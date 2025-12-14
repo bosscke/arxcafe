@@ -1,0 +1,41 @@
+version: '3.8'
+
+services:
+  mongodb:
+    image: mongo:7.0
+    container_name: arxcafe-mongodb
+    restart: unless-stopped
+    environment:
+      MONGO_INITDB_DATABASE: arxcafe
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+      - ./mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
+    networks:
+      - arxcafe-network
+
+  mongodb-test:
+    image: mongo:7.0
+    container_name: arxcafe-mongodb-test
+    restart: unless-stopped
+    environment:
+      MONGO_INITDB_DATABASE: arxcafe-test
+    ports:
+      - "27018:27017"
+    volumes:
+      - mongodb_test_data:/data/db
+    networks:
+      - arxcafe-network
+    profiles:
+      - test
+
+volumes:
+  mongodb_data:
+    driver: local
+  mongodb_test_data:
+    driver: local
+
+networks:
+  arxcafe-network:
+    driver: bridge
