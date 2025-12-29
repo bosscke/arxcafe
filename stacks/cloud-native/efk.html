@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EFK Stack – Elasticsearch · Fluentd · Kibana</title>
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/stacks.css">
+    <style>
+        :root {
+            --glass: rgba(255,255,255,0.10);
+            --text: #e6e6e6;
+            --muted: #b3b3b3;
+            --border: rgba(255,255,255,0.22);
+            --shadow: 0 10px 30px rgba(0,0,0,0.15);
+            --blur: 12px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        /* Layer-specific colors */
+        .layer.fluentd { border-left: 4px solid #e6545f; }
+        .layer.elasticsearch { border-left: 4px solid #005571; }
+        .layer.kibana { border-left: 4px solid #e54750; }
+
+        .fluentd .layer-icon { background: #e6545f; }
+        .elasticsearch .layer-icon { background: #005571; }
+        .kibana .layer-icon { background: #e54750; }
+    </style>
+</head>
+<body>
+    <a href="/" class="home-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 18px; height: 18px;">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
+        </svg>
+        Home
+    </a>
+
+    <div class="usecase-card" aria-label="Stack Use Case">
+        <div class="uc-title">Use Case</div>
+        <div class="uc-line"><span class="label">Type:</span> Observability / Logging Stack</div>
+        <div class="uc-line"><span class="label">Typical Use Case:</span> Centralized log collection, parsing, search, dashboards</div>
+        <div class="uc-line"><span class="label">Famous Usage:</span> Cloud-native platforms, Kubernetes clusters, SRE telemetry</div>
+    </div>
+
+    <div class="container">
+        <h1>🟦 EFK Stack</h1>
+        <p class="subtitle">Elasticsearch · Fluentd · Kibana</p>
+
+        <div class="diagram">
+            <div class="stack-container">
+                <div class="layer fluentd">
+                    <div class="layer-left">
+                        <div class="layer-icon">F</div>
+                        <div class="layer-title">
+                            <h2>Fluentd</h2>
+                            <div class="full-name">Log Collector & Router</div>
+                        </div>
+                    </div>
+                    <div class="layer-description">
+                        <ul>
+                            <li>Daemons/sidecars collect container, node, and app logs</li>
+                            <li>Parses, buffers, and routes streams with plugins</li>
+                            <li>Outputs to Elasticsearch (or S3, Kafka) for durability</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="arrow">↓</div>
+
+                <div class="layer elasticsearch">
+                    <div class="layer-left">
+                        <div class="layer-icon">ES</div>
+                        <div class="layer-title">
+                            <h2>Elasticsearch</h2>
+                            <div class="full-name">Search & Analytics Engine</div>
+                        </div>
+                    </div>
+                    <div class="layer-description">
+                        <ul>
+                            <li>Indexes structured/unstructured logs for fast search</li>
+                            <li>Aggregations for metrics, trends, anomalies</li>
+                            <li>Sharding/replicas for scale and resilience</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="arrow">↓</div>
+
+                <div class="layer kibana">
+                    <div class="layer-left">
+                        <div class="layer-icon">K</div>
+                        <div class="layer-title">
+                            <h2>Kibana</h2>
+                            <div class="full-name">Visualization & Dashboards</div>
+                        </div>
+                    </div>
+                    <div class="layer-description">
+                        <ul>
+                            <li>Discover, Lens, dashboards for observability views</li>
+                            <li>Alerting and anomaly detection jobs</li>
+                            <li>Access control, spaces, sharing for teams</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flow-description">
+                <strong>Flow:</strong> Fluentd collects and routes → Elasticsearch indexes and analyzes → Kibana searches, visualizes, and alerts.
+            </div>
+        </div>
+    </div>
+</body>
+</html>

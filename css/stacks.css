@@ -1,0 +1,227 @@
+/* Common Stack Page Styles */
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('/hero-night.jpg') no-repeat center/cover;
+    background-attachment: fixed;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    padding: 20px 16px 28px;
+    color: var(--text);
+    overflow-x: hidden;
+}
+
+.container {
+    max-width: 1100px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin: 0 auto;
+}
+
+h1 {
+    text-align: center;
+    color: white;
+    font-size: 2em;
+    margin-bottom: 3px;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.3);
+}
+
+.subtitle {
+    text-align: center;
+    color: rgba(255,255,255,0.95);
+    font-size: 0.9em;
+    margin-bottom: 10px;
+    text-shadow: 0 1px 4px rgba(0,0,0,0.3);
+}
+
+.diagram {
+    background: var(--glass);
+    border: 1px solid var(--border);
+    border-radius: 15px;
+    padding: 15px 20px;
+    box-shadow: var(--shadow);
+    backdrop-filter: blur(var(--blur));
+    -webkit-backdrop-filter: blur(var(--blur));
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    overflow: hidden;
+    text-align: left;
+}
+
+.stack-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    position: relative;
+    flex: 1;
+}
+
+.layer {
+    background: var(--glass);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 12px 14px;
+    position: relative;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    backdrop-filter: blur(var(--blur));
+    -webkit-backdrop-filter: blur(var(--blur));
+    box-shadow: var(--shadow);
+}
+
+.layer:hover {
+    transform: translateX(10px);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.25);
+}
+
+.layer-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex: 0 0 220px;
+    min-width: 0;
+    align-self: flex-start;
+}
+
+.layer-icon {
+    width: 38px;
+    height: 38px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3em;
+    font-weight: bold;
+    color: white;
+    flex-shrink: 0;
+}
+
+.layer-title {
+    flex: 1;
+}
+
+.layer-title h2 {
+    font-size: 1.2em;
+    margin-bottom: 1px;
+    color: var(--text);
+}
+
+.layer-title .full-name {
+    color: var(--muted);
+    font-size: 0.75em;
+}
+
+.layer-description {
+    color: var(--text);
+    line-height: 1.45;
+    font-size: 0.9em;
+    flex: 1;
+}
+
+.layer-description ul {
+    margin: 0;
+    padding-left: 20px;
+    list-style-position: outside;
+}
+
+.layer-description li {
+    margin: 3px 0;
+}
+
+.arrow {
+    text-align: center;
+    font-size: 1em;
+    color: #667eea;
+    margin: -4px 0;
+    z-index: 1;
+}
+
+.flow-description {
+    text-align: center;
+    margin-top: 6px;
+    padding: 6px 8px;
+    background: var(--glass);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    color: var(--text);
+    font-size: 0.75em;
+    line-height: 1.2;
+    backdrop-filter: blur(var(--blur));
+    -webkit-backdrop-filter: blur(var(--blur));
+}
+
+.flow-description strong {
+    color: #667eea;
+}
+
+.home-btn {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 12px;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    background: var(--glass);
+    color: var(--text);
+    text-decoration: none;
+    backdrop-filter: blur(var(--blur));
+    -webkit-backdrop-filter: blur(var(--blur));
+    box-shadow: var(--shadow);
+    transition: all 0.2s ease;
+    z-index: 100;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.home-btn:hover {
+    background: rgba(255, 255, 255, 0.15);
+    transform: translateX(-2px);
+}
+
+/* Responsive Design */
+@media (max-width: 900px) {
+    body {
+        background-attachment: scroll;
+    }
+}
+
+@media (max-width: 768px) {
+    .home-btn {
+        position: static;
+        margin-bottom: 10px;
+    }
+
+    h1 {
+        font-size: 2em;
+    }
+
+    .diagram {
+        padding: 15px 18px;
+    }
+
+    .layer {
+        padding: 10px 12px;
+    }
+}
+
+@media (max-width: 540px) {
+    .layer {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .layer-left {
+        flex: none;
+    }
+}

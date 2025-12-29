@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prometheus Stack – Prometheus · Grafana · Alertmanager</title>
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/stacks.css">
+    <style>
+        :root {
+            --glass: rgba(255,255,255,0.10);
+            --text: #e6e6e6;
+            --muted: #b3b3b3;
+            --border: rgba(255,255,255,0.22);
+            --shadow: 0 10px 30px rgba(0,0,0,0.15);
+            --blur: 12px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        /* Layer-specific colors */
+        .layer.prom { border-left: 4px solid #e6522c; }
+        .layer.alerts { border-left: 4px solid #a447a8; }
+        .layer.grafana { border-left: 4px solid #f9a825; }
+
+        .prom .layer-icon { background: #e6522c; }
+        .alerts .layer-icon { background: #a447a8; }
+        .grafana .layer-icon { background: #f9a825; }
+    </style>
+</head>
+<body>
+    <a href="/" class="home-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 18px; height: 18px;">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
+        </svg>
+        Home
+    </a>
+
+    <div class="usecase-card" aria-label="Stack Use Case">
+        <div class="uc-title">Use Case</div>
+        <div class="uc-line"><span class="label">Type:</span> Observability / Monitoring Stack</div>
+        <div class="uc-line"><span class="label">Typical Use Case:</span> Metrics scraping, dashboards, alerting for services and infrastructure</div>
+        <div class="uc-line"><span class="label">Famous Usage:</span> Kubernetes clusters, microservices SRE, cloud-native platforms</div>
+    </div>
+
+    <div class="container">
+        <h1>📈 Prometheus Stack</h1>
+        <p class="subtitle">Prometheus · Grafana · Alertmanager</p>
+
+        <div class="diagram">
+            <div class="stack-container">
+                <div class="layer prom">
+                    <div class="layer-left">
+                        <div class="layer-icon">P</div>
+                        <div class="layer-title">
+                            <h2>Prometheus</h2>
+                            <div class="full-name">Metrics Scraping & TSDB</div>
+                        </div>
+                    </div>
+                    <div class="layer-description">
+                        <ul>
+                            <li>Scrapes exporters (node, app, kube-state) via pull model</li>
+                            <li>Time-series DB with PromQL, recording rules</li>
+                            <li>Service discovery (Kubernetes, cloud, static targets)</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="arrow">↓</div>
+
+                <div class="layer alerts">
+                    <div class="layer-left">
+                        <div class="layer-icon">A</div>
+                        <div class="layer-title">
+                            <h2>Alertmanager</h2>
+                            <div class="full-name">Alert Routing & Silence</div>
+                        </div>
+                    </div>
+                    <div class="layer-description">
+                        <ul>
+                            <li>Receives alerts from Prometheus rules</li>
+                            <li>Grouping, inhibition, silence windows</li>
+                            <li>Routes to email, Slack, PagerDuty, webhooks</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="arrow">↓</div>
+
+                <div class="layer grafana">
+                    <div class="layer-left">
+                        <div class="layer-icon">G</div>
+                        <div class="layer-title">
+                            <h2>Grafana</h2>
+                            <div class="full-name">Dashboards & Visualization</div>
+                        </div>
+                    </div>
+                    <div class="layer-description">
+                        <ul>
+                            <li>Dashboards and alerts using Prometheus as datasource</li>
+                            <li>Variables, templating, drilldowns for ops/SRE</li>
+                            <li>Teams, folders, RBAC for collaboration</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flow-description">
+                <strong>Flow:</strong> Prometheus scrapes metrics → Alertmanager handles alerts → Grafana queries Prometheus for dashboards and alerting.
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Read vs Write Operations</title>
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/concepts.css">
+</head>
+<body>
+    <a href="/" class="home-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 18px; height: 18px;">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
+        </svg>
+        Home
+    </a>
+
+    <div class="container">
+        <h1>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 40px; height: 40px; display: inline-block; margin-right: 10px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M7.5 21 3 16.5m0 0L7.5 12M3 16.5h13.5m0-13.5L21 7.5m0 0L16.5 12M21 7.5H7.5"/></svg>
+            Read vs Write Operations
+        </h1>
+
+        <div class="intro-box">
+            <p>Understanding the balance between <strong>read</strong> and <strong>write</strong> operations is crucial for database design, caching strategies, and performance tuning. Most applications are read-heavy, but write patterns determine consistency, durability, and scaling approaches.</p>
+        </div>
+
+        <h2>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75 9 8.25l4.5 4.5 6-6"/></svg>
+            Fundamentals
+        </h2>
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>Read Operations</h3>
+                <ul class="features-list">
+                    <li>Fetch data without modification (SELECT, GET)</li>
+                    <li>Can be cached, replicated, scaled horizontally</li>
+                    <li>Lower latency requirements</li>
+                    <li>Idempotent and safe</li>
+                </ul>
+            </div>
+            <div class="arch-card">
+                <h3>Write Operations</h3>
+                <ul class="features-list">
+                    <li>Create, update, delete data (INSERT, UPDATE, DELETE, POST, PUT)</li>
+                    <li>Require durability and consistency</li>
+                    <li>Higher latency tolerance (typically)</li>
+                    <li>Invalidate caches, trigger side effects</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 0 1 3 19.875v-6.75ZM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V8.625ZM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V4.125Z"/></svg>
+            Read/Write Patterns
+        </h2>
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>Read-Heavy (90:10)</h3>
+                <p><strong>Examples:</strong> News sites, social feeds, e-commerce catalogs</p>
+                <ul class="features-list">
+                    <li>Optimize with caching layers (CDN, Redis)</li>
+                    <li>Use read replicas to offload primary DB</li>
+                    <li>Denormalize data for faster reads</li>
+                </ul>
+            </div>
+            <div class="arch-card">
+                <h3>Write-Heavy (30:70)</h3>
+                <p><strong>Examples:</strong> Log ingestion, IoT data, analytics pipelines</p>
+                <ul class="features-list">
+                    <li>Batch writes to reduce overhead</li>
+                    <li>Use write-optimized stores (Cassandra, time-series DBs)</li>
+                    <li>Async processing with queues</li>
+                </ul>
+            </div>
+            <div class="arch-card">
+                <h3>Balanced (50:50)</h3>
+                <p><strong>Examples:</strong> Chat apps, collaborative tools, trading platforms</p>
+                <ul class="features-list">
+                    <li>Strong consistency where needed</li>
+                    <li>Separate read/write paths (CQRS)</li>
+                    <li>Tune for both read and write latency</li>
+                </ul>
+            </div>
+            <div class="arch-card">
+                <h3>Bursty Writes</h3>
+                <p><strong>Examples:</strong> Event ticketing, flash sales, voting</p>
+                <ul class="features-list">
+                    <li>Queue to smooth traffic spikes</li>
+                    <li>Pre-provision capacity or auto-scale</li>
+                    <li>Rate limiting and backpressure</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"/></svg>
+            Optimizing Reads
+        </h2>
+        <div class="pros-box">
+            <h3>Strategies:</h3>
+            <ul class="features-list">
+                <li><strong>Caching:</strong> Redis, Memcached, CDN for static/hot data</li>
+                <li><strong>Read Replicas:</strong> Distribute read load across multiple DBs</li>
+                <li><strong>Indexes:</strong> Speed up lookups at cost of write overhead</li>
+                <li><strong>Denormalization:</strong> Pre-join data to avoid complex queries</li>
+                <li><strong>Query Optimization:</strong> Use EXPLAIN, avoid SELECT *, add covering indexes</li>
+                <li><strong>Materialized Views:</strong> Pre-compute aggregates for dashboards</li>
+            </ul>
+        </div>
+        <div style="background: #1e1e1e; color: #d4d4d4; padding: 14px; border-radius: 10px; font-family: 'Courier New', monospace; font-size: 10px; line-height: 1.6; border: 1px solid rgba(255,255,255,0.1); white-space: pre-wrap; overflow-wrap: break-word; margin-top: 16px;">
+// Read with cache-aside pattern
+async function getUser(userId) {
+  const cached = await redis.get(`user:${userId}`);
+  if (cached) return JSON.parse(cached);
+  
+  const user = await db.users.findOne({ _id: userId });
+  await redis.setex(`user:${userId}`, 3600, JSON.stringify(user));
+  return user;
+}
+        </div>
+
+        <h2>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10"/></svg>
+            Optimizing Writes
+        </h2>
+        <div class="pros-box">
+            <h3>Strategies:</h3>
+            <ul class="features-list">
+                <li><strong>Batching:</strong> Group multiple writes into one transaction</li>
+                <li><strong>Async Writes:</strong> Queue writes, process in background</li>
+                <li><strong>Write-Ahead Log (WAL):</strong> Append-only log for durability</li>
+                <li><strong>Fewer Indexes:</strong> Only index what you query; writes update all indexes</li>
+                <li><strong>Partitioning:</strong> Shard writes across multiple nodes</li>
+                <li><strong>Eventual Consistency:</strong> Accept stale reads for faster writes</li>
+            </ul>
+        </div>
+        <div style="background: #1e1e1e; color: #d4d4d4; padding: 14px; border-radius: 10px; font-family: 'Courier New', monospace; font-size: 10px; line-height: 1.6; border: 1px solid rgba(255,255,255,0.1); white-space: pre-wrap; overflow-wrap: break-word; margin-top: 16px;">
+// Batch inserts for efficiency
+const events = [];
+for (let i = 0; i < 1000; i++) {
+  events.push({ type: 'pageview', timestamp: new Date() });
+}
+await db.events.insertMany(events); // Single round-trip
+
+// Invalidate cache on write
+async function updateUser(userId, updates) {
+  await db.users.updateOne({ _id: userId }, { $set: updates });
+  await redis.del(`user:${userId}`); // Invalidate cache
+}
+        </div>
+
+        <h2>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75m-3-7.036A11.959 11.959 0 0 1 3.598 6 11.99 11.99 0 0 0 3 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285Z"/></svg>
+            CQRS Pattern
+        </h2>
+        <div class="intro-box">
+            <p><strong>Command Query Responsibility Segregation:</strong> Separate models for reads (queries) and writes (commands). Optimize each independently.</p>
+        </div>
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>Write Side (Command)</h3>
+                <ul class="features-list">
+                    <li>Normalized schema for consistency</li>
+                    <li>Validation and business rules</li>
+                    <li>Publishes events on change</li>
+                </ul>
+            </div>
+            <div class="arch-card">
+                <h3>Read Side (Query)</h3>
+                <ul class="features-list">
+                    <li>Denormalized views for fast reads</li>
+                    <li>Subscribed to write-side events</li>
+                    <li>Eventually consistent with writes</li>
+                </ul>
+            </div>
+        </div>
+        <div class="flow-diagram" style="margin-top: 20px;">
+            <div style="font-weight: bold; margin-bottom: 16px; color: #667eea;">CQRS Flow:</div>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px;">
+                <div class="flow-step" style="border-left-color: #667eea;">1) Command writes to normalized DB</div>
+                <div class="flow-step" style="border-left-color: #13AA52;">2) Publish event to message bus</div>
+                <div class="flow-step" style="border-left-color: #FFA500;">3) Read model handler updates denormalized views</div>
+                <div class="flow-step" style="border-left-color: #DD0031;">4) Queries read from optimized read DB</div>
+            </div>
+        </div>
+
+        <h2>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/></svg>
+            Read Replicas
+        </h2>
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>How They Work</h3>
+                <p>Primary handles writes; replicas async sync and serve reads. Reduces load on primary.</p>
+            </div>
+            <div class="arch-card">
+                <h3>Replica Lag</h3>
+                <p>Replicas may be seconds behind. Handle with read-after-write routing to primary.</p>
+            </div>
+            <div class="arch-card">
+                <h3>Failover</h3>
+                <p>Promote replica to primary if primary fails. Requires coordination (leader election).</p>
+            </div>
+            <div class="arch-card">
+                <h3>Scaling Reads</h3>
+                <p>Add more replicas as read traffic grows. Load balancer distributes queries.</p>
+            </div>
+        </div>
+
+        <h2>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/></svg>
+            Best Practices
+        </h2>
+        <div class="pros-box">
+            <h3>Do this:</h3>
+            <ul class="features-list">
+                <li>Profile workload: measure actual read/write ratio before optimizing</li>
+                <li>Cache hot reads; use TTL and cache invalidation strategies</li>
+                <li>Batch writes when latency allows; use queues for async processing</li>
+                <li>Monitor slow queries and write contention</li>
+                <li>Use read replicas for analytics and reporting queries</li>
+                <li>Consider CQRS for complex domains with distinct read/write models</li>
+                <li>Avoid read-after-write issues with session consistency or primary routing</li>
+                <li>Test failover scenarios (replica promotion, cache failures)</li>
+            </ul>
+        </div>
+
+        <h2>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 1 1-18 0 9 9 0 0 1 18 0zm-9 3.75h.008v.008H12v-.008z"/></svg>
+            Common Pitfalls
+        </h2>
+        <div class="cons-box">
+            <h3>Avoid these:</h3>
+            <ul class="features-list">
+                <li>Over-caching writes or frequently-changing data (stale reads)</li>
+                <li>Forgetting to invalidate cache on writes</li>
+                <li>Reading from replicas immediately after write (replica lag)</li>
+                <li>Over-indexing for reads; write performance degrades</li>
+                <li>Skipping connection pooling for high read/write volume</li>
+                <li>No monitoring of cache hit ratio or replica lag</li>
+                <li>Treating eventual consistency as strong consistency</li>
+                <li>Single primary bottleneck for all writes (scale with sharding)</li>
+            </ul>
+        </div>
+
+        <h2>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5"/></svg>
+            Metrics to Track
+        </h2>
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>Read Metrics</h3>
+                <ul class="features-list">
+                    <li>Queries per second (QPS)</li>
+                    <li>Cache hit/miss ratio</li>
+                    <li>P95/P99 read latency</li>
+                </ul>
+            </div>
+            <div class="arch-card">
+                <h3>Write Metrics</h3>
+                <ul class="features-list">
+                    <li>Writes per second (WPS)</li>
+                    <li>Write latency (commit time)</li>
+                    <li>Transaction rollback rate</li>
+                </ul>
+            </div>
+            <div class="arch-card">
+                <h3>Replication Metrics</h3>
+                <ul class="features-list">
+                    <li>Replica lag (seconds/bytes)</li>
+                    <li>Replication throughput</li>
+                    <li>Failover time (RTO/RPO)</li>
+                </ul>
+            </div>
+            <div class="arch-card">
+                <h3>System Metrics</h3>
+                <ul class="features-list">
+                    <li>Connection pool utilization</li>
+                    <li>Disk I/O saturation</li>
+                    <li>CPU/memory on DB nodes</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="intro-box" style="text-align: center; margin: 60px 0 40px;">
+            <p>Optimize reads with caching and replicas; optimize writes with batching and async processing. Measure your actual workload, then tune indexes, consistency, and architecture to match your read/write patterns.</p>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MENN Stack Architecture</title>
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/stacks.css">
+    <style>
+        :root {
+            --glass: rgba(255,255,255,0.10);
+            --text: #e6e6e6;
+            --muted: #b3b3b3;
+            --border: rgba(255,255,255,0.22);
+            --shadow: 0 10px 30px rgba(0,0,0,0.15);
+            --blur: 12px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        /* Layer-specific colors */
+        .layer.next { border-left: 4px solid #000000; }
+        .layer.express { border-left: 4px solid #323330; }
+        .layer.nodejs { border-left: 4px solid #68A063; }
+        .layer.mongodb { border-left: 4px solid #13AA52; }
+
+        .next .layer-icon { background: #000000; }
+        .express .layer-icon { background: #323330; }
+        .nodejs .layer-icon { background: #68A063; }
+        .mongodb .layer-icon { background: #13AA52; }
+    </style>
+</head>
+<body>
+    <a href="/" class="home-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 18px; height: 18px;">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
+        </svg>
+        Home
+    </a>
+
+    <div class="usecase-card" aria-label="Stack Use Case">
+        <div class="uc-title">Use Case</div>
+        <div class="uc-line"><span class="label">Type:</span> Web (Full-stack)</div>
+        <div class="uc-line"><span class="label">Typical Use Case:</span> SEO-friendly React + Node apps</div>
+        <div class="uc-line"><span class="label">Famous Usage:</span> TikTok (Next.js)</div>
+    </div>
+
+    <div class="container">
+        <h1>⚫ MENN Stack</h1>
+        <p class="subtitle">Full-Stack JavaScript with Next.js & SSR</p>
+
+        <div class="diagram">
+            <div class="stack-container">
+                <!-- Next.js Layer -->
+                <div class="layer next">
+                    <div class="layer-left">
+                        <div class="layer-icon">N</div>
+                        <div class="layer-title">
+                            <h2>Next.js</h2>
+                            <div class="full-name">React + SSR Framework</div>
+                        </div>
+                    </div>
+                    <div class="layer-description">
+                        <ul>
+                            <li>Hybrid SSR/SSG routing</li>
+                            <li>API routes for edge/server</li>
+                            <li>Optimized asset pipeline</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="arrow">↓</div>
+
+                <!-- Express Layer -->
+                <div class="layer express">
+                    <div class="layer-left">
+                        <div class="layer-icon">E</div>
+                        <div class="layer-title">
+                            <h2>Express.js</h2>
+                            <div class="full-name">Web Framework</div>
+                        </div>
+                    </div>
+                    <div class="layer-description">
+                        <ul>
+                            <li>API and middleware layer</li>
+                            <li>Auth, validation, logging</li>
+                            <li>Proxy to Next.js/Node</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="arrow">↓</div>
+
+                <!-- Node.js Layer -->
+                <div class="layer nodejs">
+                    <div class="layer-left">
+                        <div class="layer-icon">N</div>
+                        <div class="layer-title">
+                            <h2>Node.js</h2>
+                            <div class="full-name">JavaScript Runtime</div>
+                        </div>
+                    </div>
+                    <div class="layer-description">
+                        <ul>
+                            <li>Server-side JavaScript</li>
+                            <li>Event-driven architecture</li>
+                            <li>Non-blocking I/O</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="arrow">↓</div>
+
+                <!-- MongoDB Layer -->
+                <div class="layer mongodb">
+                    <div class="layer-left">
+                        <div class="layer-icon">M</div>
+                        <div class="layer-title">
+                            <h2>MongoDB</h2>
+                            <div class="full-name">NoSQL Database</div>
+                        </div>
+                    </div>
+                    <div class="layer-description">
+                        <ul>
+                            <li>JSON-like documents</li>
+                            <li>Flexible schema</li>
+                            <li>High scalability</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flow-description">
+                <strong>Request Flow:</strong> Client Browser → Next.js (UI & SSR) → Express API Routes → Node.js (Server Logic) → MongoDB (Data Storage) → Node.js → Express → Next.js → Client Browser
+            </div>
+        </div>
+    </div>
+</body>
+</html>

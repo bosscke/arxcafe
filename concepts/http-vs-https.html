@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTTP vs HTTPS</title>
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/concepts.css">
+</head>
+<body class="http-vs-https-page">
+    <a href="/" class="home-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 18px; height: 18px;">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
+        </svg>
+        Home
+    </a>
+
+    <div class="container">
+        <h1><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 40px; height: 40px; display: inline-block; margin-right: 10px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 1 0-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 0 0 2.25-2.25v-6.75a2.25 2.25 0 0 0-2.25-2.25H6.75a2.25 2.25 0 0 0-2.25 2.25v6.75a2.25 2.25 0 0 0 2.25 2.25Z" /></svg> HTTP vs HTTPS</h1>
+
+        <div class="intro-box">
+            <p><strong>HTTP (Hypertext Transfer Protocol)</strong> and <strong>HTTPS (HTTP Secure)</strong> are protocols used for transmitting data between web browsers and servers. While HTTP sends data in plain text, HTTPS adds a security layer through <strong>SSL/TLS encryption</strong>, protecting data from interception and tampering. HTTPS has become the standard for modern websites, ensuring user privacy, data integrity, and trustworthiness.</p>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M7.5 21 3 16.5m0 0L7.5 12M3 16.5h13.5m0-13.5L21 7.5m0 0L16.5 12M21 7.5H7.5" /></svg> HTTP vs HTTPS Comparison</h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>HTTP (Insecure)</h3>
+                <p>Standard protocol for web communication without encryption. Data is transmitted in plain text.</p>
+                <ul class="features-list">
+                    <li>No encryption - data visible to anyone</li>
+                    <li>Faster (no encryption overhead)</li>
+                    <li>Port 80 by default</li>
+                    <li>No authentication of server identity</li>
+                    <li>Vulnerable to man-in-the-middle attacks</li>
+                    <li>No data integrity verification</li>
+                    <li>Browser warnings on modern browsers</li>
+                    <li>Not suitable for sensitive data</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>HTTPS (Secure)</h3>
+                <p>HTTP with SSL/TLS encryption layer. Secures data transmission between client and server.</p>
+                <ul class="features-list">
+                    <li>End-to-end encryption protects data</li>
+                    <li>Slightly slower (encryption processing)</li>
+                    <li>Port 443 by default</li>
+                    <li>Verifies server identity via certificates</li>
+                    <li>Protected from eavesdropping</li>
+                    <li>Ensures data integrity</li>
+                    <li>Green padlock in browser</li>
+                    <li>Required for sensitive transactions</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75m-3-7.036A11.959 11.959 0 0 1 3.598 6 11.99 11.99 0 0 0 3 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285Z" /></svg> How HTTPS Works</h2>
+
+        <div class="flow-diagram">
+            <div style="font-weight: bold; margin-bottom: 20px; color: #667eea;">TLS Handshake Process</div>
+            <div>
+                <div class="flow-step">1. Client Hello</div>
+                <div class="flow-arrow">→</div>
+                <div class="flow-step">2. Server Hello + Certificate</div>
+                <div class="flow-arrow">→</div>
+                <div class="flow-step">3. Key Exchange</div>
+                <div class="flow-arrow">→</div>
+                <div class="flow-step">4. Encrypted Communication</div>
+            </div>
+        </div>
+
+        <h3>Detailed HTTPS Handshake:</h3>
+        <div class="diagram-box">
+            <ol style="margin-left: 30px; line-height: 2.2; text-align: left;">
+                <li><strong>Client Hello:</strong> Browser initiates connection, sends supported TLS versions and cipher suites</li>
+                <li><strong>Server Hello:</strong> Server responds with chosen TLS version and cipher suite</li>
+                <li><strong>Certificate Transmission:</strong> Server sends its SSL/TLS certificate to prove identity</li>
+                <li><strong>Certificate Verification:</strong> Browser verifies certificate with Certificate Authority (CA)</li>
+                <li><strong>Key Exchange:</strong> Both parties agree on session keys using asymmetric encryption</li>
+                <li><strong>Session Established:</strong> Symmetric encryption keys generated for faster communication</li>
+                <li><strong>Secure Transfer:</strong> All data encrypted with session keys</li>
+                <li><strong>Connection Close:</strong> Secure session terminated after transaction</li>
+            </ol>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle; color: #13AA52;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Advantages of HTTPS</h2>
+
+        <div class="pros-box">
+            <h3>Benefits of HTTPS</h3>
+            <ul class="features-list">
+                <li><strong>Data Encryption:</strong> All communication encrypted, preventing eavesdropping</li>
+                <li><strong>Authentication:</strong> Verifies you're connecting to the legitimate server</li>
+                <li><strong>Data Integrity:</strong> Detects if data has been tampered with during transmission</li>
+                <li><strong>SEO Boost:</strong> Google ranks HTTPS sites higher in search results</li>
+                <li><strong>User Trust:</strong> Browsers show security indicators (padlock icon)</li>
+                <li><strong>Compliance:</strong> Required for PCI-DSS, GDPR, and other regulations</li>
+                <li><strong>Modern Features:</strong> HTTP/2, service workers require HTTPS</li>
+                <li><strong>Privacy Protection:</strong> Hides URLs from referrer headers on external links</li>
+            </ul>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle; color: #DD0031;"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 1 1-18 0 9 9 0 0 1 18 0zm-9 3.75h.008v.008H12v-.008z" /></svg> Considerations & Challenges</h2>
+
+        <div class="cons-box">
+            <h3>HTTPS Implementation Considerations</h3>
+            <ul class="features-list">
+                <li><strong>Certificate Cost:</strong> SSL/TLS certificates may require payment (though Let's Encrypt is free)</li>
+                <li><strong>Performance Overhead:</strong> Encryption adds slight latency (minimal with modern hardware)</li>
+                <li><strong>Configuration Complexity:</strong> Initial setup requires technical knowledge</li>
+                <li><strong>Mixed Content Issues:</strong> All resources must be served over HTTPS</li>
+                <li><strong>Certificate Renewal:</strong> Certificates expire and need regular renewal</li>
+                <li><strong>Caching Differences:</strong> Some proxies handle HTTPS caching differently</li>
+                <li><strong>Legacy Systems:</strong> Very old browsers/systems may not support modern TLS</li>
+                <li><strong>Debugging Difficulty:</strong> Encrypted traffic harder to inspect for troubleshooting</li>
+            </ul>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75m-3-7.036A11.959 11.959 0 0 1 3.598 6 11.99 11.99 0 0 0 3 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285Z" /></svg> Security Protocols & Technologies</h2>
+
+        <div class="arch-card" style="margin: 30px 0;">
+            <h3>Key Technologies:</h3>
+            <ul class="features-list">
+                <li><strong>TLS 1.3:</strong> Latest protocol version with improved security and performance</li>
+                <li><strong>TLS 1.2:</strong> Widely supported, secure version (minimum recommended)</li>
+                <li><strong>SSL (Deprecated):</strong> Older protocols (SSL 2.0, 3.0) no longer secure</li>
+                <li><strong>Certificate Authorities:</strong> DigiCert, Let's Encrypt, Cloudflare, GlobalSign</li>
+                <li><strong>Certificate Types:</strong> DV (Domain Validated), OV (Organization), EV (Extended Validation)</li>
+                <li><strong>Cipher Suites:</strong> AES-GCM, ChaCha20-Poly1305 for encryption</li>
+                <li><strong>Key Exchange:</strong> ECDHE (Elliptic Curve Diffie-Hellman Ephemeral)</li>
+                <li><strong>HSTS:</strong> HTTP Strict Transport Security forces HTTPS</li>
+            </ul>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9.004 9.004 0 0 0 8.716-6.747M12 21a9.004 9.004 0 0 1-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 0 1 7.843 4.582M12 3a8.997 8.997 0 0 0-7.843 4.582m15.686 0A11.953 11.953 0 0 1 12 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0 1 21 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0 1 12 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 0 1 3 12c0-1.605.42-3.113 1.157-4.418" /></svg> Real-World Examples</h2>
+
+        <div class="arch-card" style="margin: 30px 0;">
+            <h3>Where HTTPS is Essential:</h3>
+            <p><strong>E-Commerce:</strong> Amazon, Shopify, payment gateways - protecting credit card data</p>
+            <p><strong>Banking & Finance:</strong> Online banking, stock trading, financial services</p>
+            <p><strong>Social Media:</strong> Facebook, Twitter, LinkedIn - protecting user credentials</p>
+            <p><strong>Healthcare:</strong> Patient portals, telemedicine platforms (HIPAA compliance)</p>
+            <p><strong>Email Services:</strong> Gmail, Outlook - securing personal communications</p>
+            <p><strong>Government Sites:</strong> Tax filing, government services, official portals</p>
+            <p><strong>Cloud Services:</strong> Google Drive, Dropbox, AWS Console</p>
+            <p><strong>Any Login Page:</strong> All sites collecting passwords or personal data</p>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 0 0-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 0 0 3.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 0 0 3.09 3.09l2.846.813-2.846.813a4.5 4.5 0 0 0-3.09 3.09l-.813 2.846zm6.375-5.414l.902-2.707a.75.75 0 0 0 1.386 0l.902 2.707a3 3 0 0 0 2.591 2.591l2.707.902a.75.75 0 0 0 0 1.386l-2.707.902a3 3 0 0 0-2.591 2.591l-.902 2.707a.75.75 0 0 0-1.386 0l-.902-2.707a3 3 0 0 0-2.591-2.591l-2.707-.902a.75.75 0 0 0 0-1.386l2.707-.902a3 3 0 0 0 2.591-2.591z" /></svg> Best Practices</h2>
+
+        <div class="intro-box">
+            <h3>Implementing HTTPS Correctly:</h3>
+            <ul class="features-list">
+                <li><strong>Use TLS 1.2 or Higher:</strong> Disable older SSL/TLS versions for security</li>
+                <li><strong>Strong Cipher Suites:</strong> Use modern encryption algorithms (AES-256, ChaCha20)</li>
+                <li><strong>Valid Certificates:</strong> Obtain from trusted CAs, avoid self-signed for production</li>
+                <li><strong>Automatic Renewal:</strong> Set up automated certificate renewal (Let's Encrypt with certbot)</li>
+                <li><strong>HSTS Headers:</strong> Enable HTTP Strict Transport Security</li>
+                <li><strong>Redirect HTTP to HTTPS:</strong> Force all traffic to secure connection</li>
+                <li><strong>Fix Mixed Content:</strong> Ensure all resources (images, scripts, CSS) use HTTPS</li>
+                <li><strong>Test Configuration:</strong> Use SSL Labs, Mozilla Observatory to verify setup</li>
+                <li><strong>Monitor Certificate Expiry:</strong> Set alerts before certificates expire</li>
+                <li><strong>Use Certificate Pinning:</strong> For mobile apps to prevent certificate spoofing</li>
+            </ul>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" /></svg> Modern Evolution</h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>HTTP/2</h3>
+                <p>Major upgrade with multiplexing, header compression, server push. Requires HTTPS in browsers.</p>
+            </div>
+
+            <div class="arch-card">
+                <h3>HTTP/3 (QUIC)</h3>
+                <p>Built on UDP instead of TCP, faster connection establishment, better for mobile networks.</p>
+            </div>
+
+            <div class="arch-card">
+                <h3>Zero-Round Trip (0-RTT)</h3>
+                <p>TLS 1.3 feature allowing faster reconnections by resuming previous sessions.</p>
+            </div>
+
+            <div class="arch-card">
+                <h3>Certificate Transparency</h3>
+                <p>Public logs of all issued certificates, helping detect fraudulent certificates.</p>
+            </div>
+        </div>
+
+        <div class="intro-box" style="text-align: center; margin: 60px 0 40px;">
+            <p>HTTPS has become the standard for all web communication. With free certificates from Let's Encrypt and browser enforcement, there's no longer any reason to use plain HTTP. Every website should implement HTTPS to protect user privacy and security.</p>
+        </div>
+    </div>
+</body>
+</html>

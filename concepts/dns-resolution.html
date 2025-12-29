@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DNS Resolution</title>
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/concepts.css">
+</head>
+<body>
+    <a href="/" class="home-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 18px; height: 18px;">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
+        </svg>
+        Home
+    </a>
+
+    <div class="container">
+        <h1><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 40px; height: 40px; display: inline-block; margin-right: 10px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M3 12h18M3 12a9 9 0 0 1 9-9" /><path stroke-linecap="round" stroke-linejoin="round" d="M3 12a9 9 0 0 0 9 9" /></svg> DNS Resolution</h1>
+
+        <div class="intro-box">
+            <p><strong>DNS resolution</strong> is how a human-friendly domain name (like <code>www.example.com</code>) is translated into an IP address the network can route. The process involves resolvers, caches, and a hierarchy of DNS servers (root → TLD → authoritative) to return the right record quickly and reliably.</p>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M6.75 7.5l4.5 9 4.5-9m-9 0 4.5-4.5 4.5 4.5m-9 0h9m-9 0L3 12l3.75-4.5m9 0L21 12l-3.75-4.5" /></svg> Actors in Resolution</h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>Client / Stub Resolver</h3>
+                <ul class="features-list">
+                    <li>Application asks OS for a hostname lookup</li>
+                    <li>Checks local host file and OS cache first</li>
+                    <li>Forwards query to a configured recursive resolver</li>
+                </ul>
+            </div>
+            <div class="arch-card">
+                <h3>Recursive Resolver</h3>
+                <ul class="features-list">
+                    <li>Performs the heavy lookup work on behalf of the client</li>
+                    <li>Caches answers to speed up repeat queries</li>
+                    <li>Often provided by ISP or public resolvers (1.1.1.1, 8.8.8.8)</li>
+                </ul>
+            </div>
+            <div class="arch-card">
+                <h3>Root & TLD Servers</h3>
+                <ul class="features-list">
+                    <li>Root hints direct to TLD servers (.com, .org, .net, country codes)</li>
+                    <li>Provide referrals, not final answers</li>
+                </ul>
+            </div>
+            <div class="arch-card">
+                <h3>Authoritative Servers</h3>
+                <ul class="features-list">
+                    <li>Hold the final records for the domain</li>
+                    <li>Set TTLs to control cache lifetime</li>
+                    <li>Return A/AAAA/CNAME/MX/TXT and more</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M3 6.75A2.25 2.25 0 0 1 5.25 4.5h13.5A2.25 2.25 0 0 1 21 6.75v10.5A2.25 2.25 0 0 1 18.75 19.5H5.25A2.25 2.25 0 0 1 3 17.25V6.75Z" /></svg> Typical Lookup Flow</h2>
+
+        <div class="flow-diagram">
+            <div style="font-weight: bold; margin-bottom: 16px; color: #667eea;">Steps to resolve www.example.com:</div>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px;">
+                <div class="flow-step" style="border-left-color: #667eea;">1) Client checks host file and OS cache</div>
+                <div class="flow-step" style="border-left-color: #13AA52;">2) Stub resolver asks recursive resolver</div>
+                <div class="flow-step" style="border-left-color: #8B5CF6;">3) Recursive checks its cache</div>
+                <div class="flow-step" style="border-left-color: #FFA500;">4) If cache miss: query root → TLD → authoritative</div>
+                <div class="flow-step" style="border-left-color: #DD0031;">5) Authoritative returns answer (A/AAAA/CNAME)</div>
+                <div class="flow-step" style="border-left-color: #14B8A6;">6) Recursive caches answer and returns to client</div>
+                <div class="flow-step" style="border-left-color: #0EA5E9;">7) Client uses IP to open TCP/UDP connection</div>
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="m6.75 7.5 4.5 9 4.5-9m-9 0 4.5-4.5 4.5 4.5m-9 0h9m-9 0L3 12l3.75-4.5m9 0L21 12l-3.75-4.5" /></svg> Iterative vs Recursive</h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>Recursive Query</h3>
+                <ul class="features-list">
+                    <li>Resolver does the entire lookup chain for the client</li>
+                    <li>Common for end-user devices</li>
+                    <li>Resolver caches aggressively to reduce latency</li>
+                </ul>
+            </div>
+            <div class="arch-card">
+                <h3>Iterative Query</h3>
+                <ul class="features-list">
+                    <li>Server responds with referrals ("ask this other server")</li>
+                    <li>Used between DNS servers (root/TLD/authoritative)</li>
+                    <li>Client follows referrals step by step</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M6.75 7.5h10.5m-10.5 3h10.5m-10.5 3h10.5m-10.5 3h5.25" /></svg> Common Record Types</h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>A / AAAA</h3>
+                <p>IPv4 and IPv6 addresses for a host.</p>
+            </div>
+            <div class="arch-card">
+                <h3>CNAME</h3>
+                <p>Alias to another domain name; must not coexist with other records of same name.</p>
+            </div>
+            <div class="arch-card">
+                <h3>NS</h3>
+                <p>Nameserver delegation records telling where authoritative servers are.</p>
+            </div>
+            <div class="arch-card">
+                <h3>MX</h3>
+                <p>Mail exchangers for email delivery priority.</p>
+            </div>
+            <div class="arch-card">
+                <h3>TXT</h3>
+                <p>Arbitrary text: SPF, DKIM keys, verification tokens.</p>
+            </div>
+            <div class="arch-card">
+                <h3>SOA</h3>
+                <p>Start of Authority: zone serial, retry/refresh timers, primary NS.</p>
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" /><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 19.5a9 9 0 1 1 15 0" /></svg> Caching and TTL</h2>
+
+        <div class="pros-box">
+            <h3>Why caching matters:</h3>
+            <ul class="features-list">
+                <li><strong>Speed:</strong> Cached answers avoid new lookups</li>
+                <li><strong>Resilience:</strong> Short outages masked by cached data</li>
+                <li><strong>Load:</strong> Reduces queries to authoritative servers</li>
+            </ul>
+            <h3 style="margin-top: 14px;">TTL tips:</h3>
+            <ul class="features-list">
+                <li>Lower TTLs before planned cutovers; raise after stable</li>
+                <li>Respect negative caching (NXDOMAIN TTL from SOA)</li>
+                <li>Prop changes can linger until all caches expire</li>
+            </ul>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 0 1 3 19.875v-6.75ZM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V8.625ZM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V4.125Z" /></svg> Troubleshooting Signals</h2>
+
+        <div class="cons-box">
+            <h3>What to check:</h3>
+            <ul class="features-list">
+                <li>Mismatched NS delegation (registrar vs zone)</li>
+                <li>Stale caches after recent record changes</li>
+                <li>Mixed CNAME with other records on same name</li>
+                <li>Firewall/UDP 53 blocked (fallback to TCP)</li>
+                <li>Authoritative servers returning SERVFAIL or REFUSED</li>
+            </ul>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 3h3m-6 3h6M6.75 6h10.5a2.25 2.25 0 0 1 2.25 2.25v9A2.25 2.25 0 0 1 17.25 19.5H6.75A2.25 2.25 0 0 1 4.5 17.25v-9A2.25 2.25 0 0 1 6.75 6z" /></svg> Example Lookups</h2>
+
+        <div style="background: rgba(102, 126, 234, 0.1); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 12px; padding: 25px; margin: 30px 0;">
+            <h3>Recursive resolver answering from cache:</h3>
+            <div style="background: #1e1e1e; color: #d4d4d4; padding: 15px; border-radius: 8px; font-family: 'Courier New', monospace; font-size: 12px; line-height: 1.5; overflow-x: auto; margin-top: 15px; border: 1px solid rgba(255, 255, 255, 0.1);">
+$ dig www.example.com
+
+;; ANSWER SECTION:
+www.example.com.  118  IN  A   93.184.216.34
+            </div>
+            <h3 style="margin-top: 18px;">Iterative trace (shows delegation chain):</h3>
+            <div style="background: #1e1e1e; color: #d4d4d4; padding: 15px; border-radius: 8px; font-family: 'Courier New', monospace; font-size: 12px; line-height: 1.5; overflow-x: auto; margin-top: 12px; border: 1px solid rgba(255, 255, 255, 0.1);">
+$ dig +trace www.example.com
+.                       518400  IN  NS  a.root-servers.net.
+.                       518400  IN  NS  b.root-servers.net.
+...
+com.                    172800  IN  NS  a.gtld-servers.net.
+com.                    172800  IN  NS  b.gtld-servers.net.
+...
+example.com.            86400   IN  NS  a.iana-servers.net.
+example.com.            86400   IN  NS  b.iana-servers.net.
+...
+www.example.com.        86400   IN  A   93.184.216.34
+            </div>
+        </div>
+
+        <div class="intro-box" style="text-align: center; margin: 60px 0 40px;">
+            <p>DNS resolution is the phonebook of the internet: fast because of caching, reliable because of hierarchy, and flexible through record types. Understanding the lookup path helps debug outages and plan zero-downtime changes.</p>
+        </div>
+    </div>
+</body>
+</html>

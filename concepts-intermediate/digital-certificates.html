@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Certificates</title>
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/concepts.css">
+</head>
+<body>
+    <a href="/" class="home-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 18px; height: 18px;">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
+        </svg>
+        Home
+    </a>
+
+    <div class="container">
+        <h1>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 40px; height: 40px; display: inline-block; margin-right: 10px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 0 1 3.598 6 11.99 11.99 0 0 0 3 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z"/></svg>
+            Digital Certificates
+        </h1>
+
+        <div class="intro-box">
+            <p><strong>Digital certificates</strong> (X.509) bind a public key to an identity (domain, org, person). They are cryptographically signed by a Certificate Authority (CA), enabling trust and authentication in TLS, code signing, email encryption, and more.</p>
+        </div>
+
+        <h2>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M6.75 7.5l4.5 9 4.5-9m-9 0 4.5-4.5 4.5 4.5m-9 0h9m-9 0L3 12l3.75-4.5m9 0L21 12l-3.75-4.5"/></svg>
+            Certificate Anatomy
+        </h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>Subject & Issuer</h3>
+                <ul class="features-list">
+                    <li>Subject: who/what the cert identifies (domain, org)</li>
+                    <li>Issuer: the CA that signed it</li>
+                    <li>Chain of trust to root CA</li>
+                </ul>
+            </div>
+            <div class="arch-card">
+                <h3>Public Key</h3>
+                <ul class="features-list">
+                    <li>RSA (2048/4096) or ECDSA (P-256/384)</li>
+                    <li>Used by clients to verify signatures or encrypt</li>
+                    <li>Private key never leaves server</li>
+                </ul>
+            </div>
+            <div class="arch-card">
+                <h3>Validity Period</h3>
+                <ul class="features-list">
+                    <li>Not Before / Not After timestamps</li>
+                    <li>Modern certs limited to 398 days</li>
+                    <li>Auto-renewal (ACME/Let's Encrypt) critical</li>
+                </ul>
+            </div>
+            <div class="arch-card">
+                <h3>Extensions</h3>
+                <ul class="features-list">
+                    <li>SAN (Subject Alternative Names): multi-domain</li>
+                    <li>Key Usage: digital signature, encryption, etc.</li>
+                    <li>EKU (Extended Key Usage): server auth, code signing</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v18m0-18c-1.5 1.5-4.5 4.5-7.5 4.5S1.5 4.5 0 3m12 0c1.5 1.5 4.5 4.5 7.5 4.5S22.5 4.5 24 3"/></svg>
+            Chain of Trust
+        </h2>
+
+        <div class="flow-diagram">
+            <div style="font-weight: bold; margin-bottom: 16px; color: #667eea;">How browsers validate a certificate:</div>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px;">
+                <div class="flow-step" style="border-left-color: #667eea;">Server presents cert + intermediate chain</div>
+                <div class="flow-step" style="border-left-color: #13AA52;">Client checks signature against issuer</div>
+                <div class="flow-step" style="border-left-color: #FFA500;">Chain walks up to root CA in trust store</div>
+                <div class="flow-step" style="border-left-color: #DD0031;">Root CA is pre-trusted by OS/browser</div>
+                <div class="flow-step" style="border-left-color: #14B8A6;">Cert validates: hostname, dates, revocation</div>
+                <div class="flow-step" style="border-left-color: #0EA5E9;">Handshake continues using public key</div>
+            </div>
+        </div>
+
+        <h2>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M6.75 7.5h10.5m-10.5 3h10.5m-10.5 3h10.5m-10.5 3h5.25"/></svg>
+            Certificate Types
+        </h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>DV (Domain Validated)</h3>
+                <p>Proves domain control only. Quick, cheap, automated (ACME/Let's Encrypt). No org verification.</p>
+            </div>
+            <div class="arch-card">
+                <h3>OV (Organization Validated)</h3>
+                <p>Verifies legal entity. Shows org name in cert. Moderate cost, manual vetting.</p>
+            </div>
+            <div class="arch-card">
+                <h3>EV (Extended Validation)</h3>
+                <p>Strict identity checks. Browser shows org name (historically in address bar). Costly, thorough.</p>
+            </div>
+            <div class="arch-card">
+                <h3>Wildcard & Multi-Domain</h3>
+                <p>Wildcard (*.example.com) covers subdomains. SAN certs list multiple names.</p>
+            </div>
+        </div>
+
+        <h2>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" /><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 19.5a9 9 0 1 1 15 0"/></svg>
+            Revocation Mechanisms
+        </h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>CRL (Certificate Revocation List)</h3>
+                <ul class="features-list">
+                    <li>CA publishes list of revoked cert serials</li>
+                    <li>Clients download/check periodically</li>
+                    <li>Slow, heavy for large lists</li>
+                </ul>
+            </div>
+            <div class="arch-card">
+                <h3>OCSP (Online Certificate Status Protocol)</h3>
+                <ul class="features-list">
+                    <li>Real-time revocation check per cert</li>
+                    <li>Privacy risk: CA sees what you visit</li>
+                    <li>Latency on every handshake</li>
+                </ul>
+            </div>
+            <div class="arch-card">
+                <h3>OCSP Stapling</h3>
+                <ul class="features-list">
+                    <li>Server fetches signed OCSP response</li>
+                    <li>Includes in TLS handshake</li>
+                    <li>Faster, more private</li>
+                </ul>
+            </div>
+            <div class="arch-card">
+                <h3>CRLSets & Must-Staple</h3>
+                <ul class="features-list">
+                    <li>Browser-specific revocation sets</li>
+                    <li>Must-Staple extension forces OCSP stapling</li>
+                    <li>Better protection against compromise</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 3h3m-6 3h6M6.75 6h10.5a2.25 2.25 0 0 1 2.25 2.25v9A2.25 2.25 0 0 1 17.25 19.5H6.75A2.25 2.25 0 0 1 4.5 17.25v-9A2.25 2.25 0 0 1 6.75 6z"/></svg>
+            Tools & Examples
+        </h2>
+
+        <div style="background: rgba(102, 126, 234, 0.1); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 12px; padding: 25px; margin: 30px 0; display: grid; gap: 18px;">
+            <div>
+                <h3>OpenSSL: view certificate</h3>
+                <div style="background: #1e1e1e; color: #d4d4d4; padding: 15px; border-radius: 8px; font-family: 'Courier New', monospace; font-size: 12px; line-height: 1.5; overflow-x: auto; border: 1px solid rgba(255, 255, 255, 0.1);">
+$ openssl s_client -connect example.com:443 -servername example.com < /dev/null | openssl x509 -text -noout
+                </div>
+            </div>
+            <div>
+                <h3>Let's Encrypt (Certbot) renewal</h3>
+                <div style="background: #1e1e1e; color: #d4d4d4; padding: 15px; border-radius: 8px; font-family: 'Courier New', monospace; font-size: 12px; line-height: 1.5; overflow-x: auto; border: 1px solid rgba(255, 255, 255, 0.1);">
+$ certbot renew --dry-run
+$ certbot renew
+                </div>
+            </div>
+            <div>
+                <h3>Windows: view local cert stores (PowerShell)</h3>
+                <div style="background: #1e1e1e; color: #d4d4d4; padding: 15px; border-radius: 8px; font-family: 'Courier New', monospace; font-size: 12px; line-height: 1.5; overflow-x: auto; border: 1px solid rgba(255, 255, 255, 0.1);">
+PS> Get-ChildItem -Path Cert:\LocalMachine\Root
+PS> Get-ChildItem -Path Cert:\CurrentUser\My
+                </div>
+            </div>
+        </div>
+
+        <h2>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 0 1 3 19.875v-6.75ZM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V8.625ZM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V4.125Z"/></svg>
+            Best Practices
+        </h2>
+
+        <div class="pros-box">
+            <h3>Secure certificate management:</h3>
+            <ul class="features-list">
+                <li>Auto-renew with ACME (Let's Encrypt, ZeroSSL)</li>
+                <li>Include full chain (leaf + intermediates) in server config</li>
+                <li>Enable OCSP stapling for speed and privacy</li>
+                <li>Use strong keys: RSA 2048+ or ECDSA P-256+</li>
+                <li>Monitor expiry; set alerts 30+ days before</li>
+                <li>Keep private keys offline/encrypted; rotate if compromised</li>
+                <li>Validate hostname matches (CN/SAN) before deployment</li>
+            </ul>
+        </div>
+
+        <h2>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 1 1-18 0 9 9 0 0 1 18 0zm-9 3.75h.008v.008H12v-.008z"/></svg>
+            Common Pitfalls
+        </h2>
+
+        <div class="cons-box">
+            <h3>Watch out for:</h3>
+            <ul class="features-list">
+                <li>Expired certificates (monitor and auto-renew)</li>
+                <li>Hostname mismatch (CN/SAN != requested domain)</li>
+                <li>Missing intermediate certs in chain</li>
+                <li>Self-signed or untrusted CA in production</li>
+                <li>Weak key sizes (RSA < 2048, MD5/SHA1 signatures)</li>
+                <li>Private key exposure or reuse across envs</li>
+            </ul>
+        </div>
+
+        <div class="intro-box" style="text-align: center; margin: 60px 0 40px;">
+            <p>Digital certificates underpin secure communication on the web. Proper issuance, chain validation, timely renewal, and revocation handling keep trust intact and attacks at bay.</p>
+        </div>
+    </div>
+</body>
+</html>

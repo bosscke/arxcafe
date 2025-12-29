@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TLS Handshake</title>
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/concepts.css">
+</head>
+<body>
+    <a href="/" class="home-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 18px; height: 18px;">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
+        </svg>
+        Home
+    </a>
+
+    <div class="container">
+        <h1>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 40px; height: 40px; display: inline-block; margin-right: 10px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 1 0-9 0V10.5m-.75 11.25h10.5A2.25 2.25 0 0 0 19.5 19.5v-6.75A2.25 2.25 0 0 0 17.25 10.5H6.75A2.25 2.25 0 0 0 4.5 12.75V19.5a2.25 2.25 0 0 0 2.25 2.25Z"/></svg>
+            TLS Handshake
+        </h1>
+
+        <div class="intro-box">
+            <p>The <strong>TLS handshake</strong> establishes a secure channel for HTTPS by negotiating protocol versions and ciphers, authenticating the server (and optionally the client), and deriving shared symmetric keys used to encrypt application data.</p>
+        </div>
+
+        <h2>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M6 12h12M6 6h12M6 18h12"/></svg>
+            TLS 1.3 Handshake Flow (High Level)
+        </h2>
+
+        <div class="flow-diagram">
+            <div style="font-weight: bold; margin-bottom: 16px; color: #667eea;">Modern, faster, and more secure than TLS 1.2</div>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 12px;">
+                <div class="flow-step" style="border-left-color: #667eea;">ClientHello: versions, cipher suites, key share, SNI, ALPN</div>
+                <div class="flow-step" style="border-left-color: #13AA52;">ServerHello: selects version/cipher, key share; sends certificate</div>
+                <div class="flow-step" style="border-left-color: #DD0031;">Certificate Verify: server proves possession of private key</div>
+                <div class="flow-step" style="border-left-color: #14B8A6;">Finished: both sides derive secrets and confirm handshake</div>
+                <div class="flow-step" style="border-left-color: #0EA5E9;">Encrypted HTTP begins (1-RTT or 0-RTT with resumption)</div>
+            </div>
+        </div>
+
+        <h2>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="m6.75 7.5 4.5 9 4.5-9m-9 0 4.5-4.5 4.5 4.5m-9 0h9m-9 0L3 12l3.75-4.5m9 0L21 12l-3.75-4.5"/></svg>
+            Key Concepts
+        </h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>Certificates & PKI</h3>
+                <ul class="features-list">
+                    <li>X.509 cert chains signed by trusted CAs</li>
+                    <li>Server proves identity via private key</li>
+                    <li>Hostname verification (CN/SAN) must match</li>
+                </ul>
+            </div>
+            <div class="arch-card">
+                <h3>Ephemeral Key Exchange</h3>
+                <ul class="features-list">
+                    <li>ECDHE for forward secrecy</li>
+                    <li>Compromised key can’t decrypt past traffic</li>
+                    <li>Fresh keys per connection</li>
+                </ul>
+            </div>
+            <div class="arch-card">
+                <h3>ALPN & SNI</h3>
+                <ul class="features-list">
+                    <li>ALPN chooses app protocol (h2, http/1.1)</li>
+                    <li>SNI selects virtual host on same IP</li>
+                    <li>Enables shared endpoints/CDN hosting</li>
+                </ul>
+            </div>
+            <div class="arch-card">
+                <h3>Session Resumption</h3>
+                <ul class="features-list">
+                    <li>Tickets/PSK reduce latency (0-RTT/1-RTT)</li>
+                    <li>Careful with replay risks in 0-RTT</li>
+                    <li>Short lifetimes, bind to client address</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" /><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 19.5a9 9 0 1 1 15 0" /></svg>
+            Benefits
+        </h2>
+
+        <div class="pros-box">
+            <h3>Why TLS 1.3 is preferred:</h3>
+            <ul class="features-list">
+                <li>Fewer round trips → faster page loads</li>
+                <li>Forward secrecy by default</li>
+                <li>Stronger, curated cipher suites</li>
+                <li>Encrypted handshake messages (after keys)</li>
+            </ul>
+        </div>
+
+        <h2>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 1 1-18 0 9 9 0 0 1 18 0zm-9 3.75h.008v.008H12v-.008z"/></svg>
+            Common Pitfalls
+        </h2>
+
+        <div class="cons-box">
+            <h3>Avoid these issues:</h3>
+            <ul class="features-list">
+                <li>Expired/mismatched certificates (CN/SAN)</li>
+                <li>Legacy TLS/weak ciphers still enabled</li>
+                <li>Missing intermediate CA in cert chain</li>
+                <li>0-RTT replays not mitigated</li>
+            </ul>
+        </div>
+
+        <h2>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 3h3m-6 3h6M6.75 6h10.5a2.25 2.25 0 0 1 2.25 2.25v9A2.25 2.25 0 0 1 17.25 19.5H6.75A2.25 2.25 0 0 1 4.5 17.25v-9A2.25 2.25 0 0 1 6.75 6z"/></svg>
+            Tools & Examples
+        </h2>
+
+        <div style="background: rgba(102, 126, 234, 0.1); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 12px; padding: 25px; margin: 30px 0; display: grid; gap: 18px;">
+            <div>
+                <h3>OpenSSL client (inspect handshake)</h3>
+                <div style="background: #1e1e1e; color: #d4d4d4; padding: 15px; border-radius: 8px; font-family: 'Courier New', monospace; font-size: 12px; line-height: 1.5; overflow-x: auto; border: 1px solid rgba(255, 255, 255, 0.1);">
+$ openssl s_client -connect example.com:443 -tls1_3 -servername example.com
+                </div>
+            </div>
+            <div>
+                <h3>cURL with TLS version/cipher hint</h3>
+                <div style="background: #1e1e1e; color: #d4d4d4; padding: 15px; border-radius: 8px; font-family: 'Courier New', monospace; font-size: 12px; line-height: 1.5; overflow-x: auto; border: 1px solid rgba(255, 255, 255, 0.1);">
+$ curl -v --tlsv1.3 https://example.com/
+                </div>
+            </div>
+            <div>
+                <h3>Windows: check TLS via PowerShell</h3>
+                <div style="background: #1e1e1e; color: #d4d4d4; padding: 15px; border-radius: 8px; font-family: 'Courier New', monospace; font-size: 12px; line-height: 1.5; overflow-x: auto; border: 1px solid rgba(255, 255, 255, 0.1);">
+PS> Test-NetConnection example.com -Port 443
+                </div>
+            </div>
+        </div>
+
+        <div class="intro-box" style="text-align: center; margin: 60px 0 40px;">
+            <p>TLS 1.3 trims the handshake, enforces modern cryptography, and accelerates secure browsing. Correct certificates, cipher policy, and resumption settings keep it fast and safe.</p>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Client-Server Architecture</title>
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/concepts.css">
+</head>
+<body class="client-server-page">
+    <a href="/" class="home-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 18px; height: 18px;">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
+        </svg>
+        Home
+    </a>
+
+    <div class="container">
+        <h1><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 40px; height: 40px; display: inline-block; margin-right: 10px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M5.25 14.25h13.5m-13.5 0a3 3 0 0 1-3-3m3 3a3 3 0 1 0 0 6h13.5a3 3 0 1 0 0-6m-16.5-3a3 3 0 0 1 3-3h13.5a3 3 0 0 1 3 3m-19.5 0a4.5 4.5 0 0 1 .9-2.7L5.737 5.1a3.375 3.375 0 0 1 2.7-1.35h7.126c1.062 0 2.062.5 2.7 1.35l2.587 3.45a4.5 4.5 0 0 1 .9 2.7m0 0a3 3 0 0 1-3 3m0 3h.008v.008h-.008v-.008Zm0-6h.008v.008h-.008v-.008Zm-3 6h.008v.008h-.008v-.008Zm0-6h.008v.008h-.008v-.008Z" /></svg> Client-Server Architecture</h1>
+
+        <div class="intro-box">
+            <p><strong>Client-Server architecture</strong> is a distributed computing model that divides application logic between two main components: the <strong>client</strong> (user-facing frontend) and the <strong>server</strong> (backend processing). The client sends requests to the server, which processes them and returns responses. This separation creates a scalable, maintainable, and secure architecture widely used in modern web applications.</p>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 21h16.5M4.5 3h15M5.25 3v15m13.5-15v15M9 6.75h1.5m-1.5 4.5h1.5m-1.5 4.5h1.5m4.5-13.5h1.5m-1.5 4.5h1.5m-1.5 4.5h1.5" /></svg> Core Components</h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>Client (Frontend)</h3>
+                <p>The user-facing application that runs on the user's device (web browser, mobile app, desktop client).</p>
+                <ul class="features-list">
+                    <li>Handles user interface and interactions</li>
+                    <li>Displays data to the user</li>
+                    <li>Sends requests to the server</li>
+                    <li>Validates user input (frontend validation)</li>
+                    <li>Caches data for faster access</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Server (Backend)</h3>
+                <p>The backend system that processes requests, manages data, and enforces business logic.</p>
+                <ul class="features-list">
+                    <li>Processes client requests</li>
+                    <li>Manages databases and data persistence</li>
+                    <li>Enforces business rules and logic</li>
+                    <li>Handles authentication and authorization</li>
+                    <li>Provides security and validation</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M3 18.364V5.636a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v12.728m-7-3.848a3.374 3.374 0 0 0-5.364-3.005m0 6.01a3.374 3.374 0 0 0 5.364-3.005" /></svg> How It Works</h2>
+
+        <div class="flow-diagram">
+            <div style="font-weight: bold; margin-bottom: 20px; color: #667eea;">Request-Response Cycle</div>
+            <div>
+                <div class="flow-step">1. Client sends request</div>
+                <div class="flow-arrow">→</div>
+                <div class="flow-step">2. Server processes</div>
+                <div class="flow-arrow">→</div>
+                <div class="flow-step">3. Server sends response</div>
+                <div class="flow-arrow">→</div>
+                <div class="flow-step">4. Client displays result</div>
+            </div>
+        </div>
+
+        <h3>Detailed Request Flow:</h3>
+        <div class="diagram-box">
+            <ol style="margin-left: 30px; line-height: 2.2; text-align: left;">
+                <li><strong>Client Initiation:</strong> User interacts with the client (clicks button, submits form, etc.)</li>
+                <li><strong>Request Preparation:</strong> Client packages the request with necessary data and metadata</li>
+                <li><strong>Network Transmission:</strong> Request travels across the network to the server (HTTP, TCP, etc.)</li>
+                <li><strong>Server Reception:</strong> Server receives and validates the request</li>
+                <li><strong>Processing:</strong> Server executes business logic, queries databases, performs calculations</li>
+                <li><strong>Response Preparation:</strong> Server formats the result (JSON, HTML, data)</li>
+                <li><strong>Transmission Back:</strong> Response travels back to the client</li>
+                <li><strong>Client Display:</strong> Client updates the UI with the received data</li>
+            </ol>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle; color: #13AA52;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Advantages</h2>
+
+        <div class="pros-box">
+            <h3>Benefits of Client-Server</h3>
+            <ul class="features-list">
+                <li><strong>Scalability:</strong> Easy to add more servers or upgrade hardware</li>
+                <li><strong>Centralized Data:</strong> Single source of truth on the server</li>
+                <li><strong>Security:</strong> Sensitive logic and data stay on protected servers</li>
+                <li><strong>Maintenance:</strong> Updates on the server apply to all clients automatically</li>
+                <li><strong>Accessibility:</strong> Access from any device with network connection</li>
+                <li><strong>Performance:</strong> Server can be optimized independently from clients</li>
+                <li><strong>Load Distribution:</strong> Can handle many concurrent clients</li>
+                <li><strong>Data Integrity:</strong> Server-side validation ensures consistency</li>
+            </ul>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle; color: #DD0031;"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 1 1-18 0 9 9 0 0 1 18 0zm-9 3.75h.008v.008H12v-.008z" /></svg> Disadvantages</h2>
+
+        <div class="cons-box">
+            <h3>Challenges of Client-Server</h3>
+            <ul class="features-list">
+                <li><strong>Network Dependency:</strong> Requires constant internet connection</li>
+                <li><strong>Latency:</strong> Network delays can affect responsiveness</li>
+                <li><strong>Server Load:</strong> All processing on server can become bottleneck</li>
+                <li><strong>Complexity:</strong> More components to manage and maintain</li>
+                <li><strong>Security Risks:</strong> Network transmission vulnerable to interception</li>
+                <li><strong>Server Downtime:</strong> Service unavailable when server is offline</li>
+                <li><strong>Infrastructure Costs:</strong> Need to maintain server infrastructure</li>
+                <li><strong>Client-Side Constraints:</strong> Limited processing power on client devices</li>
+            </ul>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M7.5 14.25v2.25m3-4.5v4.5m3-6.75v6.75m3-9v9M6 20.25h12A2.25 2.25 0 0 0 20.25 18V6A2.25 2.25 0 0 0 18 3.75H6A2.25 2.25 0 0 0 3.75 6v12A2.25 2.25 0 0 0 6 20.25z" /></svg> Communication Protocols</h2>
+
+        <div class="arch-card" style="margin: 30px 0;">
+            <h3>Common Protocols Used:</h3>
+            <ul class="features-list">
+                <li><strong>HTTP/HTTPS:</strong> Standard web protocol for request-response</li>
+                <li><strong>WebSocket:</strong> Bidirectional real-time communication</li>
+                <li><strong>gRPC:</strong> High-performance remote procedure calls</li>
+                <li><strong>REST:</strong> Architectural style using HTTP methods</li>
+                <li><strong>GraphQL:</strong> Query language for efficient data fetching</li>
+                <li><strong>TCP/UDP:</strong> Low-level transport protocols</li>
+            </ul>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M12 18v-5.25m0 0a6.01 6.01 0 0 0 1.5-.189m-1.5.189a6.015 6.015 0 0 1-1.5-.189m3.75 7.478a12.06 12.06 0 0 1-4.5 0m3.75 2.383a14.406 14.406 0 0 1-3 0M9 19.5a2.25 2.25 0 1 0 4.5 0 2.25 2.25 0 0 0-4.5 0z" /></svg> Real-World Examples</h2>
+
+        <div class="arch-card" style="margin: 30px 0;">
+            <h3>Industries & Applications:</h3>
+            <p><strong>Web Applications:</strong> Gmail, Facebook, Google Docs, Twitter</p>
+            <p><strong>E-Commerce:</strong> Amazon, eBay, Shopify stores</p>
+            <p><strong>Banking:</strong> Online banking systems, payment gateways</p>
+            <p><strong>Streaming:</strong> Netflix, YouTube, Spotify</p>
+            <p><strong>Gaming:</strong> Multiplayer games, cloud gaming services</p>
+            <p><strong>Productivity:</strong> Project management, collaboration tools</p>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 0 0-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 0 0 3.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 0 0 3.09 3.09l2.846.813-2.846.813a4.5 4.5 0 0 0-3.09 3.09l-.813 2.846zm6.375-5.414l.902-2.707a.75.75 0 0 0 1.386 0l.902 2.707a3 3 0 0 0 2.591 2.591l2.707.902a.75.75 0 0 0 0 1.386l-2.707.902a3 3 0 0 0-2.591 2.591l-.902 2.707a.75.75 0 0 0-1.386 0l-.902-2.707a3 3 0 0 0-2.591-2.591l-2.707-.902a.75.75 0 0 0 0-1.386l2.707-.902a3 3 0 0 0 2.591-2.591z" /></svg> Best Practices</h2>
+
+        <div class="intro-box">
+            <h3>Implementing Client-Server Architecture:</h3>
+            <ul class="features-list">
+                <li><strong>Clear Separation of Concerns:</strong> Keep frontend and backend logic separate</li>
+                <li><strong>Server-Side Validation:</strong> Always validate data on the server, not just client</li>
+                <li><strong>Authentication & Authorization:</strong> Implement secure identity verification</li>
+                <li><strong>Error Handling:</strong> Provide meaningful error messages to clients</li>
+                <li><strong>API Documentation:</strong> Document all endpoints and expected formats</li>
+                <li><strong>Caching Strategy:</strong> Reduce server load with intelligent caching</li>
+                <li><strong>Load Balancing:</strong> Distribute requests across multiple servers</li>
+                <li><strong>Security Headers:</strong> Use HTTPS, CORS, CSP, and other security measures</li>
+                <li><strong>Rate Limiting:</strong> Prevent abuse and DDoS attacks</li>
+                <li><strong>Monitoring & Logging:</strong> Track performance and issues</li>
+            </ul>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 0 0-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 0 0 3.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 0 0 3.09 3.09l2.846.813-2.846.813a4.5 4.5 0 0 0-3.09 3.09l-.813 2.846zm6.375-5.414l.902-2.707a.75.75 0 0 0 1.386 0l.902 2.707a3 3 0 0 0 2.591 2.591l2.707.902a.75.75 0 0 0 0 1.386l-2.707.902a3 3 0 0 0-2.591 2.591l-.902 2.707a.75.75 0 0 0-1.386 0l-.902-2.707a3 3 0 0 0-2.591-2.591l-2.707-.902a.75.75 0 0 0 0-1.386l2.707-.902a3 3 0 0 0 2.591-2.591z" /></svg> Modern Variations</h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>Three-Tier Architecture</h3>
+                <p>Adds a middle tier (business logic layer) between client and database server for better separation.</p>
+            </div>
+
+            <div class="arch-card">
+                <h3>Microservices</h3>
+                <p>Multiple independent servers handling different functionalities, allowing flexible scaling.</p>
+            </div>
+
+            <div class="arch-card">
+                <h3>Serverless</h3>
+                <p>Cloud-based approach where functions execute on-demand without managing servers.</p>
+            </div>
+
+            <div class="arch-card">
+                <h3>Edge Computing</h3>
+                <p>Processing occurs at the edge (closer to clients) to reduce latency.</p>
+            </div>
+        </div>
+
+        <div class="intro-box" style="text-align: center; margin: 60px 0 40px;">
+            <p>Client-Server architecture remains the foundation of modern web and application development, providing a proven balance between functionality, scalability, and maintainability.</p>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bun Stack – Bun · TypeScript · SQLite</title>
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/stacks.css">
+    <style>
+        :root {
+            --glass: rgba(255,255,255,0.10);
+            --text: #e6e6e6;
+            --muted: #b3b3b3;
+            --border: rgba(255,255,255,0.22);
+            --shadow: 0 10px 30px rgba(0,0,0,0.15);
+            --blur: 12px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        /* Layer-specific colors */
+        .layer.bun { border-left: 4px solid #000000; }
+        .layer.typescript { border-left: 4px solid #3178C6; }
+        .layer.sqlite { border-left: 4px solid #003B57; }
+
+        .bun .layer-icon { background: #000000; }
+        .typescript .layer-icon { background: #3178C6; }
+        .sqlite .layer-icon { background: #003B57; }
+    </style>
+</head>
+<body>
+    <a href="/" class="home-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 18px; height: 18px;">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
+        </svg>
+        Home
+    </a>
+
+    <div class="usecase-card" aria-label="Stack Use Case">
+        <div class="uc-title">Use Case</div>
+        <div class="uc-line"><span class="label">Type:</span> All-in-One JavaScript/TypeScript Runtime</div>
+        <div class="uc-line"><span class="label">Typical Use Case:</span> Fast backends, bundler, testing, CLI tools, rapid development</div>
+        <div class="uc-line"><span class="label">Famous Usage:</span> Elysia frameworks, startups, lightweight services</div>
+    </div>
+
+    <div class="container">
+        <h1>🥐 Bun Stack</h1>
+        <p class="subtitle">Bun · TypeScript · SQLite</p>
+
+        <div class="diagram">
+            <div class="stack-container">
+                <div class="layer bun">
+                    <div class="layer-left">
+                        <div class="layer-icon">Bu</div>
+                        <div class="layer-title">
+                            <h2>Bun</h2>
+                            <div class="full-name">JavaScript Runtime</div>
+                        </div>
+                    </div>
+                    <div class="layer-description">
+                        <ul>
+                            <li>Ultra-fast JavaScript/TypeScript runtime, Zig-based, 3x faster than Node.js</li>
+                            <li>Built-in bundler, test runner, package manager (bun install)</li>
+                            <li>APIs for HTTP, file system, socket support, WebSocket support</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="arrow">↓</div>
+
+                <div class="layer typescript">
+                    <div class="layer-left">
+                        <div class="layer-icon">TS</div>
+                        <div class="layer-title">
+                            <h2>TypeScript</h2>
+                            <div class="full-name">Type-Safe Language</div>
+                        </div>
+                    </div>
+                    <div class="layer-description">
+                        <ul>
+                            <li>Static type checking, better IDE support, compile-time error detection</li>
+                            <li>Modern ES2020+ features, interfaces, generics, decorators</li>
+                            <li>Zero configuration in Bun, native TypeScript support</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="arrow">↓</div>
+
+                <div class="layer sqlite">
+                    <div class="layer-left">
+                        <div class="layer-icon">SQ</div>
+                        <div class="layer-title">
+                            <h2>SQLite</h2>
+                            <div class="full-name">Embedded Database</div>
+                        </div>
+                    </div>
+                    <div class="layer-description">
+                        <ul>
+                            <li>Lightweight, zero configuration, ACID transactions, full SQL support</li>
+                            <li>Built into Bun runtime, file-based or in-memory databases</li>
+                            <li>No separate server needed, perfect for single-instance apps</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flow-description">
+                <strong>Flow:</strong> Bun runtime executes TypeScript code → TypeScript provides type safety → SQLite stores and retrieves data efficiently.
+            </div>
+        </div>
+    </div>
+</body>
+</html>

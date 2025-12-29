@@ -1,0 +1,1188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>ArxCafe</title>
+        <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231f2a44'/%3E%3Ctext x='50%25' y='58%25' text-anchor='middle' font-size='34'%3E🍰%3C/text%3E%3C/svg%3E">
+        <link rel="preload" as="image" href="/hero-night.jpg">
+        <link rel="preload" as="image" href="/hero-day.jpg">
+        <link rel="stylesheet" href="/css/global.css">
+        <link rel="stylesheet" href="/css/index.css">
+</head>
+<body>
+    <button class="theme-toggle" id="themeToggle" title="Toggle day/night">🌙</button>
+    <div class="page-grid">
+
+    <section class="api-section">
+        <div class="api-header">
+            <h2 class="api-title">Top IT APIs Every Startup Should Know</h2>
+            <p class="api-subtitle">A curated set of APIs used in real-world startup systems.</p>
+        </div>
+        <div class="api-grid">
+                    <!-- Cloud & Infrastructure -->
+                    <div class="api-card">
+                        <div class="api-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15a4.5 4.5 0 0 0 4.5 4.5H18a3.75 3.75 0 0 0 1.332-7.257 3 3 0 0 0-3.758-3.848 5.25 5.25 0 0 0-10.233 2.33A4.502 4.502 0 0 0 2.25 15Z" /></svg></div>
+                        <div class="api-content">
+                            <div class="api-category">Cloud & Infrastructure</div>
+                            <h3 class="api-name">AWS APIs</h3>
+                            <p class="api-desc">Compute, storage, IAM</p>
+                        </div>
+                    </div>
+                    <div class="api-card">
+                        <div class="api-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M11.42 15.17 17.25 21A2.652 2.652 0 0 0 21 17.25l-5.877-5.877M11.42 15.17l2.496-3.03c.317-.384.74-.626 1.208-.766M11.42 15.17l-4.655 5.653a2.548 2.548 0 1 1-3.586-3.586l6.837-5.63m5.108-.233c.55-.164 1.163-.188 1.743-.14a4.5 4.5 0 0 0 4.486-6.336l-3.276 3.277a3.004 3.004 0 0 1-2.25-2.25l3.276-3.276a4.5 4.5 0 0 0-6.336 4.486c.091 1.076-.071 2.264-.904 2.95l-.102.085m-1.745 1.437L5.909 7.5H4.5L2.25 3.75l1.5-1.5L7.5 4.5v1.409l4.26 4.26m-1.745 1.437 1.745-1.437m6.615 8.206L15.75 15.75M4.867 19.125h.008v.008h-.008v-.008Z" /></svg></div>
+                        <div class="api-content">
+                            <div class="api-category">Cloud & Infrastructure</div>
+                            <h3 class="api-name">Google Cloud APIs</h3>
+                            <p class="api-desc">Serverless cloud services</p>
+                        </div>
+                    </div>
+                    <div class="api-card">
+                        <div class="api-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75m-3-7.036A11.959 11.959 0 0 1 3.598 6 11.99 11.99 0 0 0 3 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285Z" /></svg></div>
+                        <div class="api-content">
+                            <div class="api-category">Cloud & Infrastructure</div>
+                            <h3 class="api-name">Cloudflare API</h3>
+                            <p class="api-desc">DNS, CDN, security</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Developer & DevOps -->
+                    <div class="api-card">
+                        <div class="api-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M17.25 6.75 22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3-4.5 16.5" /></svg></div>
+                        <div class="api-content">
+                            <div class="api-category">Developer & DevOps</div>
+                            <h3 class="api-name">GitHub REST API</h3>
+                            <p class="api-desc">Repositories and CI signals</p>
+                        </div>
+                    </div>
+                    <div class="api-card">
+                        <div class="api-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.59 14.37a6 6 0 0 1-5.84 7.38v-4.8m5.84-2.58a14.98 14.98 0 0 0 6.16-12.12A14.98 14.98 0 0 0 9.631 8.41m5.96 5.96a14.926 14.926 0 0 1-5.841 2.58m-.119-8.54a6 6 0 0 0-7.381 5.84h4.8m2.581-5.84a14.927 14.927 0 0 0-2.58 5.84m2.699 2.7c-.103.021-.207.041-.311.06a15.09 15.09 0 0 1-2.448-2.448 14.9 14.9 0 0 1 .06-.312m-2.24 2.39a4.493 4.493 0 0 0-1.757 4.306 4.493 4.493 0 0 0 4.306-1.758M16.5 9a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Z" /></svg></div>
+                        <div class="api-content">
+                            <div class="api-category">Developer & DevOps</div>
+                            <h3 class="api-name">GitLab API</h3>
+                            <p class="api-desc">CI/CD pipelines</p>
+                        </div>
+                    </div>
+                    <div class="api-card">
+                        <div class="api-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M5.25 14.25h13.5m-13.5 0a3 3 0 0 1-3-3m3 3a3 3 0 1 0 0 6h13.5a3 3 0 1 0 0-6m-16.5-3a3 3 0 0 1 3-3h13.5a3 3 0 0 1 3 3m-19.5 0a4.5 4.5 0 0 1 .9-2.7L5.737 5.1a3.375 3.375 0 0 1 2.7-1.35h7.126c1.062 0 2.062.5 2.7 1.35l2.587 3.45a4.5 4.5 0 0 1 .9 2.7m0 0a3 3 0 0 1-3 3m0 3h.008v.008h-.008v-.008Zm0-6h.008v.008h-.008v-.008Zm-3 6h.008v.008h-.008v-.008Zm0-6h.008v.008h-.008v-.008Z" /></svg></div>
+                        <div class="api-content">
+                            <div class="api-category">Developer & DevOps</div>
+                            <h3 class="api-name">Kubernetes API</h3>
+                            <p class="api-desc">Cluster automation</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Auth & Security -->
+                    <div class="api-card">
+                        <div class="api-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 1 0-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 0 0 2.25-2.25v-6.75a2.25 2.25 0 0 0-2.25-2.25H6.75a2.25 2.25 0 0 0-2.25 2.25v6.75a2.25 2.25 0 0 0 2.25 2.25Z" /></svg></div>
+                        <div class="api-content">
+                            <div class="api-category">Auth & Security</div>
+                            <h3 class="api-name">Auth0 API</h3>
+                            <p class="api-desc">Authentication workflows</p>
+                        </div>
+                    </div>
+                    <div class="api-card">
+                        <div class="api-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 5.25a3 3 0 0 1 3 3m3 0a6 6 0 0 1-7.029 5.912c-.563-.097-1.159.026-1.563.43L10.5 17.25H8.25v2.25H6v2.25H2.25v-2.818c0-.597.237-1.17.659-1.591l6.499-6.499c.404-.404.527-1 .43-1.563A6 6 0 1 1 21.75 8.25Z" /></svg></div>
+                        <div class="api-content">
+                            <div class="api-category">Auth & Security</div>
+                            <h3 class="api-name">Okta API</h3>
+                            <p class="api-desc">SSO and enterprise IAM</p>
+                        </div>
+                    </div>
+                    <div class="api-card">
+                        <div class="api-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z" /></svg></div>
+                        <div class="api-content">
+                            <div class="api-category">Auth & Security</div>
+                            <h3 class="api-name">VirusTotal API</h3>
+                            <p class="api-desc">Threat analysis</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Monitoring & Ops -->
+                    <div class="api-card">
+                        <div class="api-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 0 1 3 19.875v-6.75ZM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V8.625ZM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V4.125Z" /></svg></div>
+                        <div class="api-content">
+                            <div class="api-category">Monitoring & Ops</div>
+                            <h3 class="api-name">Prometheus API</h3>
+                            <p class="api-desc">Metrics and monitoring</p>
+                        </div>
+                    </div>
+                    <div class="api-card">
+                        <div class="api-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18 9 11.25l4.306 4.306a11.95 11.95 0 0 1 5.814-5.518l2.74-1.22m0 0-5.94-2.281m5.94 2.28-2.28 5.941" /></svg></div>
+                        <div class="api-content">
+                            <div class="api-category">Monitoring & Ops</div>
+                            <h3 class="api-name">Grafana API</h3>
+                            <p class="api-desc">Dashboards and observability</p>
+                        </div>
+                    </div>
+                    <div class="api-card">
+                        <div class="api-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0" /></svg></div>
+                        <div class="api-content">
+                            <div class="api-category">Monitoring & Ops</div>
+                            <h3 class="api-name">PagerDuty API</h3>
+                            <p class="api-desc">Incident management</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Payments & Data -->
+                    <div class="api-card">
+                        <div class="api-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 8.25h19.5M2.25 9h19.5m-16.5 5.25h6m-6 2.25h3m-3.75 3h15a2.25 2.25 0 0 0 2.25-2.25V6.75A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25v10.5A2.25 2.25 0 0 0 4.5 19.5Z" /></svg></div>
+                        <div class="api-content">
+                            <div class="api-category">Payments & Data</div>
+                            <h3 class="api-name">Stripe API</h3>
+                            <p class="api-desc">Payments infrastructure</p>
+                        </div>
+                    </div>
+                    <div class="api-card">
+                        <div class="api-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m-3-2.818.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" /></svg></div>
+                        <div class="api-content">
+                            <div class="api-category">Payments & Data</div>
+                            <h3 class="api-name">Exchange Rates API</h3>
+                            <p class="api-desc">Currency conversion</p>
+                        </div>
+                    </div>
+                    <div class="api-card">
+                        <div class="api-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9.004 9.004 0 0 0 8.716-6.747M12 21a9.004 9.004 0 0 1-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 0 1 7.843 4.582M12 3a8.997 8.997 0 0 0-7.843 4.582m15.686 0A11.953 11.953 0 0 1 12 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0 1 21 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0 1 12 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 0 1 3 12c0-1.605.42-3.113 1.157-4.418" /></svg></div>
+                        <div class="api-content">
+                            <div class="api-category">Payments & Data</div>
+                            <h3 class="api-name">IPinfo API</h3>
+                            <p class="api-desc">IP intelligence</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Testing & Automation -->
+                    <div class="api-card">
+                        <div class="api-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9.75 3.104v5.714a2.25 2.25 0 0 1-.659 1.591L5 14.5M9.75 3.104c-.251.023-.501.05-.75.082m.75-.082a24.301 24.301 0 0 1 4.5 0m0 0v5.714c0 .597.237 1.17.659 1.591L19.8 15.3M14.25 3.104c.251.023.501.05.75.082M19.8 15.3l-1.57.393A9.065 9.065 0 0 1 12 15a9.065 9.065 0 0 0-6.23-.693L5 14.5m14.8.8 1.402 1.402c1.232 1.232.65 3.318-1.067 3.611A48.309 48.309 0 0 1 12 21c-2.773 0-5.491-.235-8.135-.687-1.718-.293-2.3-2.379-1.067-3.61L5 14.5" /></svg></div>
+                        <div class="api-content">
+                            <div class="api-category">Testing & Automation</div>
+                            <h3 class="api-name">Postman API</h3>
+                            <p class="api-desc">API testing platform</p>
+                        </div>
+                    </div>
+                    <div class="api-card">
+                        <div class="api-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m3.75 13.5 10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75Z" /></svg></div>
+                        <div class="api-content">
+                            <div class="api-category">Testing & Automation</div>
+                            <h3 class="api-name">k6 API</h3>
+                            <p class="api-desc">Load testing</p>
+                        </div>
+                    </div>
+                    <div class="api-card">
+                        <div class="api-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m3.75 13.5 10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75Z" /></svg></div>
+                        <div class="api-content">
+                            <div class="api-category">Testing & Automation</div>
+                            <h3 class="api-name">Lighthouse API</h3>
+                            <p class="api-desc">Performance audits</p>
+                        </div>
+                    </div>
+                    <div class="api-card">
+                        <div class="api-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9.594 3.94c.09-.542.56-.94 1.11-.94h2.593c.55 0 1.02.398 1.11.94l.213 1.281c.063.374.313.686.645.87.074.04.147.083.22.127.325.196.72.257 1.075.124l1.217-.456a1.125 1.125 0 0 1 1.37.49l1.296 2.247a1.125 1.125 0 0 1-.26 1.431l-1.003.827c-.293.241-.438.613-.43.992a7.723 7.723 0 0 1 0 .255c-.008.378.137.75.43.991l1.004.827c.424.35.534.955.26 1.43l-1.298 2.247a1.125 1.125 0 0 1-1.369.491l-1.217-.456c-.355-.133-.75-.072-1.076.124a6.47 6.47 0 0 1-.22.128c-.331.183-.581.495-.644.869l-.213 1.281c-.09.543-.56.94-1.11.94h-2.594c-.55 0-1.019-.398-1.11-.94l-.213-1.281c-.062-.374-.312-.686-.644-.87a6.52 6.52 0 0 1-.22-.127c-.325-.196-.72-.257-1.076-.124l-1.217.456a1.125 1.125 0 0 1-1.369-.49l-1.297-2.247a1.125 1.125 0 0 1 .26-1.431l1.004-.827c.292-.24.437-.613.43-.991a6.932 6.932 0 0 1 0-.255c.007-.38-.138-.751-.43-.992l-1.004-.827a1.125 1.125 0 0 1-.26-1.43l1.297-2.247a1.125 1.125 0 0 1 1.37-.491l1.216.456c.356.133.751.072 1.076-.124.072-.044.146-.086.22-.128.332-.183.582-.495.644-.869l.214-1.28Z" /><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" /></svg></div>
+                        <div class="api-content">
+                            <div class="api-category">Testing & Automation</div>
+                            <h3 class="api-name">Ansible API</h3>
+                            <p class="api-desc">Infrastructure automation</p>
+                        </div>
+                    </div>
+                    <div class="api-card">
+                        <div class="api-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0 3.181 3.183a8.25 8.25 0 0 0 13.803-3.7M4.031 9.865a8.25 8.25 0 0 1 13.803-3.7l3.181 3.182m0-4.991v4.99" /></svg></div>
+                        <div class="api-content">
+                            <div class="api-category">Testing & Automation</div>
+                            <h3 class="api-name">ServiceNow API</h3>
+                            <p class="api-desc">IT service workflows</p>
+                        </div>
+                    </div>
+                </div>
+    </section>
+
+    <aside class="stacks-panel">
+        <div class="stack-section">
+                    <div class="stack-section-title">Classic / Server-Side Stacks</div>
+                    <div class="stack-links">
+                        <a href="/lamp" class="lamp-button">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 18px; height: 18px;">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M6.429 9.75 2.25 12l4.179 2.25m0-4.5 5.571 3 5.571-3m-11.142 0L2.25 7.5 12 2.25l9.75 5.25-4.179 2.25m0 0L21.75 12l-4.179 2.25m0 0 4.179 2.25L12 21.75 2.25 16.5l4.179-2.25m11.142 0-5.571 3-5.571-3" />
+                            </svg>
+                            LAMP Stack Diagram
+                        </a>
+                        <a href="/fastapi" class="lamp-button">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 18px; height: 18px;">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 6.75 22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3-4.5 16.5" />
+                            </svg>
+                            FastAPI Stack Diagram
+                        </a>
+                        <a href="/pydata" class="lamp-button">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 18px; height: 18px;">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 6.75 22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3-4.5 16.5" />
+                            </svg>
+                            PyData Stack Diagram
+                        </a>
+                        <a href="/lemp" class="lamp-button">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 18px; height: 18px;">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5 10.5 21m0 0 6.75-7.5M10.5 21V3" />
+                            </svg>
+                            LEMP Stack Diagram
+                        </a>
+                        <a href="/wamp" class="lamp-button">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 18px; height: 18px;">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12 11.204 3.045c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
+                            </svg>
+                            WAMP Stack Diagram
+                        </a>
+                        <a href="/xampp" class="lamp-button">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 18px; height: 18px;">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M9.75 3.104v5.714a2.25 2.25 0 0 1-.659 1.591L5 14.5M9.75 3.104c-.251.023-.501.05-.75.082m.75-.082a24.301 24.301 0 0 1 4.5 0m0 0v5.714c0 .597.237 1.17.659 1.591L19.8 15.3M14.25 3.104c.251.023.501.05.75.082M19.8 15.3l-1.57.393A9.065 9.065 0 0 1 12 16a9.065 9.065 0 0 1-6.23-.693L5 15.3m14.8 0 .94.235a2.25 2.25 0 0 1 1.723 3.214l-1.176 2.353a2.25 2.25 0 0 1-2.01 1.25h-5.552a2.25 2.25 0 0 1-2.01-1.25L10.54 18.802a2.25 2.25 0 0 1 1.723-3.214l.94-.235M5 15.3l-.94.235a2.25 2.25 0 0 0-1.723 3.214l1.176 2.353a2.25 2.25 0 0 0 2.01 1.25h5.552a2.25 2.25 0 0 0 2.01-1.25l1.176-2.353a2.25 2.25 0 0 0-1.723-3.214l-.94-.235" />
+                            </svg>
+                            XAMPP Stack Diagram
+                        </a>
+                        <a href="/mamp" class="lamp-button">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 18px; height: 18px;">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9 9-4.03 9-9-4.03-9-9-9Zm0 0c1.657 0 3 1.79 3 4s-1.343 4-3 4-3-1.79-3-4 1.343-4 3-4Zm0 18c2.5 0 4.5-3 4.5-6.5 0-1.415-.4-2.707-1.057-3.727a4.5 4.5 0 0 1-6.887 0A7.47 7.47 0 0 0 7.5 14.5C7.5 18 9.5 21 12 21Z" />
+                            </svg>
+                            MAMP Stack Diagram
+                        </a>
+                    </div>
+                <div class="stack-section">
+                    <div class="stack-section-title">JavaScript / Full-Stack</div>
+                    <div class="stack-links">
+                        <a href="/mean" class="lamp-button">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 18px; height: 18px;">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 6.75 22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3-4.5 16.5" />
+                            </svg>
+                            MEAN Stack Diagram
+                        </a>
+                        <a href="/mern" class="lamp-button">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 18px; height: 18px;">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 6.75 22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3-4.5 16.5" />
+                            </svg>
+                            MERN Stack Diagram
+                        </a>
+                        <a href="/mevn" class="lamp-button">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 18px; height: 18px;">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 6.75 22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3-4.5 16.5" />
+                            </svg>
+                            MEVN Stack Diagram
+                        </a>
+                        <a href="/menn" class="lamp-button">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 18px; height: 18px;">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 6.75 22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3-4.5 16.5" />
+                            </svg>
+                            MENN Stack Diagram
+                        </a>
+                        <a href="/pern" class="lamp-button">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 18px; height: 18px;">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 6.75 22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3-4.5 16.5" />
+                            </svg>
+                            PERN Stack Diagram
+                        </a>
+                        <a href="/t3" class="lamp-button">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 18px; height: 18px;">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 6.75 22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3-4.5 16.5" />
+                            </svg>
+                            T3 Stack Diagram
+                        </a>
+                    </div>
+                    <div class="stack-section-title" style="margin-top: 8px;">PHP Framework Stacks</div>
+                    <div class="stack-links">
+                        <a href="/laravel" class="lamp-button">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 18px; height: 18px;">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 6.75 22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3-4.5 16.5" />
+                            </svg>
+                            Laravel Stack Diagram
+                        </a>
+                        <a href="/symfony" class="lamp-button">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 18px; height: 18px;">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 6.75 22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3-4.5 16.5" />
+                            </svg>
+                            Symfony Stack Diagram
+                        </a>
+                    </div>
+                    <div class="stack-section-title" style="margin-top: 8px;">Python Stacks</div>
+                    <div class="stack-links">
+                        <a href="/django" class="lamp-button">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 18px; height: 18px;">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 6.75 22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3-4.5 16.5" />
+                            </svg>
+                            Django Stack Diagram
+                        </a>
+                        <a href="/flask" class="lamp-button">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 18px; height: 18px;">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 6.75 22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3-4.5 16.5" />
+                            </svg>
+                            Flask Stack Diagram
+                        </a>
+                        <a href="/fastapi" class="lamp-button">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 18px; height: 18px;">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 6.75 22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3-4.5 16.5" />
+                            </svg>
+                            FastAPI Stack Diagram
+                        </a>
+                        <a href="/pydata" class="lamp-button">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 18px; height: 18px;">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 6.75 22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3-4.5 16.5" />
+                            </svg>
+                            PyData Stack Diagram
+                        </a>
+                    </div>
+                    <div class="stack-section-title" style="margin-top: 8px;">Java / JVM Stacks</div>
+                    <div class="stack-links">
+                        <a href="/spring" class="lamp-button">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 18px; height: 18px;">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 6.75 22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3-4.5 16.5" />
+                            </svg>
+                            Spring Stack Diagram
+                        </a>
+                        <a href="/jhipster" class="lamp-button">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 18px; height: 18px;">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 6.75 22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3-4.5 16.5" />
+                            </svg>
+                            JHipster Stack Diagram
+                        </a>
+                        <a href="/javaee" class="lamp-button">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 18px; height: 18px;">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 6.75 22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3-4.5 16.5" />
+                            </svg>
+                            Java EE Stack Diagram
+                        </a>
+                    </div>
+                    <div class="stack-section-title" style="margin-top: 8px;">.NET / Microsoft</div>
+                    <div class="stack-links">
+                        <a href="/dotnet" class="lamp-button">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 18px; height: 18px;">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 6.75 22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3-4.5 16.5" />
+                            </svg>
+                            .NET Stack Diagram
+                        </a>
+                        <a href="/wisa" class="lamp-button">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 18px; height: 18px;">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 6.75 22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3-4.5 16.5" />
+                            </svg>
+                            WISA Stack Diagram
+                        </a>
+                        <a href="/azure" class="lamp-button">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 18px; height: 18px;">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 6.75 22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3-4.5 16.5" />
+                            </svg>
+                            Azure Stack Diagram
+                        </a>
+                    </div>
+                    <div class="stack-section-title" style="margin-top: 8px;">Ruby</div>
+                    <div class="stack-links">
+                        <a href="/rails" class="lamp-button">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 18px; height: 18px;">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 6.75 22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3-4.5 16.5" />
+                            </svg>
+                            Rails Stack Diagram
+                        </a>
+                        <a href="/rvm" class="lamp-button">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 18px; height: 18px;">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 6.75 22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3-4.5 16.5" />
+                            </svg>
+                            RVM Stack Diagram
+                        </a>
+                    </div>
+                    <div class="stack-section-title" style="margin-top: 8px;">JAMstack / Static & Headless</div>
+                    <div class="stack-links">
+                        <a href="/jamstack" class="lamp-button">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 18px; height: 18px;">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 6.75 22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3-4.5 16.5" />
+                            </svg>
+                            JAMstack Diagram
+                        </a>
+                        <a href="/headless" class="lamp-button">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 18px; height: 18px;">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 6.75 22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3-4.5 16.5" />
+                            </svg>
+                            Headless Stack Diagram
+                        </a>
+                        <a href="/static" class="lamp-button">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 18px; height: 18px;">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 6.75 22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3-4.5 16.5" />
+                            </svg>
+                            Static Stack Diagram
+                        </a>
+                    </div>
+                    <div class="stack-section-title" style="margin-top: 8px;">Cloud-Native / DevOps</div>
+                    <div class="stack-links">
+                        <a href="/kubernetes" class="lamp-button">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 18px; height: 18px;">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 6.75 22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3-4.5 16.5" />
+                            </svg>
+                            Kubernetes Stack Diagram
+                        </a>
+                        <a href="/elk" class="lamp-button">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 18px; height: 18px;">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 6.75 22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3-4.5 16.5" />
+                            </svg>
+                            ELK Stack Diagram
+                        </a>
+                        <a href="/efk" class="lamp-button">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 18px; height: 18px;">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 6.75 22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3-4.5 16.5" />
+                            </svg>
+                            EFK Stack Diagram
+                        </a>
+                        <a href="/prometheus" class="lamp-button">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 18px; height: 18px;">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 6.75 22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3-4.5 16.5" />
+                            </svg>
+                            Prometheus Stack Diagram
+                        </a>
+                    </div>
+                    <div class="stack-section-title" style="margin-top: 8px;">Data / Big Data</div>
+                    <div class="stack-links">
+                        <a href="/hadoop" class="lamp-button">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 18px; height: 18px;">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 6.75 22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3-4.5 16.5" />
+                            </svg>
+                            Hadoop Stack Diagram
+                        </a>
+                        <a href="/spark" class="lamp-button">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 18px; height: 18px;">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 6.75 22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3-4.5 16.5" />
+                            </svg>
+                            Spark Stack Diagram
+                        </a>
+                        <a href="/kafka" class="lamp-button">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 18px; height: 18px;">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 6.75 22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3-4.5 16.5" />
+                            </svg>
+                            Kafka Stack Diagram
+                        </a>
+                    </div>
+                    <div class="stack-section-title" style="margin-top: 8px;">Mobile / Cross-Platform</div>
+                    <div class="stack-links">
+                        <a href="/react-native" class="lamp-button">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 18px; height: 18px;">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 6.75 22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3-4.5 16.5" />
+                            </svg>
+                            React Native Stack Diagram
+                        </a>
+                        <a href="/flutter" class="lamp-button">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 18px; height: 18px;">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 6.75 22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3-4.5 16.5" />
+                            </svg>
+                            Flutter Stack Diagram
+                        </a>
+                        <a href="/swift" class="lamp-button">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 18px; height: 18px;">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 6.75 22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3-4.5 16.5" />
+                            </svg>
+                            Swift Stack Diagram
+                        </a>
+                    </div>
+                </div>
+
+                <div class="stack-section-title">Minimal / Modern</div>
+                <div class="stack-links">
+                    <a href="/node" class="lamp-button" style="background: rgba(104, 160, 99, 0.35); border-color: rgba(104, 160, 99, 0.8); box-shadow: 0 0 15px rgba(104, 160, 99, 0.3), 0 4px 12px rgba(0,0,0,0.15); color: #b8e6b3;">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 18px; height: 18px;">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 6.75 22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3-4.5 16.5" />
+                        </svg>
+                        Node Stack Diagram
+                    </a>
+                    <a href="/edge" class="lamp-button">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 18px; height: 18px;">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 6.75 22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3-4.5 16.5" />
+                        </svg>
+                        Edge Stack Diagram
+                    </a>
+                    <a href="/bun" class="lamp-button">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 18px; height: 18px;">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 6.75 22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3-4.5 16.5" />
+                        </svg>
+                        Bun Stack Diagram
+                    </a>
+                </div>
+    </aside>
+
+    <main class="content-panel">
+        <div class="panel">
+            <div class="toplist-title">Top 5 in-demand IT exams (live Google Trends)</div>
+            <ol id="trends-list">
+                <li>Loading latest trends...</li>
+            </ol>
+        </div>
+        <div class="card">
+            <h1>🍰 ArxCafe</h1>
+            <p>Welcome to ArxCafe a calm, secure place to sit your exams online.</p>
+        </div>
+        <div class="panel web-network-panel" aria-live="polite">
+            <div class="web-network-header">
+                <div class="toplist-title">Web &amp; Networking Concepts</div>
+            </div>
+
+            <div class="wn-grid">
+                <div class="wn-section wn-beginner">
+                    <div class="wn-title">BEGINNER</div>
+                    <ol class="wn-list">
+                        <li>Client – Server</li>
+                        <li>HTTP vs HTTPS</li>
+                        <li>Request / Response</li>
+                        <li>HTTP Methods (GET, POST, PUT, DELETE)</li>
+                        <li>HTTP Status Codes</li>
+                        <li>Headers and Body</li>
+                        <li>Stateless Communication</li>
+                        <li>Domain Name System (DNS)</li>
+                        <li>DNS Resolution</li>
+                        <li>IP Address (Public vs Private)</li>
+                        <li>Ports (80, 443)</li>
+                        <li>TCP vs UDP</li>
+                    </ol>
+                </div>
+
+                <div class="wn-section wn-intermediate">
+                    <div class="wn-title">INTERMEDIATE</div>
+                    <ol class="wn-list">
+                        <li>TLS Handshake</li>
+                        <li>Digital Certificates</li>
+                        <li>Public Key vs Private Key</li>
+                        <li>Encryption in Transit</li>
+                        <li>Authentication vs Authorization</li>
+                        <li>Tokens (Session, JWT, API Key)</li>
+                        <li>Application Architecture</li>
+                        <li>Monolith</li>
+                        <li>Modular Monolith</li>
+                        <li>Microservices</li>
+                        <li>API Gateway</li>
+                        <li>Synchronous vs Asynchronous Communication</li>
+                        <li>REST APIs</li>
+                        <li>JSON</li>
+                        <li>API Versioning</li>
+                        <li>Pagination</li>
+                        <li>Rate Limiting</li>
+                        <li>Webhooks</li>
+                        <li>Databases (Relational)</li>
+                        <li>Databases (NoSQL)</li>
+                        <li>Read vs Write Operations</li>
+                        <li>Indexing</li>
+                        <li>Backups</li>
+                        <li>Caching</li>
+                    </ol>
+                </div>
+
+                <div class="wn-section wn-advanced">
+                    <div class="wn-title">ADVANCED</div>
+                    <ol class="wn-list">
+                        <li>Vertical Scaling</li>
+                        <li>Horizontal Scaling</li>
+                        <li>Load Balancer</li>
+                        <li>Content Delivery Network (CDN)</li>
+                        <li>Latency</li>
+                        <li>Throughput</li>
+                        <li>Health Checks</li>
+                        <li>Failover</li>
+                        <li>Replication</li>
+                        <li>High Availability</li>
+                        <li>Disaster Recovery</li>
+                        <li>Logging</li>
+                        <li>Metrics</li>
+                        <li>Monitoring</li>
+                        <li>Alerts</li>
+                        <li>Distributed Tracing</li>
+                        <li>CI/CD Pipeline</li>
+                        <li>Build – Test – Deploy</li>
+                        <li>Environments (Dev / Test / Prod)</li>
+                        <li>Secrets Management</li>
+                        <li>Rollback</li>
+                        <li>Virtual Machines</li>
+                        <li>Containers</li>
+                        <li>Docker</li>
+                        <li>Managed Services</li>
+                        <li>Regions and Availability Zones</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </main>
+    <section class="architecture-bar">
+        <div class="architecture-inner">
+            <h2 class="architecture-title">Architecture Evolution</h2>
+
+            <div class="arch-lanes">
+                <div class="lane startup-lane">
+                    <div class="lane-title">Startup</div>
+                    <div class="lane-inner">
+                        <!-- topic: Infrastructure -->
+                        <div class="topic-card topic-infra">
+                            <div class="topic-title">Infrastructure</div>
+                            <ul class="topic-list">
+                                <li>Single cloud</li>
+                                <li>Few regions</li>
+                                <li>Managed services</li>
+                                <li>Cost-first</li>
+                            </ul>
+                        </div>
+
+                        <!-- topic: Network Architecture -->
+                        <div class="topic-card topic-network">
+                            <div class="topic-title">Network Architecture</div>
+                            <ul class="topic-list">
+                                <li>Single VPC / flat network</li>
+                                <li>Public ingress, private services</li>
+                                <li>Basic firewall rules</li>
+                            </ul>
+                        </div>
+
+                        <!-- topic: System Architecture -->
+                        <div class="topic-card topic-system">
+                            <div class="topic-title">System Architecture</div>
+                            <ul class="topic-list">
+                                <li>Monolith or modular monolith</li>
+                                <li>Synchronous request–response model (async implementation)</li>
+                            </ul>
+                        </div>
+                        <!-- topic: Software Architecture -->
+                        <div class="topic-card topic-software">
+                            <div class="topic-title">Software Architecture</div>
+                            <ul class="topic-list">
+                                <li>MVC or layered</li>
+                                <li>Minimal abstraction</li>
+                            </ul>
+                        </div>
+                        <!-- topic: Data Architecture -->
+                        <div class="topic-card topic-data">
+                            <div class="topic-title">Data Architecture</div>
+                            <ul class="topic-list">
+                                <li>Single database</li>
+                                <li>Simple schema</li>
+                                <li>Basic backups</li>
+                            </ul>
+                        </div>
+                        <!-- topic: Security -->
+                        <div class="topic-card topic-security">
+                            <div class="topic-title">Security</div>
+                            <ul class="topic-list">
+                                <li>Basic auth & HTTPS</li>
+                                <li>Env secrets</li>
+                                <li>OWASP basics</li>
+                            </ul>
+                        </div>
+                        <!-- topic: API Architecture -->
+                        <div class="topic-card topic-api">
+                            <div class="topic-title">API Architecture</div>
+                            <ul class="topic-list">
+                                <li>REST</li>
+                                <li>Few versions</li>
+                                <li>Minimal docs</li>
+                            </ul>
+                        </div>
+                        <!-- topic: Scalability -->
+                        <div class="topic-card topic-scalability">
+                            <div class="topic-title">Scalability</div>
+                            <ul class="topic-list">
+                                <li>Vertical scaling</li>
+                                <li>CDN</li>
+                                <li>Basic caching</li>
+                            </ul>
+                        </div>
+                        <!-- topic: Performance -->
+                        <div class="topic-card topic-performance">
+                            <div class="topic-title">Performance</div>
+                            <ul class="topic-list">
+                                <li>Fast enough</li>
+                                <li>Simple caching</li>
+                                <li>Basic monitoring</li>
+                            </ul>
+                        </div>
+                        <!-- topic: Reliability -->
+                        <div class="topic-card topic-reliability">
+                            <div class="topic-title">Reliability</div>
+                            <ul class="topic-list">
+                                <li>Best-effort availability</li>
+                                <li>Manual recovery</li>
+                            </ul>
+                        </div>
+                        <!-- topic: Observability -->
+                        <div class="topic-card topic-observability">
+                            <div class="topic-title">Observability</div>
+                            <ul class="topic-list">
+                                <li>Logs and basic metrics</li>
+                            </ul>
+                        </div>
+                        <!-- topic: DevOps & Delivery -->
+                        <div class="topic-card topic-devops">
+                            <div class="topic-title">DevOps & Delivery</div>
+                            <ul class="topic-list">
+                                <li>Simple CI/CD</li>
+                                <li>Manual approvals</li>
+                            </ul>
+                        </div>
+                        <!-- topic: Testing -->
+                        <div class="topic-card topic-testing">
+                            <div class="topic-title">Testing</div>
+                            <ul class="topic-list">
+                                <li>Unit tests</li>
+                                <li>Limited integration tests</li>
+                            </ul>
+                        </div>
+                        <!-- topic: Governance & Process -->
+                        <div class="topic-card topic-governance">
+                            <div class="topic-title">Governance & Process</div>
+                            <ul class="topic-list">
+                                <li>Informal decisions</li>
+                                <li>Minimal docs</li>
+                            </ul>
+                        </div>
+                        <!-- topic: Cost Management -->
+                        <div class="topic-card topic-cost">
+                            <div class="topic-title">Cost Management</div>
+                            <ul class="topic-list">
+                                <li>Minimize spend</li>
+                                <li>Shared resources</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lane enterprise-lane">
+                    <div class="lane-title">Enterprise</div>
+                    <div class="lane-inner">
+                        <!-- topic: Infrastructure -->
+                        <div class="topic-card topic-infra">
+                            <div class="topic-title">Infrastructure</div>
+                            <ul class="topic-list">
+                                <li>Multi-region</li>
+                                <li>Hybrid / multi-cloud</li>
+                                <li>Strict DR</li>
+                                <li>IaC everywhere</li>
+                            </ul>
+                        </div>
+
+                        <!-- topic: Network Architecture -->
+                        <div class="topic-card topic-network">
+                            <div class="topic-title">Network Architecture</div>
+                            <ul class="topic-list">
+                                <li>Segmented networks</li>
+                                <li>Private connectivity</li>
+                                <li>Zero Trust networking</li>
+                                <li>Controlled ingress &amp; egress</li>
+                            </ul>
+                        </div>
+
+                        <!-- topic: System Architecture -->
+                        <div class="topic-card topic-system">
+                            <div class="topic-title">System Architecture</div>
+                            <ul class="topic-list">
+                                <li>Microservices</li>
+                                <li>Event-driven, async messaging</li>
+                            </ul>
+                        </div>
+                        <!-- topic: Software Architecture -->
+                        <div class="topic-card topic-software">
+                            <div class="topic-title">Software Architecture</div>
+                            <ul class="topic-list">
+                                <li>Clean/Hexagonal</li>
+                                <li>DDD, strict boundaries</li>
+                            </ul>
+                        </div>
+                        <!-- topic: Data Architecture -->
+                        <div class="topic-card topic-data">
+                            <div class="topic-title">Data Architecture</div>
+                            <ul class="topic-list">
+                                <li>Multiple databases</li>
+                                <li>Replication & sharding</li>
+                                <li>Governance</li>
+                            </ul>
+                        </div>
+                        <!-- topic: Security -->
+                        <div class="topic-card topic-security">
+                            <div class="topic-title">Security</div>
+                            <ul class="topic-list">
+                                <li>Central IAM</li>
+                                <li>SSO / MFA</li>
+                                <li>RBAC/ABAC & compliance</li>
+                            </ul>
+                        </div>
+                        <!-- topic: API Architecture -->
+                        <div class="topic-card topic-api">
+                            <div class="topic-title">API Architecture</div>
+                            <ul class="topic-list">
+                                <li>REST / GraphQL / gRPC</li>
+                                <li>Contract-first</li>
+                                <li>Versioning policies</li>
+                            </ul>
+                        </div>
+                        <!-- topic: Scalability -->
+                        <div class="topic-card topic-scalability">
+                            <div class="topic-title">Scalability</div>
+                            <ul class="topic-list">
+                                <li>Horizontal scaling</li>
+                                <li>Queues</li>
+                                <li>Multi-region active-active</li>
+                            </ul>
+                        </div>
+                        <!-- topic: Performance -->
+                        <div class="topic-card topic-performance">
+                            <div class="topic-title">Performance</div>
+                            <ul class="topic-list">
+                                <li>Latency budgets & SLAs</li>
+                                <li>Continuous load testing</li>
+                                <li>Performance monitoring</li>
+                            </ul>
+                        </div>
+                        <!-- topic: Reliability -->
+                        <div class="topic-card topic-reliability">
+                            <div class="topic-title">Reliability</div>
+                            <ul class="topic-list">
+                                <li>High availability</li>
+                                <li>Automated failover</li>
+                                <li>Chaos testing</li>
+                            </ul>
+                        </div>
+                        <!-- topic: Observability -->
+                        <div class="topic-card topic-observability">
+                            <div class="topic-title">Observability</div>
+                            <ul class="topic-list">
+                                <li>Centralized logging</li>
+                                <li>Tracing</li>
+                                <li>Dashboards</li>
+                                <li>On-call</li>
+                            </ul>
+                        </div>
+                        <!-- topic: DevOps & Delivery -->
+                        <div class="topic-card topic-devops">
+                            <div class="topic-title">DevOps & Delivery</div>
+                            <ul class="topic-list">
+                                <li>Multi-stage pipelines</li>
+                                <li>Canary / blue-green deploys</li>
+                            </ul>
+                        </div>
+                        <!-- topic: Testing -->
+                        <div class="topic-card topic-testing">
+                            <div class="topic-title">Testing</div>
+                            <ul class="topic-list">
+                                <li>Full test pyramid</li>
+                                <li>Security & performance testing</li>
+                            </ul>
+                        </div>
+                        <!-- topic: Governance & Process -->
+                        <div class="topic-card topic-governance">
+                            <div class="topic-title">Governance & Process</div>
+                            <ul class="topic-list">
+                                <li>Architecture reviews</li>
+                                <li>ADRs</li>
+                                <li>Formal standards</li>
+                            </ul>
+                        </div>
+                        <!-- topic: Cost Management -->
+                        <div class="topic-card topic-cost">
+                            <div class="topic-title">Cost Management</div>
+                            <ul class="topic-list">
+                                <li>Cost allocation</li>
+                                <li>Budgets</li>
+                                <li>FinOps practices</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="site-footer">
+        <div class="footer-inner">© 2025 ArxCafe</div>
+    </section>
+</div>
+        <script>
+            // Theme toggle
+            const themeToggle = document.getElementById('themeToggle');
+            const isDayTheme = () => document.body.classList.contains('day-theme');
+            const savedTheme = localStorage.getItem('theme') || 'night';
+            
+            if (savedTheme === 'day') {
+              document.body.classList.add('day-theme');
+              themeToggle.textContent = '☀️';
+            }
+            
+            themeToggle.addEventListener('click', () => {
+              document.body.classList.toggle('day-theme');
+              const isDay = isDayTheme();
+              themeToggle.textContent = isDay ? '☀️' : '🌙';
+              localStorage.setItem('theme', isDay ? 'day' : 'night');
+            });
+
+            // Trends loader
+            (async () => {
+                const list = document.getElementById('trends-list');
+                try {
+                    const res = await fetch('/trends.json');
+                    const data = await res.json();
+                    list.innerHTML = '';
+                    (data.items || []).forEach(item => {
+                        const li = document.createElement('li');
+                        li.textContent = item.name;
+                        list.appendChild(li);
+                    });
+                    if (!list.children.length) {
+                        list.innerHTML = '<li>No data available right now.</li>';
+                    }
+                } catch (e) {
+                    list.innerHTML = '<li>Unable to load trends right now.</li>';
+                }
+            })();
+
+            // Accordion for stack sections
+            (() => {
+                const titles = document.querySelectorAll('.stack-section-title');
+                titles.forEach((title, idx) => {
+                    const links = title.nextElementSibling;
+                    if (!links || !links.classList.contains('stack-links')) return;
+
+                    title.setAttribute('tabindex', '0');
+
+                    const caret = document.createElement('span');
+                    caret.className = 'accordion-caret';
+                    caret.textContent = '▸';
+                    title.appendChild(caret);
+
+                    const setState = (expanded) => {
+                        if (expanded) {
+                            links.classList.remove('collapsed');
+                            title.classList.add('expanded');
+                        } else {
+                            links.classList.add('collapsed');
+                            title.classList.remove('expanded');
+                        }
+                    };
+
+                    // Expand the first section by default, collapse others to save space
+                    setState(idx === 0);
+
+                    const toggle = () => {
+                        const willExpand = links.classList.contains('collapsed');
+                        setState(willExpand);
+                    };
+
+                    let hoverTimeout;
+                    const openOnHover = () => {
+                        clearTimeout(hoverTimeout);
+                        setState(true);
+                    };
+                    const maybeCloseOnHoverLeave = () => {
+                        clearTimeout(hoverTimeout);
+                        hoverTimeout = setTimeout(() => {
+                            const stillHovering = title.matches(':hover') || links.matches(':hover');
+                            if (!stillHovering) setState(false);
+                        }, 80);
+                    };
+
+                    title.addEventListener('click', toggle);
+                    title.addEventListener('keydown', (e) => {
+                        if (e.key === 'Enter' || e.key === ' ') {
+                            e.preventDefault();
+                            toggle();
+                        }
+                    });
+                    title.addEventListener('mouseenter', openOnHover);
+                    title.addEventListener('mouseleave', maybeCloseOnHoverLeave);
+                    links.addEventListener('mouseenter', openOnHover);
+                    links.addEventListener('mouseleave', maybeCloseOnHoverLeave);
+                });
+            })();
+        </script>
+                <script>
+                    // Map card names to slugs and route to api.html
+                    const slugMap = {
+                        'AWS APIs':'aws',
+                        'Google Cloud APIs':'gcp',
+                        'Cloudflare API':'cloudflare',
+                        'GitHub REST API':'github',
+                        'GitLab API':'gitlab',
+                        'Kubernetes API':'kubernetes',
+                        'Auth0 API':'auth0',
+                        'Okta API':'okta',
+                        'VirusTotal API':'virustotal',
+                        'Prometheus API':'prometheus',
+                        'Grafana API':'grafana',
+                        'PagerDuty API':'pagerduty',
+                        'Stripe API':'stripe',
+                        'Exchange Rates API':'exchange-rates',
+                        'IPinfo API':'ipinfo',
+                        'Postman API':'postman',
+                        'k6 API':'k6',
+                        'Lighthouse API':'lighthouse',
+                        'Ansible API':'ansible',
+                        'ServiceNow API':'servicenow'
+                    };
+                    document.querySelectorAll('.api-card').forEach(card => {
+                        const name = card.querySelector('.api-name')?.textContent?.trim();
+                        const slug = slugMap[name];
+                        if (slug) {
+                            card.setAttribute('role','button');
+                            card.addEventListener('click', () => {
+                                window.location.href = `api.html?api=${encodeURIComponent(slug)}`;
+                            });
+                        }
+                    });
+                </script>
+                <script>
+    // Make Web & Networking list items behave like accessible buttons.
+    (function(){
+        const items = document.querySelectorAll('.wn-list li');
+        items.forEach(li => {
+            const text = li.textContent.trim();
+            li.setAttribute('role','button');
+            li.setAttribute('tabindex','0');
+            li.classList.add('wn-item');
+
+            const navigate = () => {
+                // Special cases for concept pages
+                if (text === 'Client – Server') {
+                    window.location.href = '/concepts/client-server.html';
+                    return;
+                }
+                if (text === 'HTTP vs HTTPS') {
+                    window.location.href = '/concepts/http-vs-https.html';
+                    return;
+                }
+                if (text === 'Request / Response') {
+                    window.location.href = '/concepts/request-response.html';
+                    return;
+                }
+                if (text === 'HTTP Methods (GET, POST, PUT, DELETE)') {
+                    window.location.href = '/concepts/http-methods.html';
+                    return;
+                }
+                if (text === 'HTTP Status Codes') {
+                    window.location.href = '/concepts/http-status-codes.html';
+                    return;
+                }
+                if (text === 'Headers and Body') {
+                    window.location.href = '/concepts/headers-and-body.html';
+                    return;
+                }
+                if (text === 'Stateless Communication') {
+                    window.location.href = '/concepts/stateless-communication.html';
+                    return;
+                }
+                if (text === 'Domain Name System (DNS)') {
+                    window.location.href = '/concepts/domain-name-system.html';
+                    return;
+                }
+                if (text === 'DNS Resolution') {
+                    window.location.href = '/concepts/dns-resolution.html';
+                    return;
+                }
+                if (text === 'IP Address (Public vs Private)') {
+                    window.location.href = '/concepts/ip-address-public-vs-private.html';
+                    return;
+                }
+                if (text === 'Ports (80, 443)') {
+                    window.location.href = '/concepts/ports-80-443.html';
+                    return;
+                }
+                if (text === 'TCP vs UDP') {
+                    window.location.href = '/concepts/tcp-vs-udp.html';
+                    return;
+                }
+                if (text === 'TLS Handshake') {
+                    window.location.href = '/concepts-intermediate/tls-handshake.html';
+                    return;
+                }
+                if (text === 'Digital Certificates') {
+                    window.location.href = '/concepts-intermediate/digital-certificates.html';
+                    return;
+                }
+                if (text === 'Public Key vs Private Key') {
+                    window.location.href = '/concepts-intermediate/public-key-vs-private-key.html';
+                    return;
+                }
+                if (text === 'Encryption in Transit') {
+                    window.location.href = '/concepts-intermediate/encryption-in-transit.html';
+                    return;
+                }
+                if (text === 'Authentication vs Authorization') {
+                    window.location.href = '/concepts-intermediate/authentication-vs-authorization.html';
+                    return;
+                }
+                if (text === 'Tokens (Session, JWT, API Key)') {
+                    window.location.href = '/concepts-intermediate/tokens-session-jwt-api-key.html';
+                    return;
+                }
+                if (text === 'Application Architecture') {
+                    window.location.href = '/concepts-intermediate/application-architecture.html';
+                    return;
+                }
+                if (text === 'Monolith') {
+                    window.location.href = '/concepts-intermediate/monolith.html';
+                    return;
+                }
+                if (text === 'Microservices') {
+                    window.location.href = '/concepts-intermediate/microservices.html';
+                    return;
+                }
+                if (text === 'API Gateway') {
+                    window.location.href = '/concepts-intermediate/api-gateway.html';
+                    return;
+                }
+                if (text === 'Synchronous vs Asynchronous Communication') {
+                    window.location.href = '/concepts-intermediate/synchronous-vs-asynchronous.html';
+                    return;
+                }
+                if (text === 'REST APIs') {
+                    window.location.href = '/concepts-intermediate/rest-apis.html';
+                    return;
+                }
+                if (text === 'JSON') {
+                    window.location.href = '/concepts-intermediate/json.html';
+                    return;
+                }
+                if (text === 'API Versioning') {
+                    window.location.href = '/concepts-intermediate/api-versioning.html';
+                    return;
+                }
+                if (text === 'Pagination') {
+                    window.location.href = '/concepts-intermediate/pagination.html';
+                    return;
+                }
+                if (text === 'Rate Limiting') {
+                    window.location.href = '/concepts-intermediate/rate-limiting.html';
+                    return;
+                }
+                if (text === 'Webhooks') {
+                    window.location.href = '/concepts-intermediate/webhooks.html';
+                    return;
+                }
+                if (text === 'Databases (Relational)') {
+                    window.location.href = '/concepts-intermediate/databases-relational.html';
+                    return;
+                }
+                if (text === 'Databases (NoSQL)') {
+                    window.location.href = '/concepts-intermediate/databases-nosql.html';
+                    return;
+                }
+                if (text === 'Read vs Write Operations') {
+                    window.location.href = '/concepts-intermediate/read-vs-write-operations.html';
+                    return;
+                }
+                if (text === 'Indexing') {
+                    window.location.href = '/concepts-intermediate/indexing.html';
+                    return;
+                }
+                if (text === 'Caching') {
+                    window.location.href = '/concepts-intermediate/caching.html';
+                    return;
+                }
+                if (text === 'Backups') {
+                    window.location.href = '/concepts-intermediate/backups.html';
+                    return;
+                }
+                if (text === 'Modular Monolith') {
+                    window.location.href = '/concepts-intermediate/modular-monolith.html';
+                    return;
+                }
+                
+                const slug = text.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/(^-|-$)/g,'');
+                // placeholder target — will point to pages with SVG animations later
+                window.location.href = `/web-network/${encodeURIComponent(slug)}.html`;
+            };
+
+            li.addEventListener('click', navigate);
+            li.addEventListener('keydown', (e)=>{
+                if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); navigate(); }
+            });
+        });
+    })();
+</script>
+</body>
+</html>

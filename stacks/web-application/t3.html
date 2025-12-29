@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>T3 Stack Architecture</title>
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/stacks.css">
+    <style>
+        :root {
+            --glass: rgba(255,255,255,0.10);
+            --text: #e6e6e6;
+            --muted: #b3b3b3;
+            --border: rgba(255,255,255,0.22);
+            --shadow: 0 10px 30px rgba(0,0,0,0.15);
+            --blur: 12px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        /* Layer-specific colors */
+        .layer.next { border-left: 4px solid #000000; }
+        .layer.trpc { border-left: 4px solid #3b82f6; }
+        .layer.tailwind { border-left: 4px solid #38bdf8; }
+        .layer.typescript { border-left: 4px solid #3178c6; }
+
+        .next .layer-icon { background: #000000; }
+        .trpc .layer-icon { background: #3b82f6; }
+        .tailwind .layer-icon { background: #38bdf8; }
+        .typescript .layer-icon { background: #3178c6; }
+    </style>
+</head>
+<body>
+    <a href="/" class="home-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 18px; height: 18px;">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
+        </svg>
+        Home
+    </a>
+    <div class="usecase-card" aria-label="Stack Use Case">
+        <div class="uc-title">Use Case</div>
+        <div class="uc-line"><span class="label">Type:</span> Web Application Stack</div>
+        <div class="uc-line"><span class="label">Typical Use Case:</span> Modern full-stack startups</div>
+        <div class="uc-line"><span class="label">Famous Usage:</span> Cal.com</div>
+    </div>
+    <div class="container">
+        <h1>T3 Stack</h1>
+        <p class="subtitle">TypeScript, Tailwind CSS, tRPC, Next.js</p>
+
+        <div class="diagram">
+            <div class="stack-container">
+                <!-- Next.js Layer -->
+                <div class="layer next">
+                    <div class="layer-left">
+                        <div class="layer-icon">N</div>
+                        <div class="layer-title">
+                            <h2>Next.js</h2>
+                            <div class="full-name">React + SSR Framework</div>
+                        </div>
+                    </div>
+                    <div class="layer-description">
+                        <ul>
+                            <li>Hybrid SSR/SSG routing</li>
+                            <li>App router & API routes</li>
+                            <li>Performance-first optimizations</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="arrow">↓</div>
+
+                <!-- tRPC Layer -->
+                <div class="layer trpc">
+                    <div class="layer-left">
+                        <div class="layer-icon">t</div>
+                        <div class="layer-title">
+                            <h2>tRPC</h2>
+                            <div class="full-name">Typesafe API Layer</div>
+                        </div>
+                    </div>
+                    <div class="layer-description">
+                        <ul>
+                            <li>End-to-end typesafety</li>
+                            <li>Client + server in sync</li>
+                            <li>Zero schema duplication</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="arrow">↓</div>
+
+                <!-- Tailwind Layer -->
+                <div class="layer tailwind">
+                    <div class="layer-left">
+                        <div class="layer-icon">T</div>
+                        <div class="layer-title">
+                            <h2>Tailwind CSS</h2>
+                            <div class="full-name">Utility-First Styling</div>
+                        </div>
+                    </div>
+                    <div class="layer-description">
+                        <ul>
+                            <li>Design tokens via classes</li>
+                            <li>Responsive utilities</li>
+                            <li>Rapid UI iteration</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="arrow">↓</div>
+
+                <!-- TypeScript Layer -->
+                <div class="layer typescript">
+                    <div class="layer-left">
+                        <div class="layer-icon">TS</div>
+                        <div class="layer-title">
+                            <h2>TypeScript</h2>
+                            <div class="full-name">Typed JavaScript</div>
+                        </div>
+                    </div>
+                    <div class="layer-description">
+                        <ul>
+                            <li>Static typing for safety</li>
+                            <li>Great DX and tooling</li>
+                            <li>Shared types across stack</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flow-description">
+                <strong>Request Flow:</strong> Client Browser → Next.js (UI & SSR) → tRPC (Typed API) → Tailwind (UI styling) → TypeScript (shared types) → Client Browser
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kafka Stack – Kafka · Zookeeper · Schema Registry</title>
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/stacks.css">
+    <style>
+        :root {
+            --glass: rgba(255,255,255,0.10);
+            --text: #e6e6e6;
+            --muted: #b3b3b3;
+            --border: rgba(255,255,255,0.22);
+            --shadow: 0 10px 30px rgba(0,0,0,0.15);
+            --blur: 12px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        /* Layer-specific colors */
+        .layer.kafka { border-left: 4px solid #231F20; }
+        .layer.zookeeper { border-left: 4px solid #ff6600; }
+        .layer.schema { border-left: 4px solid #4285F4; }
+
+        .kafka .layer-icon { background: #231F20; }
+        .zookeeper .layer-icon { background: #ff6600; }
+        .schema .layer-icon { background: #4285F4; }
+    </style>
+</head>
+<body>
+    <a href="/" class="home-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 18px; height: 18px;">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
+        </svg>
+        Home
+    </a>
+
+    <div class="usecase-card" aria-label="Stack Use Case">
+        <div class="uc-title">Use Case</div>
+        <div class="uc-line"><span class="label">Type:</span> Event Streaming / Data Pipeline Stack</div>
+        <div class="uc-line"><span class="label">Typical Use Case:</span> Real-time event streaming, message queuing, log aggregation, CDC pipelines</div>
+        <div class="uc-line"><span class="label">Famous Usage:</span> LinkedIn activity streams, Uber trip events, Netflix recommendations</div>
+    </div>
+
+    <div class="container">
+        <h1>📨 Kafka Stack</h1>
+        <p class="subtitle">Kafka · Zookeeper · Schema Registry</p>
+
+        <div class="diagram">
+            <div class="stack-container">
+                <div class="layer kafka">
+                    <div class="layer-left">
+                        <div class="layer-icon">K</div>
+                        <div class="layer-title">
+                            <h2>Kafka</h2>
+                            <div class="full-name">Distributed Event Streaming Platform</div>
+                        </div>
+                    </div>
+                    <div class="layer-description">
+                        <ul>
+                            <li>Topics partition messages across brokers for scalability</li>
+                            <li>Producers publish, consumers subscribe with consumer groups</li>
+                            <li>Durability with replication, retention policies, compaction</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="arrow">↓</div>
+
+                <div class="layer zookeeper">
+                    <div class="layer-left">
+                        <div class="layer-icon">Z</div>
+                        <div class="layer-title">
+                            <h2>Zookeeper</h2>
+                            <div class="full-name">Coordination & Cluster Management</div>
+                        </div>
+                    </div>
+                    <div class="layer-description">
+                        <ul>
+                            <li>Manages broker metadata, topic configs, partition leadership</li>
+                            <li>Leader election, health checks, cluster state coordination</li>
+                            <li>Note: Kafka 3.x+ can run KRaft mode (Zookeeper-less)</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="arrow">↓</div>
+
+                <div class="layer schema">
+                    <div class="layer-left">
+                        <div class="layer-icon">SR</div>
+                        <div class="layer-title">
+                            <h2>Schema Registry</h2>
+                            <div class="full-name">Schema Management & Evolution</div>
+                        </div>
+                    </div>
+                    <div class="layer-description">
+                        <ul>
+                            <li>Stores Avro, Protobuf, JSON schemas for data contracts</li>
+                            <li>Schema evolution with compatibility checks (backward, forward)</li>
+                            <li>Centralized versioning for producers/consumers to stay aligned</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flow-description">
+                <strong>Flow:</strong> Kafka brokers stream events → Zookeeper coordinates cluster → Schema Registry enforces data contracts for producers/consumers.
+            </div>
+        </div>
+    </div>
+</body>
+</html>

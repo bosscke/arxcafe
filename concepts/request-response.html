@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Request / Response</title>
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/concepts.css">
+</head>
+<body>
+    <a href="/" class="home-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 18px; height: 18px;">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
+        </svg>
+        Home
+    </a>
+
+    <div class="container">
+        <h1><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 40px; height: 40px; display: inline-block; margin-right: 10px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M7.5 21 3 16.5m0 0L7.5 12M3 16.5h13.5m0-13.5L21 7.5m0 0L16.5 12M21 7.5H7.5" /></svg> Request / Response</h1>
+
+        <div class="intro-box">
+            <p><strong>The Request-Response cycle</strong> is the fundamental communication pattern in web development and client-server architectures. A <strong>client</strong> sends a request to a <strong>server</strong>, which processes it and sends back a response. This stateless, synchronous pattern forms the backbone of HTTP communication, enabling browsers to fetch web pages, APIs to exchange data, and applications to communicate across networks.</p>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 21h16.5M4.5 3h15M5.25 3v15m13.5-15v15M9 6.75h1.5m-1.5 4.5h1.5m-1.5 4.5h1.5m4.5-13.5h1.5m-1.5 4.5h1.5m-1.5 4.5h1.5" /></svg> Components Overview</h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>HTTP Request</h3>
+                <p>Message sent from client to server asking for a resource or action.</p>
+                <ul class="features-list">
+                    <li>Request Line (Method, URL, HTTP Version)</li>
+                    <li>Headers (metadata about the request)</li>
+                    <li>Body (optional data payload)</li>
+                    <li>Query parameters in URL</li>
+                    <li>Authentication credentials</li>
+                    <li>Cookies for session tracking</li>
+                    <li>Content-Type specification</li>
+                    <li>User-Agent identification</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>HTTP Response</h3>
+                <p>Message sent from server back to client with requested data or status.</p>
+                <ul class="features-list">
+                    <li>Status Line (HTTP Version, Status Code)</li>
+                    <li>Headers (metadata about response)</li>
+                    <li>Body (actual content/data)</li>
+                    <li>Content-Type of returned data</li>
+                    <li>Cache-Control directives</li>
+                    <li>Set-Cookie for session management</li>
+                    <li>Content-Length or Transfer-Encoding</li>
+                    <li>Location for redirects</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0 3.181 3.183a8.25 8.25 0 0 0 13.803-3.7M4.031 9.865a8.25 8.25 0 0 1 13.803-3.7l3.181 3.182m0-4.991v4.99" /></svg> The Request-Response Cycle</h2>
+
+        <div class="flow-diagram">
+            <div style="font-weight: bold; margin-bottom: 20px; color: #667eea;">Complete Communication Flow</div>
+            <div>
+                <div class="flow-step">1. Client Request</div>
+                <div class="flow-arrow">→</div>
+                <div class="flow-step">2. Network Transmission</div>
+                <div class="flow-arrow">→</div>
+                <div class="flow-step">3. Server Processing</div>
+                <div class="flow-arrow">→</div>
+                <div class="flow-step">4. Server Response</div>
+                <div class="flow-arrow">→</div>
+                <div class="flow-step">5. Client Receives</div>
+            </div>
+        </div>
+
+        <h3>Detailed Request-Response Flow:</h3>
+        <div class="diagram-box">
+            <ol style="margin-left: 30px; line-height: 2.2; text-align: left;">
+                <li><strong>User Action:</strong> User triggers action (clicks link, submits form, API call)</li>
+                <li><strong>Request Creation:</strong> Browser/client builds HTTP request with method, headers, body</li>
+                <li><strong>DNS Resolution:</strong> Domain name converted to IP address</li>
+                <li><strong>TCP Connection:</strong> Three-way handshake establishes connection</li>
+                <li><strong>TLS Handshake:</strong> If HTTPS, secure connection established</li>
+                <li><strong>Request Transmission:</strong> HTTP request sent over network to server</li>
+                <li><strong>Server Reception:</strong> Web server receives and parses request</li>
+                <li><strong>Routing & Processing:</strong> Server routes to appropriate handler, executes logic</li>
+                <li><strong>Database Query:</strong> If needed, server queries database for data</li>
+                <li><strong>Response Generation:</strong> Server builds response with status, headers, body</li>
+                <li><strong>Response Transmission:</strong> HTTP response sent back to client</li>
+                <li><strong>Client Processing:</strong> Browser/client parses and renders response</li>
+            </ol>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M17.25 6.75 22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3-4.5 16.5" /></svg> HTTP Methods (Verbs)</h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>Common Methods</h3>
+                <ul class="features-list">
+                    <li><strong>GET:</strong> Retrieve data from server (read-only)</li>
+                    <li><strong>POST:</strong> Send data to create new resource</li>
+                    <li><strong>PUT:</strong> Update/replace entire resource</li>
+                    <li><strong>PATCH:</strong> Partially update resource</li>
+                    <li><strong>DELETE:</strong> Remove resource from server</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Less Common Methods</h3>
+                <ul class="features-list">
+                    <li><strong>HEAD:</strong> Same as GET but without body</li>
+                    <li><strong>OPTIONS:</strong> Check allowed methods (CORS)</li>
+                    <li><strong>TRACE:</strong> Echo request (debugging)</li>
+                    <li><strong>CONNECT:</strong> Establish tunnel (for proxies)</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 0 1 3 19.875v-6.75ZM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V8.625ZM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V4.125Z" /></svg> HTTP Status Codes</h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>Success (2xx)</h3>
+                <ul class="features-list">
+                    <li><strong>200 OK:</strong> Request succeeded</li>
+                    <li><strong>201 Created:</strong> Resource created</li>
+                    <li><strong>204 No Content:</strong> Success, no body</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Redirection (3xx)</h3>
+                <ul class="features-list">
+                    <li><strong>301 Moved Permanently:</strong> Permanent redirect</li>
+                    <li><strong>302 Found:</strong> Temporary redirect</li>
+                    <li><strong>304 Not Modified:</strong> Use cached version</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Client Errors (4xx)</h3>
+                <ul class="features-list">
+                    <li><strong>400 Bad Request:</strong> Invalid syntax</li>
+                    <li><strong>401 Unauthorized:</strong> Authentication required</li>
+                    <li><strong>403 Forbidden:</strong> No permission</li>
+                    <li><strong>404 Not Found:</strong> Resource doesn't exist</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Server Errors (5xx)</h3>
+                <ul class="features-list">
+                    <li><strong>500 Internal Server Error:</strong> Generic server error</li>
+                    <li><strong>502 Bad Gateway:</strong> Invalid upstream response</li>
+                    <li><strong>503 Service Unavailable:</strong> Server overloaded</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle; color: #13AA52;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Advantages</h2>
+
+        <div class="pros-box">
+            <h3>Benefits of Request-Response Pattern</h3>
+            <ul class="features-list">
+                <li><strong>Simplicity:</strong> Easy to understand and implement</li>
+                <li><strong>Stateless:</strong> Each request independent, server doesn't maintain client state</li>
+                <li><strong>Scalability:</strong> Stateless nature allows easy horizontal scaling</li>
+                <li><strong>Caching:</strong> Responses can be cached for performance</li>
+                <li><strong>Reliability:</strong> Clear success/failure indication via status codes</li>
+                <li><strong>Debugging:</strong> Easy to inspect and debug with browser tools</li>
+                <li><strong>Universal Support:</strong> Works across all browsers and platforms</li>
+                <li><strong>Standard Protocol:</strong> HTTP is well-documented and widely adopted</li>
+            </ul>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle; color: #DD0031;"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 1 1-18 0 9 9 0 0 1 18 0zm-9 3.75h.008v.008H12v-.008z" /></svg> Limitations & Challenges</h2>
+
+        <div class="cons-box">
+            <h3>Request-Response Constraints</h3>
+            <ul class="features-list">
+                <li><strong>Client-Initiated Only:</strong> Server cannot push updates to client</li>
+                <li><strong>Latency:</strong> Each request requires full round-trip time</li>
+                <li><strong>Overhead:</strong> Headers sent with every request/response</li>
+                <li><strong>Connection Management:</strong> Opening/closing connections adds delay</li>
+                <li><strong>No Real-Time:</strong> Requires polling for live updates</li>
+                <li><strong>Request Limit:</strong> Browser limits concurrent requests per domain</li>
+                <li><strong>Timeout Issues:</strong> Long operations may timeout</li>
+                <li><strong>Network Dependency:</strong> Fails without stable connection</li>
+            </ul>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9.594 3.94c.09-.542.56-.94 1.11-.94h2.593c.55 0 1.02.398 1.11.94l.213 1.281c.063.374.313.686.645.87.074.04.147.083.22.127.324.196.72.257 1.075.124l1.217-.456a1.125 1.125 0 0 1 1.37.49l1.296 2.247a1.125 1.125 0 0 1-.26 1.431l-1.003.827c-.293.241-.438.613-.43.992a7.723 7.723 0 0 1 0 .255c-.008.378.137.75.43.991l1.004.827c.424.35.534.955.26 1.43l-1.298 2.247a1.125 1.125 0 0 1-1.369.491l-1.217-.456c-.355-.133-.75-.072-1.076.124a6.47 6.47 0 0 1-.22.128c-.331.183-.581.495-.644.869l-.213 1.281c-.09.543-.56.94-1.11.94h-2.594c-.55 0-1.019-.398-1.11-.94l-.213-1.281c-.062-.374-.312-.686-.644-.87a6.52 6.52 0 0 1-.22-.127c-.325-.196-.72-.257-1.076-.124l-1.217.456a1.125 1.125 0 0 1-1.369-.49l-1.297-2.247a1.125 1.125 0 0 1 .26-1.431l1.004-.827c.292-.24.437-.613.43-.991a6.932 6.932 0 0 1 0-.255c.007-.38-.138-.751-.43-.992l-1.004-.827a1.125 1.125 0 0 1-.26-1.43l1.297-2.247a1.125 1.125 0 0 1 1.37-.491l1.216.456c.356.133.751.072 1.076-.124.072-.044.146-.086.22-.128.332-.183.582-.495.644-.869l.214-1.28Z" /><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" /></svg> Key Headers</h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>Request Headers</h3>
+                <ul class="features-list">
+                    <li><strong>Content-Type:</strong> Format of request body</li>
+                    <li><strong>Authorization:</strong> Auth credentials/tokens</li>
+                    <li><strong>Accept:</strong> Expected response format</li>
+                    <li><strong>User-Agent:</strong> Client identification</li>
+                    <li><strong>Cookie:</strong> Session/tracking data</li>
+                    <li><strong>Referer:</strong> Previous page URL</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Response Headers</h3>
+                <ul class="features-list">
+                    <li><strong>Content-Type:</strong> Format of response body</li>
+                    <li><strong>Cache-Control:</strong> Caching directives</li>
+                    <li><strong>Set-Cookie:</strong> Set client cookies</li>
+                    <li><strong>Location:</strong> Redirect URL</li>
+                    <li><strong>ETag:</strong> Resource version identifier</li>
+                    <li><strong>Access-Control-Allow-Origin:</strong> CORS</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9.004 9.004 0 0 0 8.716-6.747M12 21a9.004 9.004 0 0 1-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 0 1 7.843 4.582M12 3a8.997 8.997 0 0 0-7.843 4.582m15.686 0A11.953 11.953 0 0 1 12 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0 1 21 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0 1 12 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 0 1 3 12c0-1.605.42-3.113 1.157-4.418" /></svg> Real-World Examples</h2>
+
+        <div class="arch-card" style="margin: 30px 0;">
+            <h3>Common Use Cases:</h3>
+            <p><strong>Web Browsing:</strong> Every page load is a GET request → HTML response</p>
+            <p><strong>Form Submission:</strong> POST request with form data → confirmation response</p>
+            <p><strong>REST APIs:</strong> CRUD operations using GET, POST, PUT, DELETE</p>
+            <p><strong>File Upload:</strong> POST with multipart/form-data → upload confirmation</p>
+            <p><strong>Search Queries:</strong> GET with query params → search results JSON</p>
+            <p><strong>User Login:</strong> POST credentials → JWT token or session cookie</p>
+            <p><strong>Image Loading:</strong> GET image URL → binary image data</p>
+            <p><strong>AJAX Calls:</strong> Asynchronous requests without page reload</p>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 0 0-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 0 0 3.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 0 0 3.09 3.09l2.846.813-2.846.813a4.5 4.5 0 0 0-3.09 3.09l-.813 2.846zm6.375-5.414l.902-2.707a.75.75 0 0 0 1.386 0l.902 2.707a3 3 0 0 0 2.591 2.591l2.707.902a.75.75 0 0 0 0 1.386l-2.707.902a3 3 0 0 0-2.591 2.591l-.902 2.707a.75.75 0 0 0-1.386 0l-.902-2.707a3 3 0 0 0-2.591-2.591l-2.707-.902a.75.75 0 0 0 0-1.386l2.707-.902a3 3 0 0 0 2.591-2.591z" /></svg> Best Practices</h2>
+
+        <div class="intro-box">
+            <h3>Request-Response Implementation:</h3>
+            <ul class="features-list">
+                <li><strong>Use Appropriate Methods:</strong> GET for reads, POST for creates, PUT/PATCH for updates</li>
+                <li><strong>Meaningful Status Codes:</strong> Return correct HTTP status codes for each scenario</li>
+                <li><strong>Idempotency:</strong> GET, PUT, DELETE should be idempotent (same result when repeated)</li>
+                <li><strong>Error Handling:</strong> Provide clear error messages in response body</li>
+                <li><strong>Compression:</strong> Use gzip/brotli to compress responses</li>
+                <li><strong>Timeouts:</strong> Set reasonable timeout values on both client and server</li>
+                <li><strong>Retry Logic:</strong> Implement exponential backoff for failed requests</li>
+                <li><strong>Request Validation:</strong> Validate all input on server-side</li>
+                <li><strong>Response Size:</strong> Paginate large datasets to reduce response size</li>
+                <li><strong>Versioning:</strong> Version APIs to maintain backward compatibility</li>
+            </ul>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" /></svg> Modern Alternatives</h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>WebSockets</h3>
+                <p>Persistent bidirectional connection for real-time communication. Server can push updates to client.</p>
+            </div>
+
+            <div class="arch-card">
+                <h3>Server-Sent Events (SSE)</h3>
+                <p>One-way connection from server to client for streaming updates over HTTP.</p>
+            </div>
+
+            <div class="arch-card">
+                <h3>Long Polling</h3>
+                <p>Client holds request open until server has data, then immediately requests again.</p>
+            </div>
+
+            <div class="arch-card">
+                <h3>GraphQL</h3>
+                <p>Query language allowing clients to request exactly the data they need in one request.</p>
+            </div>
+        </div>
+
+        <div class="intro-box" style="text-align: center; margin: 60px 0 40px;">
+            <p>The Request-Response pattern remains the cornerstone of web communication. While new technologies like WebSockets address its limitations, HTTP request-response continues to power the vast majority of web interactions due to its simplicity, reliability, and universal support.</p>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Symfony Stack Architecture</title>
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/stacks.css">
+    <style>
+        :root {
+            --glass: rgba(255,255,255,0.10);
+            --text: #e6e6e6;
+            --muted: #b3b3b3;
+            --border: rgba(255,255,255,0.22);
+            --shadow: 0 10px 30px rgba(0,0,0,0.15);
+            --blur: 12px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        /* Layer-specific colors */
+        .layer.symfony { border-left: 4px solid #000000; }
+        .layer.apache { border-left: 4px solid #D22128; }
+        .layer.postgres { border-left: 4px solid #336791; }
+
+        .symfony .layer-icon { background: #000000; }
+        .apache .layer-icon { background: #D22128; }
+        .postgres .layer-icon { background: #336791; }
+    </style>
+</head>
+<body>
+    <a href="/" class="home-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 18px; height: 18px;">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
+        </svg>
+        Home
+    </a>
+
+    <div class="usecase-card" aria-label="Stack Use Case">
+        <div class="uc-title">Use Case</div>
+        <div class="uc-line"><span class="label">Type:</span> PHP Framework Stack</div>
+        <div class="uc-line"><span class="label">Typical Use Case:</span> Enterprise applications, REST APIs</div>
+        <div class="uc-line"><span class="label">Famous Usage:</span> Symfony ecosystem, enterprise projects</div>
+    </div>
+
+    <div class="container">
+        <h1>⬛ Symfony Stack</h1>
+        <p class="subtitle">Symfony · PostgreSQL · Apache</p>
+
+        <div class="diagram">
+            <div class="stack-container">
+                <!-- Symfony Layer -->
+                <div class="layer symfony">
+                    <div class="layer-left">
+                        <div class="layer-icon">S</div>
+                        <div class="layer-title">
+                            <h2>Symfony</h2>
+                            <div class="full-name">PHP Web Framework</div>
+                        </div>
+                    </div>
+                    <div class="layer-description">
+                        <ul>
+                            <li>Doctrine ORM, Twig templating</li>
+                            <li>Routing, dependency injection</li>
+                            <li>Event dispatcher, middleware stack</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="arrow">↓</div>
+
+                <!-- Apache Layer -->
+                <div class="layer apache">
+                    <div class="layer-left">
+                        <div class="layer-icon">A</div>
+                        <div class="layer-title">
+                            <h2>Apache</h2>
+                            <div class="full-name">Web Server</div>
+                        </div>
+                    </div>
+                    <div class="layer-description">
+                        <ul>
+                            <li>HTTP/2 support, .htaccess rewriting</li>
+                            <li>Module-based architecture</li>
+                            <li>Virtual hosting, SSL/TLS</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="arrow">↓</div>
+
+                <!-- PostgreSQL Layer -->
+                <div class="layer postgres">
+                    <div class="layer-left">
+                        <div class="layer-icon">PG</div>
+                        <div class="layer-title">
+                            <h2>PostgreSQL</h2>
+                            <div class="full-name">Advanced Relational Database</div>
+                        </div>
+                    </div>
+                    <div class="layer-description">
+                        <ul>
+                            <li>ACID compliance, JSON support</li>
+                            <li>Full-text search, advanced indexing</li>
+                            <li>Stored procedures, replication</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flow-description">
+                <strong>Flow:</strong> User request → Apache web server → Symfony application → Doctrine ORM → PostgreSQL database
+            </div>
+        </div>
+    </div>
+</body>
+</html>

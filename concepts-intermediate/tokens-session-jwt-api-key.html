@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tokens (Session, JWT, API Key)</title>
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/concepts.css">
+</head>
+<body>
+    <a href="/" class="home-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 18px; height: 18px;">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
+        </svg>
+        Home
+    </a>
+
+    <div class="container">
+        <h1>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 40px; height: 40px; display: inline-block; margin-right: 10px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 4.875c0-.621.504-1.125 1.125-1.125h4.5c.621 0 1.125.504 1.125 1.125v4.5c0 .621-.504 1.125-1.125 1.125h-4.5A1.125 1.125 0 0 1 3.75 9.375v-4.5zm0 9.75c0-.621.504-1.125 1.125-1.125h4.5c.621 0 1.125.504 1.125 1.125v4.5c0 .621-.504 1.125-1.125 1.125h-4.5a1.125 1.125 0 0 1-1.125-1.125v-4.5zm9.75-9.75c0-.621.504-1.125 1.125-1.125h4.5c.621 0 1.125.504 1.125 1.125v4.5c0 .621-.504 1.125-1.125 1.125h-4.5A1.125 1.125 0 0 1 13.5 9.375v-4.5zm0 9.75c0-.621.504-1.125 1.125-1.125h4.5c.621 0 1.125.504 1.125 1.125v4.5c0 .621-.504 1.125-1.125 1.125h-4.5a1.125 1.125 0 0 1-1.125-1.125v-4.5z"/></svg>
+            Tokens: Session, JWT, API Key
+        </h1>
+
+        <div class="intro-box">
+            <p><strong>Tokens</strong> are credentials used to authenticate and authorize users or services. Session tokens maintain state on the server, JWTs carry claims and are stateless, and API keys provide simple authentication for applications. Understanding when to use each type is crucial for building secure, scalable systems.</p>
+        </div>
+
+        <h2>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M6 12h12M6 6h12M6 18h12"/></svg>
+            Token Types Comparison
+        </h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>Session Tokens</h3>
+                <ul class="features-list">
+                    <li><strong>Stateful:</strong> Server stores session data</li>
+                    <li><strong>Format:</strong> Random string (UUID)</li>
+                    <li><strong>Storage:</strong> Cookie or local storage</li>
+                    <li><strong>Revocation:</strong> Immediate (delete from DB)</li>
+                </ul>
+            </div>
+            <div class="arch-card">
+                <h3>JWT (JSON Web Token)</h3>
+                <ul class="features-list">
+                    <li><strong>Stateless:</strong> Self-contained claims</li>
+                    <li><strong>Format:</strong> Base64 encoded JSON</li>
+                    <li><strong>Storage:</strong> Header, cookie, local storage</li>
+                    <li><strong>Revocation:</strong> Difficult (use short TTL)</li>
+                </ul>
+            </div>
+            <div class="arch-card">
+                <h3>API Keys</h3>
+                <ul class="features-list">
+                    <li><strong>Stateful:</strong> Stored in database</li>
+                    <li><strong>Format:</strong> Random string or UUID</li>
+                    <li><strong>Storage:</strong> Header (Authorization)</li>
+                    <li><strong>Revocation:</strong> Immediate (delete/disable)</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v18m0-18c-1.5 1.5-4.5 4.5-7.5 4.5S1.5 4.5 0 3m12 0c1.5 1.5 4.5 4.5 7.5 4.5S22.5 4.5 24 3"/></svg>
+            Session Tokens
+        </h2>
+
+        <div class="intro-box">
+            <p>Traditional web authentication using server-side sessions. After login, server creates a session ID stored in a cookie. Each request includes the cookie; server looks up session data.</p>
+        </div>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>How It Works</h3>
+                <ul class="features-list">
+                    <li>User logs in with credentials</li>
+                    <li>Server creates session, stores in DB/Redis</li>
+                    <li>Session ID sent as HttpOnly cookie</li>
+                    <li>Each request validated against session store</li>
+                </ul>
+            </div>
+            <div class="arch-card">
+                <h3>Advantages</h3>
+                <ul class="features-list">
+                    <li>Easy revocation (delete session)</li>
+                    <li>Server controls all session data</li>
+                    <li>Can store large amounts of data</li>
+                    <li>More secure (cookie flags: HttpOnly, Secure)</li>
+                </ul>
+            </div>
+            <div class="arch-card">
+                <h3>Disadvantages</h3>
+                <ul class="features-list">
+                    <li>Requires server-side storage (Redis, DB)</li>
+                    <li>Harder to scale horizontally</li>
+                    <li>Sticky sessions needed for load balancing</li>
+                    <li>Not ideal for APIs/microservices</li>
+                </ul>
+            </div>
+            <div class="arch-card">
+                <h3>Use Cases</h3>
+                <ul class="features-list">
+                    <li>Traditional server-rendered web apps</li>
+                    <li>High-security apps (banking)</li>
+                    <li>When immediate logout is required</li>
+                    <li>Single-domain applications</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M6.75 7.5h10.5m-10.5 3h10.5m-10.5 3h10.5m-10.5 3h5.25"/></svg>
+            JWT (JSON Web Token)
+        </h2>
+
+        <div class="intro-box">
+            <p>Compact, self-contained tokens with three parts: header, payload, and signature. Stateless and ideal for distributed systems. Signed with secret (HMAC) or private key (RSA).</p>
+        </div>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>Structure</h3>
+                <p><code>header.payload.signature</code><br>
+                <strong>Header:</strong> Algorithm, type<br>
+                <strong>Payload:</strong> Claims (user ID, role, exp)<br>
+                <strong>Signature:</strong> HMAC or RSA</p>
+            </div>
+            <div class="arch-card">
+                <h3>Advantages</h3>
+                <ul class="features-list">
+                    <li>Stateless, no server-side storage</li>
+                    <li>Easy to scale horizontally</li>
+                    <li>Cross-domain, mobile-friendly</li>
+                    <li>Contains user info (no DB lookup)</li>
+                </ul>
+            </div>
+            <div class="arch-card">
+                <h3>Disadvantages</h3>
+                <ul class="features-list">
+                    <li>Cannot revoke before expiration</li>
+                    <li>Larger payload than session ID</li>
+                    <li>Claims visible (Base64 decoded)</li>
+                    <li>Vulnerable if secret leaks</li>
+                </ul>
+            </div>
+            <div class="arch-card">
+                <h3>Use Cases</h3>
+                <ul class="features-list">
+                    <li>REST APIs and microservices</li>
+                    <li>Mobile apps (no cookies)</li>
+                    <li>Single Sign-On (SSO)</li>
+                    <li>Distributed/serverless systems</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="m6.75 7.5 4.5 9 4.5-9m-9 0 4.5-4.5 4.5 4.5m-9 0h9m-9 0L3 12l3.75-4.5m9 0L21 12l-3.75-4.5"/></svg>
+            API Keys
+        </h2>
+
+        <div class="intro-box">
+            <p>Simple authentication for applications and services. Long-lived tokens used for service-to-service or client-to-server auth. Typically passed in Authorization header or query param.</p>
+        </div>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>How It Works</h3>
+                <ul class="features-list">
+                    <li>Developer creates API key in dashboard</li>
+                    <li>Key stored hashed in database</li>
+                    <li>Client includes key in each request</li>
+                    <li>Server validates against DB</li>
+                </ul>
+            </div>
+            <div class="arch-card">
+                <h3>Advantages</h3>
+                <ul class="features-list">
+                    <li>Simple to implement and use</li>
+                    <li>Easy revocation (delete from DB)</li>
+                    <li>Per-app/service credentials</li>
+                    <li>Rate limiting per key</li>
+                </ul>
+            </div>
+            <div class="arch-card">
+                <h3>Disadvantages</h3>
+                <ul class="features-list">
+                    <li>No user identity (app-level only)</li>
+                    <li>If leaked, full access until revoked</li>
+                    <li>Not suitable for user auth</li>
+                    <li>Hard to rotate without downtime</li>
+                </ul>
+            </div>
+            <div class="arch-card">
+                <h3>Use Cases</h3>
+                <ul class="features-list">
+                    <li>Third-party API access (Stripe, Twilio)</li>
+                    <li>Server-to-server auth</li>
+                    <li>Public API rate limiting</li>
+                    <li>CI/CD pipelines, automation</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" /><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 19.5a9 9 0 1 1 15 0"/></svg>
+            Code Examples
+        </h2>
+
+        <div style="background: rgba(102, 126, 234, 0.1); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 12px; padding: 25px; margin: 30px 0; display: grid; gap: 18px;">
+            <div>
+                <h3>Session Token (Express.js)</h3>
+                <div style="background: #1e1e1e; color: #d4d4d4; padding: 12px; border-radius: 8px; font-family: 'Courier New', monospace; font-size: 10px; line-height: 1.6; overflow-wrap: break-word; word-wrap: break-word; border: 1px solid rgba(255, 255, 255, 0.1); white-space: pre-wrap; max-width: 100%; box-sizing: border-box;">
+const session = require('express-session');
+const RedisStore = require('connect-redis')
+  .default;
+
+app.use(session({
+  store: new RedisStore({ client: redisClient }),
+  secret: process.env.SESSION_SECRET,
+  resave: false,
+  saveUninitialized: false,
+  cookie: {
+    httpOnly: true,
+    secure: true,      // HTTPS only
+    maxAge: 24 * 60 * 60 * 1000  // 24h
+  }
+}));
+
+// Login
+app.post('/login', async (req, res) => {
+  const user = await authenticate(req.body);
+  req.session.userId = user.id;
+  res.json({ success: true });
+});
+
+// Protected route
+app.get('/profile', (req, res) => {
+  if (!req.session.userId) {
+    return res.status(401)
+      .json({ error: 'Not authenticated' });
+  }
+  res.json({ userId: req.session.userId });
+});
+                </div>
+            </div>
+            <div>
+                <h3>JWT (Node.js)</h3>
+                <div style="background: #1e1e1e; color: #d4d4d4; padding: 12px; border-radius: 8px; font-family: 'Courier New', monospace; font-size: 10px; line-height: 1.6; overflow-wrap: break-word; word-wrap: break-word; border: 1px solid rgba(255, 255, 255, 0.1); white-space: pre-wrap; max-width: 100%; box-sizing: border-box;">
+const jwt = require('jsonwebtoken');
+
+// Generate JWT
+app.post('/login', async (req, res) => {
+  const user = await authenticate(req.body);
+  
+  const token = jwt.sign(
+    { 
+      userId: user.id, 
+      role: user.role,
+      email: user.email 
+    },
+    process.env.JWT_SECRET,
+    { expiresIn: '15m' }  // Short-lived
+  );
+  
+  const refreshToken = jwt.sign(
+    { userId: user.id },
+    process.env.REFRESH_SECRET,
+    { expiresIn: '7d' }
+  );
+  
+  res.json({ token, refreshToken });
+});
+
+// Verify JWT middleware
+function verifyToken(req, res, next) {
+  const authHeader = req.headers.authorization;
+  const token = authHeader?.split(' ')[1];
+  
+  if (!token) {
+    return res.status(401)
+      .json({ error: 'No token' });
+  }
+  
+  try {
+    req.user = jwt.verify(token, 
+      process.env.JWT_SECRET);
+    next();
+  } catch (err) {
+    res.status(401)
+      .json({ error: 'Invalid token' });
+  }
+}
+
+app.get('/api/data', verifyToken, (req, res) => {
+  res.json({ userId: req.user.userId });
+});
+                </div>
+            </div>
+            <div>
+                <h3>API Key (Express.js)</h3>
+                <div style="background: #1e1e1e; color: #d4d4d4; padding: 12px; border-radius: 8px; font-family: 'Courier New', monospace; font-size: 10px; line-height: 1.6; overflow-wrap: break-word; word-wrap: break-word; border: 1px solid rgba(255, 255, 255, 0.1); white-space: pre-wrap; max-width: 100%; box-sizing: border-box;">
+const crypto = require('crypto');
+const bcrypt = require('bcrypt');
+
+// Generate API key
+app.post('/api-keys', async (req, res) => {
+  const apiKey = crypto.randomBytes(32)
+    .toString('hex');
+  const hashedKey = await bcrypt.hash(apiKey, 10);
+  
+  await db.apiKeys.create({
+    userId: req.user.id,
+    keyHash: hashedKey,
+    name: req.body.name
+  });
+  
+  // Only shown once!
+  res.json({ apiKey });
+});
+
+// Verify API key middleware
+async function verifyApiKey(req, res, next) {
+  const apiKey = 
+    req.headers['x-api-key'] || 
+    req.query.apiKey;
+  
+  if (!apiKey) {
+    return res.status(401)
+      .json({ error: 'API key required' });
+  }
+  
+  const keys = await db.apiKeys.findAll();
+  for (const key of keys) {
+    if (await bcrypt.compare(apiKey, 
+      key.keyHash)) {
+      req.apiKeyId = key.id;
+      return next();
+    }
+  }
+  
+  res.status(401)
+    .json({ error: 'Invalid API key' });
+}
+
+app.get('/api/public-data', 
+  verifyApiKey, 
+  (req, res) => {
+    res.json({ data: '...' });
+  }
+);
+                </div>
+            </div>
+        </div>
+
+        <h2>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 3h3m-6 3h6M6.75 6h10.5a2.25 2.25 0 0 1 2.25 2.25v9A2.25 2.25 0 0 1 17.25 19.5H6.75A2.25 2.25 0 0 1 4.5 17.25v-9A2.25 2.25 0 0 1 6.75 6z"/></svg>
+            When to Use What
+        </h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>Use Session Tokens</h3>
+                <ul class="features-list">
+                    <li>Traditional web apps (server-side rendering)</li>
+                    <li>High-security requirements (banking, healthcare)</li>
+                    <li>Need immediate revocation (logout, bans)</li>
+                    <li>Storing large session data</li>
+                </ul>
+            </div>
+            <div class="arch-card">
+                <h3>Use JWT</h3>
+                <ul class="features-list">
+                    <li>REST APIs and SPAs (React, Vue, Angular)</li>
+                    <li>Mobile apps (iOS, Android)</li>
+                    <li>Microservices and distributed systems</li>
+                    <li>Cross-domain authentication (SSO)</li>
+                </ul>
+            </div>
+            <div class="arch-card">
+                <h3>Use API Keys</h3>
+                <ul class="features-list">
+                    <li>Third-party API access</li>
+                    <li>Server-to-server communication</li>
+                    <li>Public API rate limiting</li>
+                    <li>CI/CD, automation, scripts</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 0 1 3 19.875v-6.75ZM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V8.625ZM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V4.125Z"/></svg>
+            Security Best Practices
+        </h2>
+
+        <div class="pros-box">
+            <h3>Secure token handling:</h3>
+            <ul class="features-list">
+                <li><strong>Session tokens:</strong> Use HttpOnly, Secure, SameSite=Strict cookies; store in Redis with TTL</li>
+                <li><strong>JWT:</strong> Short expiration (15 min access, 7 day refresh); validate signature; use RS256 for asymmetric</li>
+                <li><strong>API keys:</strong> Hash before storing; use HTTPS; rotate regularly; rate limit per key</li>
+                <li><strong>Storage:</strong> Never in localStorage for sensitive tokens; prefer HttpOnly cookies or secure storage APIs</li>
+                <li><strong>Transmission:</strong> Always use HTTPS/TLS; never in URL query params (logs/history)</li>
+                <li><strong>Revocation:</strong> Implement token blacklist for JWTs; delete sessions/API keys immediately</li>
+                <li><strong>Rotation:</strong> Refresh tokens for JWTs; regenerate session IDs on privilege change</li>
+                <li><strong>Secrets:</strong> Store in env vars or vaults (AWS Secrets Manager, HashiCorp Vault)</li>
+            </ul>
+        </div>
+
+        <h2>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 1 1-18 0 9 9 0 0 1 18 0zm-9 3.75h.008v.008H12v-.008z"/></svg>
+            Common Pitfalls
+        </h2>
+
+        <div class="cons-box">
+            <h3>Avoid these mistakes:</h3>
+            <ul class="features-list">
+                <li><strong>Long-lived JWTs:</strong> Cannot revoke; use short TTL (15 min) + refresh tokens</li>
+                <li><strong>Storing JWTs in localStorage:</strong> Vulnerable to XSS; use HttpOnly cookies when possible</li>
+                <li><strong>Weak secrets:</strong> Use cryptographically random secrets (32+ bytes); rotate regularly</li>
+                <li><strong>No expiration:</strong> All tokens should expire; session timeout, JWT exp claim, API key TTL</li>
+                <li><strong>Exposing secrets:</strong> Never commit secrets to Git; use environment variables or vaults</li>
+                <li><strong>Not validating signatures:</strong> Always verify JWT signature; check algorithm (avoid "none")</li>
+                <li><strong>API keys in URLs:</strong> Logs, browser history, referrer headers leak keys; use headers</li>
+                <li><strong>Reusing tokens across apps:</strong> One token per app; prevents cross-app attacks</li>
+            </ul>
+        </div>
+
+        <h2>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6v12m-7.5 0V6m7.5 0A3.75 3.75 0 0 0 8.25 6m7.5 0h3a2.25 2.25 0 0 1 2.25 2.25v7.5A2.25 2.25 0 0 1 18.75 18h-3"/></svg>
+            Token Comparison Table
+        </h2>
+
+        <div style="background: rgba(102, 126, 234, 0.1); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 12px; padding: 25px; margin: 30px 0;">
+            <div style="overflow-x: auto;">
+                <table style="width: 100%; border-collapse: collapse; font-size: 14px;">
+                    <thead>
+                        <tr style="border-bottom: 2px solid rgba(255, 255, 255, 0.3);">
+                            <th style="padding: 12px; text-align: left;">Feature</th>
+                            <th style="padding: 12px; text-align: left;">Session Token</th>
+                            <th style="padding: 12px; text-align: left;">JWT</th>
+                            <th style="padding: 12px; text-align: left;">API Key</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr style="border-bottom: 1px solid rgba(255, 255, 255, 0.1);">
+                            <td style="padding: 10px;"><strong>State</strong></td>
+                            <td style="padding: 10px;">Stateful</td>
+                            <td style="padding: 10px;">Stateless</td>
+                            <td style="padding: 10px;">Stateful</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid rgba(255, 255, 255, 0.1);">
+                            <td style="padding: 10px;"><strong>Storage</strong></td>
+                            <td style="padding: 10px;">Server (Redis/DB)</td>
+                            <td style="padding: 10px;">Client</td>
+                            <td style="padding: 10px;">Server (DB)</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid rgba(255, 255, 255, 0.1);">
+                            <td style="padding: 10px;"><strong>Scalability</strong></td>
+                            <td style="padding: 10px;">Medium</td>
+                            <td style="padding: 10px;">High</td>
+                            <td style="padding: 10px;">Medium</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid rgba(255, 255, 255, 0.1);">
+                            <td style="padding: 10px;"><strong>Revocation</strong></td>
+                            <td style="padding: 10px;">Easy</td>
+                            <td style="padding: 10px;">Difficult</td>
+                            <td style="padding: 10px;">Easy</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid rgba(255, 255, 255, 0.1);">
+                            <td style="padding: 10px;"><strong>Size</strong></td>
+                            <td style="padding: 10px;">Small (UUID)</td>
+                            <td style="padding: 10px;">Large (claims)</td>
+                            <td style="padding: 10px;">Medium</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 10px;"><strong>Best For</strong></td>
+                            <td style="padding: 10px;">Web apps</td>
+                            <td style="padding: 10px;">APIs, mobile</td>
+                            <td style="padding: 10px;">Service auth</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="intro-box" style="text-align: center; margin: 60px 0 40px;">
+            <p>Choosing the right token type depends on your architecture, security requirements, and scalability needs. <strong>Session tokens</strong> for traditional web apps, <strong>JWTs</strong> for modern APIs and SPAs, and <strong>API keys</strong> for service-to-service communication. Always prioritize security: short expirations, HTTPS, and proper storage.</p>
+        </div>
+    </div>
+</body>
+</html>

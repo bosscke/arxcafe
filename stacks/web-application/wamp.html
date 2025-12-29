@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WAMP Stack Architecture</title>
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/stacks.css">
+    <style>
+        :root {
+            --glass: rgba(255,255,255,0.10);
+            --text: #e6e6e6;
+            --muted: #b3b3b3;
+            --border: rgba(255,255,255,0.22);
+            --shadow: 0 10px 30px rgba(0,0,0,0.15);
+            --blur: 12px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        /* Layer-specific colors */
+        .layer.windows { border-left: 4px solid #0078D4; }
+        .layer.apache { border-left: 4px solid #D22128; }
+        .layer.mysql { border-left: 4px solid #00758F; }
+        .layer.php { border-left: 4px solid #777BB3; }
+
+        .windows .layer-icon { background: #0078D4; }
+        .apache .layer-icon { background: #D22128; }
+        .mysql .layer-icon { background: #00758F; }
+        .php .layer-icon { background: #777BB3; }
+    </style>
+</head>
+<body>
+    <a href="/" class="home-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 18px; height: 18px;">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
+        </svg>
+        Home
+    </a>
+
+    <div class="usecase-card" aria-label="Stack Use Case">
+        <div class="uc-title">Use Case</div>
+        <div class="uc-line"><span class="label">Type:</span> Web (Local Dev)</div>
+        <div class="uc-line"><span class="label">Typical Use Case:</span> Windows local PHP/MySQL development</div>
+        <div class="uc-line"><span class="label">Famous Usage:</span> Drupal developers</div>
+    </div>
+
+    <div class="container">
+        <h1>🪟 WAMP Stack</h1>
+        <p class="subtitle">Windows-Based Web Development</p>
+
+        <div class="diagram">
+            <div class="stack-container">
+                <!-- Windows Layer -->
+                <div class="layer windows">
+                    <div class="layer-left">
+                        <div class="layer-icon">W</div>
+                        <div class="layer-title">
+                            <h2>Windows</h2>
+                            <div class="full-name">Operating System</div>
+                        </div>
+                    </div>
+                    <div class="layer-description">
+                        <ul>
+                            <li>Windows Server environment</li>
+                            <li>GUI-based management</li>
+                            <li>Windows Server 2019/2022</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="arrow">↓</div>
+
+                <!-- Apache Layer -->
+                <div class="layer apache">
+                    <div class="layer-left">
+                        <div class="layer-icon">A</div>
+                        <div class="layer-title">
+                            <h2>Apache</h2>
+                            <div class="full-name">Web Server</div>
+                        </div>
+                    </div>
+                    <div class="layer-description">
+                        <ul>
+                            <li>Receives client requests</li>
+                            <li>Processes static files</li>
+                            <li>Routes to PHP</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="arrow">↓</div>
+
+                <!-- MySQL Layer -->
+                <div class="layer mysql">
+                    <div class="layer-left">
+                        <div class="layer-icon">M</div>
+                        <div class="layer-title">
+                            <h2>MySQL</h2>
+                            <div class="full-name">Database Management</div>
+                        </div>
+                    </div>
+                    <div class="layer-description">
+                        <ul>
+                            <li>Persistent data storage</li>
+                            <li>SQL query processing</li>
+                            <li>Data retrieval</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="arrow">↓</div>
+
+                <!-- PHP Layer -->
+                <div class="layer php">
+                    <div class="layer-left">
+                        <div class="layer-icon">P</div>
+                        <div class="layer-title">
+                            <h2>PHP</h2>
+                            <div class="full-name">Server-Side Language</div>
+                        </div>
+                    </div>
+                    <div class="layer-description">
+                        <ul>
+                            <li>Processes business logic</li>
+                            <li>Interacts with MySQL</li>
+                            <li>Generates dynamic HTML</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flow-description">
+                <strong>Request Flow:</strong> Client Browser → Apache (Web Server) → PHP (Application Logic) → MySQL (Data) → PHP (Processing) → Apache → Client Browser
+            </div>
+        </div>
+    </div>
+</body>
+</html>

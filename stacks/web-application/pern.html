@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PERN Stack Architecture</title>
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/stacks.css">
+    <style>
+        :root {
+            --glass: rgba(255,255,255,0.10);
+            --text: #e6e6e6;
+            --muted: #b3b3b3;
+            --border: rgba(255,255,255,0.22);
+            --shadow: 0 10px 30px rgba(0,0,0,0.15);
+            --blur: 12px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        /* Layer-specific colors */
+        .layer.react { border-left: 4px solid #61DAFB; }
+        .layer.express { border-left: 4px solid #323330; }
+        .layer.nodejs { border-left: 4px solid #68A063; }
+        .layer.postgres { border-left: 4px solid #336791; }
+
+        .react .layer-icon { background: #61DAFB; }
+        .express .layer-icon { background: #323330; }
+        .nodejs .layer-icon { background: #68A063; }
+        .postgres .layer-icon { background: #336791; }
+    </style>
+</head>
+<body>
+    <a href="/" class="home-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 18px; height: 18px;">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
+        </svg>
+        Home
+    </a>
+    <div class="usecase-card" aria-label="Stack Use Case">
+        <div class="uc-title">Use Case</div>
+        <div class="uc-line"><span class="label">Type:</span> Web Application Stack</div>
+        <div class="uc-line"><span class="label">Typical Use Case:</span> Data-heavy web apps</div>
+        <div class="uc-line"><span class="label">Famous Usage:</span> Reddit</div>
+    </div>
+    <div class="container">
+        <h1>🌀 PERN Stack</h1>
+        <p class="subtitle">Full-Stack JavaScript with PostgreSQL</p>
+
+        <div class="diagram">
+            <div class="stack-container">
+                <!-- React Layer -->
+                <div class="layer react">
+                    <div class="layer-left">
+                        <div class="layer-icon">R</div>
+                        <div class="layer-title">
+                            <h2>React</h2>
+                            <div class="full-name">Frontend Library</div>
+                        </div>
+                    </div>
+                    <div class="layer-description">
+                        <ul>
+                            <li>Component-based UI</li>
+                            <li>Virtual DOM rendering</li>
+                            <li>Interactive user interfaces</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="arrow">↓</div>
+
+                <!-- Express Layer -->
+                <div class="layer express">
+                    <div class="layer-left">
+                        <div class="layer-icon">E</div>
+                        <div class="layer-title">
+                            <h2>Express.js</h2>
+                            <div class="full-name">Web Framework</div>
+                        </div>
+                    </div>
+                    <div class="layer-description">
+                        <ul>
+                            <li>Lightweight web framework</li>
+                            <li>Handles API routes</li>
+                            <li>Middleware management</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="arrow">↓</div>
+
+                <!-- Node.js Layer -->
+                <div class="layer nodejs">
+                    <div class="layer-left">
+                        <div class="layer-icon">N</div>
+                        <div class="layer-title">
+                            <h2>Node.js</h2>
+                            <div class="full-name">JavaScript Runtime</div>
+                        </div>
+                    </div>
+                    <div class="layer-description">
+                        <ul>
+                            <li>Server-side JavaScript</li>
+                            <li>Event-driven architecture</li>
+                            <li>Non-blocking I/O</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="arrow">↓</div>
+
+                <!-- PostgreSQL Layer -->
+                <div class="layer postgres">
+                    <div class="layer-left">
+                        <div class="layer-icon">P</div>
+                        <div class="layer-title">
+                            <h2>PostgreSQL</h2>
+                            <div class="full-name">Relational Database</div>
+                        </div>
+                    </div>
+                    <div class="layer-description">
+                        <ul>
+                            <li>ACID transactions</li>
+                            <li>Advanced SQL & indexing</li>
+                            <li>JSONB for semi-structured data</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flow-description">
+                <strong>Request Flow:</strong> Client Browser → React (UI) → Express API Routes → Node.js (Server Logic) → PostgreSQL (Relational Data) → Node.js → Express → React → Client Browser
+            </div>
+        </div>
+    </div>
+</body>
+</html>

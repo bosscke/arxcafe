@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Versioning</title>
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/concepts.css">
+</head>
+<body>
+    <a href="/" class="home-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 18px; height: 18px;">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
+        </svg>
+        Home
+    </a>
+
+    <div class="container">
+        <h1>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 40px; height: 40px; display: inline-block; margin-right: 10px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 6.75h15m-15 4.5h15m-15 4.5h15M9.75 3v18m4.5-18v18"/></svg>
+            API Versioning
+        </h1>
+
+        <div class="intro-box">
+            <p>API versioning lets you evolve contracts without breaking existing clients. Choose a strategy (URI, header, content negotiation), deprecate safely, and keep backward compatibility as long as needed.</p>
+        </div>
+
+        <h2>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M6 12h12M6 6h12M6 18h12"/></svg>
+            Strategies
+        </h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>URI Versioning</h3>
+                <p>Prefix paths (e.g., <em>/v1/</em>, <em>/v2/</em>). Easiest to cache and route.</p>
+            </div>
+            <div class="arch-card">
+                <h3>Header Versioning</h3>
+                <p>Custom or <em>Accept</em> header (media types like <em>application/vnd.app.v2+json</em>).</p>
+            </div>
+            <div class="arch-card">
+                <h3>Query Versioning</h3>
+                <p>Use <em>?version=2</em>. Simple but less cache-friendly.</p>
+            </div>
+            <div class="arch-card">
+                <h3>GraphQL / gRPC</h3>
+                <p>Prefer field-level evolution with deprecations instead of whole-version jumps.</p>
+            </div>
+        </div>
+
+        <h2>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="m6.75 7.5 4.5 9 4.5-9m-9 0 4.5-4.5 4.5 4.5m-9 0h9m-9 0L3 12l3.75-4.5m9 0L21 12l-3.75-4.5"/></svg>
+            Examples
+        </h2>
+
+        <div style="background: rgba(102, 126, 234, 0.1); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 12px; padding: 25px; margin: 30px 0; display: grid; gap: 18px;">
+            <div>
+                <h3>Express Router per Version</h3>
+                <div style="background: #1e1e1e; color: #d4d4d4; padding: 12px; border-radius: 8px; font-family: 'Courier New', monospace; font-size: 10px; line-height: 1.6; overflow-wrap: break-word; word-wrap: break-word; border: 1px solid rgba(255, 255, 255, 0.1); white-space: pre-wrap; max-width: 100%; box-sizing: border-box;">
+const express = require('express');
+const app = express();
+const v1 = express.Router();
+const v2 = express.Router();
+
+v1.get('/users/:id', (req,res)=> res.json({ id: req.params.id, name: 'Ada', role: 'user' }));
+v2.get('/users/:id', (req,res)=> res.json({ id: req.params.id, name: 'Ada', roles: ['user'], email: 'ada@example.com' }));
+
+app.use('/v1', v1);
+app.use('/v2', v2);
+app.listen(3000);
+                </div>
+            </div>
+            <div>
+                <h3>Media-Type Versioning</h3>
+                <div style="background: #1e1e1e; color: #d4d4d4; padding: 12px; border-radius: 8px; font-family: 'Courier New', monospace; font-size: 10px; line-height: 1.6; overflow-wrap: break-word; word-wrap: break-word; border: 1px solid rgba(255, 255, 255, 0.1); white-space: pre-wrap; max-width: 100%; box-sizing: border-box;">
+// Accept: application/vnd.app.v2+json
+app.get('/users/:id', (req,res)=>{
+  const accept = req.headers['accept'] || '';
+  const isV2 = accept.includes('vnd.app.v2+json');
+  if (isV2) return res.json({ version: 'v2', id: req.params.id });
+  return res.json({ version: 'v1', id: req.params.id });
+});
+                </div>
+            </div>
+            <div>
+                <h3>Deprecation Headers</h3>
+                <div style="background: #1e1e1e; color: #d4d4d4; padding: 12px; border-radius: 8px; font-family: 'Courier New', monospace; font-size: 10px; line-height: 1.6; overflow-wrap: break-word; word-wrap: break-word; border: 1px solid rgba(255, 255, 255, 0.1); white-space: pre-wrap; max-width: 100%; box-sizing: border-box;">
+// RFC 8594 style
+res.setHeader('Deprecation', 'true');
+res.setHeader('Sunset', 'Wed, 30 Apr 2025 23:59:59 GMT');
+res.setHeader('Link', '<https://api.example.com/docs/v1-to-v2>; rel="deprecation"');
+                </div>
+            </div>
+        </div>
+
+        <h2>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 3h3m-6 3h6M6.75 6h10.5a2.25 2.25 0 0 1 2.25 2.25v9A2.25 2.25 0 0 1 17.25 19.5H6.75A2.25 2.25 0 0 1 4.5 17.25v-9A2.25 2.25 0 0 1 6.75 6z"/></svg>
+            Guidance
+        </h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>Semantic Changes</h3>
+                <p>Add fields in new versions; avoid breaking required fields. Use defaults.</p>
+            </div>
+            <div class="arch-card">
+                <h3>Deprecation Policy</h3>
+                <p>Announce timelines, provide migration docs, and monitor usage before removal.</p>
+            </div>
+            <div class="arch-card">
+                <h3>Docs & SDKs</h3>
+                <p>Publish OpenAPI per version; update SDKs and examples together.</p>
+            </div>
+            <div class="arch-card">
+                <h3>Testing</h3>
+                <p>Contract tests per version; monitor error rates and field usage.</p>
+            </div>
+        </div>
+
+        <h2>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 0 1 3 19.875v-6.75ZM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V8.625ZM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V4.125Z"/></svg>
+            Best Practices
+        </h2>
+
+        <div class="pros-box">
+            <h3>Do this:</h3>
+            <ul class="features-list">
+                <li>Keep old versions stable; only patch for security/bugs</li>
+                <li>Additive changes where possible (new fields, endpoints)</li>
+                <li>Set deprecation headers and communicate timelines</li>
+                <li>Provide changelogs and migration guides</li>
+                <li>Monitor per-version usage to plan sunsetting</li>
+            </ul>
+        </div>
+
+        <h2>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 1 1-18 0 9 9 0 0 1 18 0zm-9 3.75h.008v.008H12v-.008z"/></svg>
+            Common Pitfalls
+        </h2>
+
+        <div class="cons-box">
+            <h3>Avoid these:</h3>
+            <ul class="features-list">
+                <li>Breaking changes without a new version</li>
+                <li>Silent behavior changes between versions</li>
+                <li>Running too many active versions without a sunset plan</li>
+                <li>Inconsistent docs and SDKs per version</li>
+            </ul>
+        </div>
+
+        <div class="intro-box" style="text-align: center; margin: 60px 0 40px;">
+            <p>Versioning protects clients and lets your API evolve. Pick a strategy, document it, and manage deprecations transparently.</p>
+        </div>
+    </div>
+</body>
+</html>

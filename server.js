@@ -1,0 +1,905 @@
+const http = require('http');
+const fs = require('fs');
+const path = require('path');
+const googleTrends = require('google-trends-api');
+
+////////////////////////////////////////////
+///// Server ARXCAFE
+
+const trendKeywords = [
+    'AWS Certified Solutions Architect – Associate',
+    'Microsoft Azure Fundamentals (AZ-900)',
+    'Google Professional Cloud Architect',
+    'Certified Kubernetes Administrator (CKA)',
+    'CompTIA Security+'
+];
+
+const fallbackTrends = trendKeywords.map(name => ({ name, score: 0 }));
+let trendsCache = { updated: 0, items: fallbackTrends };
+
+const CACHE_TTL_MS = 6 * 60 * 60 * 1000; // 6 hours
+const LOOKBACK_DAYS = 30;
+
+const averageFromTimeline = (json) => {
+    try {
+        const parsed = JSON.parse(json);
+        const points = parsed?.default?.timelineData || [];
+        if (!points.length) return 0;
+        const sum = points.reduce((s, p) => s + (p.value?.[0] || 0), 0);
+        return sum / points.length;
+    } catch (e) {
+        return 0;
+    }
+};
+
+const refreshTrends = async () => {
+    const startTime = new Date(Date.now() - LOOKBACK_DAYS * 24 * 60 * 60 * 1000);
+    const results = await Promise.all(trendKeywords.map(async (keyword) => {
+        const res = await googleTrends.interestOverTime({ keyword, startTime });
+        return { name: keyword, score: averageFromTimeline(res) };
+    }));
+    const sorted = results.sort((a, b) => b.score - a.score).slice(0, 5);
+    trendsCache = { updated: Date.now(), items: sorted };
+    return trendsCache;
+};
+
+const getTrends = async () => {
+    if (Date.now() - trendsCache.updated > CACHE_TTL_MS) {
+        try {
+            await refreshTrends();
+        } catch (err) {
+            // keep cached data on failure
+        }
+    }
+    return trendsCache;
+};
+
+const serveStaticFile = (filePath, res) => {
+    fs.readFile(filePath, (err, data) => {
+        if (err) {
+            res.writeHead(404, {'Content-Type': 'text/plain'});
+            res.end('Not found');
+            return;
+        }
+        const ext = path.extname(filePath);
+        const mimeTypes = {
+            '.jpg': 'image/jpeg',
+            '.jpeg': 'image/jpeg',
+            '.png': 'image/png',
+            '.gif': 'image/gif',
+            '.svg': 'image/svg+xml',
+            '.css': 'text/css',
+            '.js': 'application/javascript'
+        };
+        const contentType = mimeTypes[ext] || 'application/octet-stream';
+        res.writeHead(200, { 'Content-Type': contentType, 'Cache-Control': 'public, max-age=3600' });
+        res.end(data);
+    });
+};
+
+const server  = http.createServer((req,res) => {
+    const pathName = req.url.split('?')[0];
+
+    if (pathName === '/trends.json') {
+        getTrends()
+            .then((data) => {
+                res.writeHead(200, { 'Content-Type': 'application/json', 'Cache-Control': 'public, max-age=300' });
+                res.end(JSON.stringify({ items: data.items }));
+            })
+            .catch(() => {
+                res.writeHead(200, { 'Content-Type': 'application/json', 'Cache-Control': 'public, max-age=300' });
+                res.end(JSON.stringify({ items: trendsCache.items }));
+            });
+        return;
+    }
+
+    // Serve static files (hero.jpg, CSS, JS) and handle leading '/'
+    if (pathName.match(/\.(jpg|jpeg|png|gif|svg|css|js)$/)) {
+        const staticPath = pathName.replace(/^\/+/, '');
+        const filePath = path.join(__dirname, staticPath);
+        serveStaticFile(filePath, res);
+        return;
+    }
+
+    if(pathName==='/'||pathName==='/index' ){
+        fs.readFile(path.join(__dirname, 'index.html'), 'utf8', (err, data) => {
+            if (err) {
+                res.writeHead(500, {'Content-Type': 'text/plain'});
+                res.end('Error loading page');
+                return;
+            }
+            res.writeHead(200, {'Content-Type': 'text/html', 'Cache-Control': 'no-store'});
+            res.end(data);
+        });
+    } else if (pathName === '/api' || pathName === '/api.html') {
+        fs.readFile(path.join(__dirname, 'api.html'), 'utf8', (err, data) => {
+            if (err) {
+                res.writeHead(500, {'Content-Type': 'text/plain'});
+                res.end('Error loading page');
+                return;
+            }
+            res.writeHead(200, {'Content-Type': 'text/html', 'Cache-Control': 'no-store'});
+            res.end(data);
+        });
+    } else if (pathName === '/lamp' || pathName === '/lamp.html') {
+        fs.readFile(path.join(__dirname, 'stacks/web-application/lamp.html'), 'utf8', (err, data) => {
+            if (err) {
+                res.writeHead(500, {'Content-Type': 'text/plain'});
+                res.end('Error loading page');
+                return;
+            }
+            res.writeHead(200, {'Content-Type': 'text/html', 'Cache-Control': 'no-store'});
+            res.end(data);
+        });
+    } else if (pathName === '/lemp' || pathName === '/lemp.html') {
+        fs.readFile(path.join(__dirname, 'stacks/web-application/lemp.html'), 'utf8', (err, data) => {
+            if (err) {
+                res.writeHead(500, {'Content-Type': 'text/plain'});
+                res.end('Error loading page');
+                return;
+            }
+            res.writeHead(200, {'Content-Type': 'text/html', 'Cache-Control': 'no-store'});
+            res.end(data);
+        });
+    } else if (pathName === '/wamp' || pathName === '/wamp.html') {
+        fs.readFile(path.join(__dirname, 'stacks/web-application/wamp.html'), 'utf8', (err, data) => {
+            if (err) {
+                res.writeHead(500, {'Content-Type': 'text/plain'});
+                res.end('Error loading page');
+                return;
+            }
+            res.writeHead(200, {'Content-Type': 'text/html', 'Cache-Control': 'no-store'});
+            res.end(data);
+        });
+    } else if (pathName === '/mamp' || pathName === '/mamp.html') {
+        fs.readFile(path.join(__dirname, 'stacks/web-application/mamp.html'), 'utf8', (err, data) => {
+            if (err) {
+                res.writeHead(500, {'Content-Type': 'text/plain'});
+                res.end('Error loading page');
+                return;
+            }
+            res.writeHead(200, {'Content-Type': 'text/html', 'Cache-Control': 'no-store'});
+            res.end(data);
+        });
+        } else if (pathName === '/xampp' || pathName === '/xampp.html') {
+            fs.readFile(path.join(__dirname, 'stacks/web-application/xampp.html'), 'utf8', (err, data) => {
+                if (err) {
+                    res.writeHead(500, {'Content-Type': 'text/plain'});
+                    res.end('Error loading page');
+                    return;
+                }
+                res.writeHead(200, {'Content-Type': 'text/html', 'Cache-Control': 'no-store'});
+                res.end(data);
+            });
+    } else if (pathName === '/mean' || pathName === '/mean.html') {
+        fs.readFile(path.join(__dirname, 'stacks/web-application/mean.html'), 'utf8', (err, data) => {
+            if (err) {
+                res.writeHead(500, {'Content-Type': 'text/plain'});
+                res.end('Error loading page');
+                return;
+            }
+            res.writeHead(200, {'Content-Type': 'text/html', 'Cache-Control': 'no-store'});
+            res.end(data);
+        });
+    } else if (pathName === '/mern' || pathName === '/mern.html') {
+        fs.readFile(path.join(__dirname, 'stacks/web-application/mern.html'), 'utf8', (err, data) => {
+            if (err) {
+                res.writeHead(500, {'Content-Type': 'text/plain'});
+                res.end('Error loading page');
+                return;
+            }
+            res.writeHead(200, {'Content-Type': 'text/html', 'Cache-Control': 'no-store'});
+            res.end(data);
+        });
+    } else if (pathName === '/mevn' || pathName === '/mevn.html') {
+        fs.readFile(path.join(__dirname, 'stacks/web-application/mevn.html'), 'utf8', (err, data) => {
+            if (err) {
+                res.writeHead(500, {'Content-Type': 'text/plain'});
+                res.end('Error loading page');
+                return;
+            }
+            res.writeHead(200, {'Content-Type': 'text/html', 'Cache-Control': 'no-store'});
+            res.end(data);
+        });
+    } else if (pathName === '/menn' || pathName === '/menn.html') {
+        fs.readFile(path.join(__dirname, 'stacks/web-application/menn.html'), 'utf8', (err, data) => {
+            if (err) {
+                res.writeHead(500, {'Content-Type': 'text/plain'});
+                res.end('Error loading page');
+                return;
+            }
+            res.writeHead(200, {'Content-Type': 'text/html', 'Cache-Control': 'no-store'});
+            res.end(data);
+        });
+    } else if (pathName === '/pern' || pathName === '/pern.html') {
+        fs.readFile(path.join(__dirname, 'stacks/web-application/pern.html'), 'utf8', (err, data) => {
+            if (err) {
+                res.writeHead(500, {'Content-Type': 'text/plain'});
+                res.end('Error loading page');
+                return;
+            }
+            res.writeHead(200, {'Content-Type': 'text/html', 'Cache-Control': 'no-store'});
+            res.end(data);
+        });
+    } else if (pathName === '/t3' || pathName === '/t3.html') {
+        fs.readFile(path.join(__dirname, 'stacks/web-application/t3.html'), 'utf8', (err, data) => {
+            if (err) {
+                res.writeHead(500, {'Content-Type': 'text/plain'});
+                res.end('Error loading page');
+                return;
+            }
+            res.writeHead(200, {'Content-Type': 'text/html', 'Cache-Control': 'no-store'});
+            res.end(data);
+        });
+    } else if (pathName === '/django' || pathName === '/django.html') {
+        fs.readFile(path.join(__dirname, 'stacks/web-application/django.html'), 'utf8', (err, data) => {
+            if (err) {
+                res.writeHead(500, {'Content-Type': 'text/plain'});
+                res.end('Error loading page');
+                return;
+            }
+            res.writeHead(200, {'Content-Type': 'text/html', 'Cache-Control': 'no-store'});
+            res.end(data);
+        });
+    } else if (pathName === '/flask' || pathName === '/flask.html') {
+        fs.readFile(path.join(__dirname, 'stacks/web-application/flask.html'), 'utf8', (err, data) => {
+            if (err) {
+                res.writeHead(500, {'Content-Type': 'text/plain'});
+                res.end('Error loading page');
+                return;
+            }
+            res.writeHead(200, {'Content-Type': 'text/html', 'Cache-Control': 'no-store'});
+            res.end(data);
+        });
+    } else if (pathName === '/fastapi' || pathName === '/fastapi.html') {
+        fs.readFile(path.join(__dirname, 'stacks/web-application/fastapi.html'), 'utf8', (err, data) => {
+            if (err) {
+                res.writeHead(500, {'Content-Type': 'text/plain'});
+                res.end('Error loading page');
+                return;
+            }
+            res.writeHead(200, {'Content-Type': 'text/html', 'Cache-Control': 'no-store'});
+            res.end(data);
+        });
+    } else if (pathName === '/pydata' || pathName === '/pydata.html') {
+        fs.readFile(path.join(__dirname, 'stacks/data-science/pydata.html'), 'utf8', (err, data) => {
+            if (err) {
+                res.writeHead(500, {'Content-Type': 'text/plain'});
+                res.end('Error loading page');
+                return;
+            }
+            res.writeHead(200, {'Content-Type': 'text/html', 'Cache-Control': 'no-store'});
+            res.end(data);
+        });
+    } else if (pathName === '/spring' || pathName === '/spring.html') {
+        fs.readFile(path.join(__dirname, 'stacks/web-application/spring.html'), 'utf8', (err, data) => {
+            if (err) {
+                res.writeHead(500, {'Content-Type': 'text/plain'});
+                res.end('Error loading page');
+                return;
+            }
+            res.writeHead(200, {'Content-Type': 'text/html', 'Cache-Control': 'no-store'});
+            res.end(data);
+        });
+    } else if (pathName === '/jhipster' || pathName === '/jhipster.html') {
+        fs.readFile(path.join(__dirname, 'stacks/web-application/jhipster.html'), 'utf8', (err, data) => {
+            if (err) {
+                res.writeHead(500, {'Content-Type': 'text/plain'});
+                res.end('Error loading page');
+                return;
+            }
+            res.writeHead(200, {'Content-Type': 'text/html', 'Cache-Control': 'no-store'});
+            res.end(data);
+        });
+    } else if (pathName === '/javaee' || pathName === '/javaee.html') {
+        fs.readFile(path.join(__dirname, 'stacks/web-application/javaee.html'), 'utf8', (err, data) => {
+            if (err) {
+                res.writeHead(500, {'Content-Type': 'text/plain'});
+                res.end('Error loading page');
+                return;
+            }
+            res.writeHead(200, {'Content-Type': 'text/html', 'Cache-Control': 'no-store'});
+            res.end(data);
+        });
+    } else if (pathName === '/dotnet' || pathName === '/dotnet.html') {
+        fs.readFile(path.join(__dirname, 'stacks/desktop/dotnet.html'), 'utf8', (err, data) => {
+            if (err) {
+                res.writeHead(500, {'Content-Type': 'text/plain'});
+                res.end('Error loading page');
+                return;
+            }
+            res.writeHead(200, {'Content-Type': 'text/html', 'Cache-Control': 'no-store'});
+            res.end(data);
+        });    } else if (pathName === '/swift' || pathName === '/swift.html') {
+        fs.readFile(path.join(__dirname, 'stacks/mobile/swift.html'), 'utf8', (err, data) => {
+            if (err) {
+                res.writeHead(500, {'Content-Type': 'text/plain'});
+                res.end('Error loading page');
+                return;
+            }
+            res.writeHead(200, {'Content-Type': 'text/html', 'Cache-Control': 'no-store'});
+            res.end(data);
+        });    } else if (pathName === '/wisa' || pathName === '/wisa.html') {
+        fs.readFile(path.join(__dirname, 'stacks/web-application/wisa.html'), 'utf8', (err, data) => {
+            if (err) {
+                res.writeHead(500, {'Content-Type': 'text/plain'});
+                res.end('Error loading page');
+                return;
+            }
+            res.writeHead(200, {'Content-Type': 'text/html', 'Cache-Control': 'no-store'});
+            res.end(data);
+        });
+    } else if (pathName === '/azure' || pathName === '/azure.html') {
+        fs.readFile(path.join(__dirname, 'stacks/cloud/azure.html'), 'utf8', (err, data) => {
+            if (err) {
+                res.writeHead(500, {'Content-Type': 'text/plain'});
+                res.end('Error loading page');
+                return;
+            }
+            res.writeHead(200, {'Content-Type': 'text/html', 'Cache-Control': 'no-store'});
+            res.end(data);
+        });    } else if (pathName === '/swift' || pathName === '/swift.html') {
+        fs.readFile(path.join(__dirname, 'stacks/mobile/swift.html'), 'utf8', (err, data) => {
+            if (err) {
+                res.writeHead(500, {'Content-Type': 'text/plain'});
+                res.end('Error loading page');
+                return;
+            }
+            res.writeHead(200, {'Content-Type': 'text/html', 'Cache-Control': 'no-store'});
+            res.end(data);
+        });    } else if (pathName === '/rails' || pathName === '/rails.html') {
+        fs.readFile(path.join(__dirname, 'stacks/web-application/rails.html'), 'utf8', (err, data) => {
+            if (err) {
+                res.writeHead(500, {'Content-Type': 'text/plain'});
+                res.end('Error loading page');
+                return;
+            }
+            res.writeHead(200, {'Content-Type': 'text/html', 'Cache-Control': 'no-store'});
+            res.end(data);
+        });
+    } else if (pathName === '/rvm' || pathName === '/rvm.html') {
+        fs.readFile(path.join(__dirname, 'stacks/web-application/rvm.html'), 'utf8', (err, data) => {
+            if (err) {
+                res.writeHead(500, {'Content-Type': 'text/plain'});
+                res.end('Error loading page');
+                return;
+            }
+            res.writeHead(200, {'Content-Type': 'text/html', 'Cache-Control': 'no-store'});
+            res.end(data);
+        });    } else if (pathName === '/edge' || pathName === '/edge.html') {
+        fs.readFile(path.join(__dirname, 'stacks/minimal/edge.html'), 'utf8', (err, data) => {
+            if (err) {
+                res.writeHead(500, {'Content-Type': 'text/plain'});
+                res.end('Error loading page');
+                return;
+            }
+            res.writeHead(200, {'Content-Type': 'text/html', 'Cache-Control': 'no-store'});
+            res.end(data);
+        });    } else if (pathName === '/static' || pathName === '/static.html') {
+        fs.readFile(path.join(__dirname, 'stacks/jamstack/static.html'), 'utf8', (err, data) => {
+            if (err) {
+                res.writeHead(500, {'Content-Type': 'text/plain'});
+                res.end('Error loading page');
+                return;
+            }
+            res.writeHead(200, {'Content-Type': 'text/html', 'Cache-Control': 'no-store'});
+            res.end(data);
+        });
+    } else if (pathName === '/headless' || pathName === '/headless.html') {
+        fs.readFile(path.join(__dirname, 'stacks/jamstack/headless.html'), 'utf8', (err, data) => {
+            if (err) {
+                res.writeHead(500, {'Content-Type': 'text/plain'});
+                res.end('Error loading page');
+                return;
+            }
+            res.writeHead(200, {'Content-Type': 'text/html', 'Cache-Control': 'no-store'});
+            res.end(data);
+        });
+    } else if (pathName === '/jamstack' || pathName === '/jamstack.html') {
+        fs.readFile(path.join(__dirname, 'stacks/jamstack/jamstack.html'), 'utf8', (err, data) => {
+            if (err) {
+                res.writeHead(500, {'Content-Type': 'text/plain'});
+                res.end('Error loading page');
+                return;
+            }
+            res.writeHead(200, {'Content-Type': 'text/html', 'Cache-Control': 'no-store'});
+            res.end(data);
+        });
+    } else if (pathName === '/symfony' || pathName === '/symfony.html') {
+        fs.readFile(path.join(__dirname, 'stacks/php-frameworks/symfony.html'), 'utf8', (err, data) => {
+            if (err) {
+                res.writeHead(500, {'Content-Type': 'text/plain'});
+                res.end('Error loading page');
+                return;
+            }
+            res.writeHead(200, {'Content-Type': 'text/html', 'Cache-Control': 'no-store'});
+            res.end(data);
+        });
+    } else if (pathName === '/laravel' || pathName === '/laravel.html') {
+        fs.readFile(path.join(__dirname, 'stacks/php-frameworks/laravel.html'), 'utf8', (err, data) => {
+            if (err) {
+                res.writeHead(500, {'Content-Type': 'text/plain'});
+                res.end('Error loading page');
+                return;
+            }
+            res.writeHead(200, {'Content-Type': 'text/html', 'Cache-Control': 'no-store'});
+            res.end(data);
+        });
+    } else if (pathName === '/kubernetes' || pathName === '/kubernetes.html') {
+        fs.readFile(path.join(__dirname, 'stacks/cloud-native/kubernetes.html'), 'utf8', (err, data) => {
+            if (err) {
+                res.writeHead(500, {'Content-Type': 'text/plain'});
+                res.end('Error loading page');
+                return;
+            }
+            res.writeHead(200, {'Content-Type': 'text/html', 'Cache-Control': 'no-store'});
+            res.end(data);
+        });
+    } else if (pathName === '/elk' || pathName === '/elk.html') {
+        fs.readFile(path.join(__dirname, 'stacks/cloud-native/elk.html'), 'utf8', (err, data) => {
+            if (err) {
+                res.writeHead(500, {'Content-Type': 'text/plain'});
+                res.end('Error loading page');
+                return;
+            }
+            res.writeHead(200, {'Content-Type': 'text/html', 'Cache-Control': 'no-store'});
+            res.end(data);
+        });    } else if (pathName === '/bun' || pathName === '/bun.html') {
+        fs.readFile(path.join(__dirname, 'stacks/minimal/bun.html'), 'utf8', (err, data) => {
+            if (err) {
+                res.writeHead(500, {'Content-Type': 'text/plain'});
+                res.end('Error loading page');
+                return;
+            }
+            res.writeHead(200, {'Content-Type': 'text/html', 'Cache-Control': 'no-store'});
+            res.end(data);
+        });    } else if (pathName === '/efk' || pathName === '/efk.html') {
+        fs.readFile(path.join(__dirname, 'stacks/cloud-native/efk.html'), 'utf8', (err, data) => {
+            if (err) {
+                res.writeHead(500, {'Content-Type': 'text/plain'});
+                res.end('Error loading page');
+                return;
+            }
+            res.writeHead(200, {'Content-Type': 'text/html', 'Cache-Control': 'no-store'});
+            res.end(data);
+        });
+    } else if (pathName === '/prometheus' || pathName === '/prometheus.html') {
+        fs.readFile(path.join(__dirname, 'stacks/cloud-native/prometheus.html'), 'utf8', (err, data) => {
+            if (err) {
+                res.writeHead(500, {'Content-Type': 'text/plain'});
+                res.end('Error loading page');
+                return;
+            }
+            res.writeHead(200, {'Content-Type': 'text/html', 'Cache-Control': 'no-store'});
+            res.end(data);
+        });
+    } else if (pathName === '/hadoop' || pathName === '/hadoop.html') {
+        fs.readFile(path.join(__dirname, 'stacks/data/hadoop.html'), 'utf8', (err, data) => {
+            if (err) {
+                res.writeHead(500, {'Content-Type': 'text/plain'});
+                res.end('Error loading page');
+                return;
+            }
+            res.writeHead(200, {'Content-Type': 'text/html', 'Cache-Control': 'no-store'});
+            res.end(data);
+        });
+    } else if (pathName === '/spark' || pathName === '/spark.html') {
+        fs.readFile(path.join(__dirname, 'stacks/data/spark.html'), 'utf8', (err, data) => {
+            if (err) {
+                res.writeHead(500, {'Content-Type': 'text/plain'});
+                res.end('Error loading page');
+                return;
+            }
+            res.writeHead(200, {'Content-Type': 'text/html', 'Cache-Control': 'no-store'});
+            res.end(data);
+        });    } else if (pathName === '/node' || pathName === '/node.html') {
+        fs.readFile(path.join(__dirname, 'stacks/minimal/node.html'), 'utf8', (err, data) => {
+            if (err) {
+                res.writeHead(500, {'Content-Type': 'text/plain'});
+                res.end('Error loading page');
+                return;
+            }
+            res.writeHead(200, {'Content-Type': 'text/html', 'Cache-Control': 'no-store'});
+            res.end(data);
+        });    } else if (pathName === '/kafka' || pathName === '/kafka.html') {
+        fs.readFile(path.join(__dirname, 'stacks/data/kafka.html'), 'utf8', (err, data) => {
+            if (err) {
+                res.writeHead(500, {'Content-Type': 'text/plain'});
+                res.end('Error loading page');
+                return;
+            }
+            res.writeHead(200, {'Content-Type': 'text/html', 'Cache-Control': 'no-store'});
+            res.end(data);
+        });
+    } else if (pathName === '/react-native' || pathName === '/react-native.html') {
+        fs.readFile(path.join(__dirname, 'stacks/mobile/react-native.html'), 'utf8', (err, data) => {
+            if (err) {
+                res.writeHead(500, {'Content-Type': 'text/plain'});
+                res.end('Error loading page');
+                return;
+            }
+            res.writeHead(200, {'Content-Type': 'text/html', 'Cache-Control': 'no-store'});
+            res.end(data);
+        });
+    } else if (pathName === '/flutter' || pathName === '/flutter.html') {
+        fs.readFile(path.join(__dirname, 'stacks/mobile/flutter.html'), 'utf8', (err, data) => {
+            if (err) {
+                res.writeHead(500, {'Content-Type': 'text/plain'});
+                res.end('Error loading page');
+                return;
+            }
+            res.writeHead(200, {'Content-Type': 'text/html', 'Cache-Control': 'no-store'});
+            res.end(data);
+        });
+    } else if (pathName === '/concepts/client-server' || pathName === '/concepts/client-server.html') {
+        fs.readFile(path.join(__dirname, 'concepts/client-server.html'), 'utf8', (err, data) => {
+            if (err) {
+                res.writeHead(500, {'Content-Type': 'text/plain'});
+                res.end('Error loading page');
+                return;
+            }
+            res.writeHead(200, {'Content-Type': 'text/html', 'Cache-Control': 'no-store'});
+            res.end(data);
+        });
+    } else if (pathName === '/concepts/http-vs-https' || pathName === '/concepts/http-vs-https.html') {
+        fs.readFile(path.join(__dirname, 'concepts/http-vs-https.html'), 'utf8', (err, data) => {
+            if (err) {
+                res.writeHead(500, {'Content-Type': 'text/plain'});
+                res.end('Error loading page');
+                return;
+            }
+            res.writeHead(200, {'Content-Type': 'text/html', 'Cache-Control': 'no-store'});
+            res.end(data);
+        });
+    } else if (pathName === '/concepts/request-response' || pathName === '/concepts/request-response.html') {
+        fs.readFile(path.join(__dirname, 'concepts/request-response.html'), 'utf8', (err, data) => {
+            if (err) {
+                res.writeHead(500, {'Content-Type': 'text/plain'});
+                res.end('Error loading page');
+                return;
+            }
+            res.writeHead(200, {'Content-Type': 'text/html', 'Cache-Control': 'no-store'});
+            res.end(data);
+        });
+    } else if (pathName === '/concepts/http-methods' || pathName === '/concepts/http-methods.html') {
+        fs.readFile(path.join(__dirname, 'concepts/http-methods.html'), 'utf8', (err, data) => {
+            if (err) {
+                res.writeHead(500, {'Content-Type': 'text/plain'});
+                res.end('Error loading page');
+                return;
+            }
+            res.writeHead(200, {'Content-Type': 'text/html', 'Cache-Control': 'no-store'});
+            res.end(data);
+        });
+    } else if (pathName === '/concepts/http-status-codes' || pathName === '/concepts/http-status-codes.html') {
+        fs.readFile(path.join(__dirname, 'concepts/http-status-codes.html'), 'utf8', (err, data) => {
+            if (err) {
+                res.writeHead(500, {'Content-Type': 'text/plain'});
+                res.end('Error loading page');
+                return;
+            }
+            res.writeHead(200, {'Content-Type': 'text/html', 'Cache-Control': 'no-store'});
+            res.end(data);
+        });
+    } else if (pathName === '/concepts/headers-and-body' || pathName === '/concepts/headers-and-body.html') {
+        fs.readFile(path.join(__dirname, 'concepts/headers-and-body.html'), 'utf8', (err, data) => {
+            if (err) {
+                res.writeHead(500, {'Content-Type': 'text/plain'});
+                res.end('Error loading page');
+                return;
+            }
+            res.writeHead(200, {'Content-Type': 'text/html', 'Cache-Control': 'no-store'});
+            res.end(data);
+        });
+    } else if (pathName === '/concepts/domain-name-system' || pathName === '/concepts/domain-name-system.html') {
+        fs.readFile(path.join(__dirname, 'concepts/domain-name-system.html'), 'utf8', (err, data) => {
+            if (err) {
+                res.writeHead(500, {'Content-Type': 'text/plain'});
+                res.end('Error loading page');
+                return;
+            }
+            res.writeHead(200, {'Content-Type': 'text/html', 'Cache-Control': 'no-store'});
+            res.end(data);
+        });
+    } else if (pathName === '/concepts/ip-address-public-vs-private' || pathName === '/concepts/ip-address-public-vs-private.html') {
+        fs.readFile(path.join(__dirname, 'concepts/ip-address-public-vs-private.html'), 'utf8', (err, data) => {
+            if (err) {
+                res.writeHead(500, {'Content-Type': 'text/plain'});
+                res.end('Error loading page');
+                return;
+            }
+            res.writeHead(200, {'Content-Type': 'text/html', 'Cache-Control': 'no-store'});
+            res.end(data);
+        });
+    } else if (pathName === '/concepts/stateless-communication' || pathName === '/concepts/stateless-communication.html') {
+        fs.readFile(path.join(__dirname, 'concepts/stateless-communication.html'), 'utf8', (err, data) => {
+            if (err) {
+                res.writeHead(500, {'Content-Type': 'text/plain'});
+                res.end('Error loading page');
+                return;
+            }
+            res.writeHead(200, {'Content-Type': 'text/html', 'Cache-Control': 'no-store'});
+            res.end(data);
+        });
+    } else if (pathName === '/concepts/dns-resolution' || pathName === '/concepts/dns-resolution.html') {
+        fs.readFile(path.join(__dirname, 'concepts/dns-resolution.html'), 'utf8', (err, data) => {
+            if (err) {
+                res.writeHead(500, {'Content-Type': 'text/plain'});
+                res.end('Error loading page');
+                return;
+            }
+            res.writeHead(200, {'Content-Type': 'text/html', 'Cache-Control': 'no-store'});
+            res.end(data);
+        });
+    } else if (pathName === '/concepts/ports-80-443' || pathName === '/concepts/ports-80-443.html') {
+        fs.readFile(path.join(__dirname, 'concepts/ports-80-443.html'), 'utf8', (err, data) => {
+            if (err) {
+                res.writeHead(500, {'Content-Type': 'text/plain'});
+                res.end('Error loading page');
+                return;
+            }
+            res.writeHead(200, {'Content-Type': 'text/html', 'Cache-Control': 'no-store'});
+            res.end(data);
+        });
+    } else if (pathName === '/concepts/tcp-vs-udp' || pathName === '/concepts/tcp-vs-udp.html') {
+        fs.readFile(path.join(__dirname, 'concepts/tcp-vs-udp.html'), 'utf8', (err, data) => {
+            if (err) {
+                res.writeHead(500, {'Content-Type': 'text/plain'});
+                res.end('Error loading page');
+                return;
+            }
+            res.writeHead(200, {'Content-Type': 'text/html', 'Cache-Control': 'no-store'});
+            res.end(data);
+        });
+    } else if (pathName === '/concepts-intermediate/tls-handshake' || pathName === '/concepts-intermediate/tls-handshake.html') {
+        fs.readFile(path.join(__dirname, 'concepts-intermediate/tls-handshake.html'), 'utf8', (err, data) => {
+            if (err) {
+                res.writeHead(500, {'Content-Type': 'text/plain'});
+                res.end('Error loading page');
+                return;
+            }
+            res.writeHead(200, {'Content-Type': 'text/html', 'Cache-Control': 'no-store'});
+            res.end(data);
+        });
+    } else if (pathName === '/concepts-intermediate/digital-certificates' || pathName === '/concepts-intermediate/digital-certificates.html') {
+        fs.readFile(path.join(__dirname, 'concepts-intermediate/digital-certificates.html'), 'utf8', (err, data) => {
+            if (err) {
+                res.writeHead(500, {'Content-Type': 'text/plain'});
+                res.end('Error loading page');
+                return;
+            }
+            res.writeHead(200, {'Content-Type': 'text/html', 'Cache-Control': 'no-store'});
+            res.end(data);
+        });
+    } else if (pathName === '/concepts-intermediate/public-key-vs-private-key' || pathName === '/concepts-intermediate/public-key-vs-private-key.html') {
+        fs.readFile(path.join(__dirname, 'concepts-intermediate/public-key-vs-private-key.html'), 'utf8', (err, data) => {
+            if (err) {
+                res.writeHead(500, {'Content-Type': 'text/plain'});
+                res.end('Error loading page');
+                return;
+            }
+            res.writeHead(200, {'Content-Type': 'text/html', 'Cache-Control': 'no-store'});
+            res.end(data);
+        });
+    } else if(pathName === '/concepts-intermediate/encryption-in-transit' || pathName === '/concepts-intermediate/encryption-in-transit.html') {
+        fs.readFile(path.join(__dirname, 'concepts-intermediate/encryption-in-transit.html'), 'utf8', (err, data) => {
+            if (err) {
+                res.writeHead(500, {'Content-Type': 'text/plain'});
+                res.end('Error loading page');
+                return;
+            }
+            res.writeHead(200, {'Content-Type': 'text/html', 'Cache-Control': 'no-store'});
+            res.end(data);
+        });
+    } else if(pathName === '/concepts-intermediate/authentication-vs-authorization' || pathName === '/concepts-intermediate/authentication-vs-authorization.html') {
+        fs.readFile(path.join(__dirname, 'concepts-intermediate/authentication-vs-authorization.html'), 'utf8', (err, data) => {
+            if (err) {
+                res.writeHead(500, {'Content-Type': 'text/plain'});
+                res.end('Error loading page');
+                return;
+            }
+            res.writeHead(200, {'Content-Type': 'text/html', 'Cache-Control': 'no-store'});
+            res.end(data);
+        });
+    } else if(pathName === '/concepts-intermediate/tokens-session-jwt-api-key' || pathName === '/concepts-intermediate/tokens-session-jwt-api-key.html') {
+        fs.readFile(path.join(__dirname, 'concepts-intermediate/tokens-session-jwt-api-key.html'), 'utf8', (err, data) => {
+            if (err) {
+                res.writeHead(500, {'Content-Type': 'text/plain'});
+                res.end('Error loading page');
+                return;
+            }
+            res.writeHead(200, {'Content-Type': 'text/html', 'Cache-Control': 'no-store'});
+            res.end(data);
+        });
+    } else if(pathName === '/concepts-intermediate/application-architecture' || pathName === '/concepts-intermediate/application-architecture.html') {
+        fs.readFile(path.join(__dirname, 'concepts-intermediate/application-architecture.html'), 'utf8', (err, data) => {
+            if (err) {
+                res.writeHead(500, {'Content-Type': 'text/plain'});
+                res.end('Error loading page');
+                return;
+            }
+            res.writeHead(200, {'Content-Type': 'text/html', 'Cache-Control': 'no-store'});
+            res.end(data);
+        });
+    } else if(pathName === '/concepts-intermediate/monolith' || pathName === '/concepts-intermediate/monolith.html') {
+        fs.readFile(path.join(__dirname, 'concepts-intermediate/monolith.html'), 'utf8', (err, data) => {
+            if (err) {
+                res.writeHead(500, {'Content-Type': 'text/plain'});
+                res.end('Error loading page');
+                return;
+            }
+            res.writeHead(200, {'Content-Type': 'text/html', 'Cache-Control': 'no-store'});
+            res.end(data);
+        });
+    } else if(pathName === '/concepts-intermediate/microservices' || pathName === '/concepts-intermediate/microservices.html') {
+        fs.readFile(path.join(__dirname, 'concepts-intermediate/microservices.html'), 'utf8', (err, data) => {
+            if (err) {
+                res.writeHead(500, {'Content-Type': 'text/plain'});
+                res.end('Error loading page');
+                return;
+            }
+            res.writeHead(200, {'Content-Type': 'text/html', 'Cache-Control': 'no-store'});
+            res.end(data);
+        });
+    } else if(pathName === '/concepts-intermediate/modular-monolith' || pathName === '/concepts-intermediate/modular-monolith.html') {
+        fs.readFile(path.join(__dirname, 'concepts-intermediate/modular-monolith.html'), 'utf8', (err, data) => {
+            if (err) {
+                res.writeHead(500, {'Content-Type': 'text/plain'});
+                res.end('Error loading page');
+                return;
+            }
+            res.writeHead(200, {'Content-Type': 'text/html', 'Cache-Control': 'no-store'});
+            res.end(data);
+        });
+    } else if(pathName === '/concepts-intermediate/api-gateway' || pathName === '/concepts-intermediate/api-gateway.html') {
+        fs.readFile(path.join(__dirname, 'concepts-intermediate/api-gateway.html'), 'utf8', (err, data) => {
+            if (err) {
+                res.writeHead(500, {'Content-Type': 'text/plain'});
+                res.end('Error loading page');
+                return;
+            }
+            res.writeHead(200, {'Content-Type': 'text/html', 'Cache-Control': 'no-store'});
+            res.end(data);
+        });
+    } else if(pathName === '/concepts-intermediate/synchronous-vs-asynchronous' || pathName === '/concepts-intermediate/synchronous-vs-asynchronous.html') {
+        fs.readFile(path.join(__dirname, 'concepts-intermediate/synchronous-vs-asynchronous.html'), 'utf8', (err, data) => {
+            if (err) {
+                res.writeHead(500, {'Content-Type': 'text/plain'});
+                res.end('Error loading page');
+                return;
+            }
+            res.writeHead(200, {'Content-Type': 'text/html', 'Cache-Control': 'no-store'});
+            res.end(data);
+        });
+    } else if(pathName === '/concepts-intermediate/rest-apis' || pathName === '/concepts-intermediate/rest-apis.html') {
+        fs.readFile(path.join(__dirname, 'concepts-intermediate/rest-apis.html'), 'utf8', (err, data) => {
+            if (err) {
+                res.writeHead(500, {'Content-Type': 'text/plain'});
+                res.end('Error loading page');
+                return;
+            }
+            res.writeHead(200, {'Content-Type': 'text/html', 'Cache-Control': 'no-store'});
+            res.end(data);
+        });
+    } else if(pathName === '/concepts-intermediate/json' || pathName === '/concepts-intermediate/json.html') {
+        fs.readFile(path.join(__dirname, 'concepts-intermediate/json.html'), 'utf8', (err, data) => {
+            if (err) {
+                res.writeHead(500, {'Content-Type': 'text/plain'});
+                res.end('Error loading page');
+                return;
+            }
+            res.writeHead(200, {'Content-Type': 'text/html', 'Cache-Control': 'no-store'});
+            res.end(data);
+        });
+    } else if(pathName === '/concepts-intermediate/api-versioning' || pathName === '/concepts-intermediate/api-versioning.html') {
+        fs.readFile(path.join(__dirname, 'concepts-intermediate/api-versioning.html'), 'utf8', (err, data) => {
+            if (err) {
+                res.writeHead(500, {'Content-Type': 'text/plain'});
+                res.end('Error loading page');
+                return;
+            }
+            res.writeHead(200, {'Content-Type': 'text/html', 'Cache-Control': 'no-store'});
+            res.end(data);
+        });
+    } else if(pathName === '/concepts-intermediate/pagination' || pathName === '/concepts-intermediate/pagination.html') {
+        fs.readFile(path.join(__dirname, 'concepts-intermediate/pagination.html'), 'utf8', (err, data) => {
+            if (err) {
+                res.writeHead(500, {'Content-Type': 'text/plain'});
+                res.end('Error loading page');
+                return;
+            }
+            res.writeHead(200, {'Content-Type': 'text/html', 'Cache-Control': 'no-store'});
+            res.end(data);
+        });
+    } else if(pathName === '/concepts-intermediate/rate-limiting' || pathName === '/concepts-intermediate/rate-limiting.html') {
+        fs.readFile(path.join(__dirname, 'concepts-intermediate/rate-limiting.html'), 'utf8', (err, data) => {
+            if (err) {
+                res.writeHead(500, {'Content-Type': 'text/plain'});
+                res.end('Error loading page');
+                return;
+            }
+            res.writeHead(200, {'Content-Type': 'text/html', 'Cache-Control': 'no-store'});
+            res.end(data);
+        });
+    } else if(pathName === '/concepts-intermediate/webhooks' || pathName === '/concepts-intermediate/webhooks.html') {
+        fs.readFile(path.join(__dirname, 'concepts-intermediate/webhooks.html'), 'utf8', (err, data) => {
+            if (err) {
+                res.writeHead(500, {'Content-Type': 'text/plain'});
+                res.end('Error loading page');
+                return;
+            }
+            res.writeHead(200, {'Content-Type': 'text/html', 'Cache-Control': 'no-store'});
+            res.end(data);
+        });
+    } else if(pathName === '/concepts-intermediate/databases-relational' || pathName === '/concepts-intermediate/databases-relational.html') {
+        fs.readFile(path.join(__dirname, 'concepts-intermediate/databases-relational.html'), 'utf8', (err, data) => {
+            if (err) {
+                res.writeHead(500, {'Content-Type': 'text/plain'});
+                res.end('Error loading page');
+                return;
+            }
+            res.writeHead(200, {'Content-Type': 'text/html', 'Cache-Control': 'no-store'});
+            res.end(data);
+        });
+    } else if(pathName === '/concepts-intermediate/databases-nosql' || pathName === '/concepts-intermediate/databases-nosql.html') {
+        fs.readFile(path.join(__dirname, 'concepts-intermediate/databases-nosql.html'), 'utf8', (err, data) => {
+            if (err) {
+                res.writeHead(500, {'Content-Type': 'text/plain'});
+                res.end('Error loading page');
+                return;
+            }
+            res.writeHead(200, {'Content-Type': 'text/html', 'Cache-Control': 'no-store'});
+            res.end(data);
+        });
+    } else if(pathName === '/concepts-intermediate/read-vs-write-operations' || pathName === '/concepts-intermediate/read-vs-write-operations.html') {
+        fs.readFile(path.join(__dirname, 'concepts-intermediate/read-vs-write-operations.html'), 'utf8', (err, data) => {
+            if (err) {
+                res.writeHead(500, {'Content-Type': 'text/plain'});
+                res.end('Error loading page');
+                return;
+            }
+            res.writeHead(200, {'Content-Type': 'text/html', 'Cache-Control': 'no-store'});
+            res.end(data);
+        });
+    } else if(pathName === '/concepts-intermediate/indexing' || pathName === '/concepts-intermediate/indexing.html') {
+        fs.readFile(path.join(__dirname, 'concepts-intermediate/indexing.html'), 'utf8', (err, data) => {
+            if (err) {
+                res.writeHead(500, {'Content-Type': 'text/plain'});
+                res.end('Error loading page');
+                return;
+            }
+            res.writeHead(200, {'Content-Type': 'text/html', 'Cache-Control': 'no-store'});
+            res.end(data);
+        });
+    } else if(pathName === '/concepts-intermediate/caching' || pathName === '/concepts-intermediate/caching.html') {
+        fs.readFile(path.join(__dirname, 'concepts-intermediate/caching.html'), 'utf8', (err, data) => {
+            if (err) {
+                res.writeHead(500, {'Content-Type': 'text/plain'});
+                res.end('Error loading page');
+                return;
+            }
+            res.writeHead(200, {'Content-Type': 'text/html', 'Cache-Control': 'no-store'});
+            res.end(data);
+        });
+    } else if(pathName === '/concepts-intermediate/backups' || pathName === '/concepts-intermediate/backups.html') {
+        fs.readFile(path.join(__dirname, 'concepts-intermediate/backups.html'), 'utf8', (err, data) => {
+            if (err) {
+                res.writeHead(500, {'Content-Type': 'text/plain'});
+                res.end('Error loading page');
+                return;
+            }
+            res.writeHead(200, {'Content-Type': 'text/html', 'Cache-Control': 'no-store'});
+            res.end(data);
+        });
+    } else if(pathName === '/sitexam') {
+        res.end('sit the exam in arxcafe!');
+    } else {
+        res.writeHead(404);
+        res.end('page not found');
+    }
+});
+
+const PORT = process.env.PORT || 8080;
+server.listen(PORT, '0.0.0.0', () => {
+    console.log(`The arxcafe server started on port ${PORT}`)
+});

@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TCP vs UDP</title>
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/concepts.css">
+</head>
+<body>
+    <a href="/" class="home-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 18px; height: 18px;">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
+        </svg>
+        Home
+    </a>
+
+    <div class="container">
+        <h1>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 40px; height: 40px; display: inline-block; margin-right: 10px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M7.5 12h9m-9 3h6m-6 3h3M6.75 6h10.5A2.25 2.25 0 0 1 19.5 8.25V18A2.25 2.25 0 0 1 17.25 20.25H6.75A2.25 2.25 0 0 1 4.5 18V8.25A2.25 2.25 0 0 1 6.75 6z"/></svg>
+            TCP vs UDP
+        </h1>
+
+        <div class="intro-box">
+            <p>Both <strong>TCP</strong> and <strong>UDP</strong> live at the transport layer (L4) and use <strong>ports</strong> to multiplex connections. TCP provides reliable, ordered, byte-stream delivery with congestion control. UDP is connectionless and best-effort: fast and lightweight, but with no guarantees.</p>
+        </div>
+
+        <h2>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M6 12h12M6 6h12M6 18h12" /></svg>
+            Key Differences
+        </h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>TCP</h3>
+                <ul class="features-list">
+                    <li>Connection-oriented (3-way handshake)</li>
+                    <li>Reliable delivery (ACKs, retransmissions)</li>
+                    <li>Ordered byte stream</li>
+                    <li>Flow + congestion control</li>
+                    <li>Heavier header, more overhead</li>
+                </ul>
+            </div>
+            <div class="arch-card">
+                <h3>UDP</h3>
+                <ul class="features-list">
+                    <li>Connectionless (no handshake)</li>
+                    <li>No delivery or ordering guarantees</li>
+                    <li>Message-oriented (datagrams)</li>
+                    <li>Very low overhead</li>
+                    <li>App implements reliability if needed</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v18m0-18c-1.5 1.5 4.5 4.5 7.5 4.5S22.5 4.5 24 3M0 3c1.5 1.5 4.5 4.5 7.5 4.5S10.5 4.5 12 3" /></svg>
+            When to Use Which
+        </h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>Use TCP when…</h3>
+                <ul class="features-list">
+                    <li>You need reliability and ordering (APIs, web, DBs)</li>
+                    <li>Throughput matters more than minimal latency</li>
+                    <li>Firewalls/proxies are common on the path</li>
+                </ul>
+            </div>
+            <div class="arch-card">
+                <h3>Use UDP when…</h3>
+                <ul class="features-list">
+                    <li>You need low latency and can tolerate loss</li>
+                    <li>Real-time media (VoIP, video), gaming, telemetry</li>
+                    <li>Custom reliability/FEC built at the app level</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M6.75 7.5l4.5 9 4.5-9m-9 0 4.5-4.5 4.5 4.5m-9 0h9m-9 0L3 12l3.75-4.5m9 0L21 12l-3.75-4.5" /></svg>
+            Behaviors & Mechanics
+        </h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>TCP Mechanics</h3>
+                <ul class="features-list">
+                    <li>Handshake: SYN → SYN-ACK → ACK</li>
+                    <li>ACKs + retransmit on loss</li>
+                    <li>Nagle’s algorithm, slow start, windowing</li>
+                    <li>Head-of-line blocking</li>
+                </ul>
+            </div>
+            <div class="arch-card">
+                <h3>UDP Mechanics</h3>
+                <ul class="features-list">
+                    <li>No session state on network</li>
+                    <li>Per-datagram size limited by path MTU</li>
+                    <li>Loss/dup/out-of-order possible</li>
+                    <li>Often paired with QUIC/DTLS for security/reliability</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M3 6.75A2.25 2.25 0 0 1 5.25 4.5h13.5A2.25 2.25 0 0 1 21 6.75v10.5A2.25 2.25 0 0 1 18.75 19.5H5.25A2.25 2.25 0 0 1 3 17.25V6.75Z" /></svg>
+            Common Use Cases
+        </h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>TCP Examples</h3>
+                <p>HTTPS, REST APIs, SSH, SMTP/IMAP, database clients, file transfer (SFTP).</p>
+            </div>
+            <div class="arch-card">
+                <h3>UDP Examples</h3>
+                <p>DNS queries, VoIP/RTP, streaming, online gaming, metrics (StatsD), DHCP.</p>
+            </div>
+        </div>
+
+        <h2>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 3h3m-6 3h6M6.75 6h10.5a2.25 2.25 0 0 1 2.25 2.25v9A2.25 2.25 0 0 1 17.25 19.5H6.75A2.25 2.25 0 0 1 4.5 17.25v-9A2.25 2.25 0 0 1 6.75 6z" /></svg>
+            Code & Tools
+        </h2>
+
+        <div style="background: rgba(102, 126, 234, 0.1); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 12px; padding: 25px; margin: 30px 0; display: grid; gap: 18px;">
+            <div>
+                <h3>Node.js TCP echo (server)</h3>
+                <div style="background: #1e1e1e; color: #d4d4d4; padding: 15px; border-radius: 8px; font-family: 'Courier New', monospace; font-size: 12px; line-height: 1.5; overflow-x: auto; border: 1px solid rgba(255, 255, 255, 0.1);">
+// tcp-echo.js
+const net = require('net');
+net.createServer(s => s.pipe(s)).listen(9000);
+                </div>
+            </div>
+            <div>
+                <h3>Node.js UDP echo (server)</h3>
+                <div style="background: #1e1e1e; color: #d4d4d4; padding: 15px; border-radius: 8px; font-family: 'Courier New', monospace; font-size: 12px; line-height: 1.5; overflow-x: auto; border: 1px solid rgba(255, 255, 255, 0.1);">
+// udp-echo.js
+const dgram = require('dgram');
+const sock = dgram.createSocket('udp4');
+sock.on('message', (msg, rinfo) => {
+  sock.send(msg, rinfo.port, rinfo.address);
+});
+sock.bind(9001);
+                </div>
+            </div>
+            <div>
+                <h3>Windows: active TCP/UDP ports</h3>
+                <div style="background: #1e1e1e; color: #d4d4d4; padding: 15px; border-radius: 8px; font-family: 'Courier New', monospace; font-size: 12px; line-height: 1.5; overflow-x: auto; border: 1px solid rgba(255, 255, 255, 0.1);">
+PS> Get-NetTCPConnection -State Listen | Select-Object LocalAddress,LocalPort,OwningProcess
+PS> Get-NetUDPEndpoint | Select-Object LocalAddress,LocalPort,OwningProcess
+                </div>
+            </div>
+        </div>
+
+        <div class="intro-box" style="text-align: center; margin: 60px 0 40px;">
+            <p>Choose TCP for reliability and ordered delivery; choose UDP for low-latency, loss-tolerant applications. Many modern protocols (like QUIC) build reliability and security on top of UDP to get the best of both worlds.</p>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ELK Stack – Elasticsearch · Logstash · Kibana</title>
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/stacks.css">
+    <style>
+        :root {
+            --glass: rgba(255,255,255,0.10);
+            --text: #e6e6e6;
+            --muted: #b3b3b3;
+            --border: rgba(255,255,255,0.22);
+            --shadow: 0 10px 30px rgba(0,0,0,0.15);
+            --blur: 12px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        /* Layer-specific colors */
+        .layer.elasticsearch { border-left: 4px solid #005571; }
+        .layer.logstash { border-left: 4px solid #8c8c8c; }
+        .layer.kibana { border-left: 4px solid #e54750; }
+
+        .elasticsearch .layer-icon { background: #005571; }
+        .logstash .layer-icon { background: #8c8c8c; }
+        .kibana .layer-icon { background: #e54750; }
+    </style>
+</head>
+<body>
+    <a href="/" class="home-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 18px; height: 18px;">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
+        </svg>
+        Home
+    </a>
+
+    <div class="usecase-card" aria-label="Stack Use Case">
+        <div class="uc-title">Use Case</div>
+        <div class="uc-line"><span class="label">Type:</span> Observability / Logging Stack</div>
+        <div class="uc-line"><span class="label">Typical Use Case:</span> Centralized log ingestion, search, dashboards, alerting</div>
+        <div class="uc-line"><span class="label">Famous Usage:</span> Elastic Cloud, GitHub actions telemetry, cloud-native platforms</div>
+    </div>
+
+    <div class="container">
+        <h1>🟦 ELK Stack</h1>
+        <p class="subtitle">Elasticsearch · Logstash · Kibana</p>
+
+        <div class="diagram">
+            <div class="stack-container">
+                <div class="layer logstash">
+                    <div class="layer-left">
+                        <div class="layer-icon">LS</div>
+                        <div class="layer-title">
+                            <h2>Logstash</h2>
+                            <div class="full-name">Data Ingest Pipeline</div>
+                        </div>
+                    </div>
+                    <div class="layer-description">
+                        <ul>
+                            <li>Collects from beats, syslog, cloud logs, app streams</li>
+                            <li>Filters, parses, enriches, transforms events</li>
+                            <li>Outputs to Elasticsearch for indexing and storage</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="arrow">↓</div>
+
+                <div class="layer elasticsearch">
+                    <div class="layer-left">
+                        <div class="layer-icon">ES</div>
+                        <div class="layer-title">
+                            <h2>Elasticsearch</h2>
+                            <div class="full-name">Search & Analytics Engine</div>
+                        </div>
+                    </div>
+                    <div class="layer-description">
+                        <ul>
+                            <li>Distributed indexing and full-text search</li>
+                            <li>Aggregations for metrics, trends, anomaly views</li>
+                            <li>Scalable shards/replicas, cluster-aware resilience</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="arrow">↓</div>
+
+                <div class="layer kibana">
+                    <div class="layer-left">
+                        <div class="layer-icon">K</div>
+                        <div class="layer-title">
+                            <h2>Kibana</h2>
+                            <div class="full-name">Visualization & Dashboards</div>
+                        </div>
+                    </div>
+                    <div class="layer-description">
+                        <ul>
+                            <li>Dashboards, Lens, Discover, saved searches</li>
+                            <li>Alerting, anomaly detection with machine learning jobs</li>
+                            <li>Role-based access, Spaces, sharing for teams</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flow-description">
+                <strong>Flow:</strong> Logstash ingests and transforms → Elasticsearch indexes and stores → Kibana visualizes, searches, and alerts.
+            </div>
+        </div>
+    </div>
+</body>
+</html>

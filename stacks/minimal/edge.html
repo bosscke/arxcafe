@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edge Stack – Edge Functions · KV Store · Static Assets</title>
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/stacks.css">
+    <style>
+        :root {
+            --glass: rgba(255,255,255,0.10);
+            --text: #e6e6e6;
+            --muted: #b3b3b3;
+            --border: rgba(255,255,255,0.22);
+            --shadow: 0 10px 30px rgba(0,0,0,0.15);
+            --blur: 12px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        /* Layer-specific colors */
+        .layer.edgefunc { border-left: 4px solid #6F42C1; }
+        .layer.kvstore { border-left: 4px solid #EF5350; }
+        .layer.staticassets { border-left: 4px solid #90A4AE; }
+
+        .edgefunc .layer-icon { background: #6F42C1; }
+        .kvstore .layer-icon { background: #EF5350; }
+        .staticassets .layer-icon { background: #90A4AE; }
+    </style>
+</head>
+<body>
+    <a href="/" class="home-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 18px; height: 18px;">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
+        </svg>
+        Home
+    </a>
+
+    <div class="usecase-card" aria-label="Stack Use Case">
+        <div class="uc-title">Use Case</div>
+        <div class="uc-line"><span class="label">Type:</span> Serverless Edge Computing Stack</div>
+        <div class="uc-line"><span class="label">Typical Use Case:</span> Low-latency API endpoints, global cache, static site hosting, real-time data</div>
+        <div class="uc-line"><span class="label">Famous Usage:</span> Vercel, Cloudflare Workers, AWS Lambda@Edge, Netlify Edge</div>
+    </div>
+
+    <div class="container">
+        <h1>⚡ Edge Stack</h1>
+        <p class="subtitle">Edge Functions · KV Store · Static Assets</p>
+
+        <div class="diagram">
+            <div class="stack-container">
+                <div class="layer edgefunc">
+                    <div class="layer-left">
+                        <div class="layer-icon">EF</div>
+                        <div class="layer-title">
+                            <h2>Edge Functions</h2>
+                            <div class="full-name">Serverless Compute</div>
+                        </div>
+                    </div>
+                    <div class="layer-description">
+                        <ul>
+                            <li>Deploy code globally, run at edge locations, minimal latency</li>
+                            <li>Zero cold starts, auto-scaling, pay-per-request pricing</li>
+                            <li>Request/response manipulation, middleware, authentication</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="arrow">↓</div>
+
+                <div class="layer kvstore">
+                    <div class="layer-left">
+                        <div class="layer-icon">KV</div>
+                        <div class="layer-title">
+                            <h2>KV Store</h2>
+                            <div class="full-name">Distributed Key-Value Cache</div>
+                        </div>
+                    </div>
+                    <div class="layer-description">
+                        <ul>
+                            <li>Ultra-fast data access, global replication, eventual consistency</li>
+                            <li>Session storage, config management, rate limiting</li>
+                            <li>Low latency queries, edge-native data persistence</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="arrow">↓</div>
+
+                <div class="layer staticassets">
+                    <div class="layer-left">
+                        <div class="layer-icon">SA</div>
+                        <div class="layer-title">
+                            <h2>Static Assets</h2>
+                            <div class="full-name">Global Content Delivery</div>
+                        </div>
+                    </div>
+                    <div class="layer-description">
+                        <ul>
+                            <li>HTML, CSS, JavaScript cached globally on edge servers</li>
+                            <li>Automatic compression, cache invalidation, versioning</li>
+                            <li>Geo-distributed serving, DDoS protection, high availability</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flow-description">
+                <strong>Flow:</strong> Edge Functions process requests → KV Store caches data → Static Assets delivered from nearest edge location.
+            </div>
+        </div>
+    </div>
+</body>
+</html>

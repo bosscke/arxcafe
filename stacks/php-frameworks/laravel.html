@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Laravel Stack Architecture</title>
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/stacks.css">
+    <style>
+        :root {
+            --glass: rgba(255,255,255,0.10);
+            --text: #e6e6e6;
+            --muted: #b3b3b3;
+            --border: rgba(255,255,255,0.22);
+            --shadow: 0 10px 30px rgba(0,0,0,0.15);
+            --blur: 12px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        /* Layer-specific colors */
+        .layer.laravel { border-left: 4px solid #FF2D20; }
+        .layer.nginx { border-left: 4px solid #009639; }
+        .layer.mysql { border-left: 4px solid #00758F; }
+
+        .laravel .layer-icon { background: #FF2D20; }
+        .nginx .layer-icon { background: #009639; }
+        .mysql .layer-icon { background: #00758F; }
+    </style>
+</head>
+<body>
+    <a href="/" class="home-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 18px; height: 18px;">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
+        </svg>
+        Home
+    </a>
+
+    <div class="usecase-card" aria-label="Stack Use Case">
+        <div class="uc-title">Use Case</div>
+        <div class="uc-line"><span class="label">Type:</span> PHP Framework Stack</div>
+        <div class="uc-line"><span class="label">Typical Use Case:</span> Modern web applications, APIs, SPA backends</div>
+        <div class="uc-line"><span class="label">Famous Usage:</span> Laravel ecosystem, Vapor, Forge</div>
+    </div>
+
+    <div class="container">
+        <h1>🔴 Laravel Stack</h1>
+        <p class="subtitle">Laravel · MySQL · Nginx</p>
+
+        <div class="diagram">
+            <div class="stack-container">
+                <!-- Laravel Layer -->
+                <div class="layer laravel">
+                    <div class="layer-left">
+                        <div class="layer-icon">L</div>
+                        <div class="layer-title">
+                            <h2>Laravel</h2>
+                            <div class="full-name">PHP Web Framework</div>
+                        </div>
+                    </div>
+                    <div class="layer-description">
+                        <ul>
+                            <li>Eloquent ORM, Blade templating engine</li>
+                            <li>Built-in authentication, routing, middleware</li>
+                            <li>Artisan CLI, migrations, seeding</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="arrow">↓</div>
+
+                <!-- Nginx Layer -->
+                <div class="layer nginx">
+                    <div class="layer-left">
+                        <div class="layer-icon">N</div>
+                        <div class="layer-title">
+                            <h2>Nginx</h2>
+                            <div class="full-name">Web Server & Reverse Proxy</div>
+                        </div>
+                    </div>
+                    <div class="layer-description">
+                        <ul>
+                            <li>High-performance web server</li>
+                            <li>Reverse proxy, load balancing</li>
+                            <li>Static file serving, caching</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="arrow">↓</div>
+
+                <!-- MySQL Layer -->
+                <div class="layer mysql">
+                    <div class="layer-left">
+                        <div class="layer-icon">DB</div>
+                        <div class="layer-title">
+                            <h2>MySQL</h2>
+                            <div class="full-name">Relational Database</div>
+                        </div>
+                    </div>
+                    <div class="layer-description">
+                        <ul>
+                            <li>ACID transactions, foreign keys</li>
+                            <li>Indexing, query optimization</li>
+                            <li>Replication, backup support</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flow-description">
+                <strong>Flow:</strong> User request → Nginx reverse proxy → Laravel application → Eloquent ORM → MySQL database
+            </div>
+        </div>
+    </div>
+</body>
+</html>

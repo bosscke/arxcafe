@@ -1,0 +1,173 @@
+:root {
+  --bg:#f7f7fb;
+  --card:#fff;
+  --text:#1f2a44;
+  --muted:#4b5568;
+  --hero-url: url('/hero-night.jpg');
+}
+body.day-theme { --hero-url: url('/hero-day.jpg'); }
+body {
+  margin:0;
+  font-family:"Segoe UI", sans-serif;
+  /* Use layered gradient over hero image for consistent overlay */
+  background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), var(--hero-url);
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  /* fixed attachment can cause jank on mobile; enable only on large screens */
+  background-attachment: fixed;
+  color:var(--text);
+  min-height: 100vh;
+}
+
+/* Improve mobile performance by disabling fixed background on small viewports */
+@media (max-width: 1024px) {
+  body { background-attachment: scroll; }
+}
+.theme-toggle {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: rgba(255, 255, 255, 0.9);
+  border: none;
+  padding: 10px 14px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 18px;
+  z-index: 100;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  transition: all 0.3s ease;
+}
+.theme-toggle:hover { background: rgba(255, 255, 255, 1); transform: scale(1.1); }
+
+h1 { margin:0 0 8px; font-size:26px; color:#fff; }
+p { margin:0; line-height:1.5; color:rgba(255,255,255,0.9); }
+.toplist-title { margin:0 0 6px; font-weight:700; font-size:14px; text-transform:uppercase; letter-spacing:0.4px; color:rgba(255,255,255,0.85); }
+ol { margin:0; padding-left:20px; color:rgba(255,255,255,0.9); }
+ol li { margin:2px 0; }
+
+/* Use case glass card (top-right) - shared across stack pages */
+.usecase-card {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  padding: 12px 14px;
+  background: rgba(255,255,255,0.10);
+  border: 1px solid rgba(255,255,255,0.22);
+  border-radius: 12px;
+  color: #e6e6e6;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+  max-width: 320px;
+  z-index: 10000;
+  pointer-events: auto;
+}
+
+/* Home button shared across stack pages */
+.home-btn {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.22);
+  background: rgba(255,255,255,0.10);
+  color: #e6e6e6;
+  text-decoration: none;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+  transition: all 0.2s ease;
+  z-index: 100;
+  font-size: 14px;
+}
+
+.home-btn:hover {
+  background: rgba(255, 255, 255, 0.15);
+  transform: translateX(-2px);
+}
+
+@media (max-width: 768px) {
+  .home-btn {
+    position: static;
+    width: fit-content;
+    margin: 12px 6px 6px;
+  }
+  
+  .usecase-card {
+    position: static;
+    width: auto;
+    max-width: 100%;
+    margin: 6px 6px 12px;
+  }
+}
+.usecase-card .uc-title {
+  font-weight: 700;
+  font-size: 14px;
+  margin-bottom: 6px;
+  color: rgba(255,255,255,0.9);
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+}
+.usecase-card .uc-line {
+  font-size: 13px;
+  margin: 2px 0;
+}
+.usecase-card .label {
+  color: rgba(255,255,255,0.85);
+  font-weight: 600;
+}
+
+/* Prevent horizontal overflow on small devices */
+html, body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+/* Make common media elements responsive */
+img, svg, video, iframe {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Prevent wide code blocks or tables from forcing horizontal scroll */
+pre, code, table {
+  max-width: 100%;
+  overflow: auto;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+/* Site-wide mobile-first layout rules so all pages are responsive */
+.page-grid {
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 12px;
+}
+
+/* Panels and cards should be fluid by default */
+.panel, .card, .api-section, .stacks-panel, .content-panel, .architecture-bar { width: 100%; box-sizing: border-box; }
+
+/* Make lane elements stack/wrap on narrow screens */
+.lane-inner { display:flex; flex-wrap:wrap; gap:10px; overflow-x:visible; }
+.topic-card { width: 100%; box-sizing: border-box; }
+
+/* Web & Networking: single column by default */
+.web-network-panel .wn-grid { grid-template-columns: 1fr; gap: 10px; }
+
+/* Theme toggle smaller on phones */
+.theme-toggle { top: 12px; right: 12px; padding: 8px; }
+
+/* Restore desktop layout at wider widths */
+@media (min-width: 961px) {
+  .page-grid { display: grid; grid-template-columns: 320px 1fr; grid-template-areas: "api api" "stacks content" "architecture architecture" "footer footer"; gap: 12px; max-width: 1200px; margin: 0 auto; }
+  .lane-inner { flex-wrap: nowrap; overflow-x:auto; }
+  .topic-card { width: 160px; }
+  .web-network-panel .wn-grid { grid-template-columns: repeat(3, minmax(160px, 1fr)); }
+}

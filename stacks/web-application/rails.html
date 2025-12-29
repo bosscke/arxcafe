@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rails Stack Architecture</title>
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/stacks.css">
+    <style>
+        :root {
+            --glass: rgba(255,255,255,0.10);
+            --text: #e6e6e6;
+            --muted: #b3b3b3;
+            --border: rgba(255,255,255,0.22);
+            --shadow: 0 10px 30px rgba(0,0,0,0.15);
+            --blur: 12px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        /* Layer-specific colors */
+        .layer.rails { border-left: 4px solid #cc0000; }
+        .layer.puma { border-left: 4px solid #ff6f00; }
+        .layer.postgres { border-left: 4px solid #336791; }
+
+        .rails .layer-icon { background: #cc0000; }
+        .puma .layer-icon { background: #ff6f00; }
+        .postgres .layer-icon { background: #336791; }
+    </style>
+</head>
+<body>
+    <a href="/" class="home-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 18px; height: 18px;">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
+        </svg>
+        Home
+    </a>
+
+    <div class="usecase-card" aria-label="Stack Use Case">
+        <div class="uc-title">Use Case</div>
+        <div class="uc-line"><span class="label">Type:</span> Web (Full-stack)</div>
+        <div class="uc-line"><span class="label">Typical Use Case:</span> SaaS platforms, marketplaces</div>
+        <div class="uc-line"><span class="label">Famous Usage:</span> Shopify</div>
+    </div>
+
+    <div class="container">
+        <h1>💎 Rails Stack</h1>
+        <p class="subtitle">Ruby on Rails · PostgreSQL · Puma</p>
+
+        <div class="diagram">
+            <div class="stack-container">
+                <!-- Rails Layer -->
+                <div class="layer rails">
+                    <div class="layer-left">
+                        <div class="layer-icon">R</div>
+                        <div class="layer-title">
+                            <h2>Ruby on Rails</h2>
+                            <div class="full-name">MVC Web Framework</div>
+                        </div>
+                    </div>
+                    <div class="layer-description">
+                        <ul>
+                            <li>Controllers, Models, Views, Routing</li>
+                            <li>Active Record ORM & migrations</li>
+                            <li>Action Cable, Active Job, caching</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="arrow">↓</div>
+
+                <!-- Puma Layer -->
+                <div class="layer puma">
+                    <div class="layer-left">
+                        <div class="layer-icon">P</div>
+                        <div class="layer-title">
+                            <h2>Puma</h2>
+                            <div class="full-name">Rack Application Server</div>
+                        </div>
+                    </div>
+                    <div class="layer-description">
+                        <ul>
+                            <li>Multi-threaded, cluster workers</li>
+                            <li>Rack middleware pipeline</li>
+                            <li>Reverse-proxy friendly (Nginx/Apache)</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="arrow">↓</div>
+
+                <!-- PostgreSQL Layer -->
+                <div class="layer postgres">
+                    <div class="layer-left">
+                        <div class="layer-icon">PG</div>
+                        <div class="layer-title">
+                            <h2>PostgreSQL</h2>
+                            <div class="full-name">Relational Database</div>
+                        </div>
+                    </div>
+                    <div class="layer-description">
+                        <ul>
+                            <li>ACID transactions & indexing</li>
+                            <li>JSONB, extensions, full-text search</li>
+                            <li>Read replicas & backup strategies</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flow-description">
+                <strong>Request Flow:</strong> Client → Puma (Rack) → Rails (MVC/ORM) → PostgreSQL → Rails → Puma → Client
+            </div>
+        </div>
+    </div>
+</body>
+</html>

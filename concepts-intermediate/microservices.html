@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Microservices</title>
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/concepts.css">
+</head>
+<body>
+    <a href="/" class="home-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 18px; height: 18px;">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
+        </svg>
+        Home
+    </a>
+
+    <div class="container">
+        <h1>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 40px; height: 40px; display: inline-block; margin-right: 10px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 4.875c0-.621.504-1.125 1.125-1.125h4.5c.621 0 1.125.504 1.125 1.125v4.5c0 .621-.504 1.125-1.125 1.125h-4.5A1.125 1.125 0 0 1 3.75 9.375v-4.5zm0 9.75c0-.621.504-1.125 1.125-1.125h4.5c.621 0 1.125.504 1.125 1.125v4.5c0 .621-.504 1.125-1.125 1.125h-4.5a1.125 1.125 0 0 1-1.125-1.125v-4.5zm9.75-9.75c0-.621.504-1.125 1.125-1.125h4.5c.621 0 1.125.504 1.125 1.125v4.5c0 .621-.504 1.125-1.125 1.125h-4.5A1.125 1.125 0 0 1 13.5 9.375v-4.5zm0 9.75c0-.621.504-1.125 1.125-1.125h4.5c.621 0 1.125.504 1.125 1.125v4.5c0 .621-.504 1.125-1.125 1.125h-4.5a1.125 1.125 0 0 1-1.125-1.125v-4.5z"/></svg>
+            Microservices
+        </h1>
+
+        <div class="intro-box">
+            <p><strong>Microservices</strong> are small, independently deployable services that encapsulate a business capability, communicate over lightweight protocols, and can be scaled and released independently. They trade operational complexity for team autonomy and resilience at scale.</p>
+        </div>
+
+        <h2>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M6 12h12M6 6h12M6 18h12"/></svg>
+            Why Microservices
+        </h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>Independent Deployability</h3>
+                <ul class="features-list">
+                    <li>Release one service without affecting others</li>
+                    <li>Smaller blast radius</li>
+                    <li>Faster iteration cycles</li>
+                </ul>
+            </div>
+            <div class="arch-card">
+                <h3>Resilience & Scalability</h3>
+                <ul class="features-list">
+                    <li>Isolate failures via bulkheads</li>
+                    <li>Scale hotspots individually</li>
+                    <li>Polyglot technology choices</li>
+                </ul>
+            </div>
+            <div class="arch-card">
+                <h3>Team Autonomy</h3>
+                <ul class="features-list">
+                    <li>Own service end-to-end</li>
+                    <li>Clear boundaries & contracts</li>
+                    <li>Decentralized decision-making</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v18m0-18c-1.5 1.5-4.5 4.5-7.5 4.5S1.5 4.5 0 3m12 0c1.5 1.5 4.5 4.5 7.5 4.5S22.5 4.5 24 3"/></svg>
+            Communication & Integration
+        </h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>Sync</h3>
+                <p>Use <strong>REST</strong> or <strong>gRPC</strong> for request/response. Apply <em>timeouts, retries, circuit breakers</em>.</p>
+            </div>
+            <div class="arch-card">
+                <h3>Async</h3>
+                <p>Use <strong>events</strong> via Kafka/RabbitMQ/NATS to decouple producers and consumers.</p>
+            </div>
+            <div class="arch-card">
+                <h3>Contracts</h3>
+                <p>Version APIs, use contract tests, and avoid breaking changes. Prefer idempotent endpoints.</p>
+            </div>
+            <div class="arch-card">
+                <h3>API Gateway</h3>
+                <p>Central entry, routing, auth, rate limiting, and aggregation for clients.</p>
+            </div>
+        </div>
+
+        <h2>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="m6.75 7.5 4.5 9 4.5-9m-9 0 4.5-4.5 4.5 4.5m-9 0h9m-9 0L3 12l3.75-4.5m9 0L21 12l-3.75-4.5"/></svg>
+            Example Structure
+        </h2>
+
+        <div style="background: rgba(102, 126, 234, 0.1); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 12px; padding: 25px; margin: 30px 0; display: grid; gap: 18px;">
+            <div>
+                <h3>Folders</h3>
+                <div style="background: #1e1e1e; color: #d4d4d4; padding: 12px; border-radius: 8px; font-family: 'Courier New', monospace; font-size: 10px; line-height: 1.6; overflow-wrap: break-word; word-wrap: break-word; border: 1px solid rgba(255, 255, 255, 0.1); white-space: pre-wrap; max-width: 100%; box-sizing: border-box;">
+services/
+  user-service/
+    server.js
+  order-service/
+    server.js
+api-gateway/
+  server.js
+infra/
+  event-bus.js
+                </div>
+            </div>
+            <div>
+                <h3>User Service (Node.js)</h3>
+                <div style="background: #1e1e1e; color: #d4d4d4; padding: 12px; border-radius: 8px; font-family: 'Courier New', monospace; font-size: 10px; line-height: 1.6; overflow-wrap: break-word; word-wrap: break-word; border: 1px solid rgba(255, 255, 255, 0.1); white-space: pre-wrap; max-width: 100%; box-sizing: border-box;">
+// services/user-service/server.js
+const express = require('express');
+const app = express();
+app.get('/users/:id', (req,res)=>{
+  res.json({ id: req.params.id, name: 'Ada Lovelace' });
+});
+app.listen(4001);
+                </div>
+            </div>
+            <div>
+                <h3>Order Service (calls User)</h3>
+                <div style="background: #1e1e1e; color: #d4d4d4; padding: 12px; border-radius: 8px; font-family: 'Courier New', monospace; font-size: 10px; line-height: 1.6; overflow-wrap: break-word; word-wrap: break-word; border: 1px solid rgba(255, 255, 255, 0.1); white-space: pre-wrap; max-width: 100%; box-sizing: border-box;">
+// services/order-service/server.js
+const express = require('express');
+const fetch = require('node-fetch');
+const app = express();
+app.post('/orders', async (req,res)=>{
+  const user = await fetch('http://user-service:4001/users/1').then(r=>r.json());
+  res.json({ orderId: 'o-123', user });
+});
+app.listen(4002);
+                </div>
+            </div>
+            <div>
+                <h3>API Gateway</h3>
+                <div style="background: #1e1e1e; color: #d4d4d4; padding: 12px; border-radius: 8px; font-family: 'Courier New', monospace; font-size: 10px; line-height: 1.6; overflow-wrap: break-word; word-wrap: break-word; border: 1px solid rgba(255, 255, 255, 0.1); white-space: pre-wrap; max-width: 100%; box-sizing: border-box;">
+// api-gateway/server.js
+const express = require('express');
+const proxy = require('express-http-proxy');
+const app = express();
+app.use('/users', proxy('http://user-service:4001'));
+app.use('/orders', proxy('http://order-service:4002'));
+app.listen(4000);
+                </div>
+            </div>
+            <div>
+                <h3>Event Bus (in-process demo)</h3>
+                <div style="background: #1e1e1e; color: #d4d4d4; padding: 12px; border-radius: 8px; font-family: 'Courier New', monospace; font-size: 10px; line-height: 1.6; overflow-wrap: break-word; word-wrap: break-word; border: 1px solid rgba(255, 255, 255, 0.1); white-space: pre-wrap; max-width: 100%; box-sizing: border-box;">
+// infra/event-bus.js
+const { EventEmitter } = require('events');
+const bus = new EventEmitter();
+module.exports = {
+  publish: (type, payload) => bus.emit(type, payload),
+  subscribe: (type, handler) => bus.on(type, handler)
+};
+                </div>
+            </div>
+        </div>
+
+        <h2>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 3h3m-6 3h6M6.75 6h10.5a2.25 2.25 0 0 1 2.25 2.25v9A2.25 2.25 0 0 1 17.25 19.5H6.75A2.25 2.25 0 0 1 4.5 17.25v-9A2.25 2.25 0 0 1 6.75 6z"/></svg>
+            Deployment & Operations
+        </h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>Containers</h3>
+                <p>Package and deploy each service independently. Use CI/CD pipelines per service.</p>
+            </div>
+            <div class="arch-card">
+                <h3>Service Discovery</h3>
+                <p>Use DNS, Consul, or mesh (Istio/Linkerd) for dynamic routing.</p>
+            </div>
+            <div class="arch-card">
+                <h3>Resilience</h3>
+                <p>Apply circuit breakers, bulkheads, retries with backoff, and timeouts.</p>
+            </div>
+            <div class="arch-card">
+                <h3>Observability</h3>
+                <p>Centralized logs/metrics/traces; correlate requests via IDs across services.</p>
+            </div>
+        </div>
+
+        <h2>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 0 1 3 19.875v-6.75ZM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V8.625ZM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V4.125Z"/></svg>
+            Best Practices
+        </h2>
+
+        <div class="pros-box">
+            <h3>Do this:</h3>
+            <ul class="features-list">
+                <li>Database per service; avoid shared DB coupling</li>
+                <li>Automated contract tests between producers/consumers</li>
+                <li>Use async messaging for decoupling where possible</li>
+                <li>Enforce observability: logs, metrics, traces, alerting</li>
+                <li>Secure by design: zero-trust, mTLS, least privilege</li>
+                <li>Back-pressure and idempotency for robustness</li>
+            </ul>
+        </div>
+
+        <h2>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 1 1-18 0 9 9 0 0 1 18 0zm-9 3.75h.008v.008H12v-.008z"/></svg>
+            Common Pitfalls
+        </h2>
+
+        <div class="cons-box">
+            <h3>Avoid these:</h3>
+            <ul class="features-list">
+                <li>Distributed monolith: tight coupling via sync calls</li>
+                <li>Breaking API changes without versioning</li>
+                <li>Shared database schemas across services</li>
+                <li>Missing observability making incidents hard to debug</li>
+                <li>Over-splitting services too early</li>
+            </ul>
+        </div>
+
+        <div class="intro-box" style="text-align: center; margin: 60px 0 40px;">
+            <p>Microservices shine when teams and scale demand autonomy and resilience. Start modular, extract carefully, and invest early in operations and observability.</p>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,284 @@
+/* Concepts Pages - Shared Responsive Styles */
+
+:root {
+    --glass: rgba(255,255,255,0.10);
+    --text: #e6e6e6;
+    --muted: #b3b3b3;
+    --border: rgba(255,255,255,0.22);
+    --shadow: 0 10px 30px rgba(0,0,0,0.15);
+    --blur: 12px;
+}
+
+* { 
+    margin: 0; 
+    padding: 0; 
+    box-sizing: border-box; 
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('/hero-night.jpg') no-repeat center/cover;
+    background-attachment: fixed;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    padding: 20px 16px 28px;
+    color: var(--text);
+    overflow-x: hidden;
+}
+
+.container {
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+h1 {
+    text-align: center;
+    color: white;
+    font-size: 2.5em;
+    margin: 40px 0 20px;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.3);
+}
+
+h2 {
+    color: #667eea;
+    font-size: 1.8em;
+    margin-top: 40px;
+    margin-bottom: 20px;
+    border-left: 4px solid #667eea;
+    padding-left: 15px;
+}
+
+h3 {
+    color: #a8b8ff;
+    font-size: 1.3em;
+    margin-top: 25px;
+    margin-bottom: 15px;
+}
+
+.intro-box {
+    background: var(--glass);
+    border: 1px solid var(--border);
+    border-radius: 15px;
+    padding: 25px;
+    margin: 30px 0;
+    backdrop-filter: blur(var(--blur));
+    -webkit-backdrop-filter: blur(var(--blur));
+    box-shadow: var(--shadow);
+    line-height: 1.8;
+    font-size: 1.05em;
+}
+
+.diagram-box {
+    background: var(--glass);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 30px;
+    margin: 30px 0;
+    backdrop-filter: blur(var(--blur));
+    -webkit-backdrop-filter: blur(var(--blur));
+    box-shadow: var(--shadow);
+    text-align: center;
+}
+
+.architecture-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 25px;
+    margin: 30px 0;
+}
+
+.arch-card {
+    background: var(--glass);
+    border: 2px solid var(--border);
+    border-radius: 12px;
+    padding: 25px;
+    backdrop-filter: blur(var(--blur));
+    -webkit-backdrop-filter: blur(var(--blur));
+    box-shadow: var(--shadow);
+    transition: all 0.3s ease;
+}
+
+.arch-card:hover {
+    border-color: #667eea;
+    box-shadow: 0 0 20px rgba(102, 126, 234, 0.2);
+    transform: translateY(-5px);
+}
+
+.arch-card h3 {
+    margin-top: 0;
+    color: #667eea;
+}
+
+.arch-card p {
+    line-height: 1.7;
+    margin-bottom: 15px;
+}
+
+.features-list {
+    list-style: none;
+    margin: 15px 0;
+}
+
+.features-list li {
+    padding: 10px 0;
+    padding-left: 30px;
+    position: relative;
+    line-height: 1.6;
+}
+
+.features-list li:before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    color: #667eea;
+    font-weight: bold;
+    font-size: 1.2em;
+}
+
+.flow-diagram {
+    background: rgba(102, 126, 234, 0.1);
+    border: 2px solid #667eea;
+    border-radius: 12px;
+    padding: 30px;
+    margin: 30px 0;
+    text-align: center;
+}
+
+.flow-step {
+    display: inline-block;
+    background: var(--glass);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 15px 20px;
+    margin: 10px;
+    min-width: 200px;
+    border-left: 4px solid #667eea;
+}
+
+.flow-arrow {
+    display: inline-block;
+    margin: 0 10px;
+    color: #667eea;
+    font-size: 1.5em;
+}
+
+.pros-cons {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 25px;
+    margin: 30px 0;
+}
+
+.pros-box, .cons-box {
+    background: var(--glass);
+    border-radius: 12px;
+    padding: 25px;
+    backdrop-filter: blur(var(--blur));
+    -webkit-backdrop-filter: blur(var(--blur));
+    box-shadow: var(--shadow);
+}
+
+.pros-box {
+    border-left: 4px solid #13AA52;
+}
+
+.cons-box {
+    border-left: 4px solid #DD0031;
+}
+
+.pros-box h3, .cons-box h3 {
+    margin-top: 0;
+}
+
+.pros-box h3 {
+    color: #13AA52;
+}
+
+.cons-box h3 {
+    color: #DD0031;
+}
+
+.code-example {
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 20px;
+    margin: 20px 0;
+    overflow-x: auto;
+    font-family: 'Courier New', monospace;
+    font-size: 0.9em;
+    line-height: 1.5;
+}
+
+@media (max-width: 900px) {
+    body {
+        background-attachment: scroll;
+    }
+}
+
+@media (max-width: 768px) {
+    h1 {
+        font-size: 2em;
+    }
+
+    h2 {
+        font-size: 1.4em;
+    }
+
+    .architecture-grid,
+    .pros-cons {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Client-Server page: mobile-friendly background framing */
+body.client-server-page {
+    background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('/hero-night.jpg');
+    background-position: center top;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+@media (max-width: 768px) {
+    body.client-server-page {
+        background-attachment: scroll;
+        background-position: 50% 15%;
+        background-size: cover;
+        background-color: #0b1120;
+    }
+}
+
+@media (max-width: 480px) {
+    body.client-server-page {
+        background-size: 120% auto;
+        background-position: 50% 8%;
+    }
+}
+
+/* HTTP vs HTTPS page: mobile-friendly background framing */
+body.http-vs-https-page {
+    background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('/hero-night.jpg');
+    background-position: center top;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+@media (max-width: 768px) {
+    body.http-vs-https-page {
+        background-attachment: scroll;
+        background-position: 50% 15%;
+        background-size: cover;
+        background-color: #0b1120;
+    }
+}
+
+@media (max-width: 480px) {
+    body.http-vs-https-page {
+        background-size: 120% auto;
+        background-position: 50% 8%;
+    }
+}

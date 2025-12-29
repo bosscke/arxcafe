@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Java EE Stack Architecture</title>
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/stacks.css">
+    <style>
+        :root {
+            --glass: rgba(255,255,255,0.10);
+            --text: #e6e6e6;
+            --muted: #b3b3b3;
+            --border: rgba(255,255,255,0.22);
+            --shadow: 0 10px 30px rgba(0,0,0,0.15);
+            --blur: 12px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        /* Layer-specific colors */
+        .layer.javaee { border-left: 4px solid #f0ad4e; }
+        .layer.wildfly { border-left: 4px solid #6c757d; }
+        .layer.mysql { border-left: 4px solid #00758f; }
+
+        .javaee .layer-icon { background: linear-gradient(135deg, #f0ad4e, #f39c12); }
+        .wildfly .layer-icon { background: #6c757d; }
+        .mysql .layer-icon { background: #00758f; }
+    </style>
+</head>
+<body>
+    <a href="/" class="home-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 18px; height: 18px;">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
+        </svg>
+        Home
+    </a>
+    <div class="usecase-card" aria-label="Stack Use Case">
+        <div class="uc-title">Use Case</div>
+        <div class="uc-line"><span class="label">Type:</span> Web Application Stack</div>
+        <div class="uc-line"><span class="label">Typical Use Case:</span> Banking & government systems</div>
+        <div class="uc-line"><span class="label">Famous Usage:</span> Oracle</div>
+    </div>
+    <div class="container">
+        <h1>🛠️ Java EE Stack</h1>
+        <p class="subtitle">Java EE · WildFly · MySQL</p>
+
+        <div class="diagram">
+            <div class="stack-container">
+                <!-- Java EE Layer -->
+                <div class="layer javaee">
+                    <div class="layer-left">
+                        <div class="layer-icon">EE</div>
+                        <div class="layer-title">
+                            <h2>Java EE</h2>
+                            <div class="full-name">Enterprise APIs & Components</div>
+                        </div>
+                    </div>
+                    <div class="layer-description">
+                        <ul>
+                            <li>JAX-RS/JAX-WS services, CDI, EJB</li>
+                            <li>JPA for persistence, Bean Validation</li>
+                            <li>JMS messaging, JTA transactions</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="arrow">↓</div>
+
+                <!-- WildFly Layer -->
+                <div class="layer wildfly">
+                    <div class="layer-left">
+                        <div class="layer-icon">WF</div>
+                        <div class="layer-title">
+                            <h2>WildFly</h2>
+                            <div class="full-name">Java EE Application Server</div>
+                        </div>
+                    </div>
+                    <div class="layer-description">
+                        <ul>
+                            <li>Deployment, clustering, and management</li>
+                            <li>Security realms, datasources, and JNDI</li>
+                            <li>Load-balanced HTTP & messaging</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="arrow">↓</div>
+
+                <!-- MySQL Layer -->
+                <div class="layer mysql">
+                    <div class="layer-left">
+                        <div class="layer-icon">MY</div>
+                        <div class="layer-title">
+                            <h2>MySQL</h2>
+                            <div class="full-name">Relational Database</div>
+                        </div>
+                    </div>
+                    <div class="layer-description">
+                        <ul>
+                            <li>ACID storage with InnoDB</li>
+                            <li>Indexes, replication, partitioning</li>
+                            <li>SQL schema managed via migrations</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flow-description">
+                <strong>Request Flow:</strong> Client → Java EE (APIs/Components) → WildFly services → MySQL → WildFly → Java EE → Client
+            </div>
+        </div>
+    </div>
+</body>
+</html>

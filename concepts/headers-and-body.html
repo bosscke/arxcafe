@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Headers and Body</title>
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/concepts.css">
+</head>
+<body>
+    <a href="/" class="home-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 18px; height: 18px;">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
+        </svg>
+        Home
+    </a>
+
+    <div class="container">
+        <h1><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 40px; height: 40px; display: inline-block; margin-right: 10px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h3.75M9 15h3.75M9 18h3.75m3 .75H18a2.25 2.25 0 0 0 2.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 0 0-1.123-.08m-5.801 0c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 0 0 .75-.75 2.25 2.25 0 0 0-.1-.664m-5.8 0A2.251 2.251 0 0 1 13.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m0 0H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V9.375c0-.621-.504-1.125-1.125-1.125H8.25zM6.75 12h.008v.008H6.75V12zm0 3h.008v.008H6.75V15zm0 3h.008v.008H6.75V18z" /></svg> Headers and Body</h1>
+
+        <div class="intro-box">
+            <p><strong>Headers and Body</strong> are the two main components of HTTP requests and responses. <strong>Headers</strong> are metadata key-value pairs that provide information about the request/response (content type, authentication, caching, etc.), while the <strong>Body</strong> (also called payload) contains the actual data being transmitted. Together, they enable rich communication between clients and servers, allowing flexible data formats, authentication, and control of how data is processed and cached.</p>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M7.5 21L3 16.5m0 0L7.5 12M3 16.5h13.5m0-13.5L21 7.5m0 0L16.5 12M21 7.5H7.5" /></svg> Headers vs Body</h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>Headers</h3>
+                <ul class="features-list">
+                    <li><strong>Purpose:</strong> Metadata about request/response</li>
+                    <li><strong>Format:</strong> Key-Value pairs (e.g., "Content-Type: application/json")</li>
+                    <li><strong>Location:</strong> Always included, before body</li>
+                    <li><strong>Required:</strong> Some are mandatory (Host, User-Agent)</li>
+                    <li><strong>Visible:</strong> Easily inspected in dev tools</li>
+                    <li><strong>Size:</strong> Typically small (few KB)</li>
+                    <li><strong>Examples:</strong> Content-Type, Authorization, Cookie, Cache-Control</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Body</h3>
+                <ul class="features-list">
+                    <li><strong>Purpose:</strong> Actual data being transmitted</li>
+                    <li><strong>Format:</strong> Varies (JSON, XML, HTML, binary, form data, etc.)</li>
+                    <li><strong>Location:</strong> After headers, optional for some requests</li>
+                    <li><strong>Required:</strong> Not needed for GET requests</li>
+                    <li><strong>Visible:</strong> May be text or binary</li>
+                    <li><strong>Size:</strong> Can be large (MB to GB)</li>
+                    <li><strong>Examples:</strong> JSON data, HTML page, image bytes, file upload</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M10.5 6a7.5 7.5 0 1 0 15 0 7.5 7.5 0 0 0-15 0zM15 3v6m3-3h-6" /></svg> Common Request Headers</h2>
+
+        <div class="diagram-box">
+            <h3 style="margin-bottom: 20px;">Essential Request Headers:</h3>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; font-family: 'Courier New', monospace; text-align: left; word-break: break-word;">
+                <div style="padding: 15px; background: rgba(102, 126, 234, 0.1); border-radius: 8px; border-left: 3px solid #667eea;">
+                    <div style="font-weight: bold; margin-bottom: 10px; color: #667eea;">Authentication & Identity</div>
+                    <p><strong>Authorization:</strong> Bearer token, credentials</p>
+                    <p><strong>Cookie:</strong> Session data</p>
+                    <p><strong>User-Agent:</strong> Client info (browser, OS)</p>
+                    <p><strong>Host:</strong> Domain being requested</p>
+                </div>
+
+                <div style="padding: 15px; background: rgba(19, 170, 82, 0.1); border-radius: 8px; border-left: 3px solid #13AA52;">
+                    <div style="font-weight: bold; margin-bottom: 10px; color: #13AA52;">Content & Format</div>
+                    <p><strong>Content-Type:</strong> Format of body (application/json)</p>
+                    <p><strong>Content-Length:</strong> Size of body in bytes</p>
+                    <p><strong>Accept:</strong> Formats client understands</p>
+                    <p><strong>Accept-Encoding:</strong> Compression support (gzip)</p>
+                </div>
+
+                <div style="padding: 15px; background: rgba(255, 165, 0, 0.1); border-radius: 8px; border-left: 3px solid #FFA500;">
+                    <div style="font-weight: bold; margin-bottom: 10px; color: #FFA500;">Caching & Control</div>
+                    <p><strong>Cache-Control:</strong> How to cache response</p>
+                    <p><strong>If-Modified-Since:</strong> Conditional request</p>
+                    <p><strong>ETag:</strong> Resource version identifier</p>
+                    <p><strong>Pragma:</strong> Legacy cache control</p>
+                </div>
+
+                <div style="padding: 15px; background: rgba(221, 0, 49, 0.1); border-radius: 8px; border-left: 3px solid #DD0031;">
+                    <div style="font-weight: bold; margin-bottom: 10px; color: #DD0031;">Security & Origin</div>
+                    <p><strong>Origin:</strong> Where request came from</p>
+                    <p><strong>Referer:</strong> Previous page URL</p>
+                    <p><strong>X-Requested-With:</strong> AJAX identifier</p>
+                    <p><strong>X-CSRF-Token:</strong> CSRF protection</p>
+                </div>
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 6.75V15m6-6v8.25m.75-13.5h-6a2.25 2.25 0 0 0-2.25 2.25v13.5A2.25 2.25 0 0 0 9.75 21h6a2.25 2.25 0 0 0 2.25-2.25V4.5a2.25 2.25 0 0 0-2.25-2.25z" /></svg> Common Response Headers</h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card" style="border-left: 4px solid #667eea;">
+                <h3>Caching Headers</h3>
+                <ul class="features-list">
+                    <li><strong>Cache-Control:</strong> How long to cache (max-age=3600)</li>
+                    <li><strong>ETag:</strong> Version tag for validation</li>
+                    <li><strong>Last-Modified:</strong> When resource last changed</li>
+                    <li><strong>Expires:</strong> Expiration date/time</li>
+                    <li><strong>Vary:</strong> Cache key dependencies</li>
+                </ul>
+            </div>
+
+            <div class="arch-card" style="border-left: 4px solid #13AA52;">
+                <h3>Content Headers</h3>
+                <ul class="features-list">
+                    <li><strong>Content-Type:</strong> Type of response body</li>
+                    <li><strong>Content-Length:</strong> Size of response body</li>
+                    <li><strong>Content-Encoding:</strong> Compression (gzip, deflate)</li>
+                    <li><strong>Content-Disposition:</strong> Download vs display</li>
+                    <li><strong>Content-Range:</strong> Partial content info</li>
+                </ul>
+            </div>
+
+            <div class="arch-card" style="border-left: 4px solid #FFA500;">
+                <h3>Security Headers</h3>
+                <ul class="features-list">
+                    <li><strong>Set-Cookie:</strong> Create session cookies</li>
+                    <li><strong>Strict-Transport-Security:</strong> Force HTTPS</li>
+                    <li><strong>X-Content-Type-Options:</strong> Prevent MIME sniffing</li>
+                    <li><strong>X-Frame-Options:</strong> Clickjacking protection</li>
+                    <li><strong>Content-Security-Policy:</strong> Script injection protection</li>
+                </ul>
+            </div>
+
+            <div class="arch-card" style="border-left: 4px solid #DD0031;">
+                <h3>Server Info Headers</h3>
+                <ul class="features-list">
+                    <li><strong>Server:</strong> Server software type</li>
+                    <li><strong>Access-Control-Allow-Origin:</strong> CORS permission</li>
+                    <li><strong>Location:</strong> Redirect destination</li>
+                    <li><strong>Retry-After:</strong> Retry timing (503 responses)</li>
+                    <li><strong>Age:</strong> Cache age in seconds</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M20.893 13.393l-1.135-1.135a2.252 2.252 0 0 0-3.183 0l-.5.5a2.252 2.252 0 0 0 0 3.183l1.135 1.135a2.25 2.25 0 0 0 3.183 0l.5-.5a2.252 2.252 0 0 0 0-3.183zM16.5 5.25a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0z" /></svg> Request Body Formats</h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>JSON (Most Common)</h3>
+                <p style="margin: 10px 0;"><strong>Use:</strong> APIs, data exchange</p>
+                <p style="margin: 10px 0;"><strong>Content-Type:</strong> application/json</p>
+                <p style="margin: 10px 0;"><strong>Example:</strong></p>
+                <code style="background: #1e1e1e; color: #d4d4d4; padding: 8px; border-radius: 4px; display: block; font-size: 12px; overflow-x: auto; border: 1px solid rgba(255, 255, 255, 0.1);">{"name": "John", "age": 30}</code>
+            </div>
+
+            <div class="arch-card">
+                <h3>Form Data (URL-Encoded)</h3>
+                <p style="margin: 10px 0;"><strong>Use:</strong> HTML forms, login</p>
+                <p style="margin: 10px 0;"><strong>Content-Type:</strong> application/x-www-form-urlencoded</p>
+                <p style="margin: 10px 0;"><strong>Example:</strong></p>
+                <code style="background: #1e1e1e; color: #d4d4d4; padding: 8px; border-radius: 4px; display: block; font-size: 12px; overflow-x: auto; border: 1px solid rgba(255, 255, 255, 0.1);">name=John&age=30</code>
+            </div>
+
+            <div class="arch-card">
+                <h3>Multipart Form (File Upload)</h3>
+                <p style="margin: 10px 0;"><strong>Use:</strong> File uploads, mixed data</p>
+                <p style="margin: 10px 0;"><strong>Content-Type:</strong> multipart/form-data</p>
+                <p style="margin: 10px 0;"><strong>Example:</strong></p>
+                <code style="background: #1e1e1e; color: #d4d4d4; padding: 8px; border-radius: 4px; display: block; font-size: 12px; overflow-x: auto; border: 1px solid rgba(255, 255, 255, 0.1);">--boundary\r\nContent-Disposition: form-data; name="file"\r\n\r\n[bytes]</code>
+            </div>
+
+            <div class="arch-card">
+                <h3>XML</h3>
+                <p style="margin: 10px 0;"><strong>Use:</strong> Legacy APIs, SOAP</p>
+                <p style="margin: 10px 0;"><strong>Content-Type:</strong> application/xml</p>
+                <p style="margin: 10px 0;"><strong>Example:</strong></p>
+                <code style="background: #1e1e1e; color: #d4d4d4; padding: 8px; border-radius: 4px; display: block; font-size: 12px; overflow-x: auto; border: 1px solid rgba(255, 255, 255, 0.1);">&lt;user&gt;&lt;name&gt;John&lt;/name&gt;&lt;/user&gt;</code>
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> HTTP Request Example</h2>
+
+        <div class="diagram-box">
+            <h3 style="margin-bottom: 20px; color: #667eea;">POST Request with Headers and Body:</h3>
+            <div style="background: #1e1e1e; color: #d4d4d4; padding: 20px; border-radius: 8px; font-family: 'Courier New', monospace; font-size: 13px; line-height: 1.6; overflow-x: auto; border: 1px solid rgba(255, 255, 255, 0.1);">
+<span style="color: #569cd6;">POST</span> /api/users HTTP/1.1<br>
+<span style="color: #ce9178;">Host</span>: <span style="color: #87ceeb;">api.example.com</span><br>
+<span style="color: #ce9178;">Content-Type</span>: <span style="color: #87ceeb;">application/json</span><br>
+<span style="color: #ce9178;">Authorization</span>: <span style="color: #87ceeb;">Bearer token123</span><br>
+<br>
+<span style="color: #6a9955;">// BODY STARTS HERE</span><br>
+{"name":"John","email":"john@example.com"}
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M12 20.25c4.97 0 9-1.804 9-4.5s-4.03-4.5-9-4.5-9 1.804-9 4.5 4.03 4.5 9 4.5zm0-12c4.97 0 9-1.804 9-4.5S16.97 3 12 3 3 4.804 3 7.5 7.03 12 12 12zm0 2.25c4.97 0 9-1.804 9-4.5V8.25c0 2.696-4.03 4.5-9 4.5s-9-1.804-9-4.5v2.25c0 2.696 4.03 4.5 9 4.5z" /></svg> HTTP Response Example</h2>
+
+        <div class="diagram-box">
+            <h3 style="margin-bottom: 20px; color: #13AA52;">200 OK Response with Headers and Body:</h3>
+            <div style="background: #1e1e1e; color: #d4d4d4; padding: 20px; border-radius: 8px; font-family: 'Courier New', monospace; font-size: 13px; line-height: 1.6; overflow-x: auto; border: 1px solid rgba(255, 255, 255, 0.1);">
+<span style="color: #569cd6;">HTTP/1.1</span> <span style="color: #87ceeb;">200</span> <span style="color: #87ceeb;">OK</span><br>
+<span style="color: #ce9178;">Content-Type</span>: <span style="color: #87ceeb;">application/json</span><br>
+<span style="color: #ce9178;">Cache-Control</span>: <span style="color: #87ceeb;">max-age=3600</span><br>
+<span style="color: #ce9178;">Set-Cookie</span>: <span style="color: #87ceeb;">sessionId=xyz789; HttpOnly</span><br>
+<br>
+<span style="color: #6a9955;">// BODY STARTS HERE</span><br>
+{"id":1,"name":"John","email":"john@example.com"}
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M17.25 6.75 22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3-4.5 16.5" /></svg> Code Examples</h2>
+
+        <div style="background: rgba(102, 126, 234, 0.1); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 12px; padding: 25px; margin: 30px 0;">
+            <h3>Working with Headers and Body in JavaScript:</h3>
+            <div style="background: #1e1e1e; color: #d4d4d4; padding: 15px; border-radius: 8px; font-family: 'Courier New', monospace; font-size: 12px; line-height: 1.5; overflow-x: auto; margin-top: 15px; border: 1px solid rgba(255, 255, 255, 0.1);">
+<span style="color: #6a9955;">// Fetch API - Setting Headers and Body</span><br>
+fetch(<span style="color: #87ceeb;">'https://api.example.com/users'</span>, {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;method: <span style="color: #87ceeb;">'POST'</span>,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;headers: {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #87ceeb;">'Content-Type'</span>: <span style="color: #87ceeb;">'application/json'</span>,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #87ceeb;">'Authorization'</span>: <span style="color: #87ceeb;">'Bearer token123'</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;},<br>
+&nbsp;&nbsp;&nbsp;&nbsp;body: JSON.stringify({name: <span style="color: #87ceeb;">'John'</span>, age: <span style="color: #87ceeb;">30</span>})<br>
+}).then(res => res.json()).then(data => console.log(data));<br>
+<br>
+<span style="color: #6a9955;">// Express.js - Reading and Setting Headers</span><br>
+app.post(<span style="color: #87ceeb;">'/api/users'</span>, (req, res) => {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #569cd6;">const</span> auth = req.headers[<span style="color: #87ceeb;">'authorization'</span>];<br>
+&nbsp;&nbsp;&nbsp;&nbsp;res.set(<span style="color: #87ceeb;">'Cache-Control'</span>, <span style="color: #87ceeb;">'max-age=3600'</span>);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;res.json({id: <span style="color: #87ceeb;">1</span>, ...req.body});<br>
+});
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3 L4 14h7v7l9-11h-7z" /></svg> When to Use Headers vs Body</h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card" style="border-left: 4px solid #667eea;">
+                <h3>Use Headers For</h3>
+                <ul class="features-list">
+                    <li>Content type and encoding</li>
+                    <li>Authentication tokens</li>
+                    <li>Cookies and sessions</li>
+                    <li>Cache control directives</li>
+                    <li>Compression negotiation</li>
+                    <li>CORS permissions</li>
+                    <li>Request/response metadata</li>
+                </ul>
+            </div>
+
+            <div class="arch-card" style="border-left: 4px solid #13AA52;">
+                <h3>Use Body For</h3>
+                <ul class="features-list">
+                    <li>User input (forms, JSON)</li>
+                    <li>Data to be created/updated</li>
+                    <li>File uploads</li>
+                    <li>Large datasets</li>
+                    <li>Sensitive information</li>
+                    <li>Complex nested structures</li>
+                    <li>Media files (images, videos)</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 1 1-18 0 9 9 0 0 1 18 0zm-9 3.75h.008v.008H12v-.008z" /></svg> Common Mistakes</h2>
+
+        <div class="cons-box">
+            <h3>Headers and Body Anti-Patterns</h3>
+            <ul class="features-list">
+                <li><strong>Forgetting Content-Type:</strong> Server can't parse body correctly</li>
+                <li><strong>Wrong Content-Type:</strong> Sending JSON but declaring text/html</li>
+                <li><strong>Large Headers:</strong> Oversized headers slow down requests</li>
+                <li><strong>Putting Data in Headers:</strong> Headers have size limits (~8KB)</li>
+                <li><strong>Not Using HTTPS:</strong> Headers/body sent in plain text</li>
+                <li><strong>Exposed Tokens in Headers:</strong> Visible in network logs</li>
+                <li><strong>Ignoring Cache Headers:</strong> Unnecessary duplicate requests</li>
+                <li><strong>Empty Bodies on POST:</strong> Intent unclear to server</li>
+            </ul>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 0 0-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 0 0 3.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 0 0 3.09 3.09l2.846.813-2.846.813a4.5 4.5 0 0 0-3.09 3.09l-.813 2.846zm6.375-5.414l.902-2.707a.75.75 0 0 0 1.386 0l.902 2.707a3 3 0 0 0 2.591 2.591l2.707.902a.75.75 0 0 0 0 1.386l-2.707.902a3 3 0 0 0-2.591 2.591l-.902 2.707a.75.75 0 0 0-1.386 0l-.902-2.707a3 3 0 0 0-2.591-2.591l-2.707-.902a.75.75 0 0 0 0-1.386l2.707-.902a3 3 0 0 0 2.591-2.591z" /></svg> Best Practices</h2>
+
+        <div class="intro-box">
+            <h3>Working with Headers and Body Effectively:</h3>
+            <ul class="features-list">
+                <li><strong>Always Set Content-Type:</strong> Be explicit about body format</li>
+                <li><strong>Use Appropriate HTTP Methods:</strong> GET has no body, POST/PUT do</li>
+                <li><strong>Validate Headers:</strong> Check required headers are present</li>
+                <li><strong>Parse Body Safely:</strong> Handle parsing errors gracefully</li>
+                <li><strong>Implement Caching Headers:</strong> Reduce server load with Cache-Control</li>
+                <li><strong>Use Compression:</strong> Set Accept-Encoding for smaller payloads</li>
+                <li><strong>Secure Headers:</strong> Use HTTPS, set secure cookies</li>
+                <li><strong>Document Headers:</strong> List required headers in API docs</li>
+                <li><strong>Use JSON for APIs:</strong> Standard, readable, widely supported</li>
+                <li><strong>Log Safely:</strong> Don't log sensitive headers (Authorization)</li>
+            </ul>
+        </div>
+
+        <div class="intro-box" style="text-align: center; margin: 60px 0 40px;">
+            <p>Headers and Body work together to enable sophisticated HTTP communication. Headers provide metadata and control, while the body carries the actual data. Understanding both is essential for building APIs, debugging web requests, and implementing proper security and performance practices.</p>
+        </div>
+    </div>
+</body>
+</html>

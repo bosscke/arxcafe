@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Azure Stack Architecture</title>
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/stacks.css">
+    <style>
+        :root {
+            --glass: rgba(255,255,255,0.10);
+            --text: #e6e6e6;
+            --muted: #b3b3b3;
+            --border: rgba(255,255,255,0.22);
+            --shadow: 0 10px 30px rgba(0,0,0,0.15);
+            --blur: 12px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        /* Layer-specific colors */
+        .layer.azure { border-left: 4px solid #0078d4; }
+        .layer.dotnet { border-left: 4px solid #512bd4; }
+        .layer.sqlazure { border-left: 4px solid #0078d4; }
+
+        .azure .layer-icon { background: linear-gradient(135deg, #0078d4, #00bcf2); }
+        .dotnet .layer-icon { background: linear-gradient(135deg, #7c4dff, #512bd4); }
+        .sqlazure .layer-icon { background: linear-gradient(135deg, #0078d4, #0063b1); }
+    </style>
+</head>
+<body>
+    <a href="/" class="home-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 18px; height: 18px;">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
+        </svg>
+        Home
+    </a>
+    <div class="container">
+        <h1>☁️ Azure Stack</h1>
+        <p class="subtitle">Azure · .NET · SQL Azure</p>
+
+        <div class="diagram">
+            <div class="stack-container">
+                <!-- Azure Layer -->
+                <div class="layer azure">
+                    <div class="layer-left">
+                        <div class="layer-icon">AZ</div>
+                        <div class="layer-title">
+                            <h2>Azure</h2>
+                            <div class="full-name">Cloud Platform & Services</div>
+                        </div>
+                    </div>
+                    <div class="layer-description">
+                        <ul>
+                            <li>App Services, Functions, Container Instances</li>
+                            <li>Azure AD, Key Vault, Application Insights</li>
+                            <li>CDN, Traffic Manager, load balancers</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="arrow">↓</div>
+
+                <!-- .NET Layer -->
+                <div class="layer dotnet">
+                    <div class="layer-left">
+                        <div class="layer-icon">.N</div>
+                        <div class="layer-title">
+                            <h2>.NET</h2>
+                            <div class="full-name">Application Runtime</div>
+                        </div>
+                    </div>
+                    <div class="layer-description">
+                        <ul>
+                            <li>ASP.NET Core APIs, Blazor, MVC</li>
+                            <li>Entity Framework Core, Dapper</li>
+                            <li>Azure SDK integration & telemetry</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="arrow">↓</div>
+
+                <!-- SQL Azure Layer -->
+                <div class="layer sqlazure">
+                    <div class="layer-left">
+                        <div class="layer-icon">SQL</div>
+                        <div class="layer-title">
+                            <h2>SQL Azure</h2>
+                            <div class="full-name">Managed Database Service</div>
+                        </div>
+                    </div>
+                    <div class="layer-description">
+                        <ul>
+                            <li>PaaS SQL with auto-scaling, geo-replication</li>
+                            <li>Built-in HA, backups, threat detection</li>
+                            <li>Elastic pools, serverless tiers</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flow-description">
+                <strong>Request Flow:</strong> Client → Azure (App Service) → .NET runtime → SQL Azure → .NET → Azure → Client
+            </div>
+        </div>
+    </div>
+</body>
+</html>

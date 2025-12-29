@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Headless Stack Architecture</title>
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/stacks.css">
+    <style>
+        :root {
+            --glass: rgba(255,255,255,0.10);
+            --text: #e6e6e6;
+            --muted: #b3b3b3;
+            --border: rgba(255,255,255,0.22);
+            --shadow: 0 10px 30px rgba(0,0,0,0.15);
+            --blur: 12px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        /* Layer-specific colors */
+        .layer.api { border-left: 4px solid #06B6D4; }
+        .layer.frontend { border-left: 4px solid #F97316; }
+
+        .api .layer-icon { background: #06B6D4; }
+        .frontend .layer-icon { background: #F97316; }
+    </style>
+</head>
+<body>
+    <a href="/" class="home-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 18px; height: 18px;">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
+        </svg>
+        Home
+    </a>
+
+    <div class="usecase-card" aria-label="Stack Use Case">
+        <div class="uc-title">Use Case</div>
+        <div class="uc-line"><span class="label">Type:</span> JAMstack / Static & Headless</div>
+        <div class="uc-line"><span class="label">Typical Use Case:</span> Content-driven apps, multi-channel publishing</div>
+        <div class="uc-line"><span class="label">Famous Usage:</span> Contentful, Strapi, Sanity projects</div>
+    </div>
+
+    <div class="container">
+        <h1>🔌 Headless Stack</h1>
+        <p class="subtitle">Headless CMS · API · Frontend Framework</p>
+
+        <div class="diagram">
+            <div class="stack-container">
+                <!-- Headless CMS Layer -->
+                <div class="layer headless-cms">
+                    <div class="layer-left">
+                        <div class="layer-icon">H</div>
+                        <div class="layer-title">
+                            <h2>Headless CMS</h2>
+                            <div class="full-name">Content Management</div>
+                        </div>
+                    </div>
+                    <div class="layer-description">
+                        <ul>
+                            <li>Contentful, Strapi, Sanity, Ghost</li>
+                            <li>Content modeling, media management</li>
+                            <li>Multi-channel content delivery</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="arrow">↓</div>
+
+                <!-- API Layer -->
+                <div class="layer api">
+                    <div class="layer-left">
+                        <div class="layer-icon">API</div>
+                        <div class="layer-title">
+                            <h2>API</h2>
+                            <div class="full-name">Content Delivery Layer</div>
+                        </div>
+                    </div>
+                    <div class="layer-description">
+                        <ul>
+                            <li>REST or GraphQL APIs</li>
+                            <li>Content webhooks, real-time updates</li>
+                            <li>Authentication, rate limiting</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="arrow">↓</div>
+
+                <!-- Frontend Framework Layer -->
+                <div class="layer frontend">
+                    <div class="layer-left">
+                        <div class="layer-icon">FE</div>
+                        <div class="layer-title">
+                            <h2>Frontend Framework</h2>
+                            <div class="full-name">Presentation Layer</div>
+                        </div>
+                    </div>
+                    <div class="layer-description">
+                        <ul>
+                            <li>React, Next.js, Gatsby, Nuxt.js</li>
+                            <li>SSR, SSG, client-side rendering</li>
+                            <li>Component-based UI, routing</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flow-description">
+                <strong>Flow:</strong> Headless CMS manages content → API delivers content → Frontend framework renders UI
+            </div>
+        </div>
+    </div>
+</body>
+</html>

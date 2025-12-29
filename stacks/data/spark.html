@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spark Stack – Apache Spark · Scala · Hadoop</title>
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/stacks.css">
+    <style>
+        :root {
+            --glass: rgba(255,255,255,0.10);
+            --text: #e6e6e6;
+            --muted: #b3b3b3;
+            --border: rgba(255,255,255,0.22);
+            --shadow: 0 10px 30px rgba(0,0,0,0.15);
+            --blur: 12px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        /* Layer-specific colors */
+        .layer.spark { border-left: 4px solid #E25A1C; }
+        .layer.scala { border-left: 4px solid #DC322F; }
+        .layer.hadoop { border-left: 4px solid #FFD94C; }
+
+        .spark .layer-icon { background: #E25A1C; }
+        .scala .layer-icon { background: #DC322F; }
+        .hadoop .layer-icon { background: #FFD94C; }
+    </style>
+</head>
+<body>
+    <a href="/" class="home-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 18px; height: 18px;">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
+        </svg>
+        Home
+    </a>
+
+    <div class="usecase-card" aria-label="Stack Use Case">
+        <div class="uc-title">Use Case</div>
+        <div class="uc-line"><span class="label">Type:</span> Big Data / Real-Time Analytics Stack</div>
+        <div class="uc-line"><span class="label">Typical Use Case:</span> Stream processing, batch analytics, machine learning pipelines, ETL</div>
+        <div class="uc-line"><span class="label">Famous Usage:</span> Netflix recommendations, Uber trip analytics, Airbnb pricing</div>
+    </div>
+
+    <div class="container">
+        <h1>⚡ Spark Stack</h1>
+        <p class="subtitle">Apache Spark · Scala · Hadoop</p>
+
+        <div class="diagram">
+            <div class="stack-container">
+                <div class="layer spark">
+                    <div class="layer-left">
+                        <div class="layer-icon">S</div>
+                        <div class="layer-title">
+                            <h2>Apache Spark</h2>
+                            <div class="full-name">Unified Analytics Engine</div>
+                        </div>
+                    </div>
+                    <div class="layer-description">
+                        <ul>
+                            <li>In-memory processing for speed, RDD/DataFrame/Dataset APIs</li>
+                            <li>Spark SQL, Streaming, MLlib, GraphX modules</li>
+                            <li>Runs on YARN, Kubernetes, Mesos, standalone cluster</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="arrow">↓</div>
+
+                <div class="layer scala">
+                    <div class="layer-left">
+                        <div class="layer-icon">Sc</div>
+                        <div class="layer-title">
+                            <h2>Scala</h2>
+                            <div class="full-name">Functional Programming Language</div>
+                        </div>
+                    </div>
+                    <div class="layer-description">
+                        <ul>
+                            <li>Native language for Spark, functional + OO paradigms</li>
+                            <li>Type-safe transformations, immutability, concise syntax</li>
+                            <li>sbt build tool, JVM interop for Java libraries</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="arrow">↓</div>
+
+                <div class="layer hadoop">
+                    <div class="layer-left">
+                        <div class="layer-icon">H</div>
+                        <div class="layer-title">
+                            <h2>Hadoop</h2>
+                            <div class="full-name">Distributed Storage & Resource Manager</div>
+                        </div>
+                    </div>
+                    <div class="layer-description">
+                        <ul>
+                            <li>HDFS for distributed file storage, fault-tolerant replication</li>
+                            <li>YARN schedules Spark jobs across cluster nodes</li>
+                            <li>Integrates with HBase, Hive, Pig for ecosystem workflows</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flow-description">
+                <strong>Flow:</strong> Spark jobs written in Scala → Spark runs on YARN/Hadoop → HDFS provides distributed data storage for input/output.
+            </div>
+        </div>
+    </div>
+</body>
+</html>

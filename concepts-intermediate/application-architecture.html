@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Application Architecture</title>
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/concepts.css">
+</head>
+<body>
+    <a href="/" class="home-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 18px; height: 18px;">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
+        </svg>
+        Home
+    </a>
+
+    <div class="container">
+        <h1>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 40px; height: 40px; display: inline-block; margin-right: 10px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 4.875c0-.621.504-1.125 1.125-1.125h4.5c.621 0 1.125.504 1.125 1.125v4.5c0 .621-.504 1.125-1.125 1.125h-4.5A1.125 1.125 0 0 1 3.75 9.375v-4.5zm0 9.75c0-.621.504-1.125 1.125-1.125h4.5c.621 0 1.125.504 1.125 1.125v4.5c0 .621-.504 1.125-1.125 1.125h-4.5a1.125 1.125 0 0 1-1.125-1.125v-4.5zm9.75-9.75c0-.621.504-1.125 1.125-1.125h4.5c.621 0 1.125.504 1.125 1.125v4.5c0 .621-.504 1.125-1.125 1.125h-4.5A1.125 1.125 0 0 1 13.5 9.375v-4.5zm0 9.75c0-.621.504-1.125 1.125-1.125h4.5c.621 0 1.125.504 1.125 1.125v4.5c0 .621-.504 1.125-1.125 1.125h-4.5a1.125 1.125 0 0 1-1.125-1.125v-4.5z"/></svg>
+            Application Architecture
+        </h1>
+
+        <div class="intro-box">
+            <p><strong>Application architecture</strong> defines how software components are organized, how they communicate, and how the system scales. Choosing the right architecture impacts maintainability, scalability, performance, and developer productivity. Common patterns include monolithic, microservices, serverless, event-driven, and layered architectures.</p>
+        </div>
+
+        <h2>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M6 12h12M6 6h12M6 18h12"/></svg>
+            Monolithic Architecture
+        </h2>
+
+        <div class="intro-box">
+            <p>Single, self-contained application where all components (UI, business logic, data access) run in one process. Traditional approach for web apps.</p>
+        </div>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>Characteristics</h3>
+                <ul class="features-list">
+                    <li>Single codebase, single deployment unit</li>
+                    <li>Shared database and memory</li>
+                    <li>Tightly coupled components</li>
+                    <li>All or nothing scaling</li>
+                </ul>
+            </div>
+            <div class="arch-card">
+                <h3>Advantages</h3>
+                <ul class="features-list">
+                    <li>Simple to develop and test</li>
+                    <li>Easy local development setup</li>
+                    <li>No network latency between modules</li>
+                    <li>Simpler deployment and debugging</li>
+                </ul>
+            </div>
+            <div class="arch-card">
+                <h3>Disadvantages</h3>
+                <ul class="features-list">
+                    <li>Hard to scale specific features</li>
+                    <li>Large codebase becomes unwieldy</li>
+                    <li>Long build/deploy times</li>
+                    <li>Technology stack locked in</li>
+                </ul>
+            </div>
+            <div class="arch-card">
+                <h3>Best For</h3>
+                <ul class="features-list">
+                    <li>Startups and MVPs</li>
+                    <li>Small to medium apps</li>
+                    <li>Simple business logic</li>
+                    <li>Limited team size</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v18m0-18c-1.5 1.5-4.5 4.5-7.5 4.5S1.5 4.5 0 3m12 0c1.5 1.5 4.5 4.5 7.5 4.5S22.5 4.5 24 3"/></svg>
+            Microservices Architecture
+        </h2>
+
+        <div class="intro-box">
+            <p>Application composed of small, independent services that communicate over network protocols (HTTP, gRPC, message queues). Each service owns its data and business logic.</p>
+        </div>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>Characteristics</h3>
+                <ul class="features-list">
+                    <li>Multiple services, independent deployment</li>
+                    <li>Decentralized data management</li>
+                    <li>API-based communication</li>
+                    <li>Polyglot (different languages/DBs)</li>
+                </ul>
+            </div>
+            <div class="arch-card">
+                <h3>Advantages</h3>
+                <ul class="features-list">
+                    <li>Independent scaling per service</li>
+                    <li>Faster deployments (small units)</li>
+                    <li>Team autonomy and parallel dev</li>
+                    <li>Fault isolation (one service fails)</li>
+                </ul>
+            </div>
+            <div class="arch-card">
+                <h3>Disadvantages</h3>
+                <ul class="features-list">
+                    <li>Complex infrastructure (orchestration)</li>
+                    <li>Network latency and failures</li>
+                    <li>Distributed transactions are hard</li>
+                    <li>Debugging across services difficult</li>
+                </ul>
+            </div>
+            <div class="arch-card">
+                <h3>Best For</h3>
+                <ul class="features-list">
+                    <li>Large, complex applications</li>
+                    <li>High scalability requirements</li>
+                    <li>Multiple teams working in parallel</li>
+                    <li>Frequent releases per service</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M6.75 7.5h10.5m-10.5 3h10.5m-10.5 3h10.5m-10.5 3h5.25"/></svg>
+            Serverless Architecture
+        </h2>
+
+        <div class="intro-box">
+            <p>Event-driven, function-as-a-service (FaaS) model where cloud provider manages infrastructure. Functions execute on demand, pay per invocation.</p>
+        </div>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>Characteristics</h3>
+                <ul class="features-list">
+                    <li>No server management required</li>
+                    <li>Auto-scaling, pay-per-use</li>
+                    <li>Event-driven execution</li>
+                    <li>Stateless functions</li>
+                </ul>
+            </div>
+            <div class="arch-card">
+                <h3>Advantages</h3>
+                <ul class="features-list">
+                    <li>Zero infrastructure management</li>
+                    <li>Cost-efficient (pay for execution)</li>
+                    <li>Infinite scaling (provider handles)</li>
+                    <li>Fast time to market</li>
+                </ul>
+            </div>
+            <div class="arch-card">
+                <h3>Disadvantages</h3>
+                <ul class="features-list">
+                    <li>Cold start latency</li>
+                    <li>Vendor lock-in (AWS, Azure, GCP)</li>
+                    <li>Difficult local testing</li>
+                    <li>Limited execution time (15 min max)</li>
+                </ul>
+            </div>
+            <div class="arch-card">
+                <h3>Best For</h3>
+                <ul class="features-list">
+                    <li>Event-driven workloads (webhooks)</li>
+                    <li>Infrequent, spiky traffic</li>
+                    <li>Background jobs, data processing</li>
+                    <li>Startups with limited DevOps</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="m6.75 7.5 4.5 9 4.5-9m-9 0 4.5-4.5 4.5 4.5m-9 0h9m-9 0L3 12l3.75-4.5m9 0L21 12l-3.75-4.5"/></svg>
+            Event-Driven Architecture
+        </h2>
+
+        <div class="intro-box">
+            <p>Components communicate asynchronously via events/messages. Decouples producers from consumers using message brokers (Kafka, RabbitMQ, SNS/SQS).</p>
+        </div>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>Characteristics</h3>
+                <ul class="features-list">
+                    <li>Asynchronous message passing</li>
+                    <li>Publish-subscribe pattern</li>
+                    <li>Event sourcing and CQRS</li>
+                    <li>Eventual consistency</li>
+                </ul>
+            </div>
+            <div class="arch-card">
+                <h3>Advantages</h3>
+                <ul class="features-list">
+                    <li>Loose coupling between services</li>
+                    <li>High scalability and resilience</li>
+                    <li>Easy to add new consumers</li>
+                    <li>Time-decoupling (async processing)</li>
+                </ul>
+            </div>
+            <div class="arch-card">
+                <h3>Disadvantages</h3>
+                <ul class="features-list">
+                    <li>Complex to reason about flow</li>
+                    <li>Eventual consistency challenges</li>
+                    <li>Message broker is SPOF</li>
+                    <li>Harder debugging and tracing</li>
+                </ul>
+            </div>
+            <div class="arch-card">
+                <h3>Best For</h3>
+                <ul class="features-list">
+                    <li>Real-time data pipelines</li>
+                    <li>IoT, streaming analytics</li>
+                    <li>Notification systems</li>
+                    <li>E-commerce order processing</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" /><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 19.5a9 9 0 1 1 15 0"/></svg>
+            Layered Architecture
+        </h2>
+
+        <div class="intro-box">
+            <p>Organizes code into horizontal layers: presentation, business logic, data access. Each layer depends only on the layer below it.</p>
+        </div>
+
+        <div class="flow-diagram">
+            <div style="font-weight: bold; margin-bottom: 16px; color: #667eea;">Typical Layers (Top to Bottom):</div>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px;">
+                <div class="flow-step" style="border-left-color: #667eea;">1) Presentation (UI, Controllers)</div>
+                <div class="flow-step" style="border-left-color: #13AA52;">2) Business Logic (Services, Domain)</div>
+                <div class="flow-step" style="border-left-color: #FFA500;">3) Data Access (Repositories, DAL)</div>
+                <div class="flow-step" style="border-left-color: #DD0031;">4) Database (Storage)</div>
+            </div>
+        </div>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>Advantages</h3>
+                <ul class="features-list">
+                    <li>Clear separation of concerns</li>
+                    <li>Easy to understand and maintain</li>
+                    <li>Testable (mock lower layers)</li>
+                    <li>Reusable business logic</li>
+                </ul>
+            </div>
+            <div class="arch-card">
+                <h3>Disadvantages</h3>
+                <ul class="features-list">
+                    <li>Can become tightly coupled vertically</li>
+                    <li>Changes ripple through layers</li>
+                    <li>Not ideal for complex domains</li>
+                    <li>Database-centric design</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 3h3m-6 3h6M6.75 6h10.5a2.25 2.25 0 0 1 2.25 2.25v9A2.25 2.25 0 0 1 17.25 19.5H6.75A2.25 2.25 0 0 1 4.5 17.25v-9A2.25 2.25 0 0 1 6.75 6z"/></svg>
+            Hexagonal/Clean Architecture
+        </h2>
+
+        <div class="intro-box">
+            <p>Domain-centric design where core business logic is isolated from external concerns (UI, DB, frameworks). Dependencies point inward toward the domain.</p>
+        </div>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>Core Principles</h3>
+                <ul class="features-list">
+                    <li>Domain at the center (pure logic)</li>
+                    <li>Ports and adapters pattern</li>
+                    <li>Dependency inversion (interfaces)</li>
+                    <li>Framework-agnostic core</li>
+                </ul>
+            </div>
+            <div class="arch-card">
+                <h3>Advantages</h3>
+                <ul class="features-list">
+                    <li>Highly testable (mock adapters)</li>
+                    <li>Easy to swap implementations</li>
+                    <li>Framework and DB independent</li>
+                    <li>Long-term maintainability</li>
+                </ul>
+            </div>
+            <div class="arch-card">
+                <h3>Disadvantages</h3>
+                <ul class="features-list">
+                    <li>Steeper learning curve</li>
+                    <li>More boilerplate code</li>
+                    <li>Over-engineering for simple apps</li>
+                    <li>Requires discipline to maintain</li>
+                </ul>
+            </div>
+            <div class="arch-card">
+                <h3>Best For</h3>
+                <ul class="features-list">
+                    <li>Complex business domains</li>
+                    <li>Long-lived enterprise apps</li>
+                    <li>When testability is critical</li>
+                    <li>Need to swap infrastructure</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 0 1 3 19.875v-6.75ZM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V8.625ZM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V4.125Z"/></svg>
+            Code Examples
+        </h2>
+
+        <div style="background: rgba(102, 126, 234, 0.1); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 12px; padding: 25px; margin: 30px 0; display: grid; gap: 18px;">
+            <div>
+                <h3>Monolithic (Express.js)</h3>
+                <div style="background: #1e1e1e; color: #d4d4d4; padding: 12px; border-radius: 8px; font-family: 'Courier New', monospace; font-size: 10px; line-height: 1.6; overflow-wrap: break-word; word-wrap: break-word; border: 1px solid rgba(255, 255, 255, 0.1); white-space: pre-wrap; max-width: 100%; box-sizing: border-box;">
+// Single app with all layers
+const express = require('express');
+const app = express();
+
+// Routes
+app.get('/users', async (req, res) => {
+  const users = await User.findAll();
+  res.json(users);
+});
+
+app.post('/orders', async (req, res) => {
+  const order = await Order.create(req.body);
+  await sendEmail(order.email);
+  res.json(order);
+});
+
+app.listen(3000);
+                </div>
+            </div>
+            <div>
+                <h3>Microservices (Service Communication)</h3>
+                <div style="background: #1e1e1e; color: #d4d4d4; padding: 12px; border-radius: 8px; font-family: 'Courier New', monospace; font-size: 10px; line-height: 1.6; overflow-wrap: break-word; word-wrap: break-word; border: 1px solid rgba(255, 255, 255, 0.1); white-space: pre-wrap; max-width: 100%; box-sizing: border-box;">
+// User Service (port 3001)
+app.get('/users/:id', async (req, res) => {
+  const user = await User.findById(req.params.id);
+  res.json(user);
+});
+
+// Order Service (port 3002)
+app.post('/orders', async (req, res) => {
+  const order = await Order.create(req.body);
+  
+  // Call User Service via HTTP
+  const userRes = await fetch(
+    `http://user-service:3001/users/${order.userId}`
+  );
+  const user = await userRes.json();
+  
+  // Call Email Service via message queue
+  await messageQueue.publish('email.send', {
+    to: user.email,
+    subject: 'Order confirmation'
+  });
+  
+  res.json(order);
+});
+                </div>
+            </div>
+            <div>
+                <h3>Serverless (AWS Lambda)</h3>
+                <div style="background: #1e1e1e; color: #d4d4d4; padding: 12px; border-radius: 8px; font-family: 'Courier New', monospace; font-size: 10px; line-height: 1.6; overflow-wrap: break-word; word-wrap: break-word; border: 1px solid rgba(255, 255, 255, 0.1); white-space: pre-wrap; max-width: 100%; box-sizing: border-box;">
+// handler.js - Lambda function
+exports.processOrder = async (event) => {
+  const order = JSON.parse(event.body);
+  
+  // Save to DynamoDB
+  await dynamoDB.put({
+    TableName: 'Orders',
+    Item: order
+  }).promise();
+  
+  // Trigger email via SNS
+  await sns.publish({
+    TopicArn: process.env.EMAIL_TOPIC,
+    Message: JSON.stringify(order)
+  }).promise();
+  
+  return {
+    statusCode: 200,
+    body: JSON.stringify(order)
+  };
+};
+
+// serverless.yml
+functions:
+  processOrder:
+    handler: handler.processOrder
+    events:
+      - http:
+          path: orders
+          method: post
+                </div>
+            </div>
+            <div>
+                <h3>Layered Architecture</h3>
+                <div style="background: #1e1e1e; color: #d4d4d4; padding: 12px; border-radius: 8px; font-family: 'Courier New', monospace; font-size: 10px; line-height: 1.6; overflow-wrap: break-word; word-wrap: break-word; border: 1px solid rgba(255, 255, 255, 0.1); white-space: pre-wrap; max-width: 100%; box-sizing: border-box;">
+// Presentation Layer (Controller)
+class UserController {
+  async getUser(req, res) {
+    const user = await userService.getById(
+      req.params.id
+    );
+    res.json(user);
+  }
+}
+
+// Business Logic Layer (Service)
+class UserService {
+  async getById(id) {
+    const user = await userRepository.findById(id);
+    if (!user) throw new Error('Not found');
+    return this.mapToDTO(user);
+  }
+}
+
+// Data Access Layer (Repository)
+class UserRepository {
+  async findById(id) {
+    return await db.users.findOne({ 
+      where: { id } 
+    });
+  }
+}
+                </div>
+            </div>
+        </div>
+
+        <h2>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6v12m-7.5 0V6m7.5 0A3.75 3.75 0 0 0 8.25 6m7.5 0h3a2.25 2.25 0 0 1 2.25 2.25v7.5A2.25 2.25 0 0 1 18.75 18h-3"/></svg>
+            Architecture Comparison
+        </h2>
+
+        <div style="background: rgba(102, 126, 234, 0.1); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 12px; padding: 25px; margin: 30px 0;">
+            <div style="overflow-x: auto;">
+                <table style="width: 100%; border-collapse: collapse; font-size: 13px;">
+                    <thead>
+                        <tr style="border-bottom: 2px solid rgba(255, 255, 255, 0.3);">
+                            <th style="padding: 10px; text-align: left;">Aspect</th>
+                            <th style="padding: 10px; text-align: left;">Monolithic</th>
+                            <th style="padding: 10px; text-align: left;">Microservices</th>
+                            <th style="padding: 10px; text-align: left;">Serverless</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr style="border-bottom: 1px solid rgba(255, 255, 255, 0.1);">
+                            <td style="padding: 8px;"><strong>Complexity</strong></td>
+                            <td style="padding: 8px;">Low</td>
+                            <td style="padding: 8px;">High</td>
+                            <td style="padding: 8px;">Medium</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid rgba(255, 255, 255, 0.1);">
+                            <td style="padding: 8px;"><strong>Scalability</strong></td>
+                            <td style="padding: 8px;">Vertical</td>
+                            <td style="padding: 8px;">Horizontal</td>
+                            <td style="padding: 8px;">Auto</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid rgba(255, 255, 255, 0.1);">
+                            <td style="padding: 8px;"><strong>Deployment</strong></td>
+                            <td style="padding: 8px;">Single unit</td>
+                            <td style="padding: 8px;">Per service</td>
+                            <td style="padding: 8px;">Per function</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid rgba(255, 255, 255, 0.1);">
+                            <td style="padding: 8px;"><strong>Team Size</strong></td>
+                            <td style="padding: 8px;">Small</td>
+                            <td style="padding: 8px;">Large</td>
+                            <td style="padding: 8px;">Small-Med</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid rgba(255, 255, 255, 0.1);">
+                            <td style="padding: 8px;"><strong>Cost</strong></td>
+                            <td style="padding: 8px;">Predictable</td>
+                            <td style="padding: 8px;">Higher infra</td>
+                            <td style="padding: 8px;">Pay per use</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 8px;"><strong>Testing</strong></td>
+                            <td style="padding: 8px;">Simple</td>
+                            <td style="padding: 8px;">Complex</td>
+                            <td style="padding: 8px;">Isolated</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <h2>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z"/></svg>
+            Best Practices
+        </h2>
+
+        <div class="pros-box">
+            <h3>Architectural decisions:</h3>
+            <ul class="features-list">
+                <li><strong>Start simple:</strong> Begin with monolith; migrate to microservices when needed (avoid premature complexity)</li>
+                <li><strong>Define boundaries:</strong> Use Domain-Driven Design (DDD) to identify bounded contexts</li>
+                <li><strong>Decouple components:</strong> Use interfaces, dependency injection, and event-driven patterns</li>
+                <li><strong>Plan for failure:</strong> Circuit breakers, retries, fallbacks in distributed systems</li>
+                <li><strong>Observability:</strong> Centralized logging (ELK), distributed tracing (Jaeger), metrics (Prometheus)</li>
+                <li><strong>API contracts:</strong> Use OpenAPI/Swagger, versioning, backward compatibility</li>
+                <li><strong>Database strategy:</strong> Database per service (microservices) or shared DB (monolith)</li>
+                <li><strong>Security:</strong> API gateways, service mesh (Istio), mTLS for service-to-service auth</li>
+                <li><strong>CI/CD:</strong> Automated testing, blue-green deployments, canary releases</li>
+            </ul>
+        </div>
+
+        <h2>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 1 1-18 0 9 9 0 0 1 18 0zm-9 3.75h.008v.008H12v-.008z"/></svg>
+            Common Pitfalls
+        </h2>
+
+        <div class="cons-box">
+            <h3>Avoid these mistakes:</h3>
+            <ul class="features-list">
+                <li><strong>Over-engineering:</strong> Using microservices for simple apps; start with monolith, refactor later</li>
+                <li><strong>Distributed monolith:</strong> Microservices that are tightly coupled; defeats the purpose</li>
+                <li><strong>Ignoring data consistency:</strong> Eventual consistency is hard; plan for sagas, 2PC, or orchestration</li>
+                <li><strong>No API gateway:</strong> Clients calling services directly; use gateway for auth, routing, rate limiting</li>
+                <li><strong>Shared databases:</strong> In microservices, shared DB creates tight coupling; each service owns data</li>
+                <li><strong>Poor monitoring:</strong> Distributed systems fail silently; invest in observability from day one</li>
+                <li><strong>Not versioning APIs:</strong> Breaking changes break clients; use semantic versioning</li>
+                <li><strong>Skipping documentation:</strong> Architecture diagrams, ADRs (Architecture Decision Records) are critical</li>
+            </ul>
+        </div>
+
+        <div class="intro-box" style="text-align: center; margin: 60px 0 40px;">
+            <p>There's no one-size-fits-all architecture. Choose based on team size, scalability needs, complexity, and long-term goals. <strong>Start simple</strong> with monolithic or layered architecture, then evolve to microservices or serverless when justified by business requirements and scale.</p>
+        </div>
+    </div>
+</body>
+</html>

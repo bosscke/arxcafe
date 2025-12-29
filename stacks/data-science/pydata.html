@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PyData Stack Architecture</title>
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/stacks.css">
+    <style>
+        :root {
+            --glass: rgba(255,255,255,0.10);
+            --text: #e6e6e6;
+            --muted: #b3b3b3;
+            --border: rgba(255,255,255,0.22);
+            --shadow: 0 10px 30px rgba(0,0,0,0.15);
+            --blur: 12px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        /* Layer-specific colors */
+        .layer.jupyter { border-left: 4px solid #f37626; }
+        .layer.pandas { border-left: 4px solid #6f42c1; }
+        .layer.numpy { border-left: 4px solid #013243; }
+        .layer.scipy { border-left: 4px solid #0a9396; }
+
+        .jupyter .layer-icon { background: #f37626; }
+        .pandas .layer-icon { background: #6f42c1; }
+        .numpy .layer-icon { background: #013243; }
+        .scipy .layer-icon { background: #0a9396; }
+    </style>
+</head>
+<body>
+    <a href="/" class="home-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 18px; height: 18px;">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
+        </svg>
+        Home
+    </a>
+    <div class="usecase-card" aria-label="Stack Use Case">
+        <div class="uc-title">Use Case</div>
+        <div class="uc-line"><span class="label">Type:</span> Data Science Stack</div>
+        <div class="uc-line"><span class="label">Typical Use Case:</span> Scientific computing & data analysis</div>
+        <div class="uc-line"><span class="label">Famous Usage:</span> Research & Analytics</div>
+    </div>
+    <div class="container">
+        <h1>📊 PyData Stack</h1>
+        <p class="subtitle">NumPy · Pandas · SciPy · Jupyter</p>
+
+        <div class="diagram">
+            <div class="stack-container">
+                <!-- Jupyter Layer -->
+                <div class="layer jupyter">
+                    <div class="layer-left">
+                        <div class="layer-icon">J</div>
+                        <div class="layer-title">
+                            <h2>Jupyter</h2>
+                            <div class="full-name">Interactive Notebooks</div>
+                        </div>
+                    </div>
+                    <div class="layer-description">
+                        <ul>
+                            <li>Exploratory coding & visuals</li>
+                            <li>Reproducible workflows</li>
+                            <li>Rich output (plots, tables)</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="arrow">↓</div>
+
+                <!-- Pandas Layer -->
+                <div class="layer pandas">
+                    <div class="layer-left">
+                        <div class="layer-icon">P</div>
+                        <div class="layer-title">
+                            <h2>Pandas</h2>
+                            <div class="full-name">DataFrames & ETL</div>
+                        </div>
+                    </div>
+                    <div class="layer-description">
+                        <ul>
+                            <li>Tabular data wrangling</li>
+                            <li>GroupBy, joins, time series</li>
+                            <li>IO for CSV/Parquet/DB</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="arrow">↓</div>
+
+                <!-- NumPy Layer -->
+                <div class="layer numpy">
+                    <div class="layer-left">
+                        <div class="layer-icon">N</div>
+                        <div class="layer-title">
+                            <h2>NumPy</h2>
+                            <div class="full-name">NDArray Math</div>
+                        </div>
+                    </div>
+                    <div class="layer-description">
+                        <ul>
+                            <li>Vectorized arrays</li>
+                            <li>Linear algebra kernels</li>
+                            <li>Broadcasting & ufuncs</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="arrow">↓</div>
+
+                <!-- SciPy Layer -->
+                <div class="layer scipy">
+                    <div class="layer-left">
+                        <div class="layer-icon">S</div>
+                        <div class="layer-title">
+                            <h2>SciPy</h2>
+                            <div class="full-name">Scientific Computing</div>
+                        </div>
+                    </div>
+                    <div class="layer-description">
+                        <ul>
+                            <li>Optimization & stats</li>
+                            <li>Signal & image processing</li>
+                            <li>Spatial, FFT, sparse ops</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flow-description">
+                <strong>Workflow:</strong> Jupyter (explore) → Pandas (wrangle) → NumPy (arrays) → SciPy (algorithms) → Outputs back to Jupyter
+            </div>
+        </div>
+    </div>
+</body>
+</html>

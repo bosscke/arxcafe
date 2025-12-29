@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Databases (Relational)</title>
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/concepts.css">
+</head>
+<body>
+    <a href="/" class="home-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 18px; height: 18px;">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
+        </svg>
+        Home
+    </a>
+
+    <div class="container">
+        <h1>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 40px; height: 40px; display: inline-block; margin-right: 10px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625c0-.621-.504-1.125-1.125-1.125h-5.25m-3 0H4.125C3.504 10.5 3 11.004 3 11.625V14.25m16.5 0v2.625c0 .621-.504 1.125-1.125 1.125h-5.25m-3 0H4.125C3.504 18 3 17.496 3 16.875V14.25m16.5 0H3"/></svg>
+            Databases (Relational)
+        </h1>
+
+        <div class="intro-box">
+            <p>Relational databases store data in structured tables with relationships enforced by keys. They excel at consistency, predictable queries, and transactional guarantees.</p>
+        </div>
+
+        <h2>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 6h15m-15 6h15m-15 6h15"/></svg>
+            Fundamentals
+        </h2>
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>Tables & Rows</h3>
+                <p>Data is organized into tables (relations), each row representing an entity instance.</p>
+            </div>
+            <div class="arch-card">
+                <h3>Schema</h3>
+                <p>Columns with defined types and constraints (NOT NULL, UNIQUE, CHECK).</p>
+            </div>
+            <div class="arch-card">
+                <h3>Keys</h3>
+                <p>Primary keys uniquely identify rows; foreign keys enforce relationships.</p>
+            </div>
+            <div class="arch-card">
+                <h3>SQL</h3>
+                <p>Declarative language for querying (SELECT), writing (INSERT/UPDATE/DELETE), and defining schema (DDL).</p>
+            </div>
+            <div class="arch-card">
+                <h3>ACID</h3>
+                <p>Atomicity, Consistency, Isolation, Durability keep transactions reliable.</p>
+            </div>
+        </div>
+
+        <h2>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75 9 8.25l4.5 4.5 6-6"/></svg>
+            Schema Design & Normalization
+        </h2>
+        <div class="pros-box">
+            <h3>Goals:</h3>
+            <ul class="features-list">
+                <li>Reduce duplication and update anomalies</li>
+                <li>Enforce integrity with constraints and foreign keys</li>
+                <li>Keep column types specific (dates as DATE/TIMESTAMP, money as DECIMAL)</li>
+            </ul>
+        </div>
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>1NF</h3>
+                <p>No repeating groups; atomic column values.</p>
+            </div>
+            <div class="arch-card">
+                <h3>2NF</h3>
+                <p>No partial dependency on composite keys.</p>
+            </div>
+            <div class="arch-card">
+                <h3>3NF</h3>
+                <p>No transitive dependencies (non-key depends on non-key).</p>
+            </div>
+            <div class="arch-card">
+                <h3>Denormalize (later)</h3>
+                <p>Introduce redundancy only for measured performance gains.</p>
+            </div>
+        </div>
+
+        <h2>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m6-6H6"/></svg>
+            Joins & Queries
+        </h2>
+        <div style="background: #1e1e1e; color: #d4d4d4; padding: 14px; border-radius: 10px; font-family: 'Courier New', monospace; font-size: 10px; line-height: 1.6; border: 1px solid rgba(255,255,255,0.1); white-space: pre-wrap; overflow-wrap: break-word;">
+-- Customers with their last order total
+SELECT c.id, c.name, o.total, o.created_at
+FROM customers c
+JOIN orders o ON o.customer_id = c.id
+WHERE o.status = 'completed'
+ORDER BY o.created_at DESC
+LIMIT 50;
+        </div>
+        <div class="architecture-grid" style="margin-top: 18px;">
+            <div class="arch-card">
+                <h3>JOIN types</h3>
+                <p>INNER (match), LEFT (keep left), RIGHT, FULL, CROSS.</p>
+            </div>
+            <div class="arch-card">
+                <h3>Filters</h3>
+                <p>Push selective WHERE predicates to minimize scanned rows.</p>
+            </div>
+            <div class="arch-card">
+                <h3>Pagination</h3>
+                <p>Use keyset/cursor pagination for large data sets.</p>
+            </div>
+        </div>
+
+        <h2>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.75c-1.148 0-2.278.328-3.243.944-1.867 1.194-3.205 3.3-3.205 5.8v3.5c0 .69.56 1.25 1.25 1.25h7.396c.69 0 1.25-.56 1.25-1.25v-3.5c0-2.5-1.338-4.606-3.205-5.8A6.25 6.25 0 0 0 12 6.75Z"/></svg>
+            Transactions & Isolation
+        </h2>
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>Atomic</h3>
+                <p>All statements succeed or all roll back.</p>
+            </div>
+            <div class="arch-card">
+                <h3>Isolation</h3>
+                <p>Levels: Read Uncommitted, Read Committed, Repeatable Read, Serializable.</p>
+            </div>
+            <div class="arch-card">
+                <h3>Consistency</h3>
+                <p>Constraints and triggers keep data valid per business rules.</p>
+            </div>
+            <div class="arch-card">
+                <h3>Durability</h3>
+                <p>WAL/redo logs ensure committed data survives crashes.</p>
+            </div>
+        </div>
+        <div style="background: #1e1e1e; color: #d4d4d4; padding: 14px; border-radius: 10px; font-family: 'Courier New', monospace; font-size: 10px; line-height: 1.6; border: 1px solid rgba(255,255,255,0.1); white-space: pre-wrap; overflow-wrap: break-word; margin-top: 16px;">
+-- Transfer with explicit transaction
+BEGIN;
+UPDATE accounts SET balance = balance - 100 WHERE id = 1;
+UPDATE accounts SET balance = balance + 100 WHERE id = 2;
+COMMIT;
+        </div>
+
+        <h2>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m-3-3 3 3 3-3m-6-6 3-3 3 3"/></svg>
+            Indexing & Performance
+        </h2>
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>Indexes</h3>
+                <p>B-tree indexes speed equality and range scans; composite indexes follow leftmost prefix rules.</p>
+            </div>
+            <div class="arch-card">
+                <h3>EXPLAIN</h3>
+                <p>Inspect query plans; avoid full table scans when possible.</p>
+            </div>
+            <div class="arch-card">
+                <h3>Write Cost</h3>
+                <p>Indexes accelerate reads but add write overhead; keep only useful ones.</p>
+            </div>
+            <div class="arch-card">
+                <h3>Caching</h3>
+                <p>Use query cache layers (app/redis) for hot reads; keep cache coherent.</p>
+            </div>
+        </div>
+
+        <h2>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v18m5.25-9H3m12 6 3 3 3-3m-6-12 3-3 3 3"/></svg>
+            Scaling Patterns
+        </h2>
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>Vertical Scale</h3>
+                <p>More CPU/RAM/IO on a single instance; simplest first step.</p>
+            </div>
+            <div class="arch-card">
+                <h3>Read Replicas</h3>
+                <p>Offload read queries; handle replica lag and read-after-write needs.</p>
+            </div>
+            <div class="arch-card">
+                <h3>Partitioning</h3>
+                <p>Sharding or table partitioning by key or date to limit working set.</p>
+            </div>
+            <div class="arch-card">
+                <h3>Backups</h3>
+                <p>Regular snapshots + point-in-time recovery; test restores.</p>
+            </div>
+        </div>
+
+        <h2>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 6.75h12m-12 4.5h12m-12 4.5h12M3 6.75h.008v.008H3V6.75Zm0 4.5h.008v.008H3v-.008Zm0 4.5h.008v.008H3v-.008Z"/></svg>
+            Migrations
+        </h2>
+        <div class="pros-box">
+            <h3>Safe rollout steps:</h3>
+            <ul class="features-list">
+                <li>Add columns as nullable, backfill in batches, then enforce NOT NULL</li>
+                <li>Use online schema changes for large tables when supported</li>
+                <li>Deploy backward-compatible app + DB changes; flip flags after backfill</li>
+            </ul>
+        </div>
+
+        <h2>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m0 3.75h.008v.008H12V16.5Zm9-4.5a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/></svg>
+            Common Pitfalls
+        </h2>
+        <div class="cons-box">
+            <h3>Avoid these:</h3>
+            <ul class="features-list">
+                <li>Missing indexes on foreign keys and search predicates</li>
+                <li>N+1 queries from ORMs; batch with JOINs or IN clauses</li>
+                <li>Overwide tables (too many columns) hurting cache and IO</li>
+                <li>Long transactions holding locks and blocking others</li>
+                <li>Skipping backups or restore drills</li>
+            </ul>
+        </div>
+
+        <div class="intro-box" style="text-align: center; margin: 60px 0 40px;">
+            <p>Relational databases reward thoughtful schema design, careful indexing, and disciplined migrations. Start normalized, measure, then optimize.</p>
+        </div>
+    </div>
+</body>
+</html>

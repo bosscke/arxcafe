@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IP Address (Public vs Private)</title>
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/concepts.css">
+</head>
+<body>
+    <a href="/" class="home-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 18px; height: 18px;">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
+        </svg>
+        Home
+    </a>
+
+    <div class="container">
+        <h1><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 40px; height: 40px; display: inline-block; margin-right: 10px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 9h6m-6 3.75h6m-6 3.75h6M4.5 19.5h15a1.5 1.5 0 0 0 1.5-1.5v-12A1.5 1.5 0 0 0 19.5 4.5h-15A1.5 1.5 0 0 0 3 6v12a1.5 1.5 0 0 0 1.5 1.5Z" /></svg> IP Address (Public vs Private)</h1>
+
+        <div class="intro-box">
+            <p><strong>IP addresses</strong> identify devices on a network. <strong>Public IPs</strong> are globally reachable on the internet. <strong>Private IPs</strong> are only valid inside private networks (home, office, cloud VPC/VNet) and are not directly routable on the public internet.</p>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M3 12h18M3 12a9 9 0 0 1 9-9" /><path stroke-linecap="round" stroke-linejoin="round" d="M3 12a9 9 0 0 0 9 9" /></svg> Public vs Private at a Glance</h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>Public IP</h3>
+                <ul class="features-list">
+                    <li>Globally unique and internet-routable</li>
+                    <li>Assigned by ISPs or cloud providers</li>
+                    <li>Needed for services exposed to the internet</li>
+                    <li>Can be static or dynamic</li>
+                </ul>
+            </div>
+            <div class="arch-card">
+                <h3>Private IP</h3>
+                <ul class="features-list">
+                    <li>Not routable on the public internet</li>
+                    <li>Safe to reuse across separate networks</li>
+                    <li>Used inside LANs, VPNs, VPCs/VNets</li>
+                    <li>Relies on NAT to reach the internet</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="m6.75 7.5 4.5 9 4.5-9m-9 0 4.5-4.5 4.5 4.5m-9 0h9m-9 0L3 12l3.75-4.5m9 0L21 12l-3.75-4.5" /></svg> RFC1918 Private IPv4 Ranges</h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>10.0.0.0/8</h3>
+                <p>16,777,216 addresses (large enterprises, clouds).</p>
+            </div>
+            <div class="arch-card">
+                <h3>172.16.0.0/12</h3>
+                <p>1,048,576 addresses (common in corp networks).</p>
+            </div>
+            <div class="arch-card">
+                <h3>192.168.0.0/16</h3>
+                <p>65,536 addresses (home routers default here).</p>
+            </div>
+            <div class="arch-card">
+                <h3>Link-local: 169.254.0.0/16</h3>
+                <p>Self-assigned when DHCP fails; not routed.</p>
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v18m0-18c-1.5 1.5-4.5 4.5-7.5 4.5S1.5 4.5 0 3m12 0c1.5 1.5 4.5 4.5 7.5 4.5S22.5 4.5 24 3" /></svg> How NAT Bridges Private to Public</h2>
+
+        <div class="flow-diagram">
+            <div style="font-weight: bold; margin-bottom: 16px; color: #667eea;">Outbound internet from a private network:</div>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px;">
+                <div class="flow-step" style="border-left-color: #667eea;">Client uses private IP (e.g., 192.168.1.10)</div>
+                <div class="flow-step" style="border-left-color: #13AA52;">Packet hits NAT gateway/router</div>
+                <div class="flow-step" style="border-left-color: #FFA500;">NAT rewrites source to public IP + port</div>
+                <div class="flow-step" style="border-left-color: #DD0031;">Return traffic mapped back to internal host</div>
+                <div class="flow-step" style="border-left-color: #14B8A6;">Internal device never exposed directly</div>
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M6 12h12M6 6h12M6 18h12" /></svg> IPv4 vs IPv6 Context</h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>IPv4</h3>
+                <ul class="features-list">
+                    <li>32-bit address space (~4.3B addresses)</li>
+                    <li>Exhaustion drives heavy NAT use</li>
+                    <li>Private ranges defined by RFC1918</li>
+                </ul>
+            </div>
+            <div class="arch-card">
+                <h3>IPv6</h3>
+                <ul class="features-list">
+                    <li>128-bit space (virtually inexhaustible)</li>
+                    <li>Typically global unicast; NAT often unnecessary</li>
+                    <li>ULA (fc00::/7) for private-like addressing</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 0 1 3 19.875v-6.75ZM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V8.625ZM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V4.125Z" /></svg> Quick Checks & Tips</h2>
+
+        <div class="pros-box">
+            <h3>Identify address type fast:</h3>
+            <ul class="features-list">
+                <li>10.x.x.x, 172.16-31.x.x, 192.168.x.x → private IPv4</li>
+                <li>169.254.x.x → link-local (DHCP issue?)</li>
+                <li>Public IPv4: anything else allocated via RIR/ISP</li>
+                <li>IPv6: fc00::/7 (ULA) behaves like private</li>
+            </ul>
+            <h3 style="margin-top: 14px;">Operational tips:</h3>
+            <ul class="features-list">
+                <li>Keep services on private IPs; front with load balancer or NAT</li>
+                <li>Use security groups/firewalls even for private ranges</li>
+                <li>Reserve/elastic IPs for stable public endpoints</li>
+            </ul>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 3h3m-6 3h6M6.75 6h10.5a2.25 2.25 0 0 1 2.25 2.25v9A2.25 2.25 0 0 1 17.25 19.5H6.75A2.25 2.25 0 0 1 4.5 17.25v-9A2.25 2.25 0 0 1 6.75 6z" /></svg> Examples</h2>
+
+        <div style="background: rgba(102, 126, 234, 0.1); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 12px; padding: 25px; margin: 30px 0; display: grid; gap: 18px;">
+            <div>
+                <h3>Home network</h3>
+                <div style="background: #1e1e1e; color: #d4d4d4; padding: 15px; border-radius: 8px; font-family: 'Courier New', monospace; font-size: 12px; line-height: 1.5; overflow-x: auto; border: 1px solid rgba(255, 255, 255, 0.1);">
+Router public IP: 203.0.113.45
+LAN: 192.168.1.0/24
+Laptop: 192.168.1.20
+Phone: 192.168.1.21
+NAT: maps outbound to 203.0.113.45:random_port
+                </div>
+            </div>
+            <div>
+                <h3>Cloud VPC/VNet</h3>
+                <div style="background: #1e1e1e; color: #d4d4d4; padding: 15px; border-radius: 8px; font-family: 'Courier New', monospace; font-size: 12px; line-height: 1.5; overflow-x: auto; border: 1px solid rgba(255, 255, 255, 0.1);">
+VPC CIDR: 10.20.0.0/16
+Private subnet: 10.20.1.0/24
+App server: 10.20.1.15 (no public IP)
+NAT gateway public IP: 198.51.100.9
+Load balancer public IP: 198.51.100.25 → routes to 10.20.1.15
+                </div>
+            </div>
+        </div>
+
+        <div class="intro-box" style="text-align: center; margin: 60px 0 40px;">
+            <p>Public IPs make a service reachable worldwide. Private IPs keep internal resources isolated and scalable. NAT and load balancers bridge the two worlds securely.</p>
+        </div>
+    </div>
+</body>
+</html>

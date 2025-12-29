@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Synchronous vs Asynchronous Communication</title>
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/concepts.css">
+</head>
+<body>
+    <a href="/" class="home-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 18px; height: 18px;">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
+        </svg>
+        Home
+    </a>
+
+    <div class="container">
+        <h1>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 40px; height: 40px; display: inline-block; margin-right: 10px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 4.875c0-.621.504-1.125 1.125-1.125h4.5c.621 0 1.125.504 1.125 1.125v4.5c0 .621-.504 1.125-1.125 1.125h-4.5A1.125 1.125 0 0 1 3.75 9.375v-4.5zm0 9.75c0-.621.504-1.125 1.125-1.125h4.5c.621 0 1.125.504 1.125 1.125v4.5c0 .621-.504 1.125-1.125 1.125h-4.5a1.125 1.125 0 0 1-1.125-1.125v-4.5zm9.75-9.75c0-.621.504-1.125 1.125-1.125h4.5c.621 0 1.125.504 1.125 1.125v4.5c0 .621-.504 1.125-1.125 1.125h-4.5A1.125 1.125 0 0 1 13.5 9.375v-4.5zm0 9.75c0-.621.504-1.125 1.125-1.125h4.5c.621 0 1.125.504 1.125 1.125v4.5c0 .621-.504 1.125-1.125 1.125h-4.5a1.125 1.125 0 0 1-1.125-1.125v-4.5z"/></svg>
+            Synchronous vs Asynchronous Communication
+        </h1>
+
+        <div class="intro-box">
+            <p><strong>Synchronous</strong> communication is request/response where the caller waits for a result. <strong>Asynchronous</strong> communication is message or event-driven where the caller does not wait; work continues and results arrive later. Good systems use both—choosing sync for immediacy and async for resilience and decoupling.</p>
+        </div>
+
+        <h2>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M6 12h12M6 6h12M6 18h12"/></svg>
+            Comparing Approaches
+        </h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>Synchronous</h3>
+                <ul class="features-list">
+                    <li>Immediate response</li>
+                    <li>Simple error handling</li>
+                    <li>Tighter coupling and higher latency risk</li>
+                </ul>
+            </div>
+            <div class="arch-card">
+                <h3>Asynchronous</h3>
+                <ul class="features-list">
+                    <li>Decoupled producers/consumers</li>
+                    <li>Resilient to spikes, enables retries</li>
+                    <li>Eventual consistency and more complex flow</li>
+                </ul>
+            </div>
+            <div class="arch-card">
+                <h3>When to Choose</h3>
+                <ul class="features-list">
+                    <li>Sync: user actions needing instant feedback</li>
+                    <li>Async: long-running tasks, integrations, pipelines</li>
+                    <li>Hybrid: sync accept, async processing</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="m6.75 7.5 4.5 9 4.5-9m-9 0 4.5-4.5 4.5 4.5m-9 0h9m-9 0L3 12l3.75-4.5m9 0L21 12l-3.75-4.5"/></svg>
+            Examples
+        </h2>
+
+        <div style="background: rgba(102, 126, 234, 0.1); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 12px; padding: 25px; margin: 30px 0; display: grid; gap: 18px;">
+            <div>
+                <h3>Sync REST (Node.js)</h3>
+                <div style="background: #1e1e1e; color: #d4d4d4; padding: 12px; border-radius: 8px; font-family: 'Courier New', monospace; font-size: 10px; line-height: 1.6; overflow-wrap: break-word; word-wrap: break-word; border: 1px solid rgba(255, 255, 255, 0.1); white-space: pre-wrap; max-width: 100%; box-sizing: border-box;">
+// service-a/server.js
+const express = require('express');
+const fetch = require('node-fetch');
+const app = express();
+app.get('/profile/:id', async (req,res)=>{
+  const controller = new AbortController();
+  const timeout = setTimeout(()=>controller.abort(), 2000); // 2s timeout
+  try {
+    const r = await fetch(`http://service-b:4001/users/${req.params.id}`, { signal: controller.signal });
+    clearTimeout(timeout);
+    if (!r.ok) return res.status(502).json({ error: 'upstream error' });
+    return res.json(await r.json());
+  } catch (e) {
+    return res.status(504).json({ error: 'timeout or network' });
+  }
+});
+app.listen(4000);
+                </div>
+            </div>
+            <div>
+                <h3>Async Event (Kafka-like)</h3>
+                <div style="background: #1e1e1e; color: #d4d4d4; padding: 12px; border-radius: 8px; font-family: 'Courier New', monospace; font-size: 10px; line-height: 1.6; overflow-wrap: break-word; word-wrap: break-word; border: 1px solid rgba(255, 255, 255, 0.1); white-space: pre-wrap; max-width: 100%; box-sizing: border-box;">
+// publisher.js
+const bus = require('./bus');
+function placeOrder(dto){
+  bus.publish('order.placed', { id: 'o-123', userId: dto.userId, items: dto.items });
+  return { accepted: true };
+}
+
+// consumer.js
+const bus = require('./bus');
+bus.subscribe('order.placed', async (evt)=>{
+  // process asynchronously, retry on failure
+  try {
+    await chargePayment(evt.id);
+    await reserveStock(evt.items);
+  } catch (e) {
+    // send to dead-letter or schedule retry
+  }
+});
+                </div>
+            </div>
+            <div>
+                <h3>Simple In-Process Bus</h3>
+                <div style="background: #1e1e1e; color: #d4d4d4; padding: 12px; border-radius: 8px; font-family: 'Courier New', monospace; font-size: 10px; line-height: 1.6; overflow-wrap: break-word; word-wrap: break-word; border: 1px solid rgba(255, 255, 255, 0.1); white-space: pre-wrap; max-width: 100%; box-sizing: border-box;">
+// bus.js
+const { EventEmitter } = require('events');
+const bus = new EventEmitter();
+module.exports = {
+  publish: (type, payload) => bus.emit(type, payload),
+  subscribe: (type, handler) => bus.on(type, handler)
+};
+                </div>
+            </div>
+        </div>
+
+        <h2>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 3h3m-6 3h6M6.75 6h10.5a2.25 2.25 0 0 1 2.25 2.25v9A2.25 2.25 0 0 1 17.25 19.5H6.75A2.25 2.25 0 0 1 4.5 17.25v-9A2.25 2.25 0 0 1 6.75 6z"/></svg>
+            Patterns & Considerations
+        </h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>Timeouts & Retries</h3>
+                <p>Always set timeouts; use <em>exponential backoff</em> and limit retries.</p>
+            </div>
+            <div class="arch-card">
+                <h3>Circuit Breakers</h3>
+                <p>Trip on failures to protect dependencies; recover when healthy.</p>
+            </div>
+            <div class="arch-card">
+                <h3>Idempotency</h3>
+                <p>Make operations safe to retry; use <em>idempotency keys</em>.</p>
+            </div>
+            <div class="arch-card">
+                <h3>Delivery Semantics</h3>
+                <p>At-least-once vs exactly-once; deduplicate at consumers.</p>
+            </div>
+        </div>
+
+        <h2>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 0 1 3 19.875v-6.75ZM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V8.625ZM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V4.125Z"/></svg>
+            Best Practices
+        </h2>
+
+        <div class="pros-box">
+            <h3>Do this:</h3>
+            <ul class="features-list">
+                <li>Use sync for short, user-facing operations</li>
+                <li>Buffer and queue work for async pipelines</li>
+                <li>Propagate correlation IDs across calls/events</li>
+                <li>Monitor latencies, queue depths, and failure rates</li>
+                <li>Document contracts and delivery guarantees</li>
+            </ul>
+        </div>
+
+        <h2>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 1 1-18 0 9 9 0 0 1 18 0zm-9 3.75h.008v.008H12v-.008z"/></svg>
+            Common Pitfalls
+        </h2>
+
+        <div class="cons-box">
+            <h3>Avoid these:</h3>
+            <ul class="features-list">
+                <li>Blocking synchronous chains causing cascading latency</li>
+                <li>Fire-and-forget without dead-letter handling</li>
+                <li>Mixing business logic into messaging infrastructure</li>
+                <li>Assuming exactly-once delivery without safeguards</li>
+            </ul>
+        </div>
+
+        <div class="intro-box" style="text-align: center; margin: 60px 0 40px;">
+            <p>Choose synchronous for immediacy, asynchronous for scale and resilience. Many teams accept requests synchronously, then process asynchronously—getting the best of both worlds.</p>
+        </div>
+    </div>
+</body>
+</html>

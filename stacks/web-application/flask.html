@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flask Stack Architecture</title>
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/stacks.css">
+    <style>
+        :root {
+            --glass: rgba(255,255,255,0.10);
+            --text: #e6e6e6;
+            --muted: #b3b3b3;
+            --border: rgba(255,255,255,0.22);
+            --shadow: 0 10px 30px rgba(0,0,0,0.15);
+            --blur: 12px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        /* Layer-specific colors */
+        .layer.flask { border-left: 4px solid #000000; }
+        .layer.nginx { border-left: 4px solid #009639; }
+        .layer.postgres { border-left: 4px solid #336791; }
+
+        .flask .layer-icon { background: #000000; }
+        .nginx .layer-icon { background: #009639; }
+        .postgres .layer-icon { background: #336791; }
+    </style>
+</head>
+<body>
+    <a href="/" class="home-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 18px; height: 18px;">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
+        </svg>
+        Home
+    </a>
+    <div class="usecase-card" aria-label="Stack Use Case">
+        <div class="uc-title">Use Case</div>
+        <div class="uc-line"><span class="label">Type:</span> Web Application Stack</div>
+        <div class="uc-line"><span class="label">Typical Use Case:</span> Microservices, APIs</div>
+        <div class="uc-line"><span class="label">Famous Usage:</span> Netflix</div>
+    </div>
+    <div class="container">
+        <h1>🧪 Flask Stack</h1>
+        <p class="subtitle">Flask · PostgreSQL · Nginx</p>
+
+        <div class="diagram">
+            <div class="stack-container">
+                <!-- Flask Layer -->
+                <div class="layer flask">
+                    <div class="layer-left">
+                        <div class="layer-icon">F</div>
+                        <div class="layer-title">
+                            <h2>Flask</h2>
+                            <div class="full-name">Micro Web Framework</div>
+                        </div>
+                    </div>
+                    <div class="layer-description">
+                        <ul>
+                            <li>WSGI micro-framework</li>
+                            <li>Blueprints and routing</li>
+                            <li>Extensible via extensions</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="arrow">↓</div>
+
+                <!-- Nginx Layer -->
+                <div class="layer nginx">
+                    <div class="layer-left">
+                        <div class="layer-icon">N</div>
+                        <div class="layer-title">
+                            <h2>Nginx</h2>
+                            <div class="full-name">Reverse Proxy</div>
+                        </div>
+                    </div>
+                    <div class="layer-description">
+                        <ul>
+                            <li>SSL termination</li>
+                            <li>Static/media serving</li>
+                            <li>Load balancing</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="arrow">↓</div>
+
+                <!-- PostgreSQL Layer -->
+                <div class="layer postgres">
+                    <div class="layer-left">
+                        <div class="layer-icon">P</div>
+                        <div class="layer-title">
+                            <h2>PostgreSQL</h2>
+                            <div class="full-name">Relational Database</div>
+                        </div>
+                    </div>
+                    <div class="layer-description">
+                        <ul>
+                            <li>ACID transactions</li>
+                            <li>Advanced SQL & indexing</li>
+                            <li>JSONB and extensions</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flow-description">
+                <strong>Request Flow:</strong> Client Browser → Nginx (Reverse Proxy) → Flask (App Logic) → PostgreSQL (Data) → Flask → Nginx → Client
+            </div>
+        </div>
+    </div>
+</body>
+</html>

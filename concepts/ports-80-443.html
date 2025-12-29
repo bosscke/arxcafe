@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ports (80, 443)</title>
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/concepts.css">
+</head>
+<body>
+    <a href="/" class="home-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 18px; height: 18px;">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
+        </svg>
+        Home
+    </a>
+
+    <div class="container">
+        <h1>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 40px; height: 40px; display: inline-block; margin-right: 10px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M3 9h18m-6 12H9m10.5 0a1.5 1.5 0 0 0 1.5-1.5v-15A1.5 1.5 0 0 0 19.5 3h-15A1.5 1.5 0 0 0 3 4.5v15A1.5 1.5 0 0 0 4.5 21H6" /></svg>
+            Ports (80, 443)
+        </h1>
+
+        <div class="intro-box">
+            <p>Network <strong>ports</strong> identify application endpoints on a host. <strong>Port 80</strong> is the default for HTTP (unencrypted). <strong>Port 443</strong> is the default for HTTPS (HTTP over TLS). Browsers omit the port when it’s the default, but you can specify them explicitly.</p>
+        </div>
+
+        <h2>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M6.75 7.5l4.5 9 4.5-9m-9 0 4.5-4.5 4.5 4.5m-9 0h9m-9 0L3 12l3.75-4.5m9 0L21 12l-3.75-4.5" /></svg>
+            What 80 and 443 Mean
+        </h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>Port 80 (HTTP)</h3>
+                <ul class="features-list">
+                    <li>Unencrypted HTTP by default</li>
+                    <li>Used for legacy or redirect to HTTPS</li>
+                    <li>Often blocked inbound on hardened networks</li>
+                </ul>
+            </div>
+            <div class="arch-card">
+                <h3>Port 443 (HTTPS)</h3>
+                <ul class="features-list">
+                    <li>Encrypted via TLS (confidentiality, integrity)</li>
+                    <li>Required for HSTS and modern browsers’ security features</li>
+                    <li>Standard for public web traffic</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M3 6.75A2.25 2.25 0 0 1 5.25 4.5h13.5A2.25 2.25 0 0 1 21 6.75v10.5A2.25 2.25 0 0 1 18.75 19.5H5.25A2.25 2.25 0 0 1 3 17.25V6.75Z" /></svg>
+            URL Examples
+        </h2>
+
+        <div class="flow-diagram">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 12px;">
+                <div class="flow-step" style="border-left-color: #667eea;">http://example.com (implicit :80)</div>
+                <div class="flow-step" style="border-left-color: #13AA52;">http://example.com:80 (explicit :80)</div>
+                <div class="flow-step" style="border-left-color: #DD0031;">https://example.com (implicit :443)</div>
+                <div class="flow-step" style="border-left-color: #0EA5E9;">https://example.com:443 (explicit :443)</div>
+            </div>
+        </div>
+
+        <h2>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M6 12h12M6 6h12M6 18h12" /></svg>
+            Where Ports Fit (Layers)
+        </h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>Layer 4</h3>
+                <p>Ports belong to TCP/UDP (transport). They multiplex many connections on one IP.</p>
+            </div>
+            <div class="arch-card">
+                <h3>Layer 7</h3>
+                <p>HTTP/HTTPS are application protocols carried over TCP (usually) on ports 80/443.</p>
+            </div>
+            <div class="arch-card">
+                <h3>Firewalls/LB</h3>
+                <p>Security groups and load balancers allow/forward specific ports to backends.</p>
+            </div>
+        </div>
+
+        <h2>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v18m0-18c-1.5 1.5-4.5 4.5-7.5 4.5S1.5 4.5 0 3m12 0c1.5 1.5 4.5 4.5 7.5 4.5S22.5 4.5 24 3" /></svg>
+            Common Inbound/Outbound Patterns
+        </h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>Inbound</h3>
+                <ul class="features-list">
+                    <li>Public sites listen on 443 (and maybe 80 → redirect)</li>
+                    <li>Load balancer terminates TLS, forwards to private ports</li>
+                    <li>WAF/CDN can sit in front of 443 for security/caching</li>
+                </ul>
+            </div>
+            <div class="arch-card">
+                <h3>Outbound</h3>
+                <ul class="features-list">
+                    <li>Clients egress to remote :80/:443 through NAT/proxy</li>
+                    <li>Firewalls allow egress 443 by default in many orgs</li>
+                    <li>Pin outbound destinations with allowlists if needed</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 3h3m-6 3h6M6.75 6h10.5a2.25 2.25 0 0 1 2.25 2.25v9A2.25 2.25 0 0 1 17.25 19.5H6.75A2.25 2.25 0 0 1 4.5 17.25v-9A2.25 2.25 0 0 1 6.75 6z" /></svg>
+            Quick Examples
+        </h2>
+
+        <div style="background: rgba(102, 126, 234, 0.1); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 12px; padding: 25px; margin: 30px 0; display: grid; gap: 18px;">
+            <div>
+                <h3>cURL with explicit ports</h3>
+                <div style="background: #1e1e1e; color: #d4d4d4; padding: 15px; border-radius: 8px; font-family: 'Courier New', monospace; font-size: 12px; line-height: 1.5; overflow-x: auto; border: 1px solid rgba(255, 255, 255, 0.1);">
+$ curl -I http://example.com:80/
+$ curl -I https://example.com:443/
+                </div>
+            </div>
+            <div>
+                <h3>Windows: listening ports</h3>
+                <div style="background: #1e1e1e; color: #d4d4d4; padding: 15px; border-radius: 8px; font-family: 'Courier New', monospace; font-size: 12px; line-height: 1.5; overflow-x: auto; border: 1px solid rgba(255, 255, 255, 0.1);">
+PS> Get-NetTCPConnection -State Listen | Where-Object { $_.LocalPort -in 80,443 } | Select-Object LocalAddress,LocalPort,OwningProcess
+                </div>
+            </div>
+        </div>
+
+        <h2>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 0 1 3 19.875v-6.75ZM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V8.625ZM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V4.125Z" /></svg>
+            Ops Tips & Pitfalls
+        </h2>
+
+        <div class="cons-box">
+            <h3>What to watch:</h3>
+            <ul class="features-list">
+                <li>Redirect port 80 → 443 for SEO and security</li>
+                <li>Open only required inbound ports on firewalls/NACLs</li>
+                <li>Terminate TLS at LB or at app; be clear on trust boundaries</li>
+                <li>Certificate renewals (e.g., ACME/Let’s Encrypt) must pass on 80 or 443</li>
+            </ul>
+        </div>
+
+        <div class="intro-box" style="text-align: center; margin: 60px 0 40px;">
+            <p>80 and 443 are the web’s front doors. Use 443 for encrypted traffic, keep 80 for redirects or ACME challenges, and enforce least privilege at the network edge.</p>
+        </div>
+    </div>
+</body>
+</html>

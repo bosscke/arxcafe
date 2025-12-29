@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flutter Stack – Flutter · Dart · Firebase</title>
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/stacks.css">
+    <style>
+        :root {
+            --glass: rgba(255,255,255,0.10);
+            --text: #e6e6e6;
+            --muted: #b3b3b3;
+            --border: rgba(255,255,255,0.22);
+            --shadow: 0 10px 30px rgba(0,0,0,0.15);
+            --blur: 12px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        /* Layer-specific colors */
+        .layer.flutter { border-left: 4px solid #02569B; }
+        .layer.dart { border-left: 4px solid #0175C2; }
+        .layer.firebase { border-left: 4px solid #FFCA28; }
+
+        .flutter .layer-icon { background: #02569B; }
+        .dart .layer-icon { background: #0175C2; }
+        .firebase .layer-icon { background: #FFCA28; }
+    </style>
+</head>
+<body>
+    <a href="/" class="home-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 18px; height: 18px;">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
+        </svg>
+        Home
+    </a>
+
+    <div class="usecase-card" aria-label="Stack Use Case">
+        <div class="uc-title">Use Case</div>
+        <div class="uc-line"><span class="label">Type:</span> Mobile / Cross-Platform Stack</div>
+        <div class="uc-line"><span class="label">Typical Use Case:</span> iOS, Android, Web, Desktop apps from single codebase</div>
+        <div class="uc-line"><span class="label">Famous Usage:</span> Google Ads, Alibaba, BMW apps</div>
+    </div>
+
+    <div class="container">
+        <h1>🦋 Flutter Stack</h1>
+        <p class="subtitle">Flutter · Dart · Firebase</p>
+
+        <div class="diagram">
+            <div class="stack-container">
+                <div class="layer flutter">
+                    <div class="layer-left">
+                        <div class="layer-icon">F</div>
+                        <div class="layer-title">
+                            <h2>Flutter</h2>
+                            <div class="full-name">UI Framework & SDK</div>
+                        </div>
+                    </div>
+                    <div class="layer-description">
+                        <ul>
+                            <li>Widget-based UI, Material/Cupertino design systems</li>
+                            <li>Hot reload, custom rendering engine (Skia), native performance</li>
+                            <li>iOS, Android, Web, Windows, macOS, Linux from one codebase</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="arrow">↓</div>
+
+                <div class="layer dart">
+                    <div class="layer-left">
+                        <div class="layer-icon">D</div>
+                        <div class="layer-title">
+                            <h2>Dart</h2>
+                            <div class="full-name">Programming Language</div>
+                        </div>
+                    </div>
+                    <div class="layer-description">
+                        <ul>
+                            <li>Optimized for UI, AOT and JIT compilation for fast builds</li>
+                            <li>Type-safe, null-safe, async/await, strong typing</li>
+                            <li>pub.dev package ecosystem, DevTools profiler</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="arrow">↓</div>
+
+                <div class="layer firebase">
+                    <div class="layer-left">
+                        <div class="layer-icon">FB</div>
+                        <div class="layer-title">
+                            <h2>Firebase</h2>
+                            <div class="full-name">Backend-as-a-Service (BaaS)</div>
+                        </div>
+                    </div>
+                    <div class="layer-description">
+                        <ul>
+                            <li>Firestore, Realtime DB, Auth, Cloud Functions, Storage</li>
+                            <li>Analytics, Crashlytics, Remote Config, Cloud Messaging</li>
+                            <li>FlutterFire plugins for seamless integration</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flow-description">
+                <strong>Flow:</strong> Flutter widgets built with Dart → Dart compiles to native code → Firebase provides backend, auth, and cloud services.
+            </div>
+        </div>
+    </div>
+</body>
+</html>

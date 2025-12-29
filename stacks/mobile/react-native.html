@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>React Native Stack – React Native · Metro · Node.js</title>
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/stacks.css">
+    <style>
+        :root {
+            --glass: rgba(255,255,255,0.10);
+            --text: #e6e6e6;
+            --muted: #b3b3b3;
+            --border: rgba(255,255,255,0.22);
+            --shadow: 0 10px 30px rgba(0,0,0,0.15);
+            --blur: 12px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        /* Layer-specific colors */
+        .layer.rn { border-left: 4px solid #61DAFB; }
+        .layer.metro { border-left: 4px solid #E91E63; }
+        .layer.node { border-left: 4px solid #68A063; }
+
+        .rn .layer-icon { background: #61DAFB; }
+        .metro .layer-icon { background: #E91E63; }
+        .node .layer-icon { background: #68A063; }
+    </style>
+</head>
+<body>
+    <a href="/" class="home-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 18px; height: 18px;">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
+        </svg>
+        Home
+    </a>
+
+    <div class="usecase-card" aria-label="Stack Use Case">
+        <div class="uc-title">Use Case</div>
+        <div class="uc-line"><span class="label">Type:</span> Mobile / Cross-Platform Stack</div>
+        <div class="uc-line"><span class="label">Typical Use Case:</span> iOS and Android apps from single codebase, rapid mobile prototyping</div>
+        <div class="uc-line"><span class="label">Famous Usage:</span> Facebook, Instagram, Shopify mobile apps</div>
+    </div>
+
+    <div class="container">
+        <h1>📱 React Native Stack</h1>
+        <p class="subtitle">React Native · Metro · Node.js</p>
+
+        <div class="diagram">
+            <div class="stack-container">
+                <div class="layer rn">
+                    <div class="layer-left">
+                        <div class="layer-icon">RN</div>
+                        <div class="layer-title">
+                            <h2>React Native</h2>
+                            <div class="full-name">Cross-Platform Mobile Framework</div>
+                        </div>
+                    </div>
+                    <div class="layer-description">
+                        <ul>
+                            <li>React components render native iOS/Android views</li>
+                            <li>Bridge for native modules, hot reload, fast refresh</li>
+                            <li>JSX, Hooks, navigation, state management (Redux, Context)</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="arrow">↓</div>
+
+                <div class="layer metro">
+                    <div class="layer-left">
+                        <div class="layer-icon">M</div>
+                        <div class="layer-title">
+                            <h2>Metro</h2>
+                            <div class="full-name">JavaScript Bundler</div>
+                        </div>
+                    </div>
+                    <div class="layer-description">
+                        <ul>
+                            <li>Fast bundler optimized for React Native workflows</li>
+                            <li>Hot module replacement, source maps, tree shaking</li>
+                            <li>Supports multiple platforms (iOS, Android, Web)</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="arrow">↓</div>
+
+                <div class="layer node">
+                    <div class="layer-left">
+                        <div class="layer-icon">N</div>
+                        <div class="layer-title">
+                            <h2>Node.js</h2>
+                            <div class="full-name">JavaScript Runtime & Tooling</div>
+                        </div>
+                    </div>
+                    <div class="layer-description">
+                        <ul>
+                            <li>Runs Metro bundler, npm/yarn package management</li>
+                            <li>CLI tools for project init, build, run, link native modules</li>
+                            <li>Backend APIs, dev servers, build scripts in JavaScript</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flow-description">
+                <strong>Flow:</strong> React Native components → Metro bundles JS → Node.js runtime powers tooling and development workflow.
+            </div>
+        </div>
+    </div>
+</body>
+</html>

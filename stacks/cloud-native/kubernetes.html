@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kubernetes Stack – Kubernetes · Docker · Helm</title>
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/stacks.css">
+    <style>
+        :root {
+            --glass: rgba(255,255,255,0.10);
+            --text: #e6e6e6;
+            --muted: #b3b3b3;
+            --border: rgba(255,255,255,0.22);
+            --shadow: 0 10px 30px rgba(0,0,0,0.15);
+            --blur: 12px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        /* Layer-specific colors */
+        .layer.k8s { border-left: 4px solid #326CE5; }
+        .layer.docker { border-left: 4px solid #2496ED; }
+        .layer.helm { border-left: 4px solid #0F1689; }
+
+        .k8s .layer-icon { background: #326CE5; }
+        .docker .layer-icon { background: #2496ED; }
+        .helm .layer-icon { background: #0F1689; }
+    </style>
+</head>
+<body>
+    <a href="/" class="home-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 18px; height: 18px;">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
+        </svg>
+        Home
+    </a>
+
+    <div class="usecase-card" aria-label="Stack Use Case">
+        <div class="uc-title">Use Case</div>
+        <div class="uc-line"><span class="label">Type:</span> Cloud-Native / DevOps Stack</div>
+        <div class="uc-line"><span class="label">Typical Use Case:</span> Container orchestration, microservices deployment, auto-scaling workloads</div>
+        <div class="uc-line"><span class="label">Famous Usage:</span> Google, Spotify, Airbnb, Netflix microservices</div>
+    </div>
+
+    <div class="container">
+        <h1>☸️ Kubernetes Stack</h1>
+        <p class="subtitle">Kubernetes · Docker · Helm</p>
+
+        <div class="diagram">
+            <div class="stack-container">
+                <div class="layer k8s">
+                    <div class="layer-left">
+                        <div class="layer-icon">K8s</div>
+                        <div class="layer-title">
+                            <h2>Kubernetes</h2>
+                            <div class="full-name">Container Orchestrator</div>
+                        </div>
+                    </div>
+                    <div class="layer-description">
+                        <ul>
+                            <li>Pods, Services, Deployments, StatefulSets for resilient workloads</li>
+                            <li>Ingress controllers for routing, service discovery</li>
+                            <li>Auto-scaling, rolling updates, self-healing health checks</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="arrow">↓</div>
+
+                <div class="layer docker">
+                    <div class="layer-left">
+                        <div class="layer-icon">D</div>
+                        <div class="layer-title">
+                            <h2>Docker</h2>
+                            <div class="full-name">Container Runtime</div>
+                        </div>
+                    </div>
+                    <div class="layer-description">
+                        <ul>
+                            <li>Image builds from Dockerfiles, layered image cache</li>
+                            <li>Container isolation, resource limits, networking</li>
+                            <li>Registry push/pull (Docker Hub, ECR, GCR, ACR)</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="arrow">↓</div>
+
+                <div class="layer helm">
+                    <div class="layer-left">
+                        <div class="layer-icon">H</div>
+                        <div class="layer-title">
+                            <h2>Helm</h2>
+                            <div class="full-name">Kubernetes Package Manager</div>
+                        </div>
+                    </div>
+                    <div class="layer-description">
+                        <ul>
+                            <li>Charts with templates and values.yaml for reusable releases</li>
+                            <li>Versioning, rollbacks, dependency management</li>
+                            <li>Declarative installs across environments</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flow-description">
+                <strong>Flow:</strong> Helm charts configure releases → Kubernetes schedules pods/services → Docker runtime executes containers across nodes.
+            </div>
+        </div>
+    </div>
+</body>
+</html>

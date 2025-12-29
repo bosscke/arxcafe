@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Backups</title>
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/concepts.css">
+</head>
+<body>
+    <a href="/" class="home-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 18px; height: 18px;">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
+        </svg>
+        Home
+    </a>
+
+    <div class="container">
+        <h1>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 40px; height: 40px; display: inline-block; margin-right: 10px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M20.25 6.375c0 2.278-3.694 4.125-8.25 4.125S3.75 8.653 3.75 6.375m16.5 0c0-2.278-3.694-4.125-8.25-4.125S3.75 4.097 3.75 6.375m16.5 0v11.25c0 2.278-3.694 4.125-8.25 4.125s-8.25-1.847-8.25-4.125V6.375m16.5 0v3.75m-16.5-3.75v3.75m16.5 0v3.75c0 2.278-3.694 4.125-8.25 4.125s-8.25-1.847-8.25-4.125v-3.75m16.5 0c0 2.278-3.694 4.125-8.25 4.125s-8.25-1.847-8.25-4.125"/></svg>
+            Backups
+        </h1>
+
+        <div class="intro-box">
+            <p>Backups are copies of data stored separately to protect against loss from hardware failure, human error, cyberattacks, or disasters. A reliable backup strategy is essential for business continuity and data recovery.</p>
+        </div>
+
+        <h2>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 1 1-18 0 9 9 0 0 1 18 0zm-9 3.75h.008v.008H12v-.008z"/></svg>
+            Why Backups Matter
+        </h2>
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>Hardware Failures</h3>
+                <p>Disk crashes, server failures, storage corruption. All hardware eventually fails.</p>
+            </div>
+            <div class="arch-card">
+                <h3>Human Error</h3>
+                <p>Accidental deletions, wrong UPDATE queries, misconfigured deployments.</p>
+            </div>
+            <div class="arch-card">
+                <h3>Cyberattacks</h3>
+                <p>Ransomware, data breaches, malicious deletions. Backups are last line of defense.</p>
+            </div>
+            <div class="arch-card">
+                <h3>Natural Disasters</h3>
+                <p>Fires, floods, earthquakes. Regional outages require offsite backups.</p>
+            </div>
+            <div class="arch-card">
+                <h3>Compliance</h3>
+                <p>Regulations (GDPR, HIPAA, SOC 2) often mandate backup retention policies.</p>
+            </div>
+            <div class="arch-card">
+                <h3>Business Continuity</h3>
+                <p>Minimize downtime and data loss to maintain operations and customer trust.</p>
+            </div>
+        </div>
+
+        <h2>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"/></svg>
+            Types of Backups
+        </h2>
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>Full Backup</h3>
+                <ul class="features-list">
+                    <li>Complete copy of all data</li>
+                    <li>Slowest to create, fastest to restore</li>
+                    <li>Use: weekly or as baseline</li>
+                </ul>
+            </div>
+            <div class="arch-card">
+                <h3>Incremental Backup</h3>
+                <ul class="features-list">
+                    <li>Only changes since last backup (full or incremental)</li>
+                    <li>Fastest to create, slower to restore (must chain)</li>
+                    <li>Use: daily or hourly</li>
+                </ul>
+            </div>
+            <div class="arch-card">
+                <h3>Differential Backup</h3>
+                <ul class="features-list">
+                    <li>Changes since last full backup</li>
+                    <li>Moderate speed for both backup and restore</li>
+                    <li>Use: daily (restore only needs full + latest diff)</li>
+                </ul>
+            </div>
+            <div class="arch-card">
+                <h3>Snapshot</h3>
+                <ul class="features-list">
+                    <li>Point-in-time copy (copy-on-write)</li>
+                    <li>Instant creation; minimal storage initially</li>
+                    <li>Use: frequent recovery points (hourly)</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 1 0-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 0 0 2.25-2.25v-6.75a2.25 2.25 0 0 0-2.25-2.25H6.75a2.25 2.25 0 0 0-2.25 2.25v6.75a2.25 2.25 0 0 0 2.25 2.25Z"/></svg>
+            3-2-1 Backup Rule
+        </h2>
+        <div class="intro-box">
+            <p>Industry best practice for backup redundancy:</p>
+        </div>
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>3 Copies</h3>
+                <p>Keep at least 3 total copies of your data (1 primary + 2 backups).</p>
+            </div>
+            <div class="arch-card">
+                <h3>2 Different Media</h3>
+                <p>Store backups on at least 2 different types of media (disk, tape, cloud).</p>
+            </div>
+            <div class="arch-card">
+                <h3>1 Offsite</h3>
+                <p>Keep at least 1 backup copy offsite or in a different region (cloud, remote datacenter).</p>
+            </div>
+        </div>
+
+        <h2>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/></svg>
+            RTO & RPO
+        </h2>
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>RTO (Recovery Time Objective)</h3>
+                <ul class="features-list">
+                    <li>Maximum acceptable downtime</li>
+                    <li>How long to restore service?</li>
+                    <li>Example: RTO = 4 hours</li>
+                    <li>Impacts: infrastructure, automation, failover design</li>
+                </ul>
+            </div>
+            <div class="arch-card">
+                <h3>RPO (Recovery Point Objective)</h3>
+                <ul class="features-list">
+                    <li>Maximum acceptable data loss</li>
+                    <li>How far back to restore?</li>
+                    <li>Example: RPO = 15 minutes</li>
+                    <li>Impacts: backup frequency, replication</li>
+                </ul>
+            </div>
+        </div>
+        <div style="background: #1e1e1e; color: #d4d4d4; padding: 14px; border-radius: 10px; font-family: 'Courier New', monospace; font-size: 10px; line-height: 1.6; border: 1px solid rgba(255,255,255,0.1); white-space: pre-wrap; overflow-wrap: break-word; margin-top: 16px;">
+// Example: E-commerce site
+// RTO = 1 hour (must restore checkout within 60 min)
+// RPO = 5 minutes (can lose max 5 min of orders)
+// → Strategy: continuous replication + automated failover
+        </div>
+
+        <h2>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75m-3-7.036A11.959 11.959 0 0 1 3.598 6 11.99 11.99 0 0 0 3 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285Z"/></svg>
+            Backup Strategies
+        </h2>
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>Database Backups</h3>
+                <ul class="features-list">
+                    <li>Logical: SQL dumps (mysqldump, pg_dump)</li>
+                    <li>Physical: filesystem snapshots, WAL archiving</li>
+                    <li>Point-in-Time Recovery (PITR) with transaction logs</li>
+                </ul>
+            </div>
+            <div class="arch-card">
+                <h3>File System Backups</h3>
+                <ul class="features-list">
+                    <li>Rsync, tar, cloud sync (S3, Azure Blob)</li>
+                    <li>Versioning for user-uploaded content</li>
+                    <li>Retention policies to manage storage costs</li>
+                </ul>
+            </div>
+            <div class="arch-card">
+                <h3>VM/Container Backups</h3>
+                <ul class="features-list">
+                    <li>Snapshot entire VMs or volumes</li>
+                    <li>Container images + volumes</li>
+                    <li>Infrastructure-as-code for quick rebuild</li>
+                </ul>
+            </div>
+            <div class="arch-card">
+                <h3>Application-Level</h3>
+                <ul class="features-list">
+                    <li>Export data via API or batch jobs</li>
+                    <li>Backup configs, secrets, keys separately</li>
+                    <li>Version control for code/config</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M17.25 6.75 22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3-4.5 16.5"/></svg>
+            Example: PostgreSQL Backup
+        </h2>
+        <div style="background: rgba(102, 126, 234, 0.1); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 12px; padding: 25px; margin: 30px 0; display: grid; gap: 18px;">
+            <div>
+                <h3>Logical Backup (SQL Dump)</h3>
+                <div style="background: #1e1e1e; color: #d4d4d4; padding: 12px; border-radius: 8px; font-family: 'Courier New', monospace; font-size: 10px; line-height: 1.6; overflow-wrap: break-word; word-wrap: break-word; border: 1px solid rgba(255, 255, 255, 0.1); white-space: pre-wrap; max-width: 100%; box-sizing: border-box;">
+# Full database dump
+pg_dump -U postgres mydb > backup_$(date +%Y%m%d_%H%M%S).sql
+
+# Compressed backup
+pg_dump -U postgres -Fc mydb > mydb.dump
+
+# Restore
+psql -U postgres mydb < backup_20251229_120000.sql
+pg_restore -U postgres -d mydb mydb.dump
+                </div>
+            </div>
+            <div>
+                <h3>Continuous Archiving (PITR)</h3>
+                <div style="background: #1e1e1e; color: #d4d4d4; padding: 12px; border-radius: 8px; font-family: 'Courier New', monospace; font-size: 10px; line-height: 1.6; overflow-wrap: break-word; word-wrap: break-word; border: 1px solid rgba(255, 255, 255, 0.1); white-space: pre-wrap; max-width: 100%; box-sizing: border-box;">
+# Enable WAL archiving in postgresql.conf
+archive_mode = on
+archive_command = 'cp %p /backups/wal/%f'
+
+# Base backup
+pg_basebackup -U postgres -D /backups/base -Ft -z -P
+
+# Restore to specific timestamp
+# 1) Stop DB, restore base backup
+# 2) Create recovery.conf with recovery_target_time
+# 3) Start DB; replays WAL to target time
+                </div>
+            </div>
+        </div>
+
+        <h2>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 0 1-1.043 3.296 3.745 3.745 0 0 1-3.296 1.043A3.745 3.745 0 0 1 12 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 0 1-3.296-1.043 3.745 3.745 0 0 1-1.043-3.296A3.745 3.745 0 0 1 3 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 0 1 1.043-3.296 3.746 3.746 0 0 1 3.296-1.043A3.746 3.746 0 0 1 12 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 0 1 3.296 1.043 3.746 3.746 0 0 1 1.043 3.296A3.745 3.745 0 0 1 21 12Z"/></svg>
+            Testing Backups
+        </h2>
+        <div class="intro-box">
+            <p><strong>Untested backups are not backups.</strong> Regularly verify you can actually restore from backups.</p>
+        </div>
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>Restore Drills</h3>
+                <p>Periodically restore to a test environment. Measure RTO/RPO compliance.</p>
+            </div>
+            <div class="arch-card">
+                <h3>Integrity Checks</h3>
+                <p>Verify backup files aren't corrupted (checksums, test restores).</p>
+            </div>
+            <div class="arch-card">
+                <h3>Automation</h3>
+                <p>Automated tests: restore last night's backup to staging daily.</p>
+            </div>
+            <div class="arch-card">
+                <h3>Documentation</h3>
+                <p>Runbooks for restore procedures. Who, what, how, escalation.</p>
+            </div>
+        </div>
+
+        <h2>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0 3.181 3.183a8.25 8.25 0 0 0 13.803-3.7M4.031 9.865a8.25 8.25 0 0 1 13.803-3.7l3.181 3.182m0-4.991v4.99"/></svg>
+            Automation & Scheduling
+        </h2>
+        <div class="pros-box">
+            <h3>Best practices:</h3>
+            <ul class="features-list">
+                <li>Scheduled backups (cron, cloud scheduler) — daily, hourly, continuous</li>
+                <li>Monitor backup jobs; alert on failures</li>
+                <li>Rotate old backups per retention policy (7 daily, 4 weekly, 12 monthly)</li>
+                <li>Encrypt backups at rest and in transit</li>
+                <li>Separate backup credentials from production (least privilege)</li>
+                <li>Immutable backups to protect against ransomware</li>
+            </ul>
+        </div>
+        <div style="background: #1e1e1e; color: #d4d4d4; padding: 14px; border-radius: 10px; font-family: 'Courier New', monospace; font-size: 10px; line-height: 1.6; border: 1px solid rgba(255,255,255,0.1); white-space: pre-wrap; overflow-wrap: break-word; margin-top: 16px;">
+# Cron job: daily DB backup at 2 AM
+0 2 * * * /scripts/backup-db.sh && aws s3 cp /backups/db.sql.gz s3://my-backups/
+
+# Retention: keep 7 days, delete older
+find /backups -name "*.sql.gz" -mtime +7 -delete
+        </div>
+
+        <h2>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75m-3-7.036A11.959 11.959 0 0 1 3.598 6 11.99 11.99 0 0 0 3 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285Z"/></svg>
+            Security Considerations
+        </h2>
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>Encryption</h3>
+                <p>Encrypt backups at rest (AES-256) and in transit (TLS). Protect encryption keys.</p>
+            </div>
+            <div class="arch-card">
+                <h3>Access Control</h3>
+                <p>Restrict who can create, read, delete backups. Audit access logs.</p>
+            </div>
+            <div class="arch-card">
+                <h3>Immutability</h3>
+                <p>Write-once backups prevent ransomware deletion. Use object lock (S3, Azure).</p>
+            </div>
+            <div class="arch-card">
+                <h3>Air-Gapped Backups</h3>
+                <p>Offline copies disconnected from network. Ultimate ransomware protection.</p>
+            </div>
+        </div>
+
+        <h2>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 0 1 3 19.875v-6.75ZM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V8.625ZM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V4.125Z"/></svg>
+            Best Practices
+        </h2>
+        <div class="pros-box">
+            <h3>Do this:</h3>
+            <ul class="features-list">
+                <li>Follow 3-2-1 rule (3 copies, 2 media types, 1 offsite)</li>
+                <li>Define and document RTO/RPO for each system</li>
+                <li>Automate backups and test restores regularly</li>
+                <li>Encrypt backups and control access</li>
+                <li>Monitor backup jobs; alert on failures</li>
+                <li>Rotate backups per retention policy</li>
+                <li>Store backups in separate accounts/regions (blast radius)</li>
+                <li>Version control code/config; backup data and state</li>
+                <li>Document restore procedures and train team</li>
+            </ul>
+        </div>
+
+        <h2>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 1 1-18 0 9 9 0 0 1 18 0zm-9 3.75h.008v.008H12v-.008z"/></svg>
+            Common Pitfalls
+        </h2>
+        <div class="cons-box">
+            <h3>Avoid these:</h3>
+            <ul class="features-list">
+                <li>Never testing restores (backups fail when you need them)</li>
+                <li>Storing backups in same location as primary (fire/ransomware wipes both)</li>
+                <li>No monitoring or alerting for backup failures</li>
+                <li>Backing up but not backing up secrets/configs needed to restore</li>
+                <li>Unencrypted backups (compliance violation, security risk)</li>
+                <li>No retention policy (costs balloon or old backups deleted too soon)</li>
+                <li>Assuming replication = backup (it's not; corrupted data replicates)</li>
+                <li>Single person knows how to restore (bus factor)</li>
+                <li>Forgetting to backup application state, queues, caches</li>
+            </ul>
+        </div>
+
+        <h2>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18.75a60.07 60.07 0 0 1 15.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 0 1 3 6h-.75m0 0v-.375c0-.621.504-1.125 1.125-1.125H20.25M2.25 6v9m18-10.5v.75c0 .414.336.75.75.75h.75m-1.5-1.5h.375c.621 0 1.125.504 1.125 1.125v9.75c0 .621-.504 1.125-1.125 1.125h-.375m1.5-1.5H21a.75.75 0 0 0-.75.75v.75m0 0H3.75m0 0h-.375a1.125 1.125 0 0 1-1.125-1.125V15m1.5 1.5v-.75A.75.75 0 0 0 3 15h-.75M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm3 0h.008v.008H18V10.5Zm-12 0h.008v.008H6V10.5Z"/></svg>
+            Cloud Backup Services
+        </h2>
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>AWS</h3>
+                <p>S3 (versioning, glacier), RDS automated backups, EBS snapshots, AWS Backup.</p>
+            </div>
+            <div class="arch-card">
+                <h3>Azure</h3>
+                <p>Blob Storage, Azure Backup, SQL DB automated backups, VM snapshots.</p>
+            </div>
+            <div class="arch-card">
+                <h3>GCP</h3>
+                <p>Cloud Storage, automated snapshots, Cloud SQL backups, persistent disk snapshots.</p>
+            </div>
+            <div class="arch-card">
+                <h3>Third-Party</h3>
+                <p>Veeam, Acronis, Backblaze, Duplicati, restic for cross-cloud/hybrid.</p>
+            </div>
+        </div>
+
+        <div class="intro-box" style="text-align: center; margin: 60px 0 40px;">
+            <p>Backups are insurance. Test them regularly, automate everything, and follow the 3-2-1 rule. The best time to verify your backups is before you need them.</p>
+        </div>
+    </div>
+</body>
+</html>

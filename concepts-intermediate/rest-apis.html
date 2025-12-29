@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>REST APIs</title>
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/concepts.css">
+</head>
+<body>
+    <a href="/" class="home-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 18px; height: 18px;">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
+        </svg>
+        Home
+    </a>
+
+    <div class="container">
+        <h1>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 40px; height: 40px; display: inline-block; margin-right: 10px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 6.75h15m-15 4.5h15m-15 4.5h15M9.75 3v18m4.5-18v18"/></svg>
+            REST APIs
+        </h1>
+
+        <div class="intro-box">
+            <p><strong>REST (Representational State Transfer)</strong> is an architectural style for building web APIs using HTTP verbs, resource-oriented URLs, stateless requests, and standardized status codes. Good REST APIs are predictable, cacheable, and well-documented.</p>
+        </div>
+
+        <h2>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M6 12h12M6 6h12M6 18h12"/></svg>
+            Core Principles
+        </h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>Resources</h3>
+                <p>Model nouns (e.g., <em>/users</em>, <em>/orders</em>), not actions.</p>
+            </div>
+            <div class="arch-card">
+                <h3>HTTP Verbs</h3>
+                <p>Use GET/POST/PUT/PATCH/DELETE consistently for CRUD semantics.</p>
+            </div>
+            <div class="arch-card">
+                <h3>Statelessness</h3>
+                <p>No server session; every request is complete with auth/context.</p>
+            </div>
+            <div class="arch-card">
+                <h3>Cacheability</h3>
+                <p>Use proper headers (ETag, Cache-Control) for safe GET responses.</p>
+            </div>
+        </div>
+
+        <h2>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="m6.75 7.5 4.5 9 4.5-9m-9 0 4.5-4.5 4.5 4.5m-9 0h9m-9 0L3 12l3.75-4.5m9 0L21 12l-3.75-4.5"/></svg>
+            Example: Node.js REST API
+        </h2>
+
+        <div style="background: rgba(102, 126, 234, 0.1); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 12px; padding: 25px; margin: 30px 0; display: grid; gap: 18px;">
+            <div>
+                <h3>Express Routes</h3>
+                <div style="background: #1e1e1e; color: #d4d4d4; padding: 12px; border-radius: 8px; font-family: 'Courier New', monospace; font-size: 10px; line-height: 1.6; overflow-wrap: break-word; word-wrap: break-word; border: 1px solid rgba(255, 255, 255, 0.1); white-space: pre-wrap; max-width: 100%; box-sizing: border-box;">
+const express = require('express');
+const app = express();
+app.use(express.json());
+
+app.get('/users', listUsers);           // safe, cacheable
+app.post('/users', createUser);         // creates
+app.get('/users/:id', getUser);         // safe, cacheable
+app.patch('/users/:id', updateUser);    // partial update
+app.delete('/users/:id', deleteUser);   // deletes
+
+app.listen(3000);
+                </div>
+            </div>
+            <div>
+                <h3>Controller & Validation</h3>
+                <div style="background: #1e1e1e; color: #d4d4d4; padding: 12px; border-radius: 8px; font-family: 'Courier New', monospace; font-size: 10px; line-height: 1.6; overflow-wrap: break-word; word-wrap: break-word; border: 1px solid rgba(255, 255, 255, 0.1); white-space: pre-wrap; max-width: 100%; box-sizing: border-box;">
+async function createUser(req, res){
+  const { email, name } = req.body;
+  if (!email) return res.status(400).json({ error: 'email required' });
+  const user = await saveUser({ email, name });
+  res.status(201).json(user);
+}
+                </div>
+            </div>
+            <div>
+                <h3>HTTP Status Codes</h3>
+                <div style="background: #1e1e1e; color: #d4d4d4; padding: 12px; border-radius: 8px; font-family: 'Courier New', monospace; font-size: 10px; line-height: 1.6; overflow-wrap: break-word; word-wrap: break-word; border: 1px solid rgba(255, 255, 255, 0.1); white-space: pre-wrap; max-width: 100%; box-sizing: border-box;">
+// examples
+200 OK          // success
+201 Created     // new resource
+204 No Content  // deleted/updated with no body
+400 Bad Request // validation
+401 Unauthorized// auth needed
+403 Forbidden   // auth ok, not allowed
+404 Not Found   // resource missing
+409 Conflict    // versioning or duplicates
+429 Too Many Requests // rate limited
+500 Internal Server Error
+                </div>
+            </div>
+        </div>
+
+        <h2>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 3h3m-6 3h6M6.75 6h10.5a2.25 2.25 0 0 1 2.25 2.25v9A2.25 2.25 0 0 1 17.25 19.5H6.75A2.25 2.25 0 0 1 4.5 17.25v-9A2.25 2.25 0 0 1 6.75 6z"/></svg>
+            Design Tips
+        </h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>Versioning</h3>
+                <p>Use URI versioning (e.g., <em>/v1/</em>) or header-based; keep backward compatible.</p>
+            </div>
+            <div class="arch-card">
+                <h3>Filtering & Pagination</h3>
+                <p>Support <em>?limit</em>, <em>?offset</em>/<em>?cursor</em>, <em>?sort</em>, <em>?filter=</em>.</p>
+            </div>
+            <div class="arch-card">
+                <h3>Errors</h3>
+                <p>Return structured errors with codes, messages, and fields.</p>
+            </div>
+            <div class="arch-card">
+                <h3>Security</h3>
+                <p>Use TLS, OAuth/JWT, rate limits, and input validation. Avoid over-sharing via fields whitelists.</p>
+            </div>
+        </div>
+
+        <h2>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 0 1 3 19.875v-6.75ZM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V8.625ZM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V4.125Z"/></svg>
+            Best Practices
+        </h2>
+
+        <div class="pros-box">
+            <h3>Do this:</h3>
+            <ul class="features-list">
+                <li>Consistent naming and plural nouns</li>
+                <li>Use idempotent methods (PUT/PATCH) where applicable</li>
+                <li>Validate input; limit payload sizes</li>
+                <li>Support ETag/If-None-Match for cache-friendly GETs</li>
+                <li>Provide OpenAPI/Swagger docs</li>
+            </ul>
+        </div>
+
+        <h2>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 1 1-18 0 9 9 0 0 1 18 0zm-9 3.75h.008v.008H12v-.008z"/></svg>
+            Common Pitfalls
+        </h2>
+
+        <div class="cons-box">
+            <h3>Avoid these:</h3>
+            <ul class="features-list">
+                <li>Verb-based routes like <em>/createUser</em></li>
+                <li>Overloading POST for updates/deletes</li>
+                <li>Returning 200 OK for errors</li>
+                <li>Breaking changes without versioning</li>
+                <li>Leaking internal IDs or sensitive fields</li>
+            </ul>
+        </div>
+
+        <div class="intro-box" style="text-align: center; margin: 60px 0 40px;">
+            <p>REST APIs work best when they are predictable, well-versioned, and secure. Keep resources clean, verbs consistent, and documentation up to date.</p>
+        </div>
+    </div>
+</body>
+</html>

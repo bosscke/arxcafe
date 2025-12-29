@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JAMstack Architecture</title>
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/stacks.css">
+    <style>
+        :root {
+            --glass: rgba(255,255,255,0.10);
+            --text: #e6e6e6;
+            --muted: #b3b3b3;
+            --border: rgba(255,255,255,0.22);
+            --shadow: 0 10px 30px rgba(0,0,0,0.15);
+            --blur: 12px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        /* Layer-specific colors */
+        .layer.javascript { border-left: 4px solid #F7DF1E; }
+        .layer.apis { border-left: 4px solid #61DAFB; }
+        .layer.markup { border-left: 4px solid #E34F26; }
+
+        .javascript .layer-icon { background: #F7DF1E; }
+        .apis .layer-icon { background: #61DAFB; }
+        .markup .layer-icon { background: #E34F26; }
+    </style>
+</head>
+<body>
+    <a href="/" class="home-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 18px; height: 18px;">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
+        </svg>
+        Home
+    </a>
+
+    <div class="usecase-card" aria-label="Stack Use Case">
+        <div class="uc-title">Use Case</div>
+        <div class="uc-line"><span class="label">Type:</span> JAMstack / Static & Headless</div>
+        <div class="uc-line"><span class="label">Typical Use Case:</span> Fast static sites, decoupled architecture</div>
+        <div class="uc-line"><span class="label">Famous Usage:</span> Netlify, Vercel, modern web apps</div>
+    </div>
+
+    <div class="container">
+        <h1>🚀 JAMstack</h1>
+        <p class="subtitle">JavaScript · APIs · Markup</p>
+
+        <div class="diagram">
+            <div class="stack-container">
+                <!-- JavaScript Layer -->
+                <div class="layer javascript">
+                    <div class="layer-left">
+                        <div class="layer-icon">J</div>
+                        <div class="layer-title">
+                            <h2>JavaScript</h2>
+                            <div class="full-name">Client-Side Logic</div>
+                        </div>
+                    </div>
+                    <div class="layer-description">
+                        <ul>
+                            <li>Dynamic functionality in the browser</li>
+                            <li>React, Vue, Svelte, vanilla JS</li>
+                            <li>Progressive enhancement, interactivity</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="arrow">↓</div>
+
+                <!-- APIs Layer -->
+                <div class="layer apis">
+                    <div class="layer-left">
+                        <div class="layer-icon">A</div>
+                        <div class="layer-title">
+                            <h2>APIs</h2>
+                            <div class="full-name">Backend Services</div>
+                        </div>
+                    </div>
+                    <div class="layer-description">
+                        <ul>
+                            <li>Headless CMS, serverless functions</li>
+                            <li>Third-party services (auth, payments)</li>
+                            <li>Microservices, REST/GraphQL APIs</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="arrow">↓</div>
+
+                <!-- Markup Layer -->
+                <div class="layer markup">
+                    <div class="layer-left">
+                        <div class="layer-icon">M</div>
+                        <div class="layer-title">
+                            <h2>Markup</h2>
+                            <div class="full-name">Pre-rendered HTML</div>
+                        </div>
+                    </div>
+                    <div class="layer-description">
+                        <ul>
+                            <li>Static site generation (SSG)</li>
+                            <li>Pre-built pages served from CDN</li>
+                            <li>Fast load times, SEO-friendly</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flow-description">
+                <strong>Flow:</strong> Pre-rendered Markup served from CDN → JavaScript adds interactivity → APIs provide dynamic data
+            </div>
+        </div>
+    </div>
+</body>
+</html>

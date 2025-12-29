@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Node Stack – Node.js · Vanilla JS · HTML · CSS</title>
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/stacks.css">
+    <style>
+        :root {
+            --glass: rgba(255,255,255,0.10);
+            --text: #e6e6e6;
+            --muted: #b3b3b3;
+            --border: rgba(255,255,255,0.22);
+            --shadow: 0 10px 30px rgba(0,0,0,0.15);
+            --blur: 12px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        /* Layer-specific colors */
+        .layer.nodejs { border-left: 4px solid #68A063; }
+        .layer.vanillajs { border-left: 4px solid #F7DF1E; }
+        .layer.frontend { border-left: 4px solid #E34C26; }
+
+        .nodejs .layer-icon { background: #68A063; }
+        .vanillajs .layer-icon { background: #F7DF1E; }
+        .frontend .layer-icon { background: #E34C26; }
+    </style>
+</head>
+<body>
+    <a href="/" class="home-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 18px; height: 18px;">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
+        </svg>
+        Home
+    </a>
+
+    <div class="usecase-card" aria-label="Stack Use Case">
+        <div class="uc-title">Use Case</div>
+        <div class="uc-line"><span class="label">Type:</span> Minimalist Full-Stack JavaScript</div>
+        <div class="uc-line"><span class="label">Typical Use Case:</span> Lightweight web apps, static sites with backend, prototypes, learning</div>
+        <div class="uc-line"><span class="label">Famous Usage:</span> ArxCafe, small startups, personal projects</div>
+    </div>
+
+    <div class="container">
+        <h1>📦 Node Stack</h1>
+        <p class="subtitle">Node.js · Vanilla JS · HTML · CSS</p>
+
+        <div class="diagram">
+            <div class="stack-container">
+                <div class="layer nodejs">
+                    <div class="layer-left">
+                        <div class="layer-icon">No</div>
+                        <div class="layer-title">
+                            <h2>Node.js</h2>
+                            <div class="full-name">JavaScript Runtime</div>
+                        </div>
+                    </div>
+                    <div class="layer-description">
+                        <ul>
+                            <li>Server-side JavaScript execution, V8 engine, npm ecosystem</li>
+                            <li>Event-driven, non-blocking I/O, clustering for scalability</li>
+                            <li>Express, Fastify, Koa for lightweight frameworks</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="arrow">↓</div>
+
+                <div class="layer vanillajs">
+                    <div class="layer-left">
+                        <div class="layer-icon">JS</div>
+                        <div class="layer-title">
+                            <h2>Vanilla JS</h2>
+                            <div class="full-name">Client-Side Logic</div>
+                        </div>
+                    </div>
+                    <div class="layer-description">
+                        <ul>
+                            <li>Pure JavaScript, no frameworks, ES6+ features, native APIs</li>
+                            <li>DOM manipulation, event handling, async/await, fetch API</li>
+                            <li>Minimal dependencies, fast load times, maximum control</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="arrow">↓</div>
+
+                <div class="layer frontend">
+                    <div class="layer-left">
+                        <div class="layer-icon">HC</div>
+                        <div class="layer-title">
+                            <h2>HTML · CSS</h2>
+                            <div class="full-name">Markup & Styling</div>
+                        </div>
+                    </div>
+                    <div class="layer-description">
+                        <ul>
+                            <li>Semantic HTML5, responsive layouts, flexbox, CSS Grid</li>
+                            <li>CSS custom properties, animations, media queries</li>
+                            <li>Progressive enhancement, accessibility, performance optimization</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flow-description">
+                <strong>Flow:</strong> Node.js serves HTML/CSS → Vanilla JS adds interactivity → Browser renders responsive UI.
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Webhooks</title>
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/concepts.css">
+</head>
+<body>
+    <a href="/" class="home-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 18px; height: 18px;">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
+        </svg>
+        Home
+    </a>
+
+    <div class="container">
+        <h1>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 40px; height: 40px; display: inline-block; margin-right: 10px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 6.75h15m-15 4.5h15m-15 4.5h15M9.75 3v18m4.5-18v18"/></svg>
+            Webhooks
+        </h1>
+
+        <div class="intro-box">
+            <p><strong>Webhooks</strong> are outbound HTTP callbacks that notify subscribers when events occur. They push data instead of polling, but require careful reliability, security, and observability.</p>
+        </div>
+
+        <h2>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M6 12h12M6 6h12M6 18h12"/></svg>
+            Core Concepts
+        </h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>Subscription</h3>
+                <p>Client registers a URL and secrets/headers for verification.</p>
+            </div>
+            <div class="arch-card">
+                <h3>Delivery</h3>
+                <p>Provider POSTs JSON payloads; expects 2xx. Retries on failure.</p>
+            </div>
+            <div class="arch-card">
+                <h3>Verification</h3>
+                <p>HMAC signatures or shared secrets to confirm authenticity.</p>
+            </div>
+            <div class="arch-card">
+                <h3>Idempotency</h3>
+                <p>Events may deliver more than once; receivers must dedupe.</p>
+            </div>
+        </div>
+
+        <h2>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="m6.75 7.5 4.5 9 4.5-9m-9 0 4.5-4.5 4.5 4.5m-9 0h9m-9 0L3 12l3.75-4.5m9 0L21 12l-3.75-4.5"/></svg>
+            Example: Sending & Receiving
+        </h2>
+
+        <div style="background: rgba(102, 126, 234, 0.1); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 12px; padding: 25px; margin: 30px 0; display: grid; gap: 18px;">
+            <div>
+                <h3>Provider (Node.js) — send webhook</h3>
+                <div style="background: #1e1e1e; color: #d4d4d4; padding: 12px; border-radius: 8px; font-family: 'Courier New', monospace; font-size: 10px; line-height: 1.6; overflow-wrap: break-word; word-wrap: break-word; border: 1px solid rgba(255, 255, 255, 0.1); white-space: pre-wrap; max-width: 100%; box-sizing: border-box;">
+const crypto = require('crypto');
+const fetch = require('node-fetch');
+
+async function sendWebhook(targetUrl, secret, event) {
+  const body = JSON.stringify(event);
+  const sig = crypto
+    .createHmac('sha256', secret)
+    .update(body)
+    .digest('hex');
+  const res = await fetch(targetUrl, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'X-Signature': sig,
+      'X-Event-Type': event.type
+    },
+    body
+  });
+  return res.status;
+}
+                </div>
+            </div>
+            <div>
+                <h3>Receiver (Node.js) — verify webhook</h3>
+                <div style="background: #1e1e1e; color: #d4d4d4; padding: 12px; border-radius: 8px; font-family: 'Courier New', monospace; font-size: 10px; line-height: 1.6; overflow-wrap: break-word; word-wrap: break-word; border: 1px solid rgba(255, 255, 255, 0.1); white-space: pre-wrap; max-width: 100%; box-sizing: border-box;">
+const express = require('express');
+const crypto = require('crypto');
+const app = express();
+app.use(express.json({ verify: (req, res, buf) => { req.rawBody = buf; }}));
+
+function verify(req, secret) {
+  const signature = req.headers['x-signature'];
+  const expected = crypto.createHmac('sha256', secret).update(req.rawBody).digest('hex');
+  return crypto.timingSafeEqual(Buffer.from(signature||'', 'hex'), Buffer.from(expected, 'hex'));
+}
+
+app.post('/webhooks/order-created', (req, res) => {
+  if (!verify(req, process.env.WH_SECRET || 'dev-secret')) {
+    return res.status(401).json({ error: 'invalid signature' });
+  }
+  // idempotency: check event.id already processed
+  console.log('received event', req.body.id);
+  res.sendStatus(200);
+});
+
+app.listen(4005);
+                </div>
+            </div>
+            <div>
+                <h3>Retry with Backoff (concept)</h3>
+                <div style="background: #1e1e1e; color: #d4d4d4; padding: 12px; border-radius: 8px; font-family: 'Courier New', monospace; font-size: 10px; line-height: 1.6; overflow-wrap: break-word; word-wrap: break-word; border: 1px solid rgba(255, 255, 255, 0.1); white-space: pre-wrap; max-width: 100%; box-sizing: border-box;">
+maxAttempts = 6
+backoff = [1s, 2s, 4s, 8s, 16s, 32s]
+retry only on 5xx/timeout; drop on 2xx/410; stop on 4xx (bad signature)
+DLQ failed deliveries for later replay
+                </div>
+            </div>
+        </div>
+
+        <h2>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 3h3m-6 3h6M6.75 6h10.5a2.25 2.25 0 0 1 2.25 2.25v9A2.25 2.25 0 0 1 17.25 19.5H6.75A2.25 2.25 0 0 1 4.5 17.25v-9A2.25 2.25 0 0 1 6.75 6z"/></svg>
+            Tips
+        </h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>Security</h3>
+                <p>HMAC signatures, HTTPS, and allowlist of source IPs if possible.</p>
+            </div>
+            <div class="arch-card">
+                <h3>Idempotency</h3>
+                <p>Include event IDs; receivers store processed IDs to dedupe.</p>
+            </div>
+            <div class="arch-card">
+                <h3>Observability</h3>
+                <p>Log deliveries, measure latency, surface success/fail rates to clients.</p>
+            </div>
+            <div class="arch-card">
+                <h3>Self-service</h3>
+                <p>Provide test delivery, replay, pause/resume, and delivery history.</p>
+            </div>
+        </div>
+
+        <h2>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 0 1 3 19.875v-6.75ZM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V8.625ZM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V4.125Z"/></svg>
+            Best Practices
+        </h2>
+
+        <div class="pros-box">
+            <h3>Do this:</h3>
+            <ul class="features-list">
+                <li>Send clear event types and schema versions</li>
+                <li>Retry with backoff; stop after a sane limit</li>
+                <li>Return 2xx quickly; process heavy work async</li>
+                <li>Document signature verification steps</li>
+                <li>Offer replay with idempotent events</li>
+            </ul>
+        </div>
+
+        <h2>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 1 1-18 0 9 9 0 0 1 18 0zm-9 3.75h.008v.008H12v-.008z"/></svg>
+            Common Pitfalls
+        </h2>
+
+        <div class="cons-box">
+            <h3>Avoid these:</h3>
+            <ul class="features-list">
+                <li>Skipping signature checks (spoofing risk)</li>
+                <li>Assuming exactly-once delivery</li>
+                <li>Long-running processing inside the webhook response</li>
+                <li>No retry/backoff or dead-letter handling</li>
+            </ul>
+        </div>
+
+        <div class="intro-box" style="text-align: center; margin: 60px 0 40px;">
+            <p>Webhooks turn your platform into an event source. Secure them, make them reliable, and give consumers the tools to debug and replay deliveries.</p>
+        </div>
+    </div>
+</body>
+</html>

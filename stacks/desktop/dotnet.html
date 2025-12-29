@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>.NET Stack Architecture</title>
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/stacks.css">
+    <style>
+        :root {
+            --glass: rgba(255,255,255,0.10);
+            --text: #e6e6e6;
+            --muted: #b3b3b3;
+            --border: rgba(255,255,255,0.22);
+            --shadow: 0 10px 30px rgba(0,0,0,0.15);
+            --blur: 12px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        /* Layer-specific colors */
+        .layer.dotnet { border-left: 4px solid #512bd4; }
+        .layer.aspnet { border-left: 4px solid #0078d7; }
+        .layer.sqlserver { border-left: 4px solid #cc2927; }
+
+        .dotnet .layer-icon { background: linear-gradient(135deg, #7c4dff, #512bd4); }
+        .aspnet .layer-icon { background: #0b2f51; }
+        .sqlserver .layer-icon { background: #cc2927; }
+    </style>
+</head>
+<body>
+    <a href="/" class="home-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 18px; height: 18px;">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
+        </svg>
+        Home
+    </a>
+    <div class="usecase-card" aria-label="Stack Use Case">
+        <div class="uc-title">Use Case</div>
+        <div class="uc-line"><span class="label">Type:</span> Desktop Application Stack</div>
+        <div class="uc-line"><span class="label">Typical Use Case:</span> Windows desktop apps</div>
+        <div class="uc-line"><span class="label">Famous Usage:</span> Microsoft</div>
+    </div>
+    <div class="container">
+        <h1>💠 .NET Stack</h1>
+        <p class="subtitle">.NET · ASP.NET · SQL Server</p>
+
+        <div class="diagram">
+            <div class="stack-container">
+                <!-- .NET Layer -->
+                <div class="layer dotnet">
+                    <div class="layer-left">
+                        <div class="layer-icon">.N</div>
+                        <div class="layer-title">
+                            <h2>.NET</h2>
+                            <div class="full-name">Runtime & BCL</div>
+                        </div>
+                    </div>
+                    <div class="layer-description">
+                        <ul>
+                            <li>CLR/GC, JIT, cross-platform runtime</li>
+                            <li>Base Class Library (collections, IO, security)</li>
+                            <li>Dependency Injection & configuration</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="arrow">↓</div>
+
+                <!-- ASP.NET Layer -->
+                <div class="layer aspnet">
+                    <div class="layer-left">
+                        <div class="layer-icon">AS</div>
+                        <div class="layer-title">
+                            <h2>ASP.NET</h2>
+                            <div class="full-name">Web APIs & Middleware</div>
+                        </div>
+                    </div>
+                    <div class="layer-description">
+                        <ul>
+                            <li>Minimal APIs / MVC controllers</li>
+                            <li>Middleware pipeline, authN/authZ</li>
+                            <li>SignalR, endpoints, health checks</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="arrow">↓</div>
+
+                <!-- SQL Server Layer -->
+                <div class="layer sqlserver">
+                    <div class="layer-left">
+                        <div class="layer-icon">SQL</div>
+                        <div class="layer-title">
+                            <h2>SQL Server</h2>
+                            <div class="full-name">Relational Database</div>
+                        </div>
+                    </div>
+                    <div class="layer-description">
+                        <ul>
+                            <li>ACID transactions & indexing</li>
+                            <li>T-SQL stored procs, views, functions</li>
+                            <li>Replication, Always On, backups</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flow-description">
+                <strong>Request Flow:</strong> Client → ASP.NET endpoints → .NET runtime → SQL Server → .NET → ASP.NET → Client
+            </div>
+        </div>
+    </div>
+</body>
+</html>

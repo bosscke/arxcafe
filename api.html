@@ -1,0 +1,244 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>API Details • arxcafe</title>
+  <meta name="description" content="Detailed info and quick links for popular developer APIs." />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%230a0a0a'/%3E%3Ctext x='50' y='58' text-anchor='middle' font-size='52' fill='%23a7f3d0' font-family='Segoe UI, Roboto, Arial, sans-serif'%3EA%3C/text%3E%3C/svg%3E" />
+  <link rel="stylesheet" href="/css/api.css" />
+</head>
+<body>
+  <div class="backbar">
+    <button class="backbtn" onclick="window.history.length > 1 ? history.back() : window.location='/'" aria-label="Back to home">↩ Home</button>
+    <div class="tagline">From ideas to systems that last.<br>Cross the bridge. Make the leap. Start building.</div>
+  </div>
+  <main class="wrap">
+    <article class="card">
+      <header class="header">
+        <div class="badge" id="api-badge">API</div>
+        <div>
+          <h1 class="title" id="api-title">API Name</h1>
+          <p class="subtitle" id="api-sub">Category · Provider</p>
+        </div>
+        <div class="cta"><a id="api-docs" target="_blank" rel="noopener">Open Docs</a></div>
+      </header>
+      <section class="grid">
+        <div class="panel">
+          <h3>Overview</h3>
+          <p class="desc" id="api-desc">Loading...</p>
+          <div class="tags" id="api-tags"></div>
+        </div>
+        <div class="panel">
+          <h3>Quick Links</h3>
+          <div class="list" id="api-links"></div>
+          <div class="footer">Tip: Bookmark this page for quick access.</div>
+        </div>
+      </section>
+    </article>
+  </main>
+
+  <script>
+    const CATALOG = {
+      aws: {
+        name: 'AWS APIs',
+        provider: 'Amazon Web Services',
+        category: 'Cloud & Infrastructure',
+        docs: 'https://docs.aws.amazon.com/',
+        bg: "url('/blagaj.jpg')",
+        desc: 'Programmatic access to AWS services including compute, storage, IAM, networking, and more. Automate infrastructure and integrate cloud-native capabilities into your apps.',
+        tags: ['IAM','S3','EC2','Lambda','CloudWatch'],
+        links: [
+          { label: 'AWS Console', href: 'https://console.aws.amazon.com/' },
+          { label: 'API Reference', href: 'https://docs.aws.amazon.com/index.html#lang/en_us' },
+          { label: 'SDKs', href: 'https://aws.amazon.com/tools/' }
+        ]
+      },
+      gcp: {
+        name: 'Google Cloud APIs',
+        provider: 'Google Cloud',
+        category: 'Cloud & Infrastructure',
+        docs: 'https://cloud.google.com/apis',
+        bg: "url('/srebrenik.jpg')",
+        desc: 'Unified access to Google Cloud services such as Compute Engine, Cloud Run, BigQuery, and more with standardized auth via OAuth 2.0 and service accounts.',
+        tags: ['Cloud Run','GCE','GKE','BigQuery','IAM'],
+        links: [
+          { label: 'Console', href: 'https://console.cloud.google.com/' },
+          { label: 'API Library', href: 'https://console.cloud.google.com/apis/library' },
+          { label: 'Credentials', href: 'https://console.cloud.google.com/apis/credentials' }
+        ]
+      },
+      cloudflare: {
+        name: 'Cloudflare API', provider: 'Cloudflare', category: 'Networking & Edge', docs: 'https://api.cloudflare.com/',
+        bg: "url('/stolac.jpg')",
+        desc: 'Manage DNS, CDN, security rules, and Workers. Automate zone settings and retrieve analytics.',
+        tags: ['DNS','CDN','WAF','Workers'],
+        links: [
+          { label: 'Dashboard', href: 'https://dash.cloudflare.com/' },
+          { label: 'Tokens', href: 'https://dash.cloudflare.com/profile/api-tokens' }
+        ]
+      },
+      github: {
+        name: 'GitHub REST API', provider: 'GitHub', category: 'Developer & DevOps', docs: 'https://docs.github.com/rest',
+        desc: 'Automate repositories, issues, PRs, releases, actions, and more. Supports fine-grained tokens and GitHub Apps.',
+        tags: ['Repos','Issues','Actions','Apps'],
+        links: [
+          { label: 'GitHub', href: 'https://github.com' },
+          { label: 'GraphQL', href: 'https://docs.github.com/graphql' }
+        ]
+      },
+      gitlab: {
+        name: 'GitLab API', provider: 'GitLab', category: 'Developer & DevOps', docs: 'https://docs.gitlab.com/ee/api/',
+        desc: 'Integrate with projects, pipelines, and artifacts. Rich CI/CD control with personal tokens and OAuth.',
+        tags: ['Projects','Pipelines','MRs'],
+        links: [ { label: 'GitLab', href: 'https://gitlab.com' } ]
+      },
+      kubernetes: {
+        name: 'Kubernetes API', provider: 'CNCF', category: 'Orchestration', docs: 'https://kubernetes.io/docs/reference/kubernetes-api/',
+        desc: 'Declarative cluster control over workloads, services, storage, and RBAC. Interact via `kubectl` or client libraries.',
+        tags: ['Pods','Deployments','Services','RBAC'],
+        links: [ { label: 'kubectl', href: 'https://kubernetes.io/docs/reference/kubectl/' } ]
+      },
+      auth0: {
+        name: 'Auth0 API', provider: 'Okta/Auth0', category: 'Auth & Security', docs: 'https://auth0.com/docs/api',
+        desc: 'Authentication, authorization, and user management. Supports OAuth, OIDC, and social logins.',
+        tags: ['OAuth2','OIDC','M2M'],
+        links: [ { label: 'Dashboard', href: 'https://manage.auth0.com/' } ]
+      },
+      okta: {
+        name: 'Okta API', provider: 'Okta', category: 'Auth & Security', docs: 'https://developer.okta.com/docs/reference/',
+        desc: 'Enterprise identity with users, groups, policies, and SSO. Strong security and lifecycle management.',
+        tags: ['SSO','SCIM','Policies'],
+        links: [ { label: 'Developer', href: 'https://developer.okta.com' } ]
+      },
+      virustotal: {
+        name: 'VirusTotal API', provider: 'Google/Chronicle', category: 'Security', docs: 'https://docs.virustotal.com/reference/overview',
+        desc: 'File, URL, and hash scanning across many AV engines. Useful for threat intelligence.',
+        tags: ['Scanning','Threat Intel'],
+        links: [ { label: 'Portal', href: 'https://www.virustotal.com/' } ]
+      },
+      prometheus: {
+        name: 'Prometheus API', provider: 'Prometheus', category: 'Monitoring & Metrics', docs: 'https://prometheus.io/docs/prometheus/latest/querying/api/',
+        desc: 'Query metrics with PromQL and manage targets. Power time-series monitoring stacks.',
+        tags: ['PromQL','TSDB'],
+        links: [ { label: 'Docs', href: 'https://prometheus.io/docs/' } ]
+      },
+      grafana: {
+        name: 'Grafana API', provider: 'Grafana Labs', category: 'Visualization', docs: 'https://grafana.com/docs/grafana/latest/developers/http_api/',
+        desc: 'Provision dashboards, manage users, and query data sources via HTTP API.',
+        tags: ['Dashboards','Data Sources'],
+        links: [ { label: 'Cloud', href: 'https://grafana.com/cloud' } ]
+      },
+      pagerduty: {
+        name: 'PagerDuty API', provider: 'PagerDuty', category: 'Incident Response', docs: 'https://developer.pagerduty.com/api-reference/',
+        desc: 'Incidents, on-call schedules, and event ingestion for modern SRE/ops workflows.',
+        tags: ['Incidents','On-call'],
+        links: [ { label: 'App', href: 'https://pagerduty.com' } ]
+      },
+      stripe: {
+        name: 'Stripe API', provider: 'Stripe', category: 'Payments', docs: 'https://stripe.com/docs/api',
+        desc: 'Payments, subscriptions, and billing with great developer tooling and webhooks.',
+        tags: ['Payments','Webhooks','Subscriptions'],
+        links: [ { label: 'Dashboard', href: 'https://dashboard.stripe.com' } ]
+      },
+      'exchange-rates': {
+        name: 'Exchange Rates API', provider: 'apilayer', category: 'Data', docs: 'https://apilayer.com/marketplace/exchangerates_data-api',
+        desc: 'Up-to-date foreign exchange rates and currency conversion endpoints.',
+        tags: ['FX','Currencies'],
+        links: [ { label: 'Marketplace', href: 'https://apilayer.com/marketplace' } ]
+      },
+      ipinfo: {
+        name: 'IPinfo API', provider: 'IPinfo', category: 'Data', docs: 'https://ipinfo.io/developers',
+        desc: 'IP geolocation, company info, and privacy detection signals at scale.',
+        tags: ['GeoIP','ASN'],
+        links: [ { label: 'Dashboard', href: 'https://ipinfo.io/account' } ]
+      },
+      postman: {
+        name: 'Postman API', provider: 'Postman', category: 'Testing & Collaboration', docs: 'https://www.postman.com/api-platform/api/',
+        desc: 'Access Postman workspaces, collections, and monitors to automate API workflows.',
+        tags: ['Collections','Monitors'],
+        links: [ { label: 'App', href: 'https://www.postman.com/' } ]
+      },
+      k6: {
+        name: 'k6 API', provider: 'Grafana Labs', category: 'Testing & Performance', docs: 'https://k6.io/docs/',
+        desc: 'Load testing as code with JS scripts and cloud execution options.',
+        tags: ['Load','Performance'],
+        links: [ { label: 'k6 Cloud', href: 'https://app.k6.io' } ]
+      },
+      lighthouse: {
+        name: 'Lighthouse API', provider: 'Google', category: 'Web Performance', docs: 'https://developer.chrome.com/docs/lighthouse',
+        desc: 'Page audits for performance, accessibility, SEO, and best practices.',
+        tags: ['Audits','Core Web Vitals'],
+        links: [ { label: 'Chrome DevTools', href: 'https://developer.chrome.com/docs/devtools' } ]
+      },
+      ansible: {
+        name: 'Ansible API', provider: 'Red Hat', category: 'Automation', docs: 'https://docs.ansible.com/ansible/latest/',
+        desc: 'Automate IT tasks with playbooks, inventory, and collections. AWX/Tower provide REST APIs.',
+        tags: ['Automation','IaC'],
+        links: [ { label: 'AWX', href: 'https://github.com/ansible/awx' } ]
+      },
+      servicenow: {
+        name: 'ServiceNow API', provider: 'ServiceNow', category: 'ITSM', docs: 'https://developer.servicenow.com/dev.do#!/reference',
+        desc: 'Access ServiceNow tables, records, and workflows for IT service management integrations.',
+        tags: ['ITSM','Tables'],
+        links: [ { label: 'Developer', href: 'https://developer.servicenow.com' } ]
+      }
+    };
+
+    function getParam(name) {
+      const u = new URL(window.location.href);
+      return u.searchParams.get(name);
+    }
+
+    function render(apiKey) {
+      const data = CATALOG[apiKey];
+      const root = document.documentElement;
+      const title = document.getElementById('api-title');
+      const sub = document.getElementById('api-sub');
+      const desc = document.getElementById('api-desc');
+      const tags = document.getElementById('api-tags');
+      const links = document.getElementById('api-links');
+      const docs = document.getElementById('api-docs');
+      const badge = document.getElementById('api-badge');
+
+      if (!data) {
+        root.style.setProperty('--hero', "url('/hero-api.jpg')");
+        root.style.setProperty('--hero-size', 'cover');
+        sub.textContent = 'Unknown · —';
+        desc.textContent = 'We could not find details for this API key.';
+        docs.textContent = 'Back to Home';
+        docs.href = '/';
+        badge.textContent = '?';
+        return;
+      }
+
+      root.style.setProperty('--hero', data.bg || "url('/hero-api.jpg')");
+      root.style.setProperty('--hero-size', data.size || 'cover');
+      sub.textContent = `${data.category} · ${data.provider}`;
+      desc.textContent = data.desc;
+      docs.textContent = 'Open Docs';
+      docs.href = data.docs;
+      badge.textContent = (data.name.split(' ')[0] || 'API').slice(0,3).toUpperCase();
+
+      tags.innerHTML = '';
+      (data.tags || []).forEach(t => {
+        const el = document.createElement('div');
+        el.className = 'tag';
+        el.textContent = t;
+        tags.appendChild(el);
+      });
+
+      links.innerHTML = '';
+      (data.links || []).forEach(l => {
+        const a = document.createElement('a');
+        a.href = l.href; a.target = '_blank'; a.rel = 'noopener';
+        a.innerHTML = `${l.label} <span>↗</span>`;
+        links.appendChild(a);
+      });
+    }
+
+    const key = getParam('api');
+    render(key);
+  </script>
+</body>
+</html>

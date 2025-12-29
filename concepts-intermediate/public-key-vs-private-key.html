@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Public Key vs Private Key</title>
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/concepts.css">
+</head>
+<body>
+    <a href="/" class="home-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 18px; height: 18px;">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
+        </svg>
+        Home
+    </a>
+
+    <div class="container">
+        <h1>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 40px; height: 40px; display: inline-block; margin-right: 10px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 5.25a3 3 0 0 1 3 3m3 0a6 6 0 0 1-7.029 5.912c-.563-.097-1.159.026-1.563.43L10.5 17.25H8.25v2.25H6v2.25H2.25v-2.818c0-.597.237-1.17.659-1.591l6.499-6.499c.404-.404.527-1 .43-1.563A6 6 0 1 1 21.75 8.25z"/></svg>
+            Public Key vs Private Key
+        </h1>
+
+        <div class="intro-box">
+            <p><strong>Public-key cryptography</strong> uses pairs of mathematically linked keys: a <strong>public key</strong> that can be shared openly and a <strong>private key</strong> kept secret. Data encrypted with one can only be decrypted by the other, enabling secure communication and digital signatures without pre-shared secrets.</p>
+        </div>
+
+        <h2>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M6 12h12M6 6h12M6 18h12"/></svg>
+            Key Roles
+        </h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>Public Key</h3>
+                <ul class="features-list">
+                    <li>Shared freely (certs, key servers, repos)</li>
+                    <li>Used to <strong>encrypt</strong> messages to you</li>
+                    <li>Used to <strong>verify</strong> signatures you create</li>
+                    <li>Cannot decrypt or sign on its own</li>
+                </ul>
+            </div>
+            <div class="arch-card">
+                <h3>Private Key</h3>
+                <ul class="features-list">
+                    <li>Kept secret, never shared</li>
+                    <li>Used to <strong>decrypt</strong> messages encrypted to you</li>
+                    <li>Used to <strong>sign</strong> data to prove identity</li>
+                    <li>Compromise means full identity/data breach</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v18m0-18c-1.5 1.5-4.5 4.5-7.5 4.5S1.5 4.5 0 3m12 0c1.5 1.5 4.5 4.5 7.5 4.5S22.5 4.5 24 3"/></svg>
+            How It Works
+        </h2>
+
+        <div class="flow-diagram">
+            <div style="font-weight: bold; margin-bottom: 16px; color: #667eea;">Encryption (confidentiality):</div>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px;">
+                <div class="flow-step" style="border-left-color: #667eea;">Alice encrypts with Bob's public key</div>
+                <div class="flow-step" style="border-left-color: #13AA52;">Message travels over untrusted network</div>
+                <div class="flow-step" style="border-left-color: #FFA500;">Only Bob's private key can decrypt</div>
+                <div class="flow-step" style="border-left-color: #14B8A6;">Bob reads plaintext message</div>
+            </div>
+        </div>
+
+        <div class="flow-diagram" style="margin-top: 20px;">
+            <div style="font-weight: bold; margin-bottom: 16px; color: #DD0031;">Digital Signature (authenticity & integrity):</div>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px;">
+                <div class="flow-step" style="border-left-color: #DD0031;">Alice signs message with her private key</div>
+                <div class="flow-step" style="border-left-color: #8B5CF6;">Anyone can verify with Alice's public key</div>
+                <div class="flow-step" style="border-left-color: #0EA5E9;">Proves Alice authored it and it's unmodified</div>
+                <div class="flow-step" style="border-left-color: #F59E0B;">Non-repudiation: Alice can't deny signing</div>
+            </div>
+        </div>
+
+        <h2>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="m6.75 7.5 4.5 9 4.5-9m-9 0 4.5-4.5 4.5 4.5m-9 0h9m-9 0L3 12l3.75-4.5m9 0L21 12l-3.75-4.5"/></svg>
+            Common Algorithms
+        </h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>RSA</h3>
+                <ul class="features-list">
+                    <li>Encryption & signatures</li>
+                    <li>Key sizes: 2048 (min), 3072, 4096</li>
+                    <li>Mature, widely supported</li>
+                    <li>Slower than ECC for same security</li>
+                </ul>
+            </div>
+            <div class="arch-card">
+                <h3>ECDSA / EdDSA</h3>
+                <ul class="features-list">
+                    <li>Elliptic Curve signatures</li>
+                    <li>Smaller keys, faster operations</li>
+                    <li>P-256, P-384, Ed25519, Ed448</li>
+                    <li>Modern TLS/SSH/JWT default</li>
+                </ul>
+            </div>
+            <div class="arch-card">
+                <h3>Diffie-Hellman (ECDH)</h3>
+                <ul class="features-list">
+                    <li>Key agreement, not encryption/signing</li>
+                    <li>Both sides derive shared secret</li>
+                    <li>Ephemeral for forward secrecy (ECDHE)</li>
+                </ul>
+            </div>
+            <div class="arch-card">
+                <h3>Hybrid Schemes</h3>
+                <ul class="features-list">
+                    <li>Use public-key to exchange symmetric key</li>
+                    <li>Bulk data encrypted with AES/ChaCha20</li>
+                    <li>TLS, PGP, S/MIME all hybrid</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M6.75 7.5h10.5m-10.5 3h10.5m-10.5 3h10.5m-10.5 3h5.25"/></svg>
+            Real-World Use Cases
+        </h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>TLS / HTTPS</h3>
+                <p>Server cert contains public key; server uses private key in handshake to prove identity.</p>
+            </div>
+            <div class="arch-card">
+                <h3>SSH Authentication</h3>
+                <p>User's public key on server; private key on client proves identity without passwords.</p>
+            </div>
+            <div class="arch-card">
+                <h3>Code Signing</h3>
+                <p>Developer signs code with private key; users verify with public key from cert.</p>
+            </div>
+            <div class="arch-card">
+                <h3>Email (S/MIME, PGP)</h3>
+                <p>Public key encrypts email; private key decrypts. Signing proves sender authenticity.</p>
+            </div>
+        </div>
+
+        <h2>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 3h3m-6 3h6M6.75 6h10.5a2.25 2.25 0 0 1 2.25 2.25v9A2.25 2.25 0 0 1 17.25 19.5H6.75A2.25 2.25 0 0 1 4.5 17.25v-9A2.25 2.25 0 0 1 6.75 6z"/></svg>
+            Tools & Examples
+        </h2>
+
+        <div style="background: rgba(102, 126, 234, 0.1); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 12px; padding: 25px; margin: 30px 0; display: grid; gap: 18px;">
+            <div>
+                <h3>Generate RSA key pair (OpenSSL)</h3>
+                <div style="background: #1e1e1e; color: #d4d4d4; padding: 15px; border-radius: 8px; font-family: 'Courier New', monospace; font-size: 12px; line-height: 1.5; overflow-x: auto; border: 1px solid rgba(255, 255, 255, 0.1);">
+$ openssl genrsa -out private.pem 2048
+$ openssl rsa -in private.pem -pubout -out public.pem
+                </div>
+            </div>
+            <div>
+                <h3>Generate Ed25519 SSH key pair</h3>
+                <div style="background: #1e1e1e; color: #d4d4d4; padding: 15px; border-radius: 8px; font-family: 'Courier New', monospace; font-size: 12px; line-height: 1.5; overflow-x: auto; border: 1px solid rgba(255, 255, 255, 0.1);">
+$ ssh-keygen -t ed25519 -C "user@example.com"
+                </div>
+            </div>
+            <div>
+                <h3>Node.js: sign/verify (crypto module)</h3>
+                <div style="background: #1e1e1e; color: #d4d4d4; padding: 15px; border-radius: 8px; font-family: 'Courier New', monospace; font-size: 12px; line-height: 1.5; overflow-x: auto; border: 1px solid rgba(255, 255, 255, 0.1);">
+const { sign, verify, generateKeyPairSync } = require('crypto');
+const { publicKey, privateKey } = generateKeyPairSync('rsa', { modulusLength: 2048 });
+const data = Buffer.from('Hello');
+const sig = sign('sha256', data, privateKey);
+const ok = verify('sha256', data, publicKey, sig);
+console.log(ok); // true
+                </div>
+            </div>
+        </div>
+
+        <h2>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 0 1 3 19.875v-6.75ZM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V8.625ZM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V4.125Z"/></svg>
+            Best Practices
+        </h2>
+
+        <div class="pros-box">
+            <h3>Secure key management:</h3>
+            <ul class="features-list">
+                <li>Never share or transmit your private key</li>
+                <li>Store private keys encrypted at rest (passphrase-protected)</li>
+                <li>Use HSM/TPM for high-value keys (servers, CAs)</li>
+                <li>Rotate keys periodically; revoke compromised keys</li>
+                <li>Minimum RSA 2048 bits; prefer ECDSA/EdDSA when possible</li>
+                <li>Separate keys per use case (SSH, signing, encryption)</li>
+                <li>Backup private keys securely (encrypted, offline)</li>
+            </ul>
+        </div>
+
+        <h2>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 1 1-18 0 9 9 0 0 1 18 0zm-9 3.75h.008v.008H12v-.008z"/></svg>
+            Common Pitfalls
+        </h2>
+
+        <div class="cons-box">
+            <h3>Avoid these mistakes:</h3>
+            <ul class="features-list">
+                <li>Committing private keys to git/repos</li>
+                <li>Using weak/short keys (RSA < 2048, DES)</li>
+                <li>Reusing same key across multiple purposes</li>
+                <li>Storing unencrypted keys on disk/cloud</li>
+                <li>Ignoring key expiry/revocation</li>
+                <li>Trusting unverified public keys (MitM risk)</li>
+            </ul>
+        </div>
+
+        <div class="intro-box" style="text-align: center; margin: 60px 0 40px;">
+            <p>Public-key cryptography enables secure, scalable communication without pre-shared secrets. Protect private keys fiercely, distribute public keys freely, and choose strong algorithms to keep data and identities safe.</p>
+        </div>
+    </div>
+</body>
+</html>

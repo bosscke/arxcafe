@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Swift Stack – Swift · UIKit · CoreData</title>
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/stacks.css">
+    <style>
+        :root {
+            --glass: rgba(255,255,255,0.10);
+            --text: #e6e6e6;
+            --muted: #b3b3b3;
+            --border: rgba(255,255,255,0.22);
+            --shadow: 0 10px 30px rgba(0,0,0,0.15);
+            --blur: 12px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        /* Layer-specific colors */
+        .layer.swift { border-left: 4px solid #FA7343; }
+        .layer.uikit { border-left: 4px solid #007AFF; }
+        .layer.coredata { border-left: 4px solid #34C759; }
+
+        .swift .layer-icon { background: #FA7343; }
+        .uikit .layer-icon { background: #007AFF; }
+        .coredata .layer-icon { background: #34C759; }
+    </style>
+</head>
+<body>
+    <a href="/" class="home-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 18px; height: 18px;">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
+        </svg>
+        Home
+    </a>
+
+    <div class="usecase-card" aria-label="Stack Use Case">
+        <div class="uc-title">Use Case</div>
+        <div class="uc-line"><span class="label">Type:</span> Native iOS Development Stack</div>
+        <div class="uc-line"><span class="label">Typical Use Case:</span> iOS apps, iPad apps, native performance, App Store distribution</div>
+        <div class="uc-line"><span class="label">Famous Usage:</span> Apple apps, Airbnb, Lyft, Slack iOS</div>
+    </div>
+
+    <div class="container">
+        <h1>🍎 Swift Stack</h1>
+        <p class="subtitle">Swift · UIKit · CoreData</p>
+
+        <div class="diagram">
+            <div class="stack-container">
+                <div class="layer swift">
+                    <div class="layer-left">
+                        <div class="layer-icon">Sw</div>
+                        <div class="layer-title">
+                            <h2>Swift</h2>
+                            <div class="full-name">Programming Language</div>
+                        </div>
+                    </div>
+                    <div class="layer-description">
+                        <ul>
+                            <li>Modern, type-safe, optional unwrapping, pattern matching</li>
+                            <li>Fast compilation, memory safety, concurrency (async/await)</li>
+                            <li>Interop with Objective-C, playground for learning</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="arrow">↓</div>
+
+                <div class="layer uikit">
+                    <div class="layer-left">
+                        <div class="layer-icon">UI</div>
+                        <div class="layer-title">
+                            <h2>UIKit</h2>
+                            <div class="full-name">Native UI Framework</div>
+                        </div>
+                    </div>
+                    <div class="layer-description">
+                        <ul>
+                            <li>UIViewController, UIView, UIButton, UITableView components</li>
+                            <li>Auto Layout, Storyboards, Interface Builder for UI design</li>
+                            <li>Animations, transitions, gestures, navigation controllers</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="arrow">↓</div>
+
+                <div class="layer coredata">
+                    <div class="layer-left">
+                        <div class="layer-icon">CD</div>
+                        <div class="layer-title">
+                            <h2>CoreData</h2>
+                            <div class="full-name">Local Persistence Framework</div>
+                        </div>
+                    </div>
+                    <div class="layer-description">
+                        <ul>
+                            <li>Object-relational mapping, NSManagedObject entities</li>
+                            <li>Querying with NSFetchRequest, change tracking</li>
+                            <li>ICloud sync, migration tools, performance optimization</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flow-description">
+                <strong>Flow:</strong> Swift code with UIKit controllers → UIKit renders native iOS UI → CoreData persists app data locally.
+            </div>
+        </div>
+    </div>
+</body>
+</html>

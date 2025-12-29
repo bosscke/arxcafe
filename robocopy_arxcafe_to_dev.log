@@ -1,0 +1,24 @@
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robust File Copy for Windows                              
+-------------------------------------------------------------------------------
+
+  Started : Friday, December 26, 2025 12:18:47 PM
+   Source : C:\Users\bossc\Desktop\code\arxcafe\
+     Dest : C:\Users\bossc\Desktop\code\arxcafe-dev\
+
+    Files : *.*
+	    
+  Options : *.* /FFT /S /E /DCOPY:DA /COPY:DAT /PURGE /MIR /Z /XA:H /R:3 /W:5 
+
+------------------------------------------------------------------------------
+
+	                  15	C:\Users\bossc\Desktop\code\arxcafe\
+	*EXTRA Dir        -1	C:\Users\bossc\Desktop\code\arxcafe-dev\scripts\
+	  *EXTRA File 		   12851	api.html.bak
+	  *EXTRA File 		   13525	api.html.bak.enforce
+	  *EXTRA File 		   13515	api.html.bak.footer
+	  *EXTRA File 		   67943	index.html.bak.footer
+	    Older     		   12591	api.html100%  
+	    Older     		   66876	index.html100%  
+	    New File  		       0	robocopy_arxcafe_to_dev.log

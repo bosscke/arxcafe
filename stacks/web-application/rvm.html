@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RVM Stack Architecture</title>
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/stacks.css">
+    <style>
+        :root {
+            --glass: rgba(255,255,255,0.10);
+            --text: #e6e6e6;
+            --muted: #b3b3b3;
+            --border: rgba(255,255,255,0.22);
+            --shadow: 0 10px 30px rgba(0,0,0,0.15);
+            --blur: 12px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        /* Layer-specific colors */
+        .layer.ruby { border-left: 4px solid #cc0000; }
+        .layer.rails { border-left: 4px solid #d3002d; }
+        .layer.nginx { border-left: 4px solid #0fa958; }
+        .layer.mysql { border-left: 4px solid #00758f; }
+
+        .ruby .layer-icon { background: #cc0000; }
+        .rails .layer-icon { background: #d3002d; }
+        .nginx .layer-icon { background: #0f9d58; }
+        .mysql .layer-icon { background: #00758f; }
+    </style>
+</head>
+<body>
+    <a href="/" class="home-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 18px; height: 18px;">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
+        </svg>
+        Home
+    </a>
+
+    <div class="usecase-card" aria-label="Stack Use Case">
+        <div class="uc-title">Use Case</div>
+        <div class="uc-line"><span class="label">Type:</span> Web (Dev Tooling)</div>
+        <div class="uc-line"><span class="label">Typical Use Case:</span> Ruby version & environment management</div>
+        <div class="uc-line"><span class="label">Famous Usage:</span> GitHub</div>
+    </div>
+
+    <div class="container">
+        <h1>💎 RVM Stack</h1>
+        <p class="subtitle">Ruby · Rails · Nginx · MySQL</p>
+
+        <div class="diagram">
+            <div class="stack-container">
+                <!-- Ruby Layer -->
+                <div class="layer ruby">
+                    <div class="layer-left">
+                        <div class="layer-icon">Rb</div>
+                        <div class="layer-title">
+                            <h2>Ruby</h2>
+                            <div class="full-name">Runtime & Gems (RVM)</div>
+                        </div>
+                    </div>
+                    <div class="layer-description">
+                        <ul>
+                            <li>Managed via RVM (versions, gemsets)</li>
+                            <li>Bundler for dependency management</li>
+                            <li>Rack interface for web servers</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="arrow">↓</div>
+
+                <!-- Rails Layer -->
+                <div class="layer rails">
+                    <div class="layer-left">
+                        <div class="layer-icon">R</div>
+                        <div class="layer-title">
+                            <h2>Rails</h2>
+                            <div class="full-name">MVC Web Framework</div>
+                        </div>
+                    </div>
+                    <div class="layer-description">
+                        <ul>
+                            <li>Controllers, Active Record ORM, jobs</li>
+                            <li>Migrations, caching, Action Cable</li>
+                            <li>API mode or full-stack views</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="arrow">↓</div>
+
+                <!-- Nginx Layer -->
+                <div class="layer nginx">
+                    <div class="layer-left">
+                        <div class="layer-icon">NX</div>
+                        <div class="layer-title">
+                            <h2>Nginx</h2>
+                            <div class="full-name">Reverse Proxy & Static</div>
+                        </div>
+                    </div>
+                    <div class="layer-description">
+                        <ul>
+                            <li>SSL/TLS, gzip, caching, compression</li>
+                            <li>Reverse proxy to Rack app server</li>
+                            <li>Serves static assets efficiently</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="arrow">↓</div>
+
+                <!-- MySQL Layer -->
+                <div class="layer mysql">
+                    <div class="layer-left">
+                        <div class="layer-icon">MY</div>
+                        <div class="layer-title">
+                            <h2>MySQL</h2>
+                            <div class="full-name">Relational Database</div>
+                        </div>
+                    </div>
+                    <div class="layer-description">
+                        <ul>
+                            <li>ACID storage with InnoDB</li>
+                            <li>Indexes, replication, partitioning</li>
+                            <li>Migrations managed by Rails</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flow-description">
+                <strong>Request Flow:</strong> Client → Nginx → Rails (Ruby/Rack) → MySQL → Rails → Nginx → Client
+            </div>
+        </div>
+    </div>
+</body>
+</html>

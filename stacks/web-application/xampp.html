@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>XAMPP Stack Architecture</title>
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/stacks.css">
+    <style>
+        :root {
+            --glass: rgba(255,255,255,0.10);
+            --text: #e6e6e6;
+            --muted: #b3b3b3;
+            --border: rgba(255,255,255,0.22);
+            --shadow: 0 10px 30px rgba(0,0,0,0.15);
+            --blur: 12px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        /* Layer-specific colors */
+        .layer.crossplatform { border-left: 4px solid #FB7A24; }
+        .layer.apache { border-left: 4px solid #D22128; }
+        .layer.mysql { border-left: 4px solid #00758F; }
+        .layer.php { border-left: 4px solid #777BB3; }
+        .layer.perl { border-left: 4px solid #39457E; }
+
+        .crossplatform .layer-icon { background: #FB7A24; }
+        .apache .layer-icon { background: #D22128; }
+        .mysql .layer-icon { background: #00758F; }
+        .php .layer-icon { background: #777BB3; }
+        .perl .layer-icon { background: #39457E; }
+    </style>
+</head>
+<body>
+    <a href="/" class="home-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 18px; height: 18px;">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
+        </svg>
+        Home
+    </a>
+
+    <div class="usecase-card" aria-label="Stack Use Case">
+        <div class="uc-title">Use Case</div>
+        <div class="uc-line"><span class="label">Type:</span> Web (Local Dev)</div>
+        <div class="uc-line"><span class="label">Typical Use Case:</span> Local development & testing of PHP apps</div>
+        <div class="uc-line"><span class="label">Famous Usage:</span> WordPress developers</div>
+    </div>
+
+    <div class="container">
+        <h1>🚀 XAMPP Stack</h1>
+        <p class="subtitle">Cross-Platform Development Environment</p>
+
+        <div class="diagram">
+            <div class="stack-container">
+                <!-- Cross-platform Layer -->
+                <div class="layer crossplatform">
+                    <div class="layer-left">
+                        <div class="layer-icon">X</div>
+                        <div class="layer-title">
+                            <h2>Cross-Platform</h2>
+                            <div class="full-name">OS Independence</div>
+                        </div>
+                    </div>
+                    <div class="layer-description">
+                        <ul>
+                            <li>Works on Windows, Mac, Linux</li>
+                            <li>Portable development package</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="arrow">↓</div>
+
+                <!-- Apache Layer -->
+                <div class="layer apache">
+                    <div class="layer-left">
+                        <div class="layer-icon">A</div>
+                        <div class="layer-title">
+                            <h2>Apache</h2>
+                            <div class="full-name">Web Server</div>
+                        </div>
+                    </div>
+                    <div class="layer-description">
+                        <ul>
+                            <li>Handles HTTP requests</li>
+                            <li>Routes to PHP/Perl</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="arrow">↓</div>
+
+                <!-- MySQL Layer -->
+                <div class="layer mysql">
+                    <div class="layer-left">
+                        <div class="layer-icon">M</div>
+                        <div class="layer-title">
+                            <h2>MySQL</h2>
+                            <div class="full-name">Database Management</div>
+                        </div>
+                    </div>
+                    <div class="layer-description">
+                        <ul>
+                            <li>Persistent data storage</li>
+                            <li>SQL query processing</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="arrow">↓</div>
+
+                <!-- PHP Layer -->
+                <div class="layer php">
+                    <div class="layer-left">
+                        <div class="layer-icon">P</div>
+                        <div class="layer-title">
+                            <h2>PHP</h2>
+                            <div class="full-name">Primary Language</div>
+                        </div>
+                    </div>
+                    <div class="layer-description">
+                        <ul>
+                            <li>Server-side scripting</li>
+                            <li>Dynamic content generation</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="arrow">↓</div>
+
+                <!-- Perl Layer -->
+                <div class="layer perl">
+                    <div class="layer-left">
+                        <div class="layer-icon">P</div>
+                        <div class="layer-title">
+                            <h2>Perl</h2>
+                            <div class="full-name">Alternative Language</div>
+                        </div>
+                    </div>
+                    <div class="layer-description">
+                        <ul>
+                            <li>Text processing & CGI scripts</li>
+                            <li>System administration tasks</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flow-description">
+                <strong>All-in-One Package:</strong> XAMPP bundles all components for easy local development on any platform
+            </div>
+        </div>
+    </div>
+</body>
+</html>

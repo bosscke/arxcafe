@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTTP Methods (GET, POST, PUT, DELETE)</title>
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/concepts.css">
+</head>
+<body>
+    <a href="/" class="home-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 18px; height: 18px;">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
+        </svg>
+        Home
+    </a>
+
+    <div class="container">
+        <h1><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 40px; height: 40px; display: inline-block; margin-right: 10px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M17.25 6.75 22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3-4.5 16.5" /></svg> HTTP Methods (Verbs)</h1>
+
+        <div class="intro-box">
+            <p><strong>HTTP Methods</strong> (also called HTTP verbs) define the <strong>action</strong> to be performed on a resource. They tell the server what operation the client wants to execute: reading data (GET), creating new resources (POST), updating existing ones (PUT), or deleting them (DELETE). These methods form the foundation of RESTful API design and enable standardized communication between clients and servers.</p>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 21h16.5M4.5 3h15M5.25 3v15m13.5-15v15M9 6.75h1.5m-1.5 4.5h1.5m-1.5 4.5h1.5m4.5-13.5h1.5m-1.5 4.5h1.5m-1.5 4.5h1.5" /></svg> Core HTTP Methods</h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>GET</h3>
+                <p>Retrieve data from the server. Most common HTTP method for reading resources.</p>
+                <ul class="features-list">
+                    <li>Read-only operation (safe)</li>
+                    <li>Idempotent (same result every time)</li>
+                    <li>Can be cached by browsers</li>
+                    <li>Parameters in URL query string</li>
+                    <li>No request body</li>
+                    <li>Visible in browser history</li>
+                    <li>Can be bookmarked</li>
+                    <li>Length restrictions on URL</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>POST</h3>
+                <p>Submit data to create a new resource on the server.</p>
+                <ul class="features-list">
+                    <li>Creates new resources</li>
+                    <li>Not idempotent (repeated calls create duplicates)</li>
+                    <li>Not cached by default</li>
+                    <li>Data sent in request body</li>
+                    <li>Can send large amounts of data</li>
+                    <li>Not visible in URL</li>
+                    <li>Cannot be bookmarked</li>
+                    <li>More secure for sensitive data</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>PUT</h3>
+                <p>Update or replace an entire existing resource on the server.</p>
+                <ul class="features-list">
+                    <li>Updates entire resource</li>
+                    <li>Idempotent (same result when repeated)</li>
+                    <li>Not cached</li>
+                    <li>Data sent in request body</li>
+                    <li>Requires full resource representation</li>
+                    <li>Creates resource if doesn't exist</li>
+                    <li>Overwrites existing data</li>
+                    <li>Used in RESTful APIs</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>DELETE</h3>
+                <p>Remove a resource from the server.</p>
+                <ul class="features-list">
+                    <li>Deletes specified resource</li>
+                    <li>Idempotent (deleting again has no effect)</li>
+                    <li>Not cached</li>
+                    <li>Usually no request body</li>
+                    <li>Resource identified in URL</li>
+                    <li>May return deleted resource in response</li>
+                    <li>Permanent operation (typically)</li>
+                    <li>Requires proper authorization</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" /></svg> Additional HTTP Methods</h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>PATCH</h3>
+                <p>Partially update a resource without replacing the entire object.</p>
+                <ul class="features-list">
+                    <li>Updates specific fields only</li>
+                    <li>More efficient than PUT for small changes</li>
+                    <li>Not always idempotent</li>
+                    <li>Sends only changed fields</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>HEAD</h3>
+                <p>Same as GET but returns only headers, no response body.</p>
+                <ul class="features-list">
+                    <li>Check if resource exists</li>
+                    <li>Get metadata (size, modified date)</li>
+                    <li>Test links before downloading</li>
+                    <li>Faster than GET</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>OPTIONS</h3>
+                <p>Describe communication options for the target resource.</p>
+                <ul class="features-list">
+                    <li>Returns allowed HTTP methods</li>
+                    <li>Used in CORS preflight requests</li>
+                    <li>Discovers server capabilities</li>
+                    <li>Safe and idempotent</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>TRACE</h3>
+                <p>Echoes back the received request for debugging purposes.</p>
+                <ul class="features-list">
+                    <li>Diagnostic tool</li>
+                    <li>Often disabled for security</li>
+                    <li>Shows request path through proxies</li>
+                    <li>Rarely used in production</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0 3.181 3.183a8.25 8.25 0 0 0 13.803-3.7M4.031 9.865a8.25 8.25 0 0 1 13.803-3.7l3.181 3.182m0-4.991v4.99" /></svg> CRUD Operations Mapping</h2>
+
+        <div class="flow-diagram">
+            <div style="font-weight: bold; margin-bottom: 20px; color: #667eea;">HTTP Methods → Database Operations</div>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; text-align: left;">
+                <div class="flow-step">POST → CREATE</div>
+                <div class="flow-step">GET → READ</div>
+                <div class="flow-step">PUT/PATCH → UPDATE</div>
+                <div class="flow-step">DELETE → DELETE</div>
+            </div>
+        </div>
+
+        <h3>RESTful API Example:</h3>
+        <div class="diagram-box">
+            <div style="text-align: left; font-family: 'Courier New', monospace; line-height: 2;">
+                <p><strong>GET</strong> /api/users → List all users</p>
+                <p><strong>GET</strong> /api/users/123 → Get user with ID 123</p>
+                <p><strong>POST</strong> /api/users → Create new user</p>
+                <p><strong>PUT</strong> /api/users/123 → Replace user 123 entirely</p>
+                <p><strong>PATCH</strong> /api/users/123 → Update specific fields of user 123</p>
+                <p><strong>DELETE</strong> /api/users/123 → Delete user 123</p>
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75m-3-7.036A11.959 11.959 0 0 1 3.598 6 11.99 11.99 0 0 0 3 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285Z" /></svg> Key Properties</h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>Safe Methods</h3>
+                <p>Do not modify server state. Read-only operations.</p>
+                <ul class="features-list">
+                    <li><strong>GET:</strong> Retrieve data only</li>
+                    <li><strong>HEAD:</strong> Get headers only</li>
+                    <li><strong>OPTIONS:</strong> Query capabilities</li>
+                    <li>Can be cached aggressively</li>
+                    <li>No side effects on server</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Idempotent Methods</h3>
+                <p>Multiple identical requests have the same effect as one request.</p>
+                <ul class="features-list">
+                    <li><strong>GET:</strong> Always returns same data</li>
+                    <li><strong>PUT:</strong> Same update = same result</li>
+                    <li><strong>DELETE:</strong> Deleting deleted resource = no change</li>
+                    <li><strong>HEAD, OPTIONS:</strong> Always safe and idempotent</li>
+                    <li><strong>POST:</strong> NOT idempotent (creates duplicates)</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> GET vs POST Comparison</h2>
+
+        <div class="pros-cons">
+            <div class="pros-box" style="border-left-color: #667eea;">
+                <h3>When to Use GET</h3>
+                <ul class="features-list">
+                    <li>Retrieving data (search, filters)</li>
+                    <li>Shareable/bookmarkable URLs</li>
+                    <li>Cacheable requests</li>
+                    <li>Non-sensitive data</li>
+                    <li>Read-only operations</li>
+                    <li>Browser back/forward navigation</li>
+                    <li>Small amounts of data</li>
+                </ul>
+            </div>
+
+            <div class="cons-box" style="border-left-color: #667eea;">
+                <h3>When to Use POST</h3>
+                <ul class="features-list">
+                    <li>Creating new resources</li>
+                    <li>Submitting forms</li>
+                    <li>Sensitive data (passwords)</li>
+                    <li>Large data payloads</li>
+                    <li>File uploads</li>
+                    <li>Non-idempotent operations</li>
+                    <li>Actions with side effects</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9.004 9.004 0 0 0 8.716-6.747M12 21a9.004 9.004 0 0 1-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 0 1 7.843 4.582M12 3a8.997 8.997 0 0 0-7.843 4.582m15.686 0A11.953 11.953 0 0 1 12 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0 1 21 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0 1 12 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 0 1 3 12c0-1.605.42-3.113 1.157-4.418" /></svg> Real-World Examples</h2>
+
+        <div class="arch-card" style="margin: 30px 0;">
+            <h3>Common Use Cases by Method:</h3>
+            <p><strong>GET Examples:</strong></p>
+            <ul style="list-style-type: disc; margin-left: 30px; line-height: 1.8;">
+                <li>Loading web pages, images, stylesheets</li>
+                <li>Search queries (Google, Amazon)</li>
+                <li>Fetching user profiles, product listings</li>
+                <li>API endpoints that return data</li>
+            </ul>
+            
+            <p style="margin-top: 20px;"><strong>POST Examples:</strong></p>
+            <ul style="list-style-type: disc; margin-left: 30px; line-height: 1.8;">
+                <li>User registration and login</li>
+                <li>Creating posts on social media</li>
+                <li>Adding items to shopping cart</li>
+                <li>File uploads, form submissions</li>
+            </ul>
+
+            <p style="margin-top: 20px;"><strong>PUT Examples:</strong></p>
+            <ul style="list-style-type: disc; margin-left: 30px; line-height: 1.8;">
+                <li>Updating entire user profile</li>
+                <li>Replacing document content</li>
+                <li>Overwriting configuration settings</li>
+            </ul>
+
+            <p style="margin-top: 20px;"><strong>PATCH Examples:</strong></p>
+            <ul style="list-style-type: disc; margin-left: 30px; line-height: 1.8;">
+                <li>Updating username only</li>
+                <li>Changing email address</li>
+                <li>Toggling feature flags</li>
+            </ul>
+
+            <p style="margin-top: 20px;"><strong>DELETE Examples:</strong></p>
+            <ul style="list-style-type: disc; margin-left: 30px; line-height: 1.8;">
+                <li>Deleting user account</li>
+                <li>Removing items from cart</li>
+                <li>Unsubscribing from services</li>
+            </ul>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle; color: #DD0031;"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 1 1-18 0 9 9 0 0 1 18 0zm-9 3.75h.008v.008H12v-.008z" /></svg> Common Mistakes</h2>
+
+        <div class="cons-box">
+            <h3>HTTP Method Anti-Patterns</h3>
+            <ul class="features-list">
+                <li><strong>Using GET for Mutations:</strong> Never use GET to create, update, or delete data</li>
+                <li><strong>Sensitive Data in GET:</strong> Don't put passwords or tokens in URL parameters</li>
+                <li><strong>Not Using Idempotent Methods:</strong> PUT and DELETE should be safely repeatable</li>
+                <li><strong>POST for Everything:</strong> Don't default to POST when GET, PUT, or DELETE is appropriate</li>
+                <li><strong>Ignoring HTTP Semantics:</strong> Use methods according to their intended purpose</li>
+                <li><strong>Wrong Status Codes:</strong> Return correct codes (200 OK, 201 Created, 204 No Content)</li>
+                <li><strong>PUT Without Full Resource:</strong> PUT should send complete representation</li>
+                <li><strong>DELETE With Body:</strong> Avoid sending request body with DELETE</li>
+            </ul>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 0 0-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 0 0 3.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 0 0 3.09 3.09l2.846.813-2.846.813a4.5 4.5 0 0 0-3.09 3.09l-.813 2.846zm6.375-5.414l.902-2.707a.75.75 0 0 0 1.386 0l.902 2.707a3 3 0 0 0 2.591 2.591l2.707.902a.75.75 0 0 0 0 1.386l-2.707.902a3 3 0 0 0-2.591 2.591l-.902 2.707a.75.75 0 0 0-1.386 0l-.902-2.707a3 3 0 0 0-2.591-2.591l-2.707-.902a.75.75 0 0 0 0-1.386l2.707-.902a3 3 0 0 0 2.591-2.591z" /></svg> Best Practices</h2>
+
+        <div class="intro-box">
+            <h3>Using HTTP Methods Correctly:</h3>
+            <ul class="features-list">
+                <li><strong>Follow REST Principles:</strong> Use standard CRUD mapping (POST=Create, GET=Read, PUT=Update, DELETE=Delete)</li>
+                <li><strong>Use Correct Status Codes:</strong> 200 OK, 201 Created, 204 No Content, 404 Not Found, etc.</li>
+                <li><strong>Implement Idempotency:</strong> Ensure PUT, DELETE, GET produce same result when repeated</li>
+                <li><strong>Version Your APIs:</strong> Use /v1/, /v2/ prefixes to maintain backward compatibility</li>
+                <li><strong>Validate Input:</strong> Always validate request data on server-side</li>
+                <li><strong>Use PATCH for Partial Updates:</strong> More efficient than replacing entire resource with PUT</li>
+                <li><strong>Document API Endpoints:</strong> Clear documentation of methods, parameters, responses</li>
+                <li><strong>Handle OPTIONS for CORS:</strong> Support preflight requests properly</li>
+                <li><strong>Secure Sensitive Operations:</strong> Require authentication for POST, PUT, DELETE</li>
+                <li><strong>Return Appropriate Data:</strong> POST/PUT return created/updated resource, DELETE returns 204 or deleted item</li>
+            </ul>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M17.25 6.75 22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3-4.5 16.5" /></svg> Code Examples</h2>
+
+        <div class="arch-card" style="margin: 30px 0;">
+            <h3>JavaScript Fetch API Examples:</h3>
+            <div class="code-example">
+// GET Request
+fetch('/api/users/123')
+    .then(res => res.json())
+    .then(data => console.log(data));
+
+// POST Request
+fetch('/api/users', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ name: 'John', email: 'john@example.com' })
+})
+    .then(res => res.json())
+    .then(data => console.log(data));
+
+// PUT Request
+fetch('/api/users/123', {
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ name: 'John Doe', email: 'john@example.com', age: 30 })
+})
+    .then(res => res.json())
+    .then(data => console.log(data));
+
+// PATCH Request
+fetch('/api/users/123', {
+    method: 'PATCH',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ name: 'Jane Doe' })
+})
+    .then(res => res.json())
+    .then(data => console.log(data));
+
+// DELETE Request
+fetch('/api/users/123', {
+    method: 'DELETE'
+})
+    .then(res => console.log('Deleted'));
+            </div>
+        </div>
+
+        <div class="intro-box" style="text-align: center; margin: 60px 0 40px;">
+            <p>HTTP methods are the verbs of the web, defining what action to perform on resources. Understanding and correctly implementing these methods is essential for building RESTful APIs and creating robust, maintainable web applications that follow web standards.</p>
+        </div>
+    </div>
+</body>
+</html>
