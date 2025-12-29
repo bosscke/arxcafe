@@ -282,3 +282,27 @@ body.http-vs-https-page {
         background-position: 50% 8%;
     }
 }
+
+/* Shared mobile-friendly background for all concept pages */
+body[class*="-page"] {
+    background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('/hero-night.jpg');
+    background-position: center top;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+@media (max-width: 768px) {
+    body[class*="-page"] {
+        background-attachment: scroll;
+        background-position: 50% 15%;
+        background-size: cover;
+        background-color: #0b1120;
+    }
+}
+
+@media (max-width: 480px) {
+    body[class*="-page"] {
+        background-size: 120% auto;
+        background-position: 50% 8%;
+    }
+}
