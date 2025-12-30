@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vertical Scaling</title>
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/concepts.css">
+    <link rel="stylesheet" href="/css/concepts-advance.css">
+</head>
+<body class="vertical-scaling-page">
+    <a href="/" class="home-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 18px; height: 18px;">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
+        </svg>
+        Home
+    </a>
+
+    <div class="container">
+        <div style="text-align: center; margin-bottom: 30px; padding: 20px; background: rgba(102, 126, 234, 0.15); border-radius: 12px; border: 1px solid rgba(102, 126, 234, 0.3);">
+            <p style="color: #a8b8ff; font-size: 1.1em; margin: 0; font-weight: 600;">Architects are building their own tools.</p>
+        </div>
+        <h1><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 40px; height: 40px; display: inline-block; margin-right: 10px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 15.75l7.5-7.5 7.5 7.5" /></svg> Vertical Scaling</h1>
+
+        <div class="intro-box">
+            <p><strong>Vertical scaling</strong> (also called "scaling up") is the process of increasing the capacity of a single server by adding more resources such as CPU, RAM, or storage. Unlike horizontal scaling which adds more machines, vertical scaling enhances the performance of an existing machine, allowing it to handle more requests and process more data without increasing the number of servers.</p>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Core Concepts</h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>Definition</h3>
+                <p>Adding more computational resources to a single server rather than distributing load across multiple servers.</p>
+                <ul class="features-list">
+                    <li>Increase CPU cores or processor speed</li>
+                    <li>Add more RAM (memory)</li>
+                    <li>Upgrade storage capacity</li>
+                    <li>Enhance network bandwidth</li>
+                    <li>Single point of failure remains</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>How It Works</h3>
+                <p>When a server reaches capacity limits, administrators upgrade the hardware to increase performance.</p>
+                <ul class="features-list">
+                    <li>Requires downtime for hardware replacement</li>
+                    <li>Application typically doesn't need code changes</li>
+                    <li>Existing connections maintained after upgrade</li>
+                    <li>Database connections remain the same</li>
+                    <li>Usually faster to implement than horizontal scaling</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Advantages</h2>
+
+        <div class="pros-box">
+            <h3>Benefits of Vertical Scaling</h3>
+            <ul class="features-list">
+                <li><strong>Simplicity:</strong> No architectural changes required</li>
+                <li><strong>Lower Complexity:</strong> No load balancing or distributed system concerns</li>
+                <li><strong>Cost-Effective Initially:</strong> Cheaper than buying multiple servers</li>
+                <li><strong>Easier Management:</strong> Single server to maintain and monitor</li>
+                <li><strong>Better Performance:</strong> Faster communication between components</li>
+                <li><strong>Less Network Overhead:</strong> No inter-server communication needed</li>
+                <li><strong>Quick Deployment:</strong> Can be implemented faster than horizontal scaling</li>
+                <li><strong>Data Consistency:</strong> Easier to maintain ACID properties</li>
+            </ul>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle; color: #DD0031;"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 1 1-18 0 9 9 0 0 1 18 0zm-9 3.75h.008v.008H12v-.008z" /></svg> Disadvantages</h2>
+
+        <div class="cons-box">
+            <h3>Limitations of Vertical Scaling</h3>
+            <ul class="features-list">
+                <li><strong>Physical Limits:</strong> Hardware has maximum capacity constraints</li>
+                <li><strong>Downtime Required:</strong> Usually requires taking server offline for upgrades</li>
+                <li><strong>Higher Hardware Costs:</strong> Premium hardware becomes exponentially more expensive</li>
+                <li><strong>Single Point of Failure:</strong> One server = entire system down if it fails</li>
+                <li><strong>Diminishing Returns:</strong> Performance gains decrease with each upgrade</li>
+                <li><strong>No Redundancy:</strong> Cannot distribute load for fault tolerance</li>
+                <li><strong>Increased Complexity Later:</strong> Eventually requires redesign for scaling</li>
+                <li><strong>Resource Wastage:</strong> May not fully utilize all upgraded resources</li>
+            </ul>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Real-World Examples</h3>
+
+        <div class="arch-card" style="margin: 30px 0;">
+            <h3>Common Use Cases:</h3>
+            <p><strong>Small Applications:</strong> Startups and small projects with predictable growth</p>
+            <p><strong>Database Servers:</strong> Adding RAM and CPU for better query performance</p>
+            <p><strong>Legacy Systems:</strong> Systems not designed for distributed architectures</p>
+            <p><strong>Specialized Workloads:</strong> Machine learning, rendering, data processing</p>
+            <p><strong>Development/Testing:</strong> Increasing resources for build and test environments</p>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M7.5 21 3 16.5m0 0L7.5 12M3 16.5h13.5m0-13.5L21 7.5m0 0L16.5 12M21 7.5H7.5" /></svg> Vertical vs Horizontal Scaling</h2>
+
+        <div class="flow-diagram">
+            <div style="font-weight: bold; margin-bottom: 20px; color: #667eea;">Comparison</div>
+            <div style="text-align: left; display: inline-block;">
+                <p style="margin: 10px 0;"><strong>Vertical (Scale Up):</strong> One powerful server</p>
+                <p style="margin: 10px 0;"><strong>Horizontal (Scale Out):</strong> Multiple smaller servers</p>
+                <p style="margin: 10px 0;"><strong>Best Combined:</strong> Use both strategies for optimal performance</p>
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Best Practices</h2>
+
+        <div class="intro-box">
+            <h3>Implementing Vertical Scaling Effectively:</h3>
+            <ul class="features-list">
+                <li><strong>Monitor Performance:</strong> Track CPU, memory, and I/O usage trends</li>
+                <li><strong>Plan Upgrades:</strong> Upgrade before hitting 100% capacity</li>
+                <li><strong>Test Compatibility:</strong> Ensure hardware is compatible with existing system</li>
+                <li><strong>Schedule Downtime:</strong> Plan upgrades during maintenance windows</li>
+                <li><strong>Backup First:</strong> Always backup data before hardware changes</li>
+                <li><strong>Know Your Limits:</strong> Understand maximum hardware capabilities</li>
+                <li><strong>Consider Cloud:</strong> Cloud platforms allow flexible vertical scaling without physical work</li>
+                <li><strong>Plan Horizontal:</strong> Have horizontal scaling plan ready for future growth</li>
+                <li><strong>Monitor After:</strong> Verify performance improvement post-upgrade</li>
+            </ul>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> When to Use Vertical Scaling</h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>Good Fit</h3>
+                <ul class="features-list">
+                    <li>Small to medium applications</li>
+                    <li>Simple architecture needs</li>
+                    <li>Budget constraints initially</li>
+                    <li>Legacy system limitations</li>
+                    <li>Predictable growth patterns</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Poor Fit</h3>
+                <ul class="features-list">
+                    <li>Explosive growth scenarios</li>
+                    <li>High availability requirements</li>
+                    <li>Need for fault tolerance</li>
+                    <li>Real-time distributed systems</li>
+                    <li>Services with heavy traffic spikes</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="intro-box" style="text-align: center; margin: 60px 0 40px;">
+            <p>Vertical scaling is a valuable first step for growing applications, but most large-scale systems eventually combine vertical and horizontal scaling strategies for optimal performance and reliability.</p>
+        </div>
+    </div>
+</body>
+</html>

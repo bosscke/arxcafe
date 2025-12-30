@@ -891,6 +891,266 @@ const server  = http.createServer((req,res) => {
             res.writeHead(200, {'Content-Type': 'text/html', 'Cache-Control': 'no-store'});
             res.end(data);
         });
+    } else if(pathName === '/concepts-advance/vertical-scaling' || pathName === '/concepts-advance/vertical-scaling.html') {
+        fs.readFile(path.join(__dirname, 'concepts-advance/vertical-scaling.html'), 'utf8', (err, data) => {
+            if (err) {
+                res.writeHead(500, {'Content-Type': 'text/plain'});
+                res.end('Error loading page');
+                return;
+            }
+            res.writeHead(200, {'Content-Type': 'text/html', 'Cache-Control': 'no-store'});
+            res.end(data);
+        });
+    } else if(pathName === '/concepts-advance/horizontal-scaling' || pathName === '/concepts-advance/horizontal-scaling.html') {
+        fs.readFile(path.join(__dirname, 'concepts-advance/horizontal-scaling.html'), 'utf8', (err, data) => {
+            if (err) {
+                res.writeHead(500, {'Content-Type': 'text/plain'});
+                res.end('Error loading page');
+                return;
+            }
+            res.writeHead(200, {'Content-Type': 'text/html', 'Cache-Control': 'no-store'});
+            res.end(data);
+        });
+    } else if(pathName === '/concepts-advance/load-balancer' || pathName === '/concepts-advance/load-balancer.html') {
+        fs.readFile(path.join(__dirname, 'concepts-advance/load-balancer.html'), 'utf8', (err, data) => {
+            if (err) {
+                res.writeHead(500, {'Content-Type': 'text/plain'});
+                res.end('Error loading page');
+                return;
+            }
+            res.writeHead(200, {'Content-Type': 'text/html', 'Cache-Control': 'no-store'});
+            res.end(data);
+        });
+    } else if(pathName === '/concepts-advance/cdn' || pathName === '/concepts-advance/cdn.html') {
+        fs.readFile(path.join(__dirname, 'concepts-advance/cdn.html'), 'utf8', (err, data) => {
+            if (err) {
+                res.writeHead(500, {'Content-Type': 'text/plain'});
+                res.end('Error loading page');
+                return;
+            }
+            res.writeHead(200, {'Content-Type': 'text/html', 'Cache-Control': 'no-store'});
+            res.end(data);
+        });
+    } else if(pathName === '/concepts-advance/latency' || pathName === '/concepts-advance/latency.html') {
+        fs.readFile(path.join(__dirname, 'concepts-advance/latency.html'), 'utf8', (err, data) => {
+            if (err) {
+                res.writeHead(500, {'Content-Type': 'text/plain'});
+                res.end('Error loading page');
+                return;
+            }
+            res.writeHead(200, {'Content-Type': 'text/html', 'Cache-Control': 'no-store'});
+            res.end(data);
+        });
+    } else if(pathName === '/concepts-advance/throughput' || pathName === '/concepts-advance/throughput.html') {
+        fs.readFile(path.join(__dirname, 'concepts-advance/throughput.html'), 'utf8', (err, data) => {
+            if (err) {
+                res.writeHead(500, {'Content-Type': 'text/plain'});
+                res.end('Error loading page');
+                return;
+            }
+            res.writeHead(200, {'Content-Type': 'text/html', 'Cache-Control': 'no-store'});
+            res.end(data);
+        });
+    } else if(pathName === '/concepts-advance/health-checks' || pathName === '/concepts-advance/health-checks.html') {
+        fs.readFile(path.join(__dirname, 'concepts-advance/health-checks.html'), 'utf8', (err, data) => {
+            if (err) {
+                res.writeHead(500, {'Content-Type': 'text/plain'});
+                res.end('Error loading page');
+                return;
+            }
+            res.writeHead(200, {'Content-Type': 'text/html', 'Cache-Control': 'no-store'});
+            res.end(data);
+        });
+    } else if(pathName === '/concepts-advance/failover' || pathName === '/concepts-advance/failover.html') {
+        fs.readFile(path.join(__dirname, 'concepts-advance/failover.html'), 'utf8', (err, data) => {
+            if (err) {
+                res.writeHead(500, {'Content-Type': 'text/plain'});
+                res.end('Error loading page');
+                return;
+            }
+            res.writeHead(200, {'Content-Type': 'text/html', 'Cache-Control': 'no-store'});
+            res.end(data);
+        });
+    } else if(pathName === '/concepts-advance/replication' || pathName === '/concepts-advance/replication.html') {
+        fs.readFile(path.join(__dirname, 'concepts-advance/replication.html'), 'utf8', (err, data) => {
+            if (err) {
+                res.writeHead(500, {'Content-Type': 'text/plain'});
+                res.end('Error loading page');
+                return;
+            }
+            res.writeHead(200, {'Content-Type': 'text/html', 'Cache-Control': 'no-store'});
+            res.end(data);
+        });
+    } else if(pathName === '/concepts-advance/high-availability' || pathName === '/concepts-advance/high-availability.html') {
+        fs.readFile(path.join(__dirname, 'concepts-advance/high-availability.html'), 'utf8', (err, data) => {
+            if (err) {
+                res.writeHead(500, {'Content-Type': 'text/plain'});
+                res.end('Error loading page');
+                return;
+            }
+            res.writeHead(200, {'Content-Type': 'text/html', 'Cache-Control': 'no-store'});
+            res.end(data);
+        });
+    } else if(pathName === '/concepts-advance/disaster-recovery' || pathName === '/concepts-advance/disaster-recovery.html') {
+        fs.readFile(path.join(__dirname, 'concepts-advance/disaster-recovery.html'), 'utf8', (err, data) => {
+            if (err) {
+                res.writeHead(500, {'Content-Type': 'text/plain'});
+                res.end('Error loading page');
+                return;
+            }
+            res.writeHead(200, {'Content-Type': 'text/html', 'Cache-Control': 'no-store'});
+            res.end(data);
+        });
+    } else if(pathName === '/concepts-advance/logging' || pathName === '/concepts-advance/logging.html') {
+        fs.readFile(path.join(__dirname, 'concepts-advance/logging.html'), 'utf8', (err, data) => {
+            if (err) {
+                res.writeHead(500, {'Content-Type': 'text/plain'});
+                res.end('Error loading page');
+                return;
+            }
+            res.writeHead(200, {'Content-Type': 'text/html', 'Cache-Control': 'no-store'});
+            res.end(data);
+        });
+    } else if(pathName === '/concepts-advance/metrics' || pathName === '/concepts-advance/metrics.html') {
+        fs.readFile(path.join(__dirname, 'concepts-advance/metrics.html'), 'utf8', (err, data) => {
+            if (err) {
+                res.writeHead(500, {'Content-Type': 'text/plain'});
+                res.end('Error loading page');
+                return;
+            }
+            res.writeHead(200, {'Content-Type': 'text/html', 'Cache-Control': 'no-store'});
+            res.end(data);
+        });
+    } else if(pathName === '/concepts-advance/monitoring' || pathName === '/concepts-advance/monitoring.html') {
+        fs.readFile(path.join(__dirname, 'concepts-advance/monitoring.html'), 'utf8', (err, data) => {
+            if (err) {
+                res.writeHead(500, {'Content-Type': 'text/plain'});
+                res.end('Error loading page');
+                return;
+            }
+            res.writeHead(200, {'Content-Type': 'text/html', 'Cache-Control': 'no-store'});
+            res.end(data);
+        });
+    } else if(pathName === '/concepts-advance/alerts' || pathName === '/concepts-advance/alerts.html') {
+        fs.readFile(path.join(__dirname, 'concepts-advance/alerts.html'), 'utf8', (err, data) => {
+            if (err) {
+                res.writeHead(500, {'Content-Type': 'text/plain'});
+                res.end('Error loading page');
+                return;
+            }
+            res.writeHead(200, {'Content-Type': 'text/html', 'Cache-Control': 'no-store'});
+            res.end(data);
+        });
+    } else if(pathName === '/concepts-advance/distributed-tracing' || pathName === '/concepts-advance/distributed-tracing.html') {
+        fs.readFile(path.join(__dirname, 'concepts-advance/distributed-tracing.html'), 'utf8', (err, data) => {
+            if (err) {
+                res.writeHead(500, {'Content-Type': 'text/plain'});
+                res.end('Error loading page');
+                return;
+            }
+            res.writeHead(200, {'Content-Type': 'text/html', 'Cache-Control': 'no-store'});
+            res.end(data);
+        });
+    } else if(pathName === '/concepts-advance/cicd-pipeline' || pathName === '/concepts-advance/cicd-pipeline.html') {
+        fs.readFile(path.join(__dirname, 'concepts-advance/cicd-pipeline.html'), 'utf8', (err, data) => {
+            if (err) {
+                res.writeHead(500, {'Content-Type': 'text/plain'});
+                res.end('Error loading page');
+                return;
+            }
+            res.writeHead(200, {'Content-Type': 'text/html', 'Cache-Control': 'no-store'});
+            res.end(data);
+        });
+    } else if(pathName === '/concepts-advance/build-test-deploy' || pathName === '/concepts-advance/build-test-deploy.html') {
+        fs.readFile(path.join(__dirname, 'concepts-advance/build-test-deploy.html'), 'utf8', (err, data) => {
+            if (err) {
+                res.writeHead(500, {'Content-Type': 'text/plain'});
+                res.end('Error loading page');
+                return;
+            }
+            res.writeHead(200, {'Content-Type': 'text/html', 'Cache-Control': 'no-store'});
+            res.end(data);
+        });
+    } else if(pathName === '/concepts-advance/environments' || pathName === '/concepts-advance/environments.html') {
+        fs.readFile(path.join(__dirname, 'concepts-advance/environments.html'), 'utf8', (err, data) => {
+            if (err) {
+                res.writeHead(500, {'Content-Type': 'text/plain'});
+                res.end('Error loading page');
+                return;
+            }
+            res.writeHead(200, {'Content-Type': 'text/html', 'Cache-Control': 'no-store'});
+            res.end(data);
+        });
+    } else if(pathName === '/concepts-advance/secrets-management' || pathName === '/concepts-advance/secrets-management.html') {
+        fs.readFile(path.join(__dirname, 'concepts-advance/secrets-management.html'), 'utf8', (err, data) => {
+            if (err) {
+                res.writeHead(500, {'Content-Type': 'text/plain'});
+                res.end('Error loading page');
+                return;
+            }
+            res.writeHead(200, {'Content-Type': 'text/html', 'Cache-Control': 'no-store'});
+            res.end(data);
+        });
+    } else if(pathName === '/concepts-advance/rollback' || pathName === '/concepts-advance/rollback.html') {
+        fs.readFile(path.join(__dirname, 'concepts-advance/rollback.html'), 'utf8', (err, data) => {
+            if (err) {
+                res.writeHead(500, {'Content-Type': 'text/plain'});
+                res.end('Error loading page');
+                return;
+            }
+            res.writeHead(200, {'Content-Type': 'text/html', 'Cache-Control': 'no-store'});
+            res.end(data);
+        });
+    } else if(pathName === '/concepts-advance/virtual-machines' || pathName === '/concepts-advance/virtual-machines.html') {
+        fs.readFile(path.join(__dirname, 'concepts-advance/virtual-machines.html'), 'utf8', (err, data) => {
+            if (err) {
+                res.writeHead(500, {'Content-Type': 'text/plain'});
+                res.end('Error loading page');
+                return;
+            }
+            res.writeHead(200, {'Content-Type': 'text/html', 'Cache-Control': 'no-store'});
+            res.end(data);
+        });
+    } else if(pathName === '/concepts-advance/containers' || pathName === '/concepts-advance/containers.html') {
+        fs.readFile(path.join(__dirname, 'concepts-advance/containers.html'), 'utf8', (err, data) => {
+            if (err) {
+                res.writeHead(500, {'Content-Type': 'text/plain'});
+                res.end('Error loading page');
+                return;
+            }
+            res.writeHead(200, {'Content-Type': 'text/html', 'Cache-Control': 'no-store'});
+            res.end(data);
+        });
+    } else if(pathName === '/concepts-advance/docker' || pathName === '/concepts-advance/docker.html') {
+        fs.readFile(path.join(__dirname, 'concepts-advance/docker.html'), 'utf8', (err, data) => {
+            if (err) {
+                res.writeHead(500, {'Content-Type': 'text/plain'});
+                res.end('Error loading page');
+                return;
+            }
+            res.writeHead(200, {'Content-Type': 'text/html', 'Cache-Control': 'no-store'});
+            res.end(data);
+        });
+    } else if(pathName === '/concepts-advance/managed-services' || pathName === '/concepts-advance/managed-services.html') {
+        fs.readFile(path.join(__dirname, 'concepts-advance/managed-services.html'), 'utf8', (err, data) => {
+            if (err) {
+                res.writeHead(500, {'Content-Type': 'text/plain'});
+                res.end('Error loading page');
+                return;
+            }
+            res.writeHead(200, {'Content-Type': 'text/html', 'Cache-Control': 'no-store'});
+            res.end(data);
+        });
+    } else if(pathName === '/concepts-advance/regions-availability-zones' || pathName === '/concepts-advance/regions-availability-zones.html') {
+        fs.readFile(path.join(__dirname, 'concepts-advance/regions-availability-zones.html'), 'utf8', (err, data) => {
+            if (err) {
+                res.writeHead(500, {'Content-Type': 'text/plain'});
+                res.end('Error loading page');
+                return;
+            }
+            res.writeHead(200, {'Content-Type': 'text/html', 'Cache-Control': 'no-store'});
+            res.end(data);
+        });
     } else if(pathName === '/sitexam') {
         res.end('sit the exam in arxcafe!');
     } else {

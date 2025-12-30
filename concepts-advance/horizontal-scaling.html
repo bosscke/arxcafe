@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Horizontal Scaling</title>
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/concepts.css">
+    <link rel="stylesheet" href="/css/concepts-advance.css">
+</head>
+<body class="horizontal-scaling-page">
+    <a href="/" class="home-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 18px; height: 18px;">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
+        </svg>
+        Home
+    </a>
+
+    <div class="container">
+        <div style="text-align: center; margin-bottom: 30px; padding: 20px; background: rgba(102, 126, 234, 0.15); border-radius: 12px; border: 1px solid rgba(102, 126, 234, 0.3);">
+            <p style="color: #a8b8ff; font-size: 1.1em; margin: 0; font-weight: 600;">Architects are building their own tools.</p>
+        </div>
+        <h1><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 40px; height: 40px; display: inline-block; margin-right: 10px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M7.5 21L3 16.5m0 0L7.5 12M3 16.5h18m0-11L16.5 12M21 5.5H3" /></svg> Horizontal Scaling</h1>
+
+        <div class="intro-box">
+            <p><strong>Horizontal scaling</strong> (also called "scaling out") is the process of adding more servers or machines to distribute the workload across multiple systems. Unlike vertical scaling which upgrades a single server, horizontal scaling increases capacity by adding more identical nodes to the infrastructure, allowing the system to handle more traffic and provide better fault tolerance.</p>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Core Concepts</h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>Definition</h3>
+                <p>Distributing load across multiple servers instead of increasing the power of a single machine.</p>
+                <ul class="features-list">
+                    <li>Add more server instances</li>
+                    <li>Distribute traffic with load balancers</li>
+                    <li>Each node handles part of the workload</li>
+                    <li>Redundancy and fault tolerance</li>
+                    <li>Near-infinite scalability</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>How It Works</h3>
+                <p>When demand increases, new servers are added to the pool and traffic is distributed among all available nodes.</p>
+                <ul class="features-list">
+                    <li>Load balancer routes requests to healthy servers</li>
+                    <li>Each server runs identical application code</li>
+                    <li>Stateless design enables any server to handle any request</li>
+                    <li>Shared data layer (database, cache)</li>
+                    <li>Auto-scaling based on metrics</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Advantages</h2>
+
+        <div class="pros-box">
+            <h3>Benefits of Horizontal Scaling</h3>
+            <ul class="features-list">
+                <li><strong>Unlimited Growth:</strong> Can add servers indefinitely</li>
+                <li><strong>High Availability:</strong> System stays up even if servers fail</li>
+                <li><strong>Fault Tolerance:</strong> Redundant nodes provide backup</li>
+                <li><strong>Cost Effective:</strong> Use commodity hardware instead of expensive servers</li>
+                <li><strong>Zero Downtime:</strong> Add servers without stopping service</li>
+                <li><strong>Geographic Distribution:</strong> Deploy across multiple regions</li>
+                <li><strong>Auto-Scaling:</strong> Automatically adjust capacity based on demand</li>
+                <li><strong>Better Performance:</strong> Parallel processing across nodes</li>
+            </ul>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle; color: #DD0031;"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 1 1-18 0 9 9 0 0 1 18 0zm-9 3.75h.008v.008H12v-.008z" /></svg> Disadvantages</h2>
+
+        <div class="cons-box">
+            <h3>Challenges of Horizontal Scaling</h3>
+            <ul class="features-list">
+                <li><strong>Complexity:</strong> Requires distributed system architecture</li>
+                <li><strong>Data Consistency:</strong> Harder to maintain across multiple nodes</li>
+                <li><strong>Network Overhead:</strong> Inter-server communication adds latency</li>
+                <li><strong>Load Balancing:</strong> Requires additional infrastructure</li>
+                <li><strong>Session Management:</strong> Sticky sessions or shared storage needed</li>
+                <li><strong>Testing Complexity:</strong> Harder to replicate multi-node environment</li>
+                <li><strong>Deployment Overhead:</strong> More servers to manage and update</li>
+                <li><strong>Initial Cost:</strong> Higher upfront infrastructure investment</li>
+            </ul>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Real-World Examples</h2>
+
+        <div class="arch-card" style="margin: 30px 0;">
+            <h3>Common Use Cases:</h3>
+            <p><strong>Web Applications:</strong> Facebook, Google, Netflix use thousands of servers</p>
+            <p><strong>E-Commerce:</strong> Amazon, eBay scale during high traffic events</p>
+            <p><strong>Microservices:</strong> Each service scales independently</p>
+            <p><strong>APIs:</strong> API gateways distribute requests across backend servers</p>
+            <p><strong>Content Delivery:</strong> CDN nodes distributed globally</p>
+            <p><strong>Big Data:</strong> Hadoop, Spark clusters process massive datasets</p>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M7.5 21 3 16.5m0 0L7.5 12M3 16.5h13.5m0-13.5L21 7.5m0 0L16.5 12M21 7.5H7.5" /></svg> Horizontal vs Vertical Scaling</h2>
+
+        <div class="flow-diagram">
+            <div style="font-weight: bold; margin-bottom: 20px; color: #667eea;">Key Differences</div>
+            <div style="text-align: left; display: inline-block;">
+                <p style="margin: 10px 0;"><strong>Horizontal (Scale Out):</strong> Add more servers → better availability</p>
+                <p style="margin: 10px 0;"><strong>Vertical (Scale Up):</strong> Bigger server → simpler but limited</p>
+                <p style="margin: 10px 0;"><strong>Best Approach:</strong> Combine both for optimal scaling strategy</p>
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Best Practices</h2>
+
+        <div class="intro-box">
+            <h3>Implementing Horizontal Scaling Effectively:</h3>
+            <ul class="features-list">
+                <li><strong>Stateless Design:</strong> Don't store session data on servers</li>
+                <li><strong>Load Balancer:</strong> Use reliable load balancing solution</li>
+                <li><strong>Health Checks:</strong> Monitor server health and remove failed nodes</li>
+                <li><strong>Auto-Scaling:</strong> Automatically add/remove servers based on metrics</li>
+                <li><strong>Shared Storage:</strong> Use centralized cache (Redis) and database</li>
+                <li><strong>Configuration Management:</strong> Use tools like Ansible, Terraform</li>
+                <li><strong>Container Orchestration:</strong> Kubernetes, Docker Swarm for management</li>
+                <li><strong>Monitoring:</strong> Track performance across all nodes</li>
+                <li><strong>Graceful Shutdown:</strong> Drain connections before removing servers</li>
+            </ul>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> When to Use Horizontal Scaling</h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>Good Fit</h3>
+                <ul class="features-list">
+                    <li>Unpredictable traffic patterns</li>
+                    <li>High availability requirements</li>
+                    <li>Large-scale applications</li>
+                    <li>Cloud-native architectures</li>
+                    <li>Global user base</li>
+                    <li>Microservices architecture</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Poor Fit</h3>
+                <ul class="features-list">
+                    <li>Small applications</li>
+                    <li>Stateful monolithic systems</li>
+                    <li>Limited budget/resources</li>
+                    <li>Simple CRUD applications</li>
+                    <li>Strong consistency requirements</li>
+                    <li>Single-threaded workloads</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="intro-box" style="text-align: center; margin: 60px 0 40px;">
+            <p>Horizontal scaling is the foundation of modern cloud architecture, enabling applications to handle millions of users by distributing load across multiple servers and providing resilience through redundancy.</p>
+        </div>
+    </div>
+</body>
+</html>

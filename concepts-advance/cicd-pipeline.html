@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CI/CD Pipeline</title>
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/concepts.css">
+    <link rel="stylesheet" href="/css/concepts-advance.css">
+</head>
+<body class="cicd-pipeline-page">
+    <a href="/" class="home-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 18px; height: 18px;">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
+        </svg>
+        Home
+    </a>
+
+    <div class="container">
+        <div style="text-align: center; margin-bottom: 30px; padding: 20px; background: rgba(102, 126, 234, 0.15); border-radius: 12px; border: 1px solid rgba(102, 126, 234, 0.3);">
+            <p style="color: #a8b8ff; font-size: 1.1em; margin: 0; font-weight: 600;">Architects are building their own tools.</p>
+        </div>
+        <h1><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 40px; height: 40px; display: inline-block; margin-right: 10px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> CI/CD Pipeline</h1>
+
+        <div class="intro-box">
+            <p><strong>CI/CD Pipeline</strong> is an automated process that takes code changes from developers and moves them through build, test, and deployment stages. CI/CD enables rapid, reliable, and frequent delivery of software by automating repetitive tasks and catching problems early. Modern development demands fast feedback loops, and CI/CD pipelines are the infrastructure that makes this possible.</p>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Core Concepts</h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>Continuous Integration</h3>
+                <p>Frequent code integration and testing.</p>
+                <ul class="features-list">
+                    <li>Code commits multiple times daily</li>
+                    <li>Automatic build on every commit</li>
+                    <li>Automated tests immediately</li>
+                    <li>Fast feedback (minutes)</li>
+                    <li>Catch integration issues early</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Continuous Delivery</h3>
+                <p>Automated path to production readiness.</p>
+                <ul class="features-list">
+                    <li>Build + test + package automated</li>
+                    <li>Manual approval before deploy</li>
+                    <li>Always production-ready code</li>
+                    <li>Operator decides when to release</li>
+                    <li>Enables frequent releases</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Continuous Deployment</h3>
+                <p>Fully automated deployment to production.</p>
+                <ul class="features-list">
+                    <li>Everything CI/CD does</li>
+                    <li>No manual approval gates</li>
+                    <li>Automatic production deployment</li>
+                    <li>Minutes from commit to live</li>
+                    <li>Requires excellent testing</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Pipeline Stages</h3>
+                <p>Progression from code to production.</p>
+                <ul class="features-list">
+                    <li>Commit: developer push</li>
+                    <li>Build: compile/package</li>
+                    <li>Test: unit, integration, e2e</li>
+                    <li>Deploy: staging, production</li>
+                    <li>Monitor: health and metrics</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Pipeline Stages</h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>Source Control</h3>
+                <p>Detecting code changes.</p>
+                <ul class="features-list">
+                    <li>Git repository webhook</li>
+                    <li>Branch push triggers pipeline</li>
+                    <li>Pull request detection</li>
+                    <li>Automatic pipeline start</li>
+                    <li>Commit metadata capture</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Build Stage</h3>
+                <p>Compiling and packaging code.</p>
+                <ul class="features-list">
+                    <li>Compile source code</li>
+                    <li>Dependency resolution</li>
+                    <li>Create artifacts (JAR, binary)</li>
+                    <li>Generate Docker images</li>
+                    <li>Publish to registry</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Test Stage</h3>
+                <p>Validating code quality.</p>
+                <ul class="features-list">
+                    <li>Unit tests</li>
+                    <li>Integration tests</li>
+                    <li>Code coverage analysis</li>
+                    <li>Lint and style checks</li>
+                    <li>Security scanning</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Deploy Stage</h3>
+                <p>Moving to target environments.</p>
+                <ul class="features-list">
+                    <li>Deploy to staging</li>
+                    <li>Smoke tests</li>
+                    <li>Manual approval (if CD)</li>
+                    <li>Deploy to production</li>
+                    <li>Health checks</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Testing Strategy</h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>Unit Tests</h3>
+                <p>Individual function/method testing.</p>
+                <ul class="features-list">
+                    <li>Test smallest units</li>
+                    <li>Fast execution</li>
+                    <li>High coverage</li>
+                    <li>Isolated dependencies</li>
+                    <li>Run on every commit</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Integration Tests</h3>
+                <p>Multiple components together.</p>
+                <ul class="features-list">
+                    <li>Database interactions</li>
+                    <li>API calls</li>
+                    <li>Service communication</li>
+                    <li>Slower than unit tests</li>
+                    <li>Catch integration bugs</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>End-to-End Tests</h3>
+                <p>Full user workflows.</p>
+                <ul class="features-list">
+                    <li>User journey simulation</li>
+                    <li>Complete system testing</li>
+                    <li>Browser automation</li>
+                    <li>Slowest tests</li>
+                    <li>Test critical paths only</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Quality Gates</h3>
+                <p>Approval criteria.</p>
+                <ul class="features-list">
+                    <li>Code coverage minimum</li>
+                    <li>Test pass rate</li>
+                    <li>Lint rule violations</li>
+                    <li>Security scan results</li>
+                    <li>Block deployment if fail</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Deployment Strategies</h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>Blue-Green Deployment</h3>
+                <p>Two identical production environments.</p>
+                <ul class="features-list">
+                    <li>Blue: current production</li>
+                    <li>Green: new version</li>
+                    <li>Test in green</li>
+                    <li>Switch traffic instantly</li>
+                    <li>Quick rollback possible</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Canary Deployment</h3>
+                <p>Gradual rollout to subset of users.</p>
+                <ul class="features-list">
+                    <li>Start with small percentage</li>
+                    <li>Monitor metrics closely</li>
+                    <li>Gradually increase traffic</li>
+                    <li>100% rollout or rollback</li>
+                    <li>Catch issues early</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Rolling Deployment</h3>
+                <p>Gradual replacement of instances.</p>
+                <ul class="features-list">
+                    <li>Update some pods/servers</li>
+                    <li>Keep some on old version</li>
+                    <li>No downtime</li>
+                    <li>Slow rollout</li>
+                    <li>Version overlap period</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Feature Flags</h3>
+                <p>Control feature visibility at runtime.</p>
+                <ul class="features-list">
+                    <li>Deploy with feature hidden</li>
+                    <li>Enable for subset of users</li>
+                    <li>Progressive rollout</li>
+                    <li>Instant disable if issues</li>
+                    <li>A/B testing support</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Advantages</h2>
+
+        <div class="pros-cons-grid">
+            <div class="pros-box">
+                <h3>Benefits</h3>
+                <ul class="features-list">
+                    <li><strong>Fast Feedback:</strong> Know about problems in minutes</li>
+                    <li><strong>Reduced Risk:</strong> Smaller, more frequent releases</li>
+                    <li><strong>Faster Deployments:</strong> Automated process</li>
+                    <li><strong>Quality Improvement:</strong> Automated tests catch bugs</li>
+                    <li><strong>Reliability:</strong> Consistent repeatable process</li>
+                    <li><strong>Developer Satisfaction:</strong> Rapid iteration</li>
+                    <li><strong>Reduced Costs:</strong> Fewer manual operations</li>
+                    <li><strong>Time to Market:</strong> Launch features quickly</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle; color: #DD0031;"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 1 1-18 0 9 9 0 0 1 18 0zm-9 3.75h.008v.008H12v-.008z" /></svg> Challenges</h2>
+
+        <div class="pros-cons-grid">
+            <div class="cons-box">
+                <h3>Drawbacks</h3>
+                <ul class="features-list">
+                    <li><strong>Initial Effort:</strong> Setup and configuration complex</li>
+                    <li><strong>Test Coverage:</strong> Need comprehensive test suite</li>
+                    <li><strong>Infrastructure:</strong> Requires build/test servers</li>
+                    <li><strong>Flaky Tests:</strong> False failures break confidence</li>
+                    <li><strong>Skill Requirements:</strong> Team needs DevOps knowledge</li>
+                    <li><strong>Maintenance Burden:</strong> Pipelines need updates</li>
+                    <li><strong>Security:</strong> More entry points to secure</li>
+                    <li><strong>Database Migrations:</strong> Coordination challenge</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Best Practices</h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>Pipeline Design</h3>
+                <ul class="features-list">
+                    <li>Fast feedback first</li>
+                    <li>Parallelization</li>
+                    <li>Stage gating</li>
+                    <li>Clear responsibilities</li>
+                    <li>Easy to understand</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Test Quality</h3>
+                <ul class="features-list">
+                    <li>Cover critical paths</li>
+                    <li>Avoid flaky tests</li>
+                    <li>Fast execution</li>
+                    <li>Meaningful failures</li>
+                    <li>Regular review</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Monitoring & Observability</h3>
+                <ul class="features-list">
+                    <li>Pipeline metrics</li>
+                    <li>Deployment health</li>
+                    <li>Performance tracking</li>
+                    <li>Error alerts</li>
+                    <li>Trend analysis</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Security & Compliance</h3>
+                <ul class="features-list">
+                    <li>Secret management</li>
+                    <li>Code scanning</li>
+                    <li>Dependency checking</li>
+                    <li>Audit logging</li>
+                    <li>Access control</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Popular CI/CD Tools</h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>GitHub Actions</h3>
+                <p>Native GitHub integration.</p>
+                <ul class="features-list">
+                    <li>Workflows in YAML</li>
+                    <li>Tight GitHub integration</li>
+                    <li>Marketplace for actions</li>
+                    <li>Free for public repos</li>
+                    <li>Generous free tier</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>GitLab CI/CD</h3>
+                <p>Built into GitLab platform.</p>
+                <ul class="features-list">
+                    <li>GitLab runner required</li>
+                    <li>Container-native</li>
+                    <li>Parallel execution</li>
+                    <li>Free tier available</li>
+                    <li>Community edition</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Jenkins</h3>
+                <p>Self-hosted pipeline engine.</p>
+                <ul class="features-list">
+                    <li>Open source</li>
+                    <li>Highly customizable</li>
+                    <li>Large plugin ecosystem</li>
+                    <li>Self-hosted</li>
+                    <li>Steep learning curve</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Cloud-Native Solutions</h3>
+                <p>AWS, GCP, Azure offerings.</p>
+                <ul class="features-list">
+                    <li>AWS CodePipeline</li>
+                    <li>Cloud Build (GCP)</li>
+                    <li>Azure Pipelines</li>
+                    <li>Managed infrastructure</li>
+                    <li>Native integrations</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Real-World Examples</h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>Web Application</h3>
+                <p>Multi-stage web deployment.</p>
+                <ul class="features-list">
+                    <li>Commit → Build Docker image</li>
+                    <li>Run unit tests</li>
+                    <li>Deploy to staging</li>
+                    <li>Run e2e tests</li>
+                    <li>Deploy to production</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Mobile App</h3>
+                <p>Release management pipeline.</p>
+                <ul class="features-list">
+                    <li>Build Android/iOS</li>
+                    <li>Run unit and UI tests</li>
+                    <li>Sign binaries</li>
+                    <li>Deploy to TestFlight/Play Console</li>
+                    <li>Release to app stores</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Microservices</h3>
+                <p>Multiple service deployment.</p>
+                <ul class="features-list">
+                    <li>Each service independent pipeline</li>
+                    <li>Container image per service</li>
+                    <li>Deploy to Kubernetes</li>
+                    <li>Service discovery</li>
+                    <li>Health checks</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Data Pipeline</h3>
+                <p>ETL workflow automation.</p>
+                <ul class="features-list">
+                    <li>Code validation</li>
+                    <li>Unit test schemas</li>
+                    <li>Deploy to staging</li>
+                    <li>Integration test data</li>
+                    <li>Deploy to production</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> CI/CD Maturity Levels</h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>Level 1: Manual</h3>
+                <p>Developer-triggered builds.</p>
+                <ul class="features-list">
+                    <li>Manual build commands</li>
+                    <li>Manual test execution</li>
+                    <li>Manual deployment</li>
+                    <li>Error-prone</li>
+                    <li>Slow release cycle</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Level 2: CI</h3>
+                <p>Automated build and test.</p>
+                <ul class="features-list">
+                    <li>Automatic build on commit</li>
+                    <li>Automatic test execution</li>
+                    <li>Build pass/fail feedback</li>
+                    <li>Manual deployment</li>
+                    <li>Daily/weekly releases</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Level 3: CD</h3>
+                <p>Automated deployment staging.</p>
+                <ul class="features-list">
+                    <li>CI plus automated pipeline</li>
+                    <li>Deploy to staging automated</li>
+                    <li>Manual promotion to prod</li>
+                    <li>Always production-ready</li>
+                    <li>Multiple deploys per day possible</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Level 4: Continuous Deployment</h3>
+                <p>Fully automated deployment.</p>
+                <ul class="features-list">
+                    <li>Full automation</li>
+                    <li>Auto-deploy to production</li>
+                    <li>No human approval gates</li>
+                    <li>Minutes from commit to live</li>
+                    <li>Requires excellent testing</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Implementing CI/CD</h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>Step 1: Choose Tool</h3>
+                <ul class="features-list">
+                    <li>Assess requirements</li>
+                    <li>Evaluate options</li>
+                    <li>Start simple</li>
+                    <li>Consider team skill</li>
+                    <li>Cost analysis</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Step 2: Basic Pipeline</h3>
+                <ul class="features-list">
+                    <li>Build on commit</li>
+                    <li>Run unit tests</li>
+                    <li>Deploy to staging</li>
+                    <li>Manual approval</li>
+                    <li>Deploy to production</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Step 3: Expand Testing</h3>
+                <ul class="features-list">
+                    <li>Integration tests</li>
+                    <li>Code coverage metrics</li>
+                    <li>Linting/scanning</li>
+                    <li>Performance tests</li>
+                    <li>Security scanning</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Step 4: Advanced Features</h3>
+                <ul class="features-list">
+                    <li>Deployment strategies</li>
+                    <li>Automated rollback</li>
+                    <li>Continuous deployment</li>
+                    <li>Multi-region support</li>
+                    <li>Advanced monitoring</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="intro-box" style="text-align: center; margin: 60px 0 40px;">
+            <p>CI/CD Pipeline is the backbone of modern software development. By automating the path from code to production, you enable rapid iteration, catch problems early, and deliver value faster. Start simple with build and test automation, then expand to full deployment pipelines as your team and confidence grow.</p>
+        </div>
+    </div>
+</body>
+</html>

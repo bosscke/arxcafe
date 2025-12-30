@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Load Balancer</title>
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/concepts.css">
+    <link rel="stylesheet" href="/css/concepts-advance.css">
+</head>
+<body class="load-balancer-page">
+    <a href="/" class="home-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 18px; height: 18px;">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
+        </svg>
+        Home
+    </a>
+
+    <div class="container">
+        <div style="text-align: center; margin-bottom: 30px; padding: 20px; background: rgba(102, 126, 234, 0.15); border-radius: 12px; border: 1px solid rgba(102, 126, 234, 0.3);">
+            <p style="color: #a8b8ff; font-size: 1.1em; margin: 0; font-weight: 600;">Architects are building their own tools.</p>
+        </div>
+        <h1><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 40px; height: 40px; display: inline-block; margin-right: 10px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m6.364.386-1.591 1.591M21 12h-2.25m-.386 6.364-1.591-1.591M12 18.75V21m-4.773-4.227-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0z" /></svg> Load Balancer</h1>
+
+        <div class="intro-box">
+            <p><strong>A load balancer</strong> is a networking device or software that distributes incoming requests and network traffic across multiple servers. It acts as a reverse proxy, sitting between clients and backend servers to ensure no single server becomes overwhelmed. Load balancers are critical for horizontal scaling, high availability, and optimal resource utilization.</p>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Core Concepts</h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>Definition</h3>
+                <p>A system that receives client requests and routes them to the most suitable backend server.</p>
+                <ul class="features-list">
+                    <li>Distributes network traffic</li>
+                    <li>Acts as a reverse proxy</li>
+                    <li>Monitors backend server health</li>
+                    <li>Maintains connection persistence</li>
+                    <li>Enhances system reliability</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>How It Works</h3>
+                <p>Client requests arrive at the load balancer, which uses algorithms to decide which backend server handles each request.</p>
+                <ul class="features-list">
+                    <li>Client connects to load balancer IP</li>
+                    <li>Load balancer routes to healthy backend</li>
+                    <li>Backend processes request</li>
+                    <li>Response sent back through load balancer</li>
+                    <li>Client sees single endpoint</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Load Balancing Algorithms</h2>
+
+        <div class="pros-box">
+            <h3>Common Distribution Methods:</h3>
+            <ul class="features-list">
+                <li><strong>Round Robin:</strong> Distribute equally across all servers in sequence</li>
+                <li><strong>Least Connections:</strong> Route to server with fewest active connections</li>
+                <li><strong>IP Hash:</strong> Same client IP always routes to same server</li>
+                <li><strong>Weighted Round Robin:</strong> Distribute based on server capacity weights</li>
+                <li><strong>Random:</strong> Randomly select a server for each request</li>
+                <li><strong>Resource Based:</strong> Route based on server's CPU, memory, or other metrics</li>
+                <li><strong>Geographic:</strong> Route based on client location</li>
+            </ul>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Advantages</h2>
+
+        <div class="pros-box">
+            <h3>Benefits of Load Balancers</h3>
+            <ul class="features-list">
+                <li><strong>High Availability:</strong> Removes single point of failure</li>
+                <li><strong>Performance:</strong> Distributes traffic prevents bottlenecks</li>
+                <li><strong>Scalability:</strong> Enables adding servers without downtime</li>
+                <li><strong>Redundancy:</strong> Failed servers automatically bypassed</li>
+                <li><strong>Session Persistence:</strong> Maintains client connections</li>
+                <li><strong>SSL Termination:</strong> Decrypts traffic to reduce server load</li>
+                <li><strong>Health Monitoring:</strong> Detects and removes unhealthy servers</li>
+                <li><strong>DDoS Protection:</strong> Can filter malicious traffic</li>
+            </ul>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle; color: #DD0031;"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 1 1-18 0 9 9 0 0 1 18 0zm-9 3.75h.008v.008H12v-.008z" /></svg> Disadvantages</h2>
+
+        <div class="cons-box">
+            <h3>Challenges with Load Balancers</h3>
+            <ul class="features-list">
+                <li><strong>Additional Complexity:</strong> More infrastructure to manage</li>
+                <li><strong>Single Point of Failure:</strong> Load balancer itself needs redundancy</li>
+                <li><strong>Latency:</strong> Extra hop adds small delay</li>
+                <li><strong>Cost:</strong> Hardware or software load balancers are expensive</li>
+                <li><strong>Configuration:</strong> Requires careful setup and tuning</li>
+                <li><strong>Connection Limits:</strong> Load balancer has maximum capacity</li>
+                <li><strong>Session Affinity Issues:</strong> Sticky sessions reduce load distribution</li>
+                <li><strong>Monitoring Overhead:</strong> Additional system to monitor</li>
+            </ul>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Types of Load Balancers</h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>Hardware Load Balancers</h3>
+                <p>Physical devices that handle massive traffic volumes.</p>
+                <ul class="features-list">
+                    <li>High performance</li>
+                    <li>Expensive upfront cost</li>
+                    <li>Examples: F5, Citrix NetScaler</li>
+                    <li>Enterprise deployments</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Software Load Balancers</h3>
+                <p>Software running on standard servers or cloud platforms.</p>
+                <ul class="features-list">
+                    <li>Cost-effective</li>
+                    <li>Flexible and configurable</li>
+                    <li>Examples: Nginx, HAProxy, Traefik</li>
+                    <li>Cloud-native solutions</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Cloud Load Balancers</h3>
+                <p>Managed services by cloud providers.</p>
+                <ul class="features-list">
+                    <li>Auto-scaling built-in</li>
+                    <li>Pay-as-you-go pricing</li>
+                    <li>Examples: AWS ALB, Azure LB</li>
+                    <li>Zero management needed</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>DNS Load Balancers</h3>
+                <p>Route traffic at DNS level using multiple IPs.</p>
+                <ul class="features-list">
+                    <li>Geographic routing</li>
+                    <li>Simple setup</li>
+                    <li>Limited intelligence</li>
+                    <li>Geographic distribution</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Best Practices</h2>
+
+        <div class="intro-box">
+            <h3>Implementing Load Balancers Effectively:</h3>
+            <ul class="features-list">
+                <li><strong>Redundancy:</strong> Use multiple load balancers for high availability</li>
+                <li><strong>Health Checks:</strong> Configure regular server health monitoring</li>
+                <li><strong>Session Handling:</strong> Use stateless design or shared session storage</li>
+                <li><strong>Connection Limits:</strong> Set appropriate timeouts and connection limits</li>
+                <li><strong>Monitoring:</strong> Track load balancer performance and metrics</li>
+                <li><strong>Algorithm Choice:</strong> Pick algorithm matching your workload</li>
+                <li><strong>SSL/TLS:</strong> Terminate encryption at load balancer when possible</li>
+                <li><strong>Gradual Rollout:</strong> Use canary deployments with load balancer</li>
+                <li><strong>Geographic Distribution:</strong> Deploy load balancers across regions</li>
+            </ul>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Real-World Examples</h2>
+
+        <div class="arch-card" style="margin: 30px 0;">
+            <h3>Common Load Balancer Solutions:</h3>
+            <p><strong>Open Source:</strong> Nginx, HAProxy, Apache, Traefik</p>
+            <p><strong>Cloud Services:</strong> AWS Application Load Balancer, Azure Load Balancer, GCP Load Balancer</p>
+            <p><strong>Enterprise:</strong> F5 Networks, Citrix NetScaler, Radcom</p>
+            <p><strong>Message Queues:</strong> RabbitMQ, Kafka for distributed processing</p>
+            <p><strong>API Gateways:</strong> Kong, AWS API Gateway with load balancing</p>
+        </div>
+
+        <div class="intro-box" style="text-align: center; margin: 60px 0 40px;">
+            <p>Load balancers are essential infrastructure components in modern scalable systems, enabling horizontal scaling and ensuring high availability by intelligently distributing traffic across backend resources.</p>
+        </div>
+    </div>
+</body>
+</html>

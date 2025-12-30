@@ -1,0 +1,32 @@
+/* Advanced Concepts - Bosanski Tornjak Background */
+
+body {
+    background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('/bosanski-tornjak.jpg') !important;
+    background-position: center top;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+@media (max-width: 900px) {
+    body {
+        background-attachment: scroll;
+    }
+}
+
+@media (max-width: 768px) {
+    body {
+        background-attachment: scroll;
+        background-position: 50% 15%;
+        background-size: cover;
+        background-color: #0b1120;
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        background-attachment: scroll;
+        background-size: 120% auto;
+        background-position: 50% 8%;
+    }
+}

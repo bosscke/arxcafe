@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Virtual Machines</title>
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/concepts.css">
+    <link rel="stylesheet" href="/css/concepts-advance.css">
+</head>
+<body class="virtual-machines-page">
+    <a href="/" class="home-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 18px; height: 18px;">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
+        </svg>
+        Home
+    </a>
+
+    <div class="container">
+        <div style="text-align: center; margin-bottom: 30px; padding: 20px; background: rgba(102, 126, 234, 0.15); border-radius: 12px; border: 1px solid rgba(102, 126, 234, 0.3);">
+            <p style="color: #a8b8ff; font-size: 1.1em; margin: 0; font-weight: 600;">Architects are building their own tools.</p>
+        </div>
+        <h1><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 40px; height: 40px; display: inline-block; margin-right: 10px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Virtual Machines</h1>
+
+        <div class="intro-box">
+            <p><strong>Virtual Machines</strong> are software-based emulations of physical computers that run operating systems and applications in isolation on shared hardware. VMs enable efficient resource utilization, rapid infrastructure provisioning, workload flexibility, and strong isolation boundaries. They form the foundation of Infrastructure-as-a-Service (IaaS) cloud computing and on-premises virtualization.</p>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Core Concepts</h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>What Is a VM</h3>
+                <p>Virtual machine fundamentals.</p>
+                <ul class="features-list">
+                    <li>Software-based computer</li>
+                    <li>Emulates hardware</li>
+                    <li>Runs full OS</li>
+                    <li>Isolated from host</li>
+                    <li>Multiple VMs per host</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>VM vs Container</h3>
+                <p>Different virtualization layers.</p>
+                <ul class="features-list">
+                    <li>VM: full OS per instance</li>
+                    <li>Container: shared kernel</li>
+                    <li>VM: heavier, slower</li>
+                    <li>Container: lighter, faster</li>
+                    <li>Different use cases</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Hypervisors</h3>
+                <p>VM management software.</p>
+                <ul class="features-list">
+                    <li>Type 1: bare metal</li>
+                    <li>Type 2: hosted</li>
+                    <li>Allocate resources</li>
+                    <li>Manage virtual hardware</li>
+                    <li>Enforce isolation</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Resource Abstraction</h3>
+                <p>Hardware virtualization.</p>
+                <ul class="features-list">
+                    <li>CPU cores allocated</li>
+                    <li>RAM memory reserved</li>
+                    <li>Disk storage assigned</li>
+                    <li>Network interfaces virtual</li>
+                    <li>GPU/specialized hardware</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Hypervisor Types</h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>Type 1: Bare Metal</h3>
+                <p>Hypervisor on hardware.</p>
+                <ul class="features-list">
+                    <li>Runs directly on hardware</li>
+                    <li>No host OS</li>
+                    <li>Higher performance</li>
+                    <li>Better isolation</li>
+                    <li>Examples: ESXi, Hyper-V</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Type 2: Hosted</h3>
+                <p>Hypervisor in OS.</p>
+                <ul class="features-list">
+                    <li>Runs in host OS</li>
+                    <li>Easier installation</li>
+                    <li>More overhead</li>
+                    <li>Lower performance</li>
+                    <li>Examples: VirtualBox, VMware Fusion</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>KVM (Linux)</h3>
+                <p>Linux kernel virtualization.</p>
+                <ul class="features-list">
+                    <li>Kernel module</li>
+                    <li>Full OS support</li>
+                    <li>Good performance</li>
+                    <li>Open source</li>
+                    <li>Cloud provider standard</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Xen</h3>
+                <p>Paravirtualization approach.</p>
+                <ul class="features-list">
+                    <li>Lightweight hypervisor</li>
+                    <li>Strong isolation</li>
+                    <li>AWS Nitro uses Xen</li>
+                    <li>PV and HVM modes</li>
+                    <li>Enterprise capable</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> VM Lifecycle</h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>Provisioning</h3>
+                <p>Creating new VMs.</p>
+                <ul class="features-list">
+                    <li>Define resources</li>
+                    <li>Choose base image</li>
+                    <li>Allocate storage</li>
+                    <li>Boot VM</li>
+                    <li>Configure network</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Running</h3>
+                <p>Active VM operation.</p>
+                <ul class="features-list">
+                    <li>Execute workloads</li>
+                    <li>Host CPU resources</li>
+                    <li>Consume memory</li>
+                    <li>Use storage</li>
+                    <li>Network communication</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Snapshots</h3>
+                <p>VM state capture.</p>
+                <ul class="features-list">
+                    <li>Save current state</li>
+                    <li>Backup point-in-time</li>
+                    <li>Quick restore</li>
+                    <li>Testing/rollback</li>
+                    <li>Storage intensive</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Termination</h3>
+                <p>Removing VMs.</p>
+                <ul class="features-list">
+                    <li>Shut down gracefully</li>
+                    <li>Force kill if needed</li>
+                    <li>Release resources</li>
+                    <li>Delete storage</li>
+                    <li>Cleanup networking</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Resource Management</h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>CPU Allocation</h3>
+                <p>Compute resources.</p>
+                <ul class="features-list">
+                    <li>vCPU count</li>
+                    <li>CPU cores pinning</li>
+                    <li>CPU reservation</li>
+                    <li>Hyper-threading</li>
+                    <li>Over-provisioning risk</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Memory Management</h3>
+                <p>RAM allocation.</p>
+                <ul class="features-list">
+                    <li>Fixed memory size</li>
+                    <li>Memory ballooning</li>
+                    <li>Swap space</li>
+                    <li>Memory pressure</li>
+                    <li>OOM killer</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Storage</h3>
+                <p>Disk management.</p>
+                <ul class="features-list">
+                    <li>Disk image formats</li>
+                    <li>Thin vs thick provisioning</li>
+                    <li>VM snapshots</li>
+                    <li>Live migration</li>
+                    <li>Storage arrays/SAN</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Networking</h3>
+                <p>Virtual networks.</p>
+                <ul class="features-list">
+                    <li>Virtual NICs</li>
+                    <li>Bridge vs NAT</li>
+                    <li>VLAN tagging</li>
+                    <li>Security groups</li>
+                    <li>Load balancing</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Cloud VM Services</h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>AWS EC2</h3>
+                <p>Amazon VM service.</p>
+                <ul class="features-list">
+                    <li>Instance types</li>
+                    <li>Spot instances</li>
+                    <li>Auto scaling groups</li>
+                    <li>EBS storage</li>
+                    <li>VPC networking</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Google Compute Engine</h3>
+                <p>Google Cloud VMs.</p>
+                <ul class="features-list">
+                    <li>Compute instances</li>
+                    <li>Machine types</li>
+                    <li>Preemptible VMs</li>
+                    <li>Persistent disks</li>
+                    <li>VPC networks</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Azure Virtual Machines</h3>
+                <p>Microsoft cloud VMs.</p>
+                <ul class="features-list">
+                    <li>VM sizes</li>
+                    <li>Managed disks</li>
+                    <li>Scale sets</li>
+                    <li>Availability sets</li>
+                    <li>Virtual networks</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>On-Premises</h3>
+                <p>Private virtualization.</p>
+                <ul class="features-list">
+                    <li>VMware vSphere</li>
+                    <li>Hyper-V</li>
+                    <li>KVM/OpenStack</li>
+                    <li>Dedicated hardware</li>
+                    <li>Full control</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Advantages</h2>
+
+        <div class="pros-cons-grid">
+            <div class="pros-box">
+                <h3>Benefits</h3>
+                <ul class="features-list">
+                    <li><strong>Resource Efficiency:</strong> Multiple OS per physical server</li>
+                    <li><strong>Isolation:</strong> VMs cannot access host or other VMs</li>
+                    <li><strong>Flexibility:</strong> Run any OS on same hardware</li>
+                    <li><strong>Quick Provisioning:</strong> Minutes vs physical servers</li>
+                    <li><strong>Snapshots:</strong> Easy backup and recovery</li>
+                    <li><strong>Live Migration:</strong> Move VMs between hosts</li>
+                    <li><strong>Testing:</strong> Disposable environments</li>
+                    <li><strong>Cost Reduction:</strong> Better hardware utilization</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle; color: #DD0031;"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 1 1-18 0 9 9 0 0 1 18 0zm-9 3.75h.008v.008H12v-.008z" /></svg> Challenges</h2>
+
+        <div class="pros-cons-grid">
+            <div class="cons-box">
+                <h3>Drawbacks</h3>
+                <ul class="features-list">
+                    <li><strong>Performance Overhead:</strong> Hypervisor taxes CPU/memory</li>
+                    <li><strong>Resource Over-provisioning:</strong> Hard to predict usage</li>
+                    <li><strong>Management Complexity:</strong> Many VMs to manage</li>
+                    <li><strong>Storage Overhead:</strong> Full OS per VM</li>
+                    <li><strong>Boot Time:</strong> Slower than containers</li>
+                    <li><strong>Licensing:</strong> OS licenses per VM</li>
+                    <li><strong>Security Hypervisor Bugs:</strong> Escape vulnerabilities</li>
+                    <li><strong>Live Migration Issues:</strong> Downtime/data consistency</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Best Practices</h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>Right-Sizing</h3>
+                <ul class="features-list">
+                    <li>Match resources to needs</li>
+                    <li>Monitor actual usage</li>
+                    <li>Avoid over-provisioning</li>
+                    <li>Regular audits</li>
+                    <li>Cost optimization</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Security</h3>
+                <ul class="features-list">
+                    <li>Regular patching</li>
+                    <li>Security groups</li>
+                    <li>Encryption enabled</li>
+                    <li>Access control</li>
+                    <li>Firewall rules</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Monitoring & Maintenance</h3>
+                <ul class="features-list">
+                    <li>CPU/memory metrics</li>
+                    <li>Disk space monitoring</li>
+                    <li>Network utilization</li>
+                    <li>Regular snapshots</li>
+                    <li>Automated backups</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>High Availability</h3>
+                <ul class="features-list">
+                    <li>Multiple instances</li>
+                    <li>Load balancing</li>
+                    <li>Auto-failover</li>
+                    <li>Distributed deployment</li>
+                    <li>Redundancy planning</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Real-World Architectures</h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>Startup (Cloud Native)</h3>
+                <p>Quick to market approach.</p>
+                <ul class="features-list">
+                    <li>AWS EC2 or GCP</li>
+                    <li>Auto scaling groups</li>
+                    <li>Load balancing</li>
+                    <li>Managed RDS/DB</li>
+                    <li>Pay-as-you-go</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Enterprise (Hybrid)</h3>
+                <p>Mixed environments.</p>
+                <ul class="features-list">
+                    <li>On-prem VMware</li>
+                    <li>AWS/Azure cloud</li>
+                    <li>Dedicated connections</li>
+                    <li>VPN tunnels</li>
+                    <li>Complex management</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Financial (On-Prem)</h3>
+                <p>Compliance-focused setup.</p>
+                <ul class="features-list">
+                    <li>Private data center</li>
+                    <li>VMware/Hyper-V</li>
+                    <li>Strict isolation</li>
+                    <li>Redundant infrastructure</li>
+                    <li>Disaster recovery site</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Tech Company (Containers)</h3>
+                <p>Modern microservices.</p>
+                <ul class="features-list">
+                    <li>VMs run Kubernetes</li>
+                    <li>Containers inside</li>
+                    <li>Auto-scaling clusters</li>
+                    <li>High utilization</li>
+                    <li>Cost efficient</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> VM Migration & Scaling</h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>Live Migration</h3>
+                <p>Moving running VMs.</p>
+                <ul class="features-list">
+                    <li>Zero downtime moves</li>
+                    <li>Between physical hosts</li>
+                    <li>Storage access required</li>
+                    <li>Network persistence</li>
+                    <li>Complex orchestration</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Cold Migration</h3>
+                <p>Offline VM moves.</p>
+                <ul class="features-list">
+                    <li>Shut down VM first</li>
+                    <li>Move disk/data</li>
+                    <li>Boot on new host</li>
+                    <li>Simple process</li>
+                    <li>Downtime required</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Horizontal Scaling</h3>
+                <p>Adding more VMs.</p>
+                <ul class="features-list">
+                    <li>Load balancer distributes</li>
+                    <li>Auto-scaling groups</li>
+                    <li>Metric-based triggers</li>
+                    <li>Multiple instances</li>
+                    <li>Stateless design</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Vertical Scaling</h3>
+                <p>Increasing VM resources.</p>
+                <ul class="features-list">
+                    <li>Add CPU cores</li>
+                    <li>Increase memory</li>
+                    <li>Expand disk</li>
+                    <li>Usually requires downtime</li>
+                    <li>Hardware limits exist</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Implementing VM Infrastructure</h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>Step 1: Choose Platform</h3>
+                <ul class="features-list">
+                    <li>Evaluate options</li>
+                    <li>Cloud vs on-prem</li>
+                    <li>Cost analysis</li>
+                    <li>Compliance needs</li>
+                    <li>Team expertise</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Step 2: Design Architecture</h3>
+                <ul class="features-list">
+                    <li>VM sizing</li>
+                    <li>Network topology</li>
+                    <li>Storage strategy</li>
+                    <li>Redundancy plan</li>
+                    <li>Disaster recovery</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Step 3: Implement & Deploy</h3>
+                <ul class="features-list">
+                    <li>Infrastructure setup</li>
+                    <li>Network configuration</li>
+                    <li>Security groups</li>
+                    <li>Load balancers</li>
+                    <li>Monitoring setup</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Step 4: Operationalize</h3>
+                <ul class="features-list">
+                    <li>Automation/IaC</li>
+                    <li>Backup procedures</li>
+                    <li>Patch management</li>
+                    <li>Team training</li>
+                    <li>Cost monitoring</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="intro-box" style="text-align: center; margin: 60px 0 40px;">
+            <p>Virtual machines remain a cornerstone of modern infrastructure, offering unmatched flexibility and isolation. Whether deployed in the cloud or on-premises, VMs provide the abstraction layer that enables efficient resource utilization and rapid provisioning. While containers have shifted workload patterns for many organizations, VMs continue to be essential for legacy systems, specialized workloads, and infrastructure flexibility.</p>
+        </div>
+    </div>
+</body>
+</html>

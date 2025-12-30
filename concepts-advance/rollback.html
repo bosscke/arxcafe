@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rollback</title>
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/concepts.css">
+    <link rel="stylesheet" href="/css/concepts-advance.css">
+</head>
+<body class="rollback-page">
+    <a href="/" class="home-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 18px; height: 18px;">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
+        </svg>
+        Home
+    </a>
+
+    <div class="container">
+        <div style="text-align: center; margin-bottom: 30px; padding: 20px; background: rgba(102, 126, 234, 0.15); border-radius: 12px; border: 1px solid rgba(102, 126, 234, 0.3);">
+            <p style="color: #a8b8ff; font-size: 1.1em; margin: 0; font-weight: 600;">Architects are building their own tools.</p>
+        </div>
+        <h1><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 40px; height: 40px; display: inline-block; margin-right: 10px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Rollback</h1>
+
+        <div class="intro-box">
+            <p><strong>Rollback</strong> is the ability to quickly revert to a previously known good version when a deployment causes problems. It's a critical safety mechanism that reduces deployment risk and enables rapid recovery from failures. Effective rollback strategies minimize downtime, prevent cascading failures, and restore user trust during incidents.</p>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Core Concepts</h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>Why Rollback Matters</h3>
+                <p>The importance of fast recovery.</p>
+                <ul class="features-list">
+                    <li>Deployments fail sometimes</li>
+                    <li>Bugs escape testing</li>
+                    <li>Production conditions differ</li>
+                    <li>Need instant recovery</li>
+                    <li>Minimizes user impact</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Rollback vs Hotfix</h3>
+                <p>Different recovery approaches.</p>
+                <ul class="features-list">
+                    <li>Rollback: go back fast</li>
+                    <li>Hotfix: fix forward slow</li>
+                    <li>Rollback preferred for speed</li>
+                    <li>Hotfix for critical bugs</li>
+                    <li>Often both needed</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Prerequisites</h3>
+                <p>What enables rollback.</p>
+                <ul class="features-list">
+                    <li>Immutable artifacts</li>
+                    <li>Previous versions available</li>
+                    <li>State/database backward compatible</li>
+                    <li>Health checks for detection</li>
+                    <li>Automated procedures</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Rollback Window</h3>
+                <p>Time between versions.</p>
+                <ul class="features-list">
+                    <li>How long can we roll back?</li>
+                    <li>Database schema changes limit</li>
+                    <li>Data incompatibility risk</li>
+                    <li>Keep 2-3 old versions</li>
+                    <li>Document compatibility</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Rollback Strategies</h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>Blue-Green Deployment</h3>
+                <p>Instant version switching.</p>
+                <ul class="features-list">
+                    <li>Two identical environments</li>
+                    <li>Blue = current, Green = new</li>
+                    <li>Switch traffic instantly</li>
+                    <li>Keep both running</li>
+                    <li>Rollback = switch back</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Canary Deployment</h3>
+                <p>Gradual rollout with fallback.</p>
+                <ul class="features-list">
+                    <li>Roll out to small % first</li>
+                    <li>Monitor metrics closely</li>
+                    <li>Detect issues early</li>
+                    <li>Roll back before full</li>
+                    <li>Continue if healthy</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Rolling Deployment</h3>
+                <p>Instance-by-instance updates.</p>
+                <ul class="features-list">
+                    <li>Update one instance</li>
+                    <li>Verify it works</li>
+                    <li>Move to next instance</li>
+                    <li>Harder to rollback</li>
+                    <li>Good for many instances</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Feature Flags</h3>
+                <p>Runtime version switching.</p>
+                <ul class="features-list">
+                    <li>Code deployed but disabled</li>
+                    <li>Toggle feature at runtime</li>
+                    <li>Instant enable/disable</li>
+                    <li>No redeployment needed</li>
+                    <li>Ultimate flexibility</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Rollback Triggers</h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>Automatic Detection</h3>
+                <p>Triggered by health checks.</p>
+                <ul class="features-list">
+                    <li>Health check failures</li>
+                    <li>Error rate spikes</li>
+                    <li>Latency degradation</li>
+                    <li>Resource exhaustion</li>
+                    <li>Auto-rollback enabled</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Manual Triggers</h3>
+                <p>Human-initiated rollback.</p>
+                <ul class="features-list">
+                    <li>On-call engineer decision</li>
+                    <li>Incident commander approval</li>
+                    <li>Single button in dashboard</li>
+                    <li>Slack/PagerDuty command</li>
+                    <li>One-step execution</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Metric-Based</h3>
+                <p>Threshold-triggered rollback.</p>
+                <ul class="features-list">
+                    <li>Error rate > 5%</li>
+                    <li>P99 latency > threshold</li>
+                    <li>CPU/memory spikes</li>
+                    <li>Queue depth exceeded</li>
+                    <li>Custom business metrics</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>User Complaints</h3>
+                <p>Reactive detection.</p>
+                <ul class="features-list">
+                    <li>Customer reports issues</li>
+                    <li>Support escalates</li>
+                    <li>On-call responds</li>
+                    <li>Initiates rollback</li>
+                    <li>Prevents further damage</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Database Rollback Complexity</h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>No Schema Changes</h3>
+                <p>Simplest rollback case.</p>
+                <ul class="features-list">
+                    <li>Code only deployment</li>
+                    <li>Database unchanged</li>
+                    <li>Instant rollback</li>
+                    <li>No data issues</li>
+                    <li>Safe to roll back anytime</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Backward Compatible Schema</h3>
+                <p>Migration-friendly changes.</p>
+                <ul class="features-list">
+                    <li>Add new columns (nullable)</li>
+                    <li>New tables created</li>
+                    <li>Old columns still work</li>
+                    <li>Safe to roll back</li>
+                    <li>Key pattern for CI/CD</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Breaking Schema Changes</h3>
+                <p>Difficult rollback situations.</p>
+                <ul class="features-list">
+                    <li>Drop required column</li>
+                    <li>Rename column</li>
+                    <li>Change data type</li>
+                    <li>Cannot rollback easily</li>
+                    <li>Requires data migration</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Two-Phase Migrations</h3>
+                <p>Safe schema change pattern.</p>
+                <ul class="features-list">
+                    <li>Phase 1: Add new column</li>
+                    <li>Wait for code update</li>
+                    <li>Phase 2: Remove old column</li>
+                    <li>Allows rollback at Phase 1</li>
+                    <li>Double deployment cost</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Rollback Procedures</h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>Notification & Assessment</h3>
+                <p>Initial response steps.</p>
+                <ul class="features-list">
+                    <li>Alert triggered/reported</li>
+                    <li>Incident declared</li>
+                    <li>Commander assigned</li>
+                    <li>Quick assessment</li>
+                    <li>Decision to rollback</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Preparation Phase</h3>
+                <p>Before executing rollback.</p>
+                <ul class="features-list">
+                    <li>Verify old version available</li>
+                    <li>Check data compatibility</li>
+                    <li>Prepare communication</li>
+                    <li>Test rollback procedure</li>
+                    <li>Get approvals if needed</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Execution Phase</h3>
+                <p>Running the rollback.</p>
+                <ul class="features-list">
+                    <li>Execute rollback script</li>
+                    <li>Switch traffic back</li>
+                    <li>Verify service health</li>
+                    <li>Run smoke tests</li>
+                    <li>Monitor metrics</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Validation & Cleanup</h3>
+                <p>After rollback complete.</p>
+                <ul class="features-list">
+                    <li>Confirm service restored</li>
+                    <li>User communication</li>
+                    <li>Incident postmortem</li>
+                    <li>Root cause analysis</li>
+                    <li>Prevention measures</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Advantages</h2>
+
+        <div class="pros-cons-grid">
+            <div class="pros-box">
+                <h3>Benefits</h3>
+                <ul class="features-list">
+                    <li><strong>Fast Recovery:</strong> Minutes not hours</li>
+                    <li><strong>Risk Reduction:</strong> Deploy with confidence</li>
+                    <li><strong>Downtime Minimized:</strong> Quick restoration</li>
+                    <li><strong>User Impact:</strong> Less damage during incidents</li>
+                    <li><strong>Psychological Safety:</strong> Teams less afraid to deploy</li>
+                    <li><strong>Problem Isolation:</strong> Separates deployment from production issues</li>
+                    <li><strong>Testing Acceleration:</strong> Enables more frequent releases</li>
+                    <li><strong>Incident Management:</strong> Clear recovery procedure</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle; color: #DD0031;"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 1 1-18 0 9 9 0 0 1 18 0zm-9 3.75h.008v.008H12v-.008z" /></svg> Challenges</h2>
+
+        <div class="pros-cons-grid">
+            <div class="cons-box">
+                <h3>Drawbacks</h3>
+                <ul class="features-list">
+                    <li><strong>Data Inconsistency:</strong> Users modified data during bad version</li>
+                    <li><strong>Database Compatibility:</strong> Schema changes prevent rollback</li>
+                    <li><strong>Infrastructure Cost:</strong> Keeping old versions/environments</li>
+                    <li><strong>Delayed Fix:</strong> Masks underlying problem</li>
+                    <li><strong>Cascading Issues:</strong> May expose other problems</li>
+                    <li><strong>User Confusion:</strong> Data/state changes unexpectedly</li>
+                    <li><strong>Procedure Complexity:</strong> Many moving parts</li>
+                    <li><strong>Not Always Possible:</strong> Some changes cannot roll back</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Best Practices</h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>Design for Rollback</h3>
+                <ul class="features-list">
+                    <li>Immutable deployments</li>
+                    <li>Keep N previous versions</li>
+                    <li>Version all artifacts</li>
+                    <li>Tag releases in git</li>
+                    <li>Automated artifact storage</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Database Safety</h3>
+                <ul class="features-list">
+                    <li>Avoid breaking schema changes</li>
+                    <li>Use two-phase migrations</li>
+                    <li>Keep old column while new exists</li>
+                    <li>Test backward compatibility</li>
+                    <li>Document migration windows</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Automation & Testing</h3>
+                <ul class="features-list">
+                    <li>Automated rollback scripts</li>
+                    <li>One-button execution</li>
+                    <li>Regular rollback drills</li>
+                    <li>Test in staging first</li>
+                    <li>Keep procedures updated</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Monitoring & Detection</h3>
+                <ul class="features-list">
+                    <li>Health checks before traffic</li>
+                    <li>Automated canary validation</li>
+                    <li>Metric thresholds</li>
+                    <li>Error rate monitoring</li>
+                    <li>Quick manual triggers</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Real-World Examples</h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>Startup (Manual)</h3>
+                <p>Simple rollback approach.</p>
+                <ul class="features-list">
+                    <li>Single server setup</li>
+                    <li>Git history rollback</li>
+                    <li>Manual redeployment</li>
+                    <li>5-10 minute recovery</li>
+                    <li>Documented runbook</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Mid-Size (Blue-Green)</h3>
+                <p>Two environment strategy.</p>
+                <ul class="features-list">
+                    <li>Two load-balanced clusters</li>
+                    <li>Switch traffic via LB</li>
+                    <li>Instant rollback possible</li>
+                    <li>1-2 minute recovery</li>
+                    <li>Higher cost infrastructure</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Enterprise (Canary)</h3>
+                <p>Risk-mitigated deployment.</p>
+                <ul class="features-list">
+                    <li>1% traffic to new version</li>
+                    <li>5 minute monitoring window</li>
+                    <li>Auto-rollback if metrics bad</li>
+                    <li>Proceed if healthy</li>
+                    <li>Complex orchestration</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Tech-Forward (Feature Flags)</h3>
+                <p>Code deployment + runtime control.</p>
+                <ul class="features-list">
+                    <li>Deploy new code dark</li>
+                    <li>Enable feature gradually</li>
+                    <li>Disable instantly if issues</li>
+                    <li>No redeployment needed</li>
+                    <li>Most flexible approach</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Rollback Tools & Technologies</h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>Kubernetes</h3>
+                <p>Container rollback native.</p>
+                <ul class="features-list">
+                    <li>kubectl rollout undo</li>
+                    <li>Revision history stored</li>
+                    <li>One-command rollback</li>
+                    <li>Pod recreation</li>
+                    <li>ConfigMap updates</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>CI/CD Platforms</h3>
+                <p>Deployment pipeline control.</p>
+                <ul class="features-list">
+                    <li>GitHub Actions</li>
+                    <li>GitLab CI/CD</li>
+                    <li>Jenkins</li>
+                    <li>Rollback jobs/stages</li>
+                    <li>Approval workflows</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Deployment Tools</h3>
+                <p>Specialized deployment.</p>
+                <ul class="features-list">
+                    <li>Spinnaker multi-cloud</li>
+                    <li>Flux GitOps</li>
+                    <li>ArgoCD declarative</li>
+                    <li>Terraform state</li>
+                    <li>Custom scripts</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Load Balancers</h3>
+                <p>Traffic management.</p>
+                <ul class="features-list">
+                    <li>AWS ALB/NLB</li>
+                    <li>NGINX weighted routing</li>
+                    <li>HAProxy gradual switch</li>
+                    <li>Service mesh (Istio)</li>
+                    <li>DNS failover</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Implementing Rollback Strategy</h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>Step 1: Plan Strategy</h3>
+                <ul class="features-list">
+                    <li>Assess rollback needs</li>
+                    <li>Choose approach</li>
+                    <li>Identify constraints</li>
+                    <li>Database compatibility</li>
+                    <li>Document decisions</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Step 2: Infrastructure Setup</h3>
+                <ul class="features-list">
+                    <li>Blue-green environments</li>
+                    <li>Load balancer config</li>
+                    <li>Version storage</li>
+                    <li>Health check setup</li>
+                    <li>Monitoring dashboards</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Step 3: Automation</h3>
+                <ul class="features-list">
+                    <li>Write rollback scripts</li>
+                    <li>Integrate CI/CD</li>
+                    <li>Create dashboard buttons</li>
+                    <li>Slack/PagerDuty hooks</li>
+                    <li>Test automation</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Step 4: Operationalize</h3>
+                <ul class="features-list">
+                    <li>Train team</li>
+                    <li>Create runbooks</li>
+                    <li>Regular drills</li>
+                    <li>Incident simulations</li>
+                    <li>Postmortem process</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="intro-box" style="text-align: center; margin: 60px 0 40px;">
+            <p>Rollback is the safety net that enables confident deployments. By designing systems with rollback in mind, automating rollback procedures, and practicing incident recovery, you create an environment where teams can deploy frequently without fear. The ability to quickly recover from failed deployments is not a luxury—it's a requirement for modern software delivery at scale.</p>
+        </div>
+    </div>
+</body>
+</html>

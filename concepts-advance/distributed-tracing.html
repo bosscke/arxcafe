@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Distributed Tracing</title>
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/concepts.css">
+    <link rel="stylesheet" href="/css/concepts-advance.css">
+</head>
+<body class="distributed-tracing-page">
+    <a href="/" class="home-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 18px; height: 18px;">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
+        </svg>
+        Home
+    </a>
+
+    <div class="container">
+        <div style="text-align: center; margin-bottom: 30px; padding: 20px; background: rgba(102, 126, 234, 0.15); border-radius: 12px; border: 1px solid rgba(102, 126, 234, 0.3);">
+            <p style="color: #a8b8ff; font-size: 1.1em; margin: 0; font-weight: 600;">Architects are building their own tools.</p>
+        </div>
+        <h1><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 40px; height: 40px; display: inline-block; margin-right: 10px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Distributed Tracing</h1>
+
+        <div class="intro-box">
+            <p><strong>Distributed Tracing</strong> is a method of tracking application requests as they flow through a distributed system, crossing process and service boundaries. Tracing provides end-to-end visibility into request journeys, revealing performance bottlenecks, failure points, and dependencies between services. Essential for understanding complex microservices architectures where a single user request touches dozens of services.</p>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Core Concepts</h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>Trace</h3>
+                <p>Complete request journey through system.</p>
+                <ul class="features-list">
+                    <li>Unique trace ID per request</li>
+                    <li>Follows request end-to-end</li>
+                    <li>Contains multiple spans</li>
+                    <li>Shows causality and ordering</li>
+                    <li>Parent-child relationships</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Span</h3>
+                <p>Single operation within a trace.</p>
+                <ul class="features-list">
+                    <li>Represents work in one service</li>
+                    <li>Has start and end time</li>
+                    <li>Contains operation metadata</li>
+                    <li>Can have child spans</li>
+                    <li>Nested/sequential arrangement</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Context Propagation</h3>
+                <p>Carrying trace identity across services.</p>
+                <ul class="features-list">
+                    <li>Trace ID in HTTP headers</li>
+                    <li>Span ID relationships</li>
+                    <li>Cross-service communication</li>
+                    <li>Standard headers (W3C)</li>
+                    <li>Baggage for metadata</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Instrumentation</h3>
+                <p>Code changes to emit traces.</p>
+                <ul class="features-list">
+                    <li>Manual instrumentation</li>
+                    <li>Automatic instrumentation</li>
+                    <li>Library integrations</li>
+                    <li>Minimal overhead</li>
+                    <li>Non-invasive agents</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> How Distributed Tracing Works</h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>Request Initiation</h3>
+                <p>Starting a trace.</p>
+                <ul class="features-list">
+                    <li>User request arrives</li>
+                    <li>Generate unique trace ID</li>
+                    <li>Create root span</li>
+                    <li>Record timestamp</li>
+                    <li>Initialize context</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Service Interaction</h3>
+                <p>Crossing service boundaries.</p>
+                <ul class="features-list">
+                    <li>Current service creates span</li>
+                    <li>Calls downstream service</li>
+                    <li>Propagates trace context</li>
+                    <li>Downstream creates child span</li>
+                    <li>Records timing and result</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Data Collection</h3>
+                <p>Gathering span information.</p>
+                <ul class="features-list">
+                    <li>Instrumentation emits spans</li>
+                    <li>Local buffering</li>
+                    <li>Batching for efficiency</li>
+                    <li>Network transmission</li>
+                    <li>Collector aggregation</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Analysis & Visualization</h3>
+                <p>Understanding the trace.</p>
+                <ul class="features-list">
+                    <li>Store in trace database</li>
+                    <li>Reconstruct full timeline</li>
+                    <li>Visualize call graph</li>
+                    <li>Calculate critical path</li>
+                    <li>Identify bottlenecks</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Span Attributes</h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>Standard Attributes</h3>
+                <p>Basic span information.</p>
+                <ul class="features-list">
+                    <li>Trace ID (request identifier)</li>
+                    <li>Span ID (this operation)</li>
+                    <li>Parent span ID (caller)</li>
+                    <li>Operation name</li>
+                    <li>Start and end time</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Semantic Attributes</h3>
+                <p>Standardized metadata fields.</p>
+                <ul class="features-list">
+                    <li>HTTP method and status</li>
+                    <li>Database statement</li>
+                    <li>Service name and version</li>
+                    <li>Component type</li>
+                    <li>Error information</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Custom Attributes</h3>
+                <p>Application-specific data.</p>
+                <ul class="features-list">
+                    <li>User ID</li>
+                    <li>Request ID</li>
+                    <li>Feature flags</li>
+                    <li>Business metrics</li>
+                    <li>Custom dimensions</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Span Events & Links</h3>
+                <p>Rich span relationships.</p>
+                <ul class="features-list">
+                    <li>Events: timestamped log points</li>
+                    <li>Links: reference other spans</li>
+                    <li>Exception information</li>
+                    <li>Async operation handling</li>
+                    <li>Complex dependency tracking</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Instrumentation Approaches</h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>Manual Instrumentation</h3>
+                <p>Explicit tracing in code.</p>
+                <ul class="features-list">
+                    <li>Create spans explicitly</li>
+                    <li>Full control</li>
+                    <li>Detailed information</li>
+                    <li>Code changes required</li>
+                    <li>Development overhead</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Automatic Instrumentation</h3>
+                <p>Library auto-detection and tracing.</p>
+                <ul class="features-list">
+                    <li>Agent injects tracing</li>
+                    <li>No code changes needed</li>
+                    <li>Standard library support</li>
+                    <li>Minor overhead</li>
+                    <li>Language/framework specific</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Zero-Code Instrumentation</h3>
+                <p>Pure agent-based tracing.</p>
+                <ul class="features-list">
+                    <li>Process-level monitoring</li>
+                    <li>No library integration</li>
+                    <li>Works across languages</li>
+                    <li>eBPF in Linux</li>
+                    <li>Less detailed than code-based</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>OpenTelemetry Standard</h3>
+                <p>Vendor-neutral instrumentation.</p>
+                <ul class="features-list">
+                    <li>Unified API across languages</li>
+                    <li>SDK and exporters</li>
+                    <li>Multiple backend support</li>
+                    <li>Industry standard</li>
+                    <li>Operator control</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Popular Tracing Platforms</h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>Jaeger</h3>
+                <p>Open-source distributed tracing.</p>
+                <ul class="features-list">
+                    <li>CNCF project</li>
+                    <li>OpenTelemetry compatible</li>
+                    <li>Multiple storage backends</li>
+                    <li>UI for trace visualization</li>
+                    <li>Sampling strategies</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Zipkin</h3>
+                <p>Original distributed tracing system.</p>
+                <ul class="features-list">
+                    <li>Apache project</li>
+                    <li>Simple and lightweight</li>
+                    <li>Good for learning</li>
+                    <li>Web UI</li>
+                    <li>REST API for queries</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Datadog APM</h3>
+                <p>Enterprise tracing platform.</p>
+                <ul class="features-list">
+                    <li>Managed service</li>
+                    <li>Integrated metrics/logs</li>
+                    <li>Advanced analytics</li>
+                    <li>Service maps</li>
+                    <li>High cost</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Cloud Provider Solutions</h3>
+                <p>AWS, GCP, Azure offerings.</p>
+                <ul class="features-list">
+                    <li>AWS X-Ray</li>
+                    <li>Cloud Trace (GCP)</li>
+                    <li>Application Insights (Azure)</li>
+                    <li>Native integrations</li>
+                    <li>Managed overhead</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Advantages</h2>
+
+        <div class="pros-cons-grid">
+            <div class="pros-box">
+                <h3>Benefits</h3>
+                <ul class="features-list">
+                    <li><strong>End-to-End Visibility:</strong> See entire request journey</li>
+                    <li><strong>Performance Analysis:</strong> Identify latency sources</li>
+                    <li><strong>Dependency Discovery:</strong> Understand service interactions</li>
+                    <li><strong>Error Investigation:</strong> Trace failures across services</li>
+                    <li><strong>Optimization Target:</strong> Data-driven improvements</li>
+                    <li><strong>Critical Path Analysis:</strong> Know what matters</li>
+                    <li><strong>Async Debugging:</strong> Track asynchronous operations</li>
+                    <li><strong>Integration Testing:</strong> Real execution visibility</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle; color: #DD0031;"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 1 1-18 0 9 9 0 0 1 18 0zm-9 3.75h.008v.008H12v-.008z" /></svg> Challenges</h2>
+
+        <div class="pros-cons-grid">
+            <div class="cons-box">
+                <h3>Drawbacks</h3>
+                <ul class="features-list">
+                    <li><strong>Storage Cost:</strong> High volume of trace data</li>
+                    <li><strong>Sampling Complexity:</strong> Balancing coverage vs cost</li>
+                    <li><strong>Implementation Effort:</strong> Setup and integration</li>
+                    <li><strong>Latency Overhead:</strong> Tracing adds processing cost</li>
+                    <li><strong>Privacy/Security:</strong> Sensitive data in traces</li>
+                    <li><strong>Distributed Clock Skew:</strong> Timing alignment difficult</li>
+                    <li><strong>Data Explosion:</strong> Context propagation overhead</li>
+                    <li><strong>Operational Complexity:</strong> Many components</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Best Practices</h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>Sampling Strategy</h3>
+                <ul class="features-list">
+                    <li>Head-based sampling early</li>
+                    <li>Tail-based for slow requests</li>
+                    <li>Adaptive sampling</li>
+                    <li>Error/exception tracing</li>
+                    <li>Cost management</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Context Propagation</h3>
+                <ul class="features-list">
+                    <li>Use W3C standards</li>
+                    <li>Baggage for metadata</li>
+                    <li>Cross-process support</li>
+                    <li>Async handling</li>
+                    <li>Header size awareness</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Data Quality</h3>
+                <ul class="features-list">
+                    <li>Meaningful span names</li>
+                    <li>Rich attributes</li>
+                    <li>Error recording</li>
+                    <li>Consistent standards</li>
+                    <li>Validation rules</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Operational Excellence</h3>
+                <ul class="features-list">
+                    <li>Monitor tracing system</li>
+                    <li>Graceful degradation</li>
+                    <li>Resource budgeting</li>
+                    <li>Team training</li>
+                    <li>Regular review</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Tracing Use Cases</h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>Performance Analysis</h3>
+                <p>Find and fix latency issues.</p>
+                <ul class="features-list">
+                    <li>Slow request investigation</li>
+                    <li>Bottleneck identification</li>
+                    <li>Service latency breakdown</li>
+                    <li>Critical path analysis</li>
+                    <li>Optimization targeting</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Error Investigation</h3>
+                <p>Trace failures to root cause.</p>
+                <ul class="features-list">
+                    <li>Error context capture</li>
+                    <li>Call stack reconstruction</li>
+                    <li>Cross-service failures</li>
+                    <li>Timeout investigation</li>
+                    <li>Exception tracking</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Dependency Discovery</h3>
+                <p>Understand service topology.</p>
+                <ul class="features-list">
+                    <li>Service dependency graph</li>
+                    <li>Communication patterns</li>
+                    <li>Integration points</li>
+                    <li>Coupling analysis</li>
+                    <li>Impact analysis</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Resource Planning</h3>
+                <p>Capacity and scaling decisions.</p>
+                <ul class="features-list">
+                    <li>Service load analysis</li>
+                    <li>Growth projection</li>
+                    <li>Resource allocation</li>
+                    <li>Scaling triggers</li>
+                    <li>Cost optimization</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Real-World Examples</h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>E-Commerce Checkout</h3>
+                <p>Multi-service purchase flow.</p>
+                <ul class="features-list">
+                    <li>API Gateway → Order Service</li>
+                    <li>Order → Payment Service</li>
+                    <li>Order → Inventory Service</li>
+                    <li>Inventory → Warehouse</li>
+                    <li>Final timing and failures</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Search Query</h3>
+                <p>Aggregating results from multiple services.</p>
+                <ul class="features-list">
+                    <li>Frontend request</li>
+                    <li>Search service routing</li>
+                    <li>Multiple index services</li>
+                    <li>Parallel span execution</li>
+                    <li>Result merging latency</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Data Processing Pipeline</h3>
+                <p>Tracking async ETL operations.</p>
+                <ul class="features-list">
+                    <li>Job submission trace</li>
+                    <li>Worker processing</li>
+                    <li>Database writes</li>
+                    <li>Result collection</li>
+                    <li>Total pipeline duration</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Mobile App Sync</h3>
+                <p>Client-server synchronization.</p>
+                <ul class="features-list">
+                    <li>App initiates sync</li>
+                    <li>API endpoint request</li>
+                    <li>Database query</li>
+                    <li>Compression and transfer</li>
+                    <li>Client processing</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Sampling in Distributed Tracing</h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>No Sampling</h3>
+                <p>Every request traced.</p>
+                <ul class="features-list">
+                    <li>Complete visibility</li>
+                    <li>100% accuracy</li>
+                    <li>Very high cost</li>
+                    <li>Storage explosion</li>
+                    <li>Only viable for low traffic</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Static Sampling</h3>
+                <p>Fixed percentage traced.</p>
+                <ul class="features-list">
+                    <li>1% or 10% sampling</li>
+                    <li>Consistent cost</li>
+                    <li>May miss rare issues</li>
+                    <li>Predictable overhead</li>
+                    <li>Simple to implement</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Tail-Based Sampling</h3>
+                <p>Sample based on complete trace.</p>
+                <ul class="features-list">
+                    <li>Always keep slow traces</li>
+                    <li>Keep all errors</li>
+                    <li>Drop normal fast traces</li>
+                    <li>Smart cost efficiency</li>
+                    <li>Catches anomalies</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Adaptive Sampling</h3>
+                <p>Dynamic based on system state.</p>
+                <ul class="features-list">
+                    <li>High load → lower sampling</li>
+                    <li>Issues detected → higher sampling</li>
+                    <li>Cost vs visibility trade-off</li>
+                    <li>Complex to implement</li>
+                    <li>Optimal resource usage</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Implementing Distributed Tracing</h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>Step 1: Choose Platform</h3>
+                <ul class="features-list">
+                    <li>Jaeger for open source</li>
+                    <li>Datadog for enterprise</li>
+                    <li>Cloud provider native</li>
+                    <li>Consider OpenTelemetry</li>
+                    <li>Test with workload</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Step 2: Instrument Services</h3>
+                <ul class="features-list">
+                    <li>Add SDK/agent</li>
+                    <li>Auto-instrumentation first</li>
+                    <li>Manual for critical paths</li>
+                    <li>Test context propagation</li>
+                    <li>Verify header forwarding</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Step 3: Configure Sampling</h3>
+                <ul class="features-list">
+                    <li>Start with high sample rate</li>
+                    <li>Monitor cost</li>
+                    <li>Adjust based on traffic</li>
+                    <li>Implement tail sampling</li>
+                    <li>Balance coverage</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Step 4: Analysis & Iteration</h3>
+                <ul class="features-list">
+                    <li>Test with real traffic</li>
+                    <li>Explore UI features</li>
+                    <li>Create dashboards</li>
+                    <li>Document patterns</li>
+                    <li>Train team</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="intro-box" style="text-align: center; margin: 60px 0 40px;">
+            <p>Distributed tracing transforms a distributed system from a black box into something observable. By tracking requests across service boundaries, you gain the visibility needed to understand performance, debug failures, and optimize the critical path. With proper sampling strategies and good instrumentation, tracing can provide exceptional ROI by revealing exactly where time is being spent.</p>
+        </div>
+    </div>
+</body>
+</html>

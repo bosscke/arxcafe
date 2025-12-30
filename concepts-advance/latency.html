@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Latency</title>
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/concepts.css">
+    <link rel="stylesheet" href="/css/concepts-advance.css">
+</head>
+<body class="latency-page">
+    <a href="/" class="home-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 18px; height: 18px;">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
+        </svg>
+        Home
+    </a>
+
+    <div class="container">
+        <div style="text-align: center; margin-bottom: 30px; padding: 20px; background: rgba(102, 126, 234, 0.15); border-radius: 12px; border: 1px solid rgba(102, 126, 234, 0.3);">
+            <p style="color: #a8b8ff; font-size: 1.1em; margin: 0; font-weight: 600;">Architects are building their own tools.</p>
+        </div>
+        <h1><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 40px; height: 40px; display: inline-block; margin-right: 10px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6l4 2" /><path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Latency</h1>
+
+        <div class="intro-box">
+            <p><strong>Latency</strong> is the time delay between a user action and the system's response. It represents the time it takes for data to travel from source to destination and is typically measured in milliseconds (ms). Lower latency means faster response times and better user experience, while high latency can make applications feel sluggish and unresponsive.</p>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Core Concepts</h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>Definition</h3>
+                <p>The time interval between initiating a request and receiving a response.</p>
+                <ul class="features-list">
+                    <li>Measured in milliseconds (ms)</li>
+                    <li>Round-trip time (RTT)</li>
+                    <li>One-way delay</li>
+                    <li>Processing time included</li>
+                    <li>Critical for user experience</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>How It's Measured</h3>
+                <p>Common methods to measure and monitor latency in systems.</p>
+                <ul class="features-list">
+                    <li>Ping command (ICMP echo)</li>
+                    <li>Traceroute/tracert</li>
+                    <li>Application Performance Monitoring (APM)</li>
+                    <li>Synthetic monitoring</li>
+                    <li>Real User Monitoring (RUM)</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Types of Latency</h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>Network Latency</h3>
+                <p>Time for data to travel across network infrastructure.</p>
+                <ul class="features-list">
+                    <li>Physical distance</li>
+                    <li>Network congestion</li>
+                    <li>Router/switch delays</li>
+                    <li>DNS resolution time</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Processing Latency</h3>
+                <p>Time for systems to process requests.</p>
+                <ul class="features-list">
+                    <li>CPU computation time</li>
+                    <li>Application logic execution</li>
+                    <li>Algorithm complexity</li>
+                    <li>Resource availability</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Database Latency</h3>
+                <p>Time to query and retrieve data from storage.</p>
+                <ul class="features-list">
+                    <li>Query execution time</li>
+                    <li>Index lookup speed</li>
+                    <li>Disk I/O operations</li>
+                    <li>Connection pooling overhead</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Rendering Latency</h3>
+                <p>Time for client to display content.</p>
+                <ul class="features-list">
+                    <li>DOM parsing</li>
+                    <li>CSS rendering</li>
+                    <li>JavaScript execution</li>
+                    <li>Image decoding</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 1 1-18 0 9 9 0 0 1 18 0zm-9 3.75h.008v.008H12v-.008z" /></svg> Common Causes of High Latency</h2>
+
+        <div class="cons-box">
+            <h3>Factors That Increase Latency:</h3>
+            <ul class="features-list">
+                <li><strong>Geographic Distance:</strong> Physical distance between client and server</li>
+                <li><strong>Network Congestion:</strong> Too much traffic on network paths</li>
+                <li><strong>Inefficient Code:</strong> Poorly optimized algorithms and queries</li>
+                <li><strong>Cold Starts:</strong> System initialization or cache misses</li>
+                <li><strong>Third-Party APIs:</strong> Dependencies on external services</li>
+                <li><strong>Database Design:</strong> Missing indexes, N+1 queries</li>
+                <li><strong>Overloaded Servers:</strong> CPU/memory saturation</li>
+                <li><strong>Protocol Overhead:</strong> HTTP handshakes, TLS negotiation</li>
+                <li><strong>DNS Lookups:</strong> Slow domain name resolution</li>
+            </ul>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" /></svg> How to Reduce Latency</h2>
+
+        <div class="pros-box">
+            <h3>Optimization Strategies:</h3>
+            <ul class="features-list">
+                <li><strong>Use CDNs:</strong> Serve content from edge locations near users</li>
+                <li><strong>Caching:</strong> Store frequently accessed data in memory (Redis, Memcached)</li>
+                <li><strong>Database Optimization:</strong> Add indexes, optimize queries, use connection pooling</li>
+                <li><strong>Minimize HTTP Requests:</strong> Bundle assets, use sprites, lazy loading</li>
+                <li><strong>Compression:</strong> Gzip/Brotli for text, WebP for images</li>
+                <li><strong>Async Processing:</strong> Use background jobs for heavy tasks</li>
+                <li><strong>Geographic Distribution:</strong> Deploy servers in multiple regions</li>
+                <li><strong>HTTP/2 or HTTP/3:</strong> Multiplexing and faster protocols</li>
+                <li><strong>Prefetching:</strong> Anticipate and load resources early</li>
+                <li><strong>Load Balancing:</strong> Distribute traffic to prevent bottlenecks</li>
+            </ul>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Latency Benchmarks</h2>
+
+        <div class="intro-box">
+            <h3>Typical Latency Values:</h3>
+            <ul class="features-list">
+                <li><strong>L1 Cache Reference:</strong> ~1 nanosecond (0.001 microseconds)</li>
+                <li><strong>Memory Access:</strong> ~100 nanoseconds</li>
+                <li><strong>SSD Read:</strong> ~16 microseconds</li>
+                <li><strong>HDD Seek:</strong> ~4 milliseconds</li>
+                <li><strong>Same Data Center:</strong> 1-10 ms</li>
+                <li><strong>Cross-Region (US East to West):</strong> 60-80 ms</li>
+                <li><strong>Intercontinental (US to Europe):</strong> 100-150 ms</li>
+                <li><strong>US to Australia:</strong> 180-250 ms</li>
+            </ul>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> User Experience Impact</h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>Acceptable Latency</h3>
+                <ul class="features-list">
+                    <li><strong>0-100ms:</strong> Excellent, feels instant</li>
+                    <li><strong>100-300ms:</strong> Good, barely noticeable</li>
+                    <li><strong>300-1000ms:</strong> Acceptable, noticeable delay</li>
+                    <li><strong>1000ms+:</strong> Poor, users get frustrated</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Application-Specific</h3>
+                <ul class="features-list">
+                    <li><strong>Gaming:</strong> <50ms critical</li>
+                    <li><strong>Video Calls:</strong> <150ms ideal</li>
+                    <li><strong>Financial Trading:</strong> <10ms required</li>
+                    <li><strong>Web Browsing:</strong> <200ms acceptable</li>
+                    <li><strong>IoT Sensors:</strong> Varies by use case</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Best Practices</h2>
+
+        <div class="intro-box">
+            <h3>Managing Latency Effectively:</h3>
+            <ul class="features-list">
+                <li><strong>Monitor Continuously:</strong> Track latency metrics across all layers</li>
+                <li><strong>Set SLOs:</strong> Define acceptable latency targets (e.g., p95 < 200ms)</li>
+                <li><strong>Test Globally:</strong> Measure from multiple geographic locations</li>
+                <li><strong>Optimize Critical Path:</strong> Focus on most-used user journeys first</li>
+                <li><strong>Use Percentiles:</strong> Monitor p50, p95, p99 instead of just average</li>
+                <li><strong>Implement Timeouts:</strong> Prevent hanging requests from degrading experience</li>
+                <li><strong>Cache Intelligently:</strong> Balance freshness vs speed</li>
+                <li><strong>Profile Code:</strong> Identify slow functions and database queries</li>
+                <li><strong>Load Test:</strong> Simulate high traffic to find bottlenecks</li>
+            </ul>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Tools for Measuring Latency</h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>Network Tools</h3>
+                <ul class="features-list">
+                    <li>Ping, Traceroute</li>
+                    <li>MTR (My Traceroute)</li>
+                    <li>Wireshark</li>
+                    <li>Chrome DevTools Network tab</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>APM Solutions</h3>
+                <ul class="features-list">
+                    <li>New Relic</li>
+                    <li>Datadog</li>
+                    <li>Dynatrace</li>
+                    <li>AppDynamics</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Open Source</h3>
+                <ul class="features-list">
+                    <li>Prometheus + Grafana</li>
+                    <li>Jaeger (distributed tracing)</li>
+                    <li>Zipkin</li>
+                    <li>OpenTelemetry</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Synthetic Monitoring</h3>
+                <ul class="features-list">
+                    <li>Pingdom</li>
+                    <li>UptimeRobot</li>
+                    <li>StatusCake</li>
+                    <li>Google PageSpeed Insights</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Real-World Examples</h2>
+
+        <div class="arch-card" style="margin: 30px 0;">
+            <h3>Latency Optimization Success Stories:</h3>
+            <p><strong>Google:</strong> Found that 500ms delay reduced traffic by 20%</p>
+            <p><strong>Amazon:</strong> Every 100ms of latency costs 1% in sales</p>
+            <p><strong>Netflix:</strong> Uses adaptive bitrate streaming to handle varying latency</p>
+            <p><strong>Facebook:</strong> Optimized to <100ms for News Feed rendering</p>
+            <p><strong>Gaming:</strong> Valorant targets <35ms server tick rate for competitive play</p>
+            <p><strong>Financial Trading:</strong> High-frequency trading requires sub-millisecond latency</p>
+        </div>
+
+        <div class="intro-box" style="text-align: center; margin: 60px 0 40px;">
+            <p>Latency is one of the most critical performance metrics in modern applications. Even small improvements in latency can significantly enhance user experience, increase conversion rates, and improve customer satisfaction.</p>
+        </div>
+    </div>
+</body>
+</html>

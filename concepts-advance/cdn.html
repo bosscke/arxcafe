@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Content Delivery Network (CDN)</title>
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/concepts.css">
+    <link rel="stylesheet" href="/css/concepts-advance.css">
+</head>
+<body class="cdn-page">
+    <a href="/" class="home-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 18px; height: 18px;">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
+        </svg>
+        Home
+    </a>
+
+    <div class="container">
+        <div style="text-align: center; margin-bottom: 30px; padding: 20px; background: rgba(102, 126, 234, 0.15); border-radius: 12px; border: 1px solid rgba(102, 126, 234, 0.3);">
+            <p style="color: #a8b8ff; font-size: 1.1em; margin: 0; font-weight: 600;">Architects are building their own tools.</p>
+        </div>
+        <h1><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 40px; height: 40px; display: inline-block; margin-right: 10px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9 9 0 1 1 0-18 9 9 0 0 1 0 18zm0 0a8.949 8.949 0 0 0 4.951-1.488A3.987 3.987 0 0 0 13.5 16.5h-3a3.987 3.987 0 0 0-3.451 3.012A8.948 8.948 0 0 0 12 21z" /></svg> Content Delivery Network (CDN)</h1>
+
+        <div class="intro-box">
+            <p><strong>A Content Delivery Network (CDN)</strong> is a geographically distributed network of servers that work together to deliver web content quickly to users based on their location. CDNs cache static assets (images, videos, CSS, JavaScript) on edge servers near users, reducing latency and improving load times by serving content from the nearest location.</p>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Core Concepts</h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>Definition</h3>
+                <p>A distributed system of servers that cache and deliver content from locations closest to end users.</p>
+                <ul class="features-list">
+                    <li>Edge servers worldwide</li>
+                    <li>Cached static content</li>
+                    <li>Geographic routing</li>
+                    <li>Origin server protection</li>
+                    <li>Reduced latency</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>How It Works</h3>
+                <p>User requests are routed to the nearest edge server, which serves cached content or fetches from origin.</p>
+                <ul class="features-list">
+                    <li>DNS resolution to nearest edge</li>
+                    <li>Edge checks cache for content</li>
+                    <li>Cache hit: serve immediately</li>
+                    <li>Cache miss: fetch from origin</li>
+                    <li>Store in edge cache for future</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Key Components</h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>Origin Server</h3>
+                <p>The source server hosting the original content.</p>
+                <ul class="features-list">
+                    <li>Master copy of all files</li>
+                    <li>Responds to cache misses</li>
+                    <li>Protected from traffic spikes</li>
+                    <li>Dynamic content generation</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Edge Servers</h3>
+                <p>Distributed servers that cache content near users.</p>
+                <ul class="features-list">
+                    <li>Located in Points of Presence (PoPs)</li>
+                    <li>Cache static assets</li>
+                    <li>Fast content delivery</li>
+                    <li>Handle high traffic volumes</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Cache</h3>
+                <p>Temporary storage of frequently accessed content.</p>
+                <ul class="features-list">
+                    <li>TTL (Time To Live) settings</li>
+                    <li>Cache headers control behavior</li>
+                    <li>Purge/invalidate when needed</li>
+                    <li>Hit ratio optimization</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>DNS Routing</h3>
+                <p>Directs users to optimal edge server.</p>
+                <ul class="features-list">
+                    <li>GeoDNS for location routing</li>
+                    <li>Anycast IP addressing</li>
+                    <li>Health-based routing</li>
+                    <li>Load distribution</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Types of CDNs</h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>Pull CDN</h3>
+                <p>Edge servers pull content from origin on first request.</p>
+                <ul class="features-list">
+                    <li>Automatic caching on demand</li>
+                    <li>Minimal configuration</li>
+                    <li>Good for large file libraries</li>
+                    <li>Lower storage costs</li>
+                    <li>First request slower (cache miss)</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Push CDN</h3>
+                <p>You manually upload content to edge servers.</p>
+                <ul class="features-list">
+                    <li>Pre-populate cache</li>
+                    <li>Full control over content</li>
+                    <li>Good for small sites</li>
+                    <li>Faster first requests</li>
+                    <li>Manual updates required</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Hybrid CDN</h3>
+                <p>Combines pull and push strategies.</p>
+                <ul class="features-list">
+                    <li>Push for critical assets</li>
+                    <li>Pull for less frequent content</li>
+                    <li>Best of both approaches</li>
+                    <li>Flexible caching strategy</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Advantages</h2>
+
+        <div class="pros-box">
+            <h3>Benefits of CDNs</h3>
+            <ul class="features-list">
+                <li><strong>Reduced Latency:</strong> Content served from nearest location</li>
+                <li><strong>Improved Performance:</strong> Faster page load times globally</li>
+                <li><strong>Reduced Origin Load:</strong> Most requests served from cache</li>
+                <li><strong>High Availability:</strong> Redundant edge servers provide backup</li>
+                <li><strong>DDoS Protection:</strong> Distributed network absorbs attacks</li>
+                <li><strong>Bandwidth Savings:</strong> Less data transferred from origin</li>
+                <li><strong>Scalability:</strong> Handle traffic spikes easily</li>
+                <li><strong>Better SEO:</strong> Faster sites rank higher</li>
+                <li><strong>Geographic Reach:</strong> Serve global audience efficiently</li>
+            </ul>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle; color: #DD0031;"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 1 1-18 0 9 9 0 0 1 18 0zm-9 3.75h.008v.008H12v-.008z" /></svg> Disadvantages</h2>
+
+        <div class="cons-box">
+            <h3>Challenges with CDNs</h3>
+            <ul class="features-list">
+                <li><strong>Cost:</strong> Can be expensive for high traffic sites</li>
+                <li><strong>Cache Invalidation:</strong> Difficult to update cached content immediately</li>
+                <li><strong>Complexity:</strong> Additional infrastructure to configure</li>
+                <li><strong>Stale Content:</strong> Risk of serving outdated cached data</li>
+                <li><strong>Dynamic Content:</strong> Not suitable for personalized content</li>
+                <li><strong>Vendor Lock-in:</strong> Switching CDN providers can be challenging</li>
+                <li><strong>Debugging:</strong> Harder to troubleshoot edge server issues</li>
+                <li><strong>Privacy Concerns:</strong> Third-party handles user requests</li>
+            </ul>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> What Content to Cache</h2>
+
+        <div class="pros-box">
+            <h3>Ideal Content for CDN:</h3>
+            <ul class="features-list">
+                <li><strong>Static Assets:</strong> Images, CSS, JavaScript files</li>
+                <li><strong>Videos:</strong> Streaming media and downloads</li>
+                <li><strong>Downloadable Files:</strong> PDFs, software installers</li>
+                <li><strong>Web Fonts:</strong> Custom typography files</li>
+                <li><strong>Static HTML:</strong> Pages that rarely change</li>
+                <li><strong>API Responses:</strong> Cacheable GET requests</li>
+            </ul>
+        </div>
+
+        <div class="cons-box">
+            <h3>Not Suitable for CDN:</h3>
+            <ul class="features-list">
+                <li><strong>Personalized Content:</strong> User-specific data</li>
+                <li><strong>Real-time Data:</strong> Live feeds, stock prices</li>
+                <li><strong>Sensitive Information:</strong> Private user data</li>
+                <li><strong>Frequently Changing Content:</strong> Updated every second</li>
+                <li><strong>POST/PUT Requests:</strong> Write operations</li>
+            </ul>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Best Practices</h2>
+
+        <div class="intro-box">
+            <h3>Optimizing CDN Usage:</h3>
+            <ul class="features-list">
+                <li><strong>Appropriate TTLs:</strong> Set cache expiration based on content update frequency</li>
+                <li><strong>Cache Busting:</strong> Use versioned filenames (app.v2.js) or query strings</li>
+                <li><strong>Compression:</strong> Enable Gzip/Brotli compression for text files</li>
+                <li><strong>Image Optimization:</strong> Use modern formats (WebP, AVIF)</li>
+                <li><strong>HTTP/2:</strong> Enable for multiplexing and faster delivery</li>
+                <li><strong>Cache Headers:</strong> Use Cache-Control, ETag, Last-Modified</li>
+                <li><strong>Purge Strategy:</strong> Implement cache invalidation when needed</li>
+                <li><strong>Monitoring:</strong> Track cache hit ratio and performance</li>
+                <li><strong>Multi-CDN:</strong> Use multiple CDN providers for redundancy</li>
+                <li><strong>Security:</strong> Enable SSL/TLS and use signed URLs for protected content</li>
+            </ul>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Popular CDN Providers</h2>
+
+        <div class="arch-card" style="margin: 30px 0;">
+            <h3>Leading CDN Solutions:</h3>
+            <p><strong>Cloudflare:</strong> Free tier available, DDoS protection, global network</p>
+            <p><strong>AWS CloudFront:</strong> Integrated with AWS services, pay-as-you-go</p>
+            <p><strong>Akamai:</strong> Enterprise-grade, largest CDN network</p>
+            <p><strong>Fastly:</strong> Real-time purging, instant updates</p>
+            <p><strong>Google Cloud CDN:</strong> Integration with Google Cloud Platform</p>
+            <p><strong>Azure CDN:</strong> Microsoft's global CDN service</p>
+            <p><strong>KeyCDN:</strong> Affordable, high performance</p>
+            <p><strong>BunnyCDN:</strong> Budget-friendly, easy setup</p>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Real-World Use Cases</h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>E-Commerce</h3>
+                <p>Deliver product images and assets globally for fast shopping experience.</p>
+            </div>
+
+            <div class="arch-card">
+                <h3>Streaming Services</h3>
+                <p>Netflix, YouTube use CDNs to deliver video content efficiently worldwide.</p>
+            </div>
+
+            <div class="arch-card">
+                <h3>News Websites</h3>
+                <p>Handle traffic spikes during breaking news with cached static content.</p>
+            </div>
+
+            <div class="arch-card">
+                <h3>Software Downloads</h3>
+                <p>Distribute large files (OS updates, games) from nearby servers.</p>
+            </div>
+        </div>
+
+        <div class="intro-box" style="text-align: center; margin: 60px 0 40px;">
+            <p>CDNs are essential infrastructure for modern web applications, dramatically improving performance and reliability by bringing content closer to users through geographically distributed edge servers.</p>
+        </div>
+    </div>
+</body>
+</html>

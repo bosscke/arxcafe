@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Disaster Recovery</title>
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/concepts.css">
+    <link rel="stylesheet" href="/css/concepts-advance.css">
+</head>
+<body class="disaster-recovery-page">
+    <a href="/" class="home-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 18px; height: 18px;">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
+        </svg>
+        Home
+    </a>
+
+    <div class="container">
+        <div style="text-align: center; margin-bottom: 30px; padding: 20px; background: rgba(102, 126, 234, 0.15); border-radius: 12px; border: 1px solid rgba(102, 126, 234, 0.3);">
+            <p style="color: #a8b8ff; font-size: 1.1em; margin: 0; font-weight: 600;">Architects are building their own tools.</p>
+        </div>
+        <h1><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 40px; height: 40px; display: inline-block; margin-right: 10px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 0 1 3.598 6 11.99 11.99 0 0 0 3 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.57-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" /></svg> Disaster Recovery</h1>
+
+        <div class="intro-box">
+            <p><strong>Disaster Recovery (DR)</strong> is a comprehensive set of policies, tools, and procedures that enable the recovery or continuation of vital technology infrastructure and systems following a natural or human-induced disaster. DR focuses on restoring data, applications, and infrastructure to a functional state after catastrophic events like hardware failures, cyberattacks, natural disasters, or data corruption.</p>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Core Concepts</h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>RPO (Recovery Point Objective)</h3>
+                <p>Maximum acceptable amount of data loss measured in time.</p>
+                <ul class="features-list">
+                    <li>How much data can you afford to lose?</li>
+                    <li>Measured in time (minutes/hours)</li>
+                    <li>Determines backup frequency</li>
+                    <li>Lower RPO = more frequent backups</li>
+                    <li>Financial impact consideration</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>RTO (Recovery Time Objective)</h3>
+                <p>Maximum acceptable downtime before business impact becomes unacceptable.</p>
+                <ul class="features-list">
+                    <li>How long can systems be down?</li>
+                    <li>Measured in time units</li>
+                    <li>Drives DR strategy selection</li>
+                    <li>Lower RTO = higher cost</li>
+                    <li>Business criticality factor</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Backup Strategy</h3>
+                <p>Systematic approach to creating data copies for recovery.</p>
+                <ul class="features-list">
+                    <li>Full backups (complete copy)</li>
+                    <li>Incremental (changes only)</li>
+                    <li>Differential (since last full)</li>
+                    <li>Continuous data protection</li>
+                    <li>3-2-1 rule (3 copies, 2 media, 1 offsite)</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>DR Plan</h3>
+                <p>Documented procedures for responding to disasters.</p>
+                <ul class="features-list">
+                    <li>Step-by-step recovery procedures</li>
+                    <li>Contact information</li>
+                    <li>Asset inventory</li>
+                    <li>Roles and responsibilities</li>
+                    <li>Regular testing schedule</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> DR Strategies</h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>Backup and Restore</h3>
+                <p>Restore from backups after disaster. Lowest cost, highest RTO.</p>
+                <ul class="features-list">
+                    <li>RTO: Hours to days</li>
+                    <li>RPO: Hours (depends on backup frequency)</li>
+                    <li>Lowest cost option</li>
+                    <li>Store backups offsite/cloud</li>
+                    <li>Good for non-critical systems</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Pilot Light</h3>
+                <p>Minimal version always running, scaled up during disaster.</p>
+                <ul class="features-list">
+                    <li>RTO: Minutes to hours</li>
+                    <li>RPO: Minutes</li>
+                    <li>Core services always on</li>
+                    <li>Quick scaling capability</li>
+                    <li>Moderate cost</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Warm Standby</h3>
+                <p>Scaled-down but fully functional version running continuously.</p>
+                <ul class="features-list">
+                    <li>RTO: Minutes</li>
+                    <li>RPO: Seconds to minutes</li>
+                    <li>All services running at reduced capacity</li>
+                    <li>Can handle some production load</li>
+                    <li>Higher cost than pilot light</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Hot Site / Multi-Site Active-Active</h3>
+                <p>Full production capacity in multiple locations simultaneously.</p>
+                <ul class="features-list">
+                    <li>RTO: Near-zero (automatic)</li>
+                    <li>RPO: Near-zero (real-time sync)</li>
+                    <li>All sites handle production traffic</li>
+                    <li>Instant failover</li>
+                    <li>Highest cost</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Disaster Scenarios</h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>Hardware Failure</h3>
+                <p>Server, storage, or network equipment malfunction.</p>
+                <ul class="features-list">
+                    <li>Disk failures</li>
+                    <li>Server crashes</li>
+                    <li>Network outages</li>
+                    <li>Power failures</li>
+                    <li>Most common scenario</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Natural Disasters</h3>
+                <p>Physical events affecting datacenter facilities.</p>
+                <ul class="features-list">
+                    <li>Earthquakes</li>
+                    <li>Floods</li>
+                    <li>Fires</li>
+                    <li>Hurricanes/tornadoes</li>
+                    <li>Requires geographic redundancy</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Cyber Attacks</h3>
+                <p>Malicious actions compromising systems or data.</p>
+                <ul class="features-list">
+                    <li>Ransomware</li>
+                    <li>Data breaches</li>
+                    <li>DDoS attacks</li>
+                    <li>Malware infections</li>
+                    <li>Insider threats</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Human Error</h3>
+                <p>Accidental deletion, misconfiguration, or mistakes.</p>
+                <ul class="features-list">
+                    <li>Accidental deletions</li>
+                    <li>Configuration errors</li>
+                    <li>Deployment mistakes</li>
+                    <li>Requires version control</li>
+                    <li>Preventable with automation</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Advantages</h2>
+
+        <div class="pros-cons-grid">
+            <div class="pros-box">
+                <h3>Benefits</h3>
+                <ul class="features-list">
+                    <li><strong>Business Continuity:</strong> Operations continue despite disasters</li>
+                    <li><strong>Data Protection:</strong> Prevents permanent data loss</li>
+                    <li><strong>Compliance:</strong> Meets regulatory requirements</li>
+                    <li><strong>Reputation Protection:</strong> Maintains customer trust</li>
+                    <li><strong>Financial Protection:</strong> Minimizes revenue loss from downtime</li>
+                    <li><strong>Competitive Advantage:</strong> Faster recovery than competitors</li>
+                    <li><strong>Peace of Mind:</strong> Confidence in handling disasters</li>
+                    <li><strong>Risk Mitigation:</strong> Reduces impact of unforeseen events</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle; color: #DD0031;"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 1 1-18 0 9 9 0 0 1 18 0zm-9 3.75h.008v.008H12v-.008z" /></svg> Challenges</h2>
+
+        <div class="pros-cons-grid">
+            <div class="cons-box">
+                <h3>Drawbacks</h3>
+                <ul class="features-list">
+                    <li><strong>High Cost:</strong> Maintaining redundant infrastructure is expensive</li>
+                    <li><strong>Complexity:</strong> Multiple systems and locations to manage</li>
+                    <li><strong>Testing Overhead:</strong> Regular DR drills disrupt operations</li>
+                    <li><strong>Data Synchronization:</strong> Keeping backups current is challenging</li>
+                    <li><strong>Recovery Validation:</strong> Hard to verify backup integrity</li>
+                    <li><strong>Skill Requirements:</strong> Needs specialized expertise</li>
+                    <li><strong>Documentation Burden:</strong> Plans require constant updates</li>
+                    <li><strong>False Sense of Security:</strong> Untested plans may not work</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Best Practices</h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>Planning</h3>
+                <ul class="features-list">
+                    <li>Conduct Business Impact Analysis (BIA)</li>
+                    <li>Define RPO and RTO for each system</li>
+                    <li>Document all recovery procedures</li>
+                    <li>Identify critical dependencies</li>
+                    <li>Assign clear roles and responsibilities</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Testing</h3>
+                <ul class="features-list">
+                    <li>Test DR plan quarterly or annually</li>
+                    <li>Conduct tabletop exercises</li>
+                    <li>Perform full failover tests</li>
+                    <li>Document test results and gaps</li>
+                    <li>Update plan based on findings</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Backup Strategy</h3>
+                <ul class="features-list">
+                    <li>Follow 3-2-1 backup rule</li>
+                    <li>Encrypt backups at rest and in transit</li>
+                    <li>Automate backup processes</li>
+                    <li>Verify backup integrity regularly</li>
+                    <li>Store offsite/cloud copies</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Continuous Improvement</h3>
+                <ul class="features-list">
+                    <li>Review and update plan annually</li>
+                    <li>Learn from actual incidents</li>
+                    <li>Track industry best practices</li>
+                    <li>Monitor new threats</li>
+                    <li>Train staff on procedures</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Real-World Examples</h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>AWS Disaster Recovery</h3>
+                <p>Multi-region DR with automated failover.</p>
+                <ul class="features-list">
+                    <li>Cross-region replication</li>
+                    <li>Route 53 health checks</li>
+                    <li>S3 Cross-Region Replication</li>
+                    <li>RDS automated backups</li>
+                    <li>CloudFormation for infrastructure as code</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Financial Services</h3>
+                <p>Hot site with near-zero RTO/RPO requirements.</p>
+                <ul class="features-list">
+                    <li>Active-active datacenters</li>
+                    <li>Synchronous replication</li>
+                    <li>Sub-second failover</li>
+                    <li>Continuous testing</li>
+                    <li>Regulatory compliance</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>SaaS Applications</h3>
+                <p>Cloud-native DR with automated backups.</p>
+                <ul class="features-list">
+                    <li>Multi-AZ deployments</li>
+                    <li>Automated database snapshots</li>
+                    <li>Point-in-time recovery</li>
+                    <li>Infrastructure as code</li>
+                    <li>Chaos engineering testing</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Healthcare Systems</h3>
+                <p>HIPAA-compliant DR with strict requirements.</p>
+                <ul class="features-list">
+                    <li>Encrypted backups</li>
+                    <li>Audit trail requirements</li>
+                    <li>Geographic redundancy</li>
+                    <li>15-minute RTO target</li>
+                    <li>Regular compliance audits</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> DR Plan Components</h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>Emergency Response</h3>
+                <p>Immediate actions when disaster strikes.</p>
+                <ul class="features-list">
+                    <li>Incident detection and notification</li>
+                    <li>Emergency contact list</li>
+                    <li>Situation assessment procedures</li>
+                    <li>Activation decision criteria</li>
+                    <li>Communication protocols</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Recovery Procedures</h3>
+                <p>Step-by-step instructions for system restoration.</p>
+                <ul class="features-list">
+                    <li>Infrastructure rebuild steps</li>
+                    <li>Data restoration process</li>
+                    <li>Application deployment</li>
+                    <li>Verification and testing</li>
+                    <li>Cutover to production</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Resource Inventory</h3>
+                <p>Complete list of critical assets and dependencies.</p>
+                <ul class="features-list">
+                    <li>Hardware and software inventory</li>
+                    <li>Network diagrams</li>
+                    <li>Configuration details</li>
+                    <li>Vendor contacts</li>
+                    <li>License information</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Post-Recovery</h3>
+                <p>Actions after returning to normal operations.</p>
+                <ul class="features-list">
+                    <li>System verification</li>
+                    <li>Performance monitoring</li>
+                    <li>Post-mortem analysis</li>
+                    <li>Plan updates</li>
+                    <li>Lessons learned documentation</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> DR vs High Availability</h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>Disaster Recovery</h3>
+                <p>Recovery after catastrophic failure.</p>
+                <ul class="features-list">
+                    <li>Focuses on restoration</li>
+                    <li>Activated after disaster</li>
+                    <li>Measured by RTO/RPO</li>
+                    <li>Involves downtime</li>
+                    <li>Geographic redundancy</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>High Availability</h3>
+                <p>Prevents downtime through redundancy.</p>
+                <ul class="features-list">
+                    <li>Focuses on prevention</li>
+                    <li>Always active</li>
+                    <li>Measured by uptime %</li>
+                    <li>Minimal downtime</li>
+                    <li>Local redundancy</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Combined Approach</h3>
+                <p>Use both for comprehensive resilience.</p>
+                <ul class="features-list">
+                    <li>HA handles component failures</li>
+                    <li>DR handles site failures</li>
+                    <li>Layered defense strategy</li>
+                    <li>Best for critical systems</li>
+                    <li>Higher total cost</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Strategy Selection</h3>
+                <p>Choose based on business requirements.</p>
+                <ul class="features-list">
+                    <li>Assess business criticality</li>
+                    <li>Calculate acceptable downtime</li>
+                    <li>Consider budget constraints</li>
+                    <li>Evaluate risk tolerance</li>
+                    <li>Match strategy to needs</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="intro-box" style="text-align: center; margin: 60px 0 40px;">
+            <p>Disaster recovery is not optional for modern businesses. Whether facing natural disasters, cyberattacks, or simple human errors, having a well-tested DR plan ensures your organization can recover quickly and minimize impact. The key is matching your DR strategy to your specific RTO and RPO requirements while staying within budget constraints.</p>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Containers</title>
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/concepts.css">
+    <link rel="stylesheet" href="/css/concepts-advance.css">
+</head>
+<body class="containers-page">
+    <a href="/" class="home-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 18px; height: 18px;">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
+        </svg>
+        Home
+    </a>
+
+    <div class="container">
+        <div style="text-align: center; margin-bottom: 30px; padding: 20px; background: rgba(102, 126, 234, 0.15); border-radius: 12px; border: 1px solid rgba(102, 126, 234, 0.3);">
+            <p style="color: #a8b8ff; font-size: 1.1em; margin: 0; font-weight: 600;">Architects are building their own tools.</p>
+        </div>
+        <h1><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 40px; height: 40px; display: inline-block; margin-right: 10px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Containers</h1>
+
+        <div class="intro-box">
+            <p><strong>Containers</strong> are lightweight, portable application packages that include code, runtime, dependencies, and configuration. They provide process isolation and standardized environments while being faster and more efficient than VMs. Containers enable consistent deployment across machines, rapid scaling, and the microservices architecture pattern that powers modern cloud-native applications.</p>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Core Concepts</h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>What Is a Container</h3>
+                <p>Container fundamentals.</p>
+                <ul class="features-list">
+                    <li>Isolated process</li>
+                    <li>Bundled dependencies</li>
+                    <li>Shares OS kernel</li>
+                    <li>Runs anywhere</li>
+                    <li>Lightweight</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Containers vs VMs</h3>
+                <p>Different virtualization approaches.</p>
+                <ul class="features-list">
+                    <li>Container: shared kernel</li>
+                    <li>VM: full OS per instance</li>
+                    <li>Container: faster startup</li>
+                    <li>VM: stronger isolation</li>
+                    <li>Both have uses</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Container Runtime</h3>
+                <p>Software that runs containers.</p>
+                <ul class="features-list">
+                    <li>Docker</li>
+                    <li>containerd</li>
+                    <li>CRI-O</li>
+                    <li>Manages isolation</li>
+                    <li>Executes processes</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Key Technologies</h3>
+                <p>Container foundations.</p>
+                <ul class="features-list">
+                    <li>Linux namespaces</li>
+                    <li>cgroups (control groups)</li>
+                    <li>Union filesystems</li>
+                    <li>Image format</li>
+                    <li>Registry system</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Container Architecture</h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>Container Images</h3>
+                <p>Read-only templates.</p>
+                <ul class="features-list">
+                    <li>Base OS layer</li>
+                    <li>Application layer</li>
+                    <li>Dependency layer</li>
+                    <li>Configuration</li>
+                    <li>Immutable</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Container Instances</h3>
+                <p>Running containers.</p>
+                <ul class="features-list">
+                    <li>From image template</li>
+                    <li>Writable layer</li>
+                    <li>Process isolation</li>
+                    <li>Own filesystem</li>
+                    <li>Can be killed</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Volumes & Storage</h3>
+                <p>Data persistence.</p>
+                <ul class="features-list">
+                    <li>Ephemeral data</li>
+                    <li>Persistent volumes</li>
+                    <li>Bind mounts</li>
+                    <li>Named volumes</li>
+                    <li>Storage drivers</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Networking</h3>
+                <p>Container communication.</p>
+                <ul class="features-list">
+                    <li>Bridge networks</li>
+                    <li>Host networking</li>
+                    <li>Custom networks</li>
+                    <li>DNS discovery</li>
+                    <li>Port mapping</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Container Runtimes</h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>Docker</h3>
+                <p>Industry-standard platform.</p>
+                <ul class="features-list">
+                    <li>Image building</li>
+                    <li>Container runtime</li>
+                    <li>Registry (Docker Hub)</li>
+                    <li>Compose for multi-container</li>
+                    <li>Most popular</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>containerd</h3>
+                <p>CNCF container runtime.</p>
+                <ul class="features-list">
+                    <li>Docker-compatible</li>
+                    <li>Lightweight</li>
+                    <li>OCI compliant</li>
+                    <li>Used by Kubernetes</li>
+                    <li>Industry standard</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>CRI-O</h3>
+                <p>Kubernetes-focused runtime.</p>
+                <ul class="features-list">
+                    <li>Minimal design</li>
+                    <li>Kubernetes native</li>
+                    <li>OCI compliant</li>
+                    <li>No Docker required</li>
+                    <li>Enterprise ready</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Podman</h3>
+                <p>Daemon-less containers.</p>
+                <ul class="features-list">
+                    <li>Docker-compatible CLI</li>
+                    <li>No daemon required</li>
+                    <li>Rootless containers</li>
+                    <li>Podman pods</li>
+                    <li>Security focused</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Container Images & Registry</h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>Building Images</h3>
+                <p>Creating container templates.</p>
+                <ul class="features-list">
+                    <li>Dockerfile specification</li>
+                    <li>Multi-stage builds</li>
+                    <li>Layer caching</li>
+                    <li>Minimal size goals</li>
+                    <li>Build best practices</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Image Layers</h3>
+                <p>Efficient storage.</p>
+                <ul class="features-list">
+                    <li>Immutable layers</li>
+                    <li>Copy-on-write</li>
+                    <li>Shared layers</li>
+                    <li>Layer reuse</li>
+                    <li>Disk efficient</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Container Registry</h3>
+                <p>Image storage & distribution.</p>
+                <ul class="features-list">
+                    <li>Docker Hub</li>
+                    <li>AWS ECR</li>
+                    <li>Google Artifact Registry</li>
+                    <li>Azure ACR</li>
+                    <li>Private registries</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Image Distribution</h3>
+                <p>Pushing and pulling images.</p>
+                <ul class="features-list">
+                    <li>Registry API</li>
+                    <li>Authentication</li>
+                    <li>Image tagging</li>
+                    <li>Version management</li>
+                    <li>Pull optimization</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Container Lifecycle</h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>Building</h3>
+                <p>Creating images.</p>
+                <ul class="features-list">
+                    <li>Write Dockerfile</li>
+                    <li>docker build command</li>
+                    <li>Layer creation</li>
+                    <li>Image tagging</li>
+                    <li>Reproducible builds</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Running</h3>
+                <p>Executing containers.</p>
+                <ul class="features-list">
+                    <li>Create container</li>
+                    <li>Allocate resources</li>
+                    <li>Start process</li>
+                    <li>Execute application</li>
+                    <li>Monitor runtime</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Stopping</h3>
+                <p>Graceful shutdown.</p>
+                <ul class="features-list">
+                    <li>Send SIGTERM</li>
+                    <li>Wait for grace period</li>
+                    <li>Cleanup resources</li>
+                    <li>Exit gracefully</li>
+                    <li>Preserve logs</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Cleanup</h3>
+                <p>Removing containers.</p>
+                <ul class="features-list">
+                    <li>Delete container</li>
+                    <li>Remove volumes</li>
+                    <li>Free resources</li>
+                    <li>Prune unused</li>
+                    <li>Disk cleanup</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Advantages</h2>
+
+        <div class="pros-cons-grid">
+            <div class="pros-box">
+                <h3>Benefits</h3>
+                <ul class="features-list">
+                    <li><strong>Lightweight:</strong> Megabytes vs gigabytes</li>
+                    <li><strong>Fast Startup:</strong> Seconds not minutes</li>
+                    <li><strong>Portability:</strong> Works on any Linux</li>
+                    <li><strong>Consistency:</strong> Dev/test/prod identical</li>
+                    <li><strong>Isolation:</strong> Process/filesystem separation</li>
+                    <li><strong>Scalability:</strong> Horizontal scaling easy</li>
+                    <li><strong>Microservices:</strong> Enables service architecture</li>
+                    <li><strong>Resource Efficient:</strong> Share kernel and libraries</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle; color: #DD0031;"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 1 1-18 0 9 9 0 0 1 18 0zm-9 3.75h.008v.008H12v-.008z" /></svg> Challenges</h2>
+
+        <div class="pros-cons-grid">
+            <div class="cons-box">
+                <h3>Drawbacks</h3>
+                <ul class="features-list">
+                    <li><strong>Learning Curve:</strong> New paradigm/tooling</li>
+                    <li><strong>Stateful Apps:</strong> Designed for stateless</li>
+                    <li><strong>Weak Isolation:</strong> Shared kernel vs VMs</li>
+                    <li><strong>Image Size:</strong> Can grow with layers</li>
+                    <li><strong>Security:</strong> Container escape risks</li>
+                    <li><strong>Orchestration Needed:</strong> Many containers hard to manage</li>
+                    <li><strong>Debugging:</strong> Less visibility than VMs</li>
+                    <li><strong>Windows Support:</strong> Native Linux only</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Best Practices</h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>Image Building</h3>
+                <ul class="features-list">
+                    <li>Minimal base images</li>
+                    <li>Multi-stage builds</li>
+                    <li>Layer optimization</li>
+                    <li>Security scanning</li>
+                    <li>Version pinning</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Security</h3>
+                <ul class="features-list">
+                    <li>Rootless containers</li>
+                    <li>Security context</li>
+                    <li>Network policies</li>
+                    <li>Image scanning</li>
+                    <li>Runtime monitoring</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Resource Management</h3>
+                <ul class="features-list">
+                    <li>CPU limits</li>
+                    <li>Memory limits</li>
+                    <li>No overcommit</li>
+                    <li>Health checks</li>
+                    <li>Liveness probes</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Operations</h3>
+                <ul class="features-list">
+                    <li>Container registry</li>
+                    <li>Image versioning</li>
+                    <li>Immutable deployments</li>
+                    <li>Log aggregation</li>
+                    <li>Monitoring/alerting</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Container Orchestration</h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>Orchestration Needs</h3>
+                <p>Managing many containers.</p>
+                <ul class="features-list">
+                    <li>Scheduling</li>
+                    <li>Load balancing</li>
+                    <li>Auto-scaling</li>
+                    <li>Updates/rollback</li>
+                    <li>Failure recovery</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Kubernetes</h3>
+                <p>Industry-standard platform.</p>
+                <ul class="features-list">
+                    <li>Pod abstraction</li>
+                    <li>Services</li>
+                    <li>Deployments</li>
+                    <li>StatefulSets</li>
+                    <li>Complex but powerful</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Docker Swarm</h3>
+                <p>Simpler orchestration.</p>
+                <ul class="features-list">
+                    <li>Lightweight</li>
+                    <li>Services & stacks</li>
+                    <li>Built-in to Docker</li>
+                    <li>Less powerful</li>
+                    <li>Smaller scale</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Serverless</h3>
+                <p>No container management.</p>
+                <ul class="features-list">
+                    <li>FaaS (Functions)</li>
+                    <li>Pay per execution</li>
+                    <li>Auto-scaling</li>
+                    <li>AWS Lambda/GCP</li>
+                    <li>Simplified operations</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Real-World Deployment Patterns</h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>Startup (Single Host)</h3>
+                <p>Simple Docker setup.</p>
+                <ul class="features-list">
+                    <li>Single VPS/host</li>
+                    <li>Docker Compose</li>
+                    <li>All services together</li>
+                    <li>Simple deployment</li>
+                    <li>Limited scaling</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Scale-Up (Docker Swarm)</h3>
+                <p>Multi-host orchestration.</p>
+                <ul class="features-list">
+                    <li>3+ node cluster</li>
+                    <li>Swarm mode</li>
+                    <li>Load balancing</li>
+                    <li>Service replication</li>
+                    <li>Simpler than K8s</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Enterprise (Kubernetes)</h3>
+                <p>Complex applications.</p>
+                <ul class="features-list">
+                    <li>Multi-region clusters</li>
+                    <li>Microservices</li>
+                    <li>Service mesh</li>
+                    <li>Advanced networking</li>
+                    <li>Full control</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Cloud-Native (Managed)</h3>
+                <p>Fully managed platforms.</p>
+                <ul class="features-list">
+                    <li>ECS / GKE / AKS</li>
+                    <li>Vendor manages</li>
+                    <li>Focus on apps</li>
+                    <li>Auto-scaling built-in</li>
+                    <li>Pay for usage</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Container Ecosystem Tools</h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>Development Tools</h3>
+                <p>Local development.</p>
+                <ul class="features-list">
+                    <li>Docker Desktop</li>
+                    <li>Docker Compose</li>
+                    <li>Skaffold</li>
+                    <li>Tilt</li>
+                    <li>Local debugging</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>CI/CD Integration</h3>
+                <p>Pipeline automation.</p>
+                <ul class="features-list">
+                    <li>Build container image</li>
+                    <li>Push to registry</li>
+                    <li>Deploy to cluster</li>
+                    <li>GitHub Actions</li>
+                    <li>GitLab CI</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Monitoring & Logging</h3>
+                <p>Observability.</p>
+                <ul class="features-list">
+                    <li>Prometheus metrics</li>
+                    <li>ELK/EFK logging</li>
+                    <li>Datadog monitoring</li>
+                    <li>cAdvisor metrics</li>
+                    <li>Log drivers</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Security & Scanning</h3>
+                <p>Image protection.</p>
+                <ul class="features-list">
+                    <li>Trivy scanning</li>
+                    <li>Image signing</li>
+                    <li>Policy engines</li>
+                    <li>Network policies</li>
+                    <li>Runtime security</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Implementing Containers</h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>Step 1: Containerize App</h3>
+                <ul class="features-list">
+                    <li>Write Dockerfile</li>
+                    <li>Test locally</li>
+                    <li>Optimize image size</li>
+                    <li>Security review</li>
+                    <li>Document setup</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Step 2: Setup Registry</h3>
+                <ul class="features-list">
+                    <li>Choose registry</li>
+                    <li>Create accounts</li>
+                    <li>Configure auth</li>
+                    <li>Setup CI/CD push</li>
+                    <li>Image retention</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Step 3: Choose Platform</h3>
+                <ul class="features-list">
+                    <li>Assess scale</li>
+                    <li>Evaluate orchestration</li>
+                    <li>Cost analysis</li>
+                    <li>Team expertise</li>
+                    <li>Future growth</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Step 4: Deploy & Monitor</h3>
+                <ul class="features-list">
+                    <li>Deploy to cluster</li>
+                    <li>Setup monitoring</li>
+                    <li>Configure logging</li>
+                    <li>Test scaling</li>
+                    <li>Plan upgrades</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="intro-box" style="text-align: center; margin: 60px 0 40px;">
+            <p>Containers have fundamentally transformed application deployment and infrastructure management. By packaging applications with their dependencies into portable, lightweight units, containers enable consistency across environments, rapid iteration, and efficient resource utilization. Whether deployed locally, on VMs, or in managed cloud platforms, containers are the foundation of modern cloud-native architecture and microservices patterns.</p>
+        </div>
+    </div>
+</body>
+</html>

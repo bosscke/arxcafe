@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Managed Services</title>
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/concepts.css">
+    <link rel="stylesheet" href="/css/concepts-advance.css">
+</head>
+<body class="managed-services-page">
+    <a href="/" class="home-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 18px; height: 18px;">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
+        </svg>
+        Home
+    </a>
+
+    <div class="container">
+        <div style="text-align: center; margin-bottom: 30px; padding: 20px; background: rgba(102, 126, 234, 0.15); border-radius: 12px; border: 1px solid rgba(102, 126, 234, 0.3);">
+            <p style="color: #a8b8ff; font-size: 1.1em; margin: 0; font-weight: 600;">Operations become someone else's responsibility.</p>
+        </div>
+        <h1><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 40px; height: 40px; display: inline-block; margin-right: 10px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Managed Services</h1>
+
+        <div class="intro-box">
+            <p><strong>Managed Services</strong> are cloud-based services where the provider handles operational aspects including maintenance, updates, backups, scaling, and patching. Rather than managing infrastructure and software yourself, you pay for a managed service and focus on your application logic. Managed services reduce operational burden, improve reliability, and allow teams to focus on business value rather than infrastructure management.</p>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Core Concepts</h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>Definition</h3>
+                <p>What are managed services.</p>
+                <ul class="features-list">
+                    <li>Cloud provider owns operations</li>
+                    <li>You own application code</li>
+                    <li>Pay per use or subscription</li>
+                    <li>SLA guaranteed</li>
+                    <li>Automatic updates</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Operating Model</h3>
+                <p>Responsibility split.</p>
+                <ul class="features-list">
+                    <li>Shared responsibility</li>
+                    <li>Provider: infrastructure, updates, security patches</li>
+                    <li>You: data, access control, configuration</li>
+                    <li>Clear SLAs</li>
+                    <li>24/7 provider support</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Service Categories</h3>
+                <p>Types of managed services.</p>
+                <ul class="features-list">
+                    <li>Compute (serverless)</li>
+                    <li>Databases (SQL, NoSQL)</li>
+                    <li>Messaging (queues, events)</li>
+                    <li>Caching (in-memory)</li>
+                    <li>Search (Elasticsearch)</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Key Characteristics</h3>
+                <p>Common features.</p>
+                <ul class="features-list">
+                    <li>Automatic scaling</li>
+                    <li>Built-in redundancy</li>
+                    <li>Automated backups</li>
+                    <li>Zero downtime updates</li>
+                    <li>Monitoring included</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Managed Databases</h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>Relational Databases</h3>
+                <p>SQL managed services.</p>
+                <ul class="features-list">
+                    <li>AWS RDS (MySQL, PostgreSQL, Oracle)</li>
+                    <li>Google Cloud SQL</li>
+                    <li>Azure Database for PostgreSQL</li>
+                    <li>Automated backups</li>
+                    <li>Multi-AZ failover</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>NoSQL Databases</h3>
+                <p>Document/key-value services.</p>
+                <ul class="features-list">
+                    <li>AWS DynamoDB</li>
+                    <li>Google Firestore</li>
+                    <li>MongoDB Atlas</li>
+                    <li>Automatic sharding</li>
+                    <li>Global tables</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Data Warehouses</h3>
+                <p>Analytics platforms.</p>
+                <ul class="features-list">
+                    <li>AWS Redshift</li>
+                    <li>Google BigQuery</li>
+                    <li>Snowflake</li>
+                    <li>Auto scaling</li>
+                    <li>SQL interface</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Database Features</h3>
+                <p>Common capabilities.</p>
+                <ul class="features-list">
+                    <li>Point-in-time recovery</li>
+                    <li>Automated replication</li>
+                    <li>Encryption at rest/transit</li>
+                    <li>Access controls</li>
+                    <li>Performance monitoring</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Managed Compute</h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>Serverless Functions</h3>
+                <p>Event-driven compute.</p>
+                <ul class="features-list">
+                    <li>AWS Lambda</li>
+                    <li>Google Cloud Functions</li>
+                    <li>Azure Functions</li>
+                    <li>Pay per invocation</li>
+                    <li>Auto scaling</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Container Services</h3>
+                <p>Managed container platforms.</p>
+                <ul class="features-list">
+                    <li>AWS ECS/Fargate</li>
+                    <li>Google Cloud Run</li>
+                    <li>Azure Container Instances</li>
+                    <li>No cluster management</li>
+                    <li>Pay per resource</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Managed Kubernetes</h3>
+                <p>Kubernetes as a service.</p>
+                <ul class="features-list">
+                    <li>AWS EKS</li>
+                    <li>Google GKE</li>
+                    <li>Azure AKS</li>
+                    <li>Control plane managed</li>
+                    <li>You manage nodes</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>App Platforms</h3>
+                <p>Platform-as-a-service.</p>
+                <ul class="features-list">
+                    <li>Heroku</li>
+                    <li>Firebase</li>
+                    <li>App Engine (Google)</li>
+                    <li>App Service (Azure)</li>
+                    <li>Git-to-production</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Managed Data Services</h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>Messaging Services</h3>
+                <p>Event and queue systems.</p>
+                <ul class="features-list">
+                    <li>AWS SQS (queues)</li>
+                    <li>AWS SNS (pub/sub)</li>
+                    <li>Google Pub/Sub</li>
+                    <li>Azure Event Hubs</li>
+                    <li>Decoupled applications</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Caching Services</h3>
+                <p>In-memory data stores.</p>
+                <ul class="features-list">
+                    <li>AWS ElastiCache</li>
+                    <li>Google Memorystore</li>
+                    <li>Azure Cache for Redis</li>
+                    <li>Sub-millisecond latency</li>
+                    <li>Auto failover</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Search Services</h3>
+                <p>Full-text search.</p>
+                <ul class="features-list">
+                    <li>AWS Elasticsearch</li>
+                    <li>Google Cloud Search</li>
+                    <li>Elastic Cloud</li>
+                    <li>Complex queries</li>
+                    <li>Scaling included</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Stream Processing</h3>
+                <p>Real-time data processing.</p>
+                <ul class="features-list">
+                    <li>AWS Kinesis</li>
+                    <li>Google Dataflow</li>
+                    <li>Azure Stream Analytics</li>
+                    <li>Real-time analytics</li>
+                    <li>Automatic scaling</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Managed vs Self-Hosted</h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>Operational Burden</h3>
+                <p>Work required.</p>
+                <ul class="features-list">
+                    <li><strong>Managed:</strong> Provider handles infrastructure</li>
+                    <li><strong>Self-hosted:</strong> You manage all aspects</li>
+                    <li><strong>Managed:</strong> Focus on application</li>
+                    <li><strong>Self-hosted:</strong> Hiring DevOps team</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Cost Structure</h3>
+                <p>Pricing models.</p>
+                <ul class="features-list">
+                    <li><strong>Managed:</strong> Pay-as-you-go</li>
+                    <li><strong>Self-hosted:</strong> Large upfront cost</li>
+                    <li><strong>Managed:</strong> No waste on idle</li>
+                    <li><strong>Self-hosted:</strong> Unused capacity</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Scalability</h3>
+                <p>Growth handling.</p>
+                <ul class="features-list">
+                    <li><strong>Managed:</strong> Automatic</li>
+                    <li><strong>Self-hosted:</strong> Manual provisioning</li>
+                    <li><strong>Managed:</strong> Instant spikes</li>
+                    <li><strong>Self-hosted:</strong> Planning required</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Control</h3>
+                <p>Flexibility levels.</p>
+                <ul class="features-list">
+                    <li><strong>Managed:</strong> Limited customization</li>
+                    <li><strong>Self-hosted:</strong> Full control</li>
+                    <li><strong>Managed:</strong> Vendor constraints</li>
+                    <li><strong>Self-hosted:</strong> Complete flexibility</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Advantages</h2>
+
+        <div class="pros-cons-grid">
+            <div class="pros-box">
+                <h3>Benefits</h3>
+                <ul class="features-list">
+                    <li><strong>Reduced Ops Burden:</strong> No infrastructure management</li>
+                    <li><strong>Faster Time-to-Market:</strong> Instant provisioning</li>
+                    <li><strong>Automatic Scaling:</strong> Handle traffic spikes</li>
+                    <li><strong>Higher Reliability:</strong> Built-in redundancy</li>
+                    <li><strong>Security Updates:</strong> Automatic patching</li>
+                    <li><strong>Cost Efficiency:</strong> Pay only what you use</li>
+                    <li><strong>Expertise Included:</strong> Provider is expert</li>
+                    <li><strong>SLA Guarantees:</strong> Uptime commitments</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle; color: #DD0031;"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 1 1-18 0 9 9 0 0 1 18 0zm-9 3.75h.008v.008H12v-.008z" /></svg> Challenges</h2>
+
+        <div class="pros-cons-grid">
+            <div class="cons-box">
+                <h3>Drawbacks</h3>
+                <ul class="features-list">
+                    <li><strong>Vendor Lock-in:</strong> Difficult to migrate</li>
+                    <li><strong>Limited Control:</strong> Can't customize deep</li>
+                    <li><strong>Cost at Scale:</strong> Can be expensive</li>
+                    <li><strong>Data Sovereignty:</strong> Where is data stored</li>
+                    <li><strong>Feature Limitations:</strong> Provider constraints</li>
+                    <li><strong>Outages Impact:</strong> Provider downtime affects you</li>
+                    <li><strong>Latency:</strong> Network hops</li>
+                    <li><strong>Compliance:</strong> May not meet regulations</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Cost Optimization</h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>Reserved Capacity</h3>
+                <ul class="features-list">
+                    <li>Reserve capacity in advance</li>
+                    <li>Significant discounts (30-70%)</li>
+                    <li>Predictable workloads</li>
+                    <li>Commit for 1-3 years</li>
+                    <li>Trade-off: inflexibility</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Spot/Preemptible</h3>
+                <ul class="features-list">
+                    <li>Use unused capacity</li>
+                    <li>Up to 90% discount</li>
+                    <li>Can be interrupted</li>
+                    <li>Batch jobs, non-critical</li>
+                    <li>Great for cost-sensitive</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Right-Sizing</h3>
+                <ul class="features-list">
+                    <li>Match actual needs</li>
+                    <li>Avoid over-provisioning</li>
+                    <li>Monitor utilization</li>
+                    <li>Scale down unused resources</li>
+                    <li>Regular reviews</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Multi-Region Strategy</h3>
+                <ul class="features-list">
+                    <li>Choose cheapest regions</li>
+                    <li>Data transfer costs</li>
+                    <li>Latency tradeoffs</li>
+                    <li>Regional pricing varies</li>
+                    <li>Consider compliance</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Best Practices</h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>Service Selection</h3>
+                <ul class="features-list">
+                    <li>Evaluate integration impact</li>
+                    <li>Check provider roadmap</li>
+                    <li>Test before production</li>
+                    <li>Verify SLAs</li>
+                    <li>Consider exit strategy</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Data Management</h3>
+                <ul class="features-list">
+                    <li>Regular backups</li>
+                    <li>Export periodically</li>
+                    <li>Avoid single region</li>
+                    <li>Encrypt sensitive data</li>
+                    <li>Access controls</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Monitoring</h3>
+                <ul class="features-list">
+                    <li>Enable all metrics</li>
+                    <li>Set up alerts</li>
+                    <li>Track costs</li>
+                    <li>Monitor performance</li>
+                    <li>Plan capacity</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Vendor Relationships</h3>
+                <ul class="features-list">
+                    <li>Negotiate contracts</li>
+                    <li>Track roadmaps</li>
+                    <li>Attend conferences</li>
+                    <li>Maintain relationships</li>
+                    <li>Plan migrations</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Real-World Scenarios</h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>Startup Use Case</h3>
+                <p>Fast growth scenario.</p>
+                <ul class="features-list">
+                    <li>Limited DevOps team</li>
+                    <li>Focus on product</li>
+                    <li>Managed services ideal</li>
+                    <li>Pay-as-you-grow</li>
+                    <li>Rapid scaling needed</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Enterprise Use Case</h3>
+                <p>Large-scale operations.</p>
+                <ul class="features-list">
+                    <li>Hybrid approach</li>
+                    <li>Managed for non-core</li>
+                    <li>Self-hosted for core</li>
+                    <li>Cost control important</li>
+                    <li>Reserved instances</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Data Pipeline Use Case</h3>
+                <p>Analytics workload.</p>
+                <ul class="features-list">
+                    <li>BigQuery/Redshift</li>
+                    <li>Streaming data</li>
+                    <li>ETL processes</li>
+                    <li>Real-time analytics</li>
+                    <li>Automatic scaling</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Mobile Backend Use Case</h3>
+                <p>Mobile app support.</p>
+                <ul class="features-list">
+                    <li>Firebase complete</li>
+                    <li>Realtime database</li>
+                    <li>Authentication</li>
+                    <li>Hosting included</li>
+                    <li>Global scale</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Hybrid Approach</h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>Multi-Cloud Strategy</h3>
+                <p>Avoiding lock-in.</p>
+                <ul class="features-list">
+                    <li>Use multiple providers</li>
+                    <li>Distribute risk</li>
+                    <li>Better negotiating power</li>
+                    <li>More operational complexity</li>
+                    <li>Consider carefully</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Hybrid Cloud</h3>
+                <p>On-prem + cloud.</p>
+                <ul class="features-list">
+                    <li>Sensitive data on-prem</li>
+                    <li>Managed services in cloud</li>
+                    <li>Network latency</li>
+                    <li>Compliance flexibility</li>
+                    <li>Integration challenges</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Portability Layer</h3>
+                <p>Reducing lock-in.</p>
+                <ul class="features-list">
+                    <li>Abstract service APIs</li>
+                    <li>Easy provider swaps</li>
+                    <li>Extra code layer</li>
+                    <li>Architectural complexity</li>
+                    <li>Worth for critical services</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Service Evaluation</h3>
+                <p>Making migration decisions.</p>
+                <ul class="features-list">
+                    <li>Cost-benefit analysis</li>
+                    <li>Lock-in assessment</li>
+                    <li>Alternative evaluation</li>
+                    <li>Future flexibility</li>
+                    <li>Team capabilities</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Cloud Providers & Services</h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>AWS Managed Services</h3>
+                <p>Most extensive portfolio.</p>
+                <ul class="features-list">
+                    <li>RDS (databases)</li>
+                    <li>Lambda (functions)</li>
+                    <li>DynamoDB (NoSQL)</li>
+                    <li>ElastiCache (caching)</li>
+                    <li>200+ managed services</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Google Cloud Services</h3>
+                <p>Data and AI focused.</p>
+                <ul class="features-list">
+                    <li>BigQuery (data warehouse)</li>
+                    <li>Cloud Run (containers)</li>
+                    <li>Firestore (NoSQL)</li>
+                    <li>Pub/Sub (messaging)</li>
+                    <li>Strong on analytics</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Azure Services</h3>
+                <p>Enterprise focused.</p>
+                <ul class="features-list">
+                    <li>Database for PostgreSQL</li>
+                    <li>Azure Functions</li>
+                    <li>Cosmos DB (NoSQL)</li>
+                    <li>Azure DevOps</li>
+                    <li>Integration with Microsoft</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Specialized Providers</h3>
+                <p>Niche solutions.</p>
+                <ul class="features-list">
+                    <li>Heroku (app platform)</li>
+                    <li>Firebase (mobile)</li>
+                    <li>Supabase (PostgreSQL)</li>
+                    <li>MongoDB Atlas (NoSQL)</li>
+                    <li>Managed by best experts</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Implementation Strategy</h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>Step 1: Assessment</h3>
+                <ul class="features-list">
+                    <li>Identify candidates</li>
+                    <li>Current infrastructure</li>
+                    <li>Team capabilities</li>
+                    <li>Cost analysis</li>
+                    <li>Risk assessment</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Step 2: Pilot</h3>
+                <ul class="features-list">
+                    <li>Non-critical service</li>
+                    <li>Proof of concept</li>
+                    <li>Cost validation</li>
+                    <li>Performance testing</li>
+                    <li>Team training</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Step 3: Migration</h3>
+                <ul class="features-list">
+                    <li>Detailed planning</li>
+                    <li>Gradual cutover</li>
+                    <li>Parallel running</li>
+                    <li>Validation steps</li>
+                    <li>Rollback plan</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Step 4: Operations</h3>
+                <ul class="features-list">
+                    <li>Monitoring setup</li>
+                    <li>Cost optimization</li>
+                    <li>Team reskilling</li>
+                    <li>Documentation</li>
+                    <li>Continuous improvement</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="intro-box" style="text-align: center; margin: 60px 0 40px;">
+            <p>Managed services represent a fundamental shift in how organizations think about infrastructure. By delegating operational complexity to specialized providers, teams can focus on business logic and innovation. The key is finding the right balance—using managed services where they provide clear value while retaining control over critical components. As cloud platforms mature, the decision is increasingly not whether to use managed services, but which ones and how to best integrate them into your architecture.</p>
+        </div>
+    </div>
+</body>
+</html>

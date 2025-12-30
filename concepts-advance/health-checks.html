@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Health Checks</title>
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/concepts.css">
+    <link rel="stylesheet" href="/css/concepts-advance.css">
+</head>
+<body class="health-checks-page">
+    <a href="/" class="home-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 18px; height: 18px;">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
+        </svg>
+        Home
+    </a>
+
+    <div class="container">
+        <div style="text-align: center; margin-bottom: 30px; padding: 20px; background: rgba(102, 126, 234, 0.15); border-radius: 12px; border: 1px solid rgba(102, 126, 234, 0.3);">
+            <p style="color: #a8b8ff; font-size: 1.1em; margin: 0; font-weight: 600;">Architects are building their own tools.</p>
+        </div>
+        <h1><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 40px; height: 40px; display: inline-block; margin-right: 10px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Health Checks</h1>
+
+        <div class="intro-box">
+            <p><strong>Health checks</strong> are automated mechanisms that continuously monitor whether services, applications, and infrastructure components are running correctly and responding to requests. They enable systems to detect failures quickly and take corrective action, such as removing failed servers from load balancers or triggering automatic failover. Health checks are essential for maintaining high availability and reliability.</p>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Core Concepts</h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>Definition</h3>
+                <p>Regular automated checks to verify system and service availability.</p>
+                <ul class="features-list">
+                    <li>Periodic monitoring</li>
+                    <li>Failure detection</li>
+                    <li>Status reporting</li>
+                    <li>Action triggering</li>
+                    <li>Critical for high availability</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>How It Works</h3>
+                <p>Regular probes check component status and report results.</p>
+                <ul class="features-list">
+                    <li>Send probe requests at intervals</li>
+                    <li>Check response status</li>
+                    <li>Track success/failure</li>
+                    <li>Report findings to orchestrator</li>
+                    <li>Trigger remediation if needed</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Types of Health Checks</h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>Liveness Checks</h3>
+                <p>Determines if a service is running and responsive.</p>
+                <ul class="features-list">
+                    <li>Simple connectivity test</li>
+                    <li>TCP port check</li>
+                    <li>HTTP endpoint ping</li>
+                    <li>Fast failure detection</li>
+                    <li>Triggers immediate restart</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Readiness Checks</h3>
+                <p>Verifies if a service can handle traffic.</p>
+                <ul class="features-list">
+                    <li>Deep application checks</li>
+                    <li>Database connectivity</li>
+                    <li>Dependencies available</li>
+                    <li>Slow start detection</li>
+                    <li>Prevents traffic routing</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Startup Checks</h3>
+                <p>Checks if application initialization completed.</p>
+                <ul class="features-list">
+                    <li>Application startup status</li>
+                    <li>Configuration validation</li>
+                    <li>Cache population</li>
+                    <li>Initialization time tracking</li>
+                    <li>Startup failure detection</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Custom Checks</h3>
+                <p>Application-specific health indicators.</p>
+                <ul class="features-list">
+                    <li>Business logic validation</li>
+                    <li>Feature availability</li>
+                    <li>Resource thresholds</li>
+                    <li>Queue depth monitoring</li>
+                    <li>Custom metrics</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Implementation Methods</h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>HTTP Endpoints</h3>
+                <p>Application exposes status endpoints.</p>
+                <ul class="features-list">
+                    <li>/health endpoint</li>
+                    <li>/healthz (Kubernetes standard)</li>
+                    <li>/status route</li>
+                    <li>Returns JSON status</li>
+                    <li>HTTP 200 = healthy</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>TCP/UDP Probes</h3>
+                <p>Network-level connectivity checks.</p>
+                <ul class="features-list">
+                    <li>Port availability test</li>
+                    <li>Connection attempt</li>
+                    <li>Minimal overhead</li>
+                    <li>Fast detection</li>
+                    <li>Works without application</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Heartbeat Monitoring</h3>
+                <p>Services send periodic alive signals.</p>
+                <ul class="features-list">
+                    <li>Service initiates contact</li>
+                    <li>Regular intervals</li>
+                    <li>Includes metrics</li>
+                    <li>Timeout triggers action</li>
+                    <li>Good for push model</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Script-based Checks</h3>
+                <p>Run custom scripts for verification.</p>
+                <ul class="features-list">
+                    <li>Shell/bash scripts</li>
+                    <li>Custom logic</li>
+                    <li>Exit code interpretation</li>
+                    <li>Flexible validation</li>
+                    <li>Resource intensive</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Health Check Parameters</h2>
+
+        <div class="intro-box">
+            <h3>Critical Configuration:</h3>
+            <ul class="features-list">
+                <li><strong>Interval:</strong> How often to check (typically 10-30 seconds)</li>
+                <li><strong>Timeout:</strong> Max wait for response (typically 2-5 seconds)</li>
+                <li><strong>Failure Threshold:</strong> Consecutive failures before marking unhealthy (typically 3)</li>
+                <li><strong>Success Threshold:</strong> Consecutive successes before marking healthy (typically 1-2)</li>
+                <li><strong>Grace Period:</strong> Initial startup time before health checks (typically 10-30 seconds)</li>
+                <li><strong>Max Response Time:</strong> Warn if response slower than threshold</li>
+                <li><strong>Check Path:</strong> Specific endpoint or port to probe</li>
+            </ul>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Advantages</h2>
+
+        <div class="pros-box">
+            <h3>Benefits of Health Checks:</h3>
+            <ul class="features-list">
+                <li><strong>High Availability:</strong> Detect failures and auto-recover</li>
+                <li><strong>Fast Recovery:</strong> Minimize downtime (seconds vs hours)</li>
+                <li><strong>Automatic Failover:</strong> Route traffic away from failed nodes</li>
+                <li><strong>Self-Healing:</strong> Restart failed containers/services</li>
+                <li><strong>Prevent Cascading Failures:</strong> Stop sending requests to bad servers</li>
+                <li><strong>Early Warning:</strong> Detect degradation before total failure</li>
+                <li><strong>Load Balancer Intelligence:</strong> Only route to healthy backends</li>
+                <li><strong>Improved User Experience:</strong> Fewer errors and timeouts</li>
+            </ul>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle; color: #DD0031;"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 1 1-18 0 9 9 0 0 1 18 0zm-9 3.75h.008v.008H12v-.008z" /></svg> Common Pitfalls</h2>
+
+        <div class="cons-box">
+            <h3>Challenges and Mistakes:</h3>
+            <ul class="features-list">
+                <li><strong>False Positives:</strong> Marking healthy services as unhealthy</li>
+                <li><strong>False Negatives:</strong> Missing actual failures</li>
+                <li><strong>Cascading Failures:</strong> Health check itself becomes bottleneck</li>
+                <li><strong>Thundering Herd:</strong> All checks timing out simultaneously</li>
+                <li><strong>Dependencies in Health Check:</strong> Creating circular dependencies</li>
+                <li><strong>Fragile Checks:</strong> Checks fail for unrelated reasons</li>
+                <li><strong>Resource Exhaustion:</strong> Health checks consuming too much CPU/memory</li>
+                <li><strong>Slow Recovery:</strong> Overly conservative thresholds delay recovery</li>
+                <li><strong>Incomplete Checks:</strong> Not checking critical dependencies</li>
+            </ul>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Best Practices</h3>
+
+        <div class="intro-box">
+            <h3>Implementing Effective Health Checks:</h3>
+            <ul class="features-list">
+                <li><strong>Separate Liveness & Readiness:</strong> Different endpoints for different purposes</li>
+                <li><strong>Minimal Dependencies:</strong> Health checks shouldn't depend on external services</li>
+                <li><strong>Fast Responses:</strong> Health checks should return in <1 second</li>
+                <li><strong>Idempotent Checks:</strong> Multiple checks shouldn't cause side effects</li>
+                <li><strong>Return Detailed Status:</strong> Include reason for failures in response</li>
+                <li><strong>Monitor Health Check Metrics:</strong> Track health check itself</li>
+                <li><strong>Test Failure Scenarios:</strong> Verify proper failure handling</li>
+                <li><strong>Exponential Backoff:</strong> Avoid repeated probes after failures</li>
+                <li><strong>Health Check Alerts:</strong> Alert when too many nodes fail</li>
+                <li><strong>Document Expectations:</strong> Clearly state what healthy means</li>
+            </ul>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Real-World Examples</h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>Kubernetes Health Checks</h3>
+                <p>Industry standard with three probe types:</p>
+                <ul class="features-list">
+                    <li>livenessProbe</li>
+                    <li>readinessProbe</li>
+                    <li>startupProbe</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>AWS ELB/ALB</h3>
+                <p>Load balancer health checks:</p>
+                <ul class="features-list">
+                    <li>HTTP/HTTPS targets</li>
+                    <li>TCP port checks</li>
+                    <li>gRPC checks</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Nginx Upstream</h3>
+                <p>Upstream server health:</p>
+                <ul class="features-list">
+                    <li>Active health checks</li>
+                    <li>Passive monitoring</li>
+                    <li>Custom check intervals</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Consul Service Mesh</h3>
+                <p>Distributed health checking:</p>
+                <ul class="features-list">
+                    <li>Multiple check types</li>
+                    <li>Script-based checks</li>
+                    <li>TTL-based checks</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Example Health Check Implementation</h2>
+
+        <div class="intro-box">
+            <h3>Simple HTTP Health Check:</h3>
+            <p style="text-align: left; margin: 20px 0; font-family: monospace; font-size: 0.9em; background: rgba(0,0,0,0.3); padding: 15px; border-radius: 8px;">
+GET /health HTTP/1.1<br>
+Host: myservice.example.com<br>
+<br>
+Response (200 OK):<br>
+{<br>
+&nbsp;&nbsp;"status": "healthy",<br>
+&nbsp;&nbsp;"timestamp": "2025-12-30T10:30:00Z",<br>
+&nbsp;&nbsp;"database": "connected",<br>
+&nbsp;&nbsp;"cache": "responsive",<br>
+&nbsp;&nbsp;"version": "1.2.3"<br>
+}
+            </p>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Integration with Infrastructure</h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>Container Orchestration</h3>
+                <ul class="features-list">
+                    <li>Auto-restart containers</li>
+                    <li>Replace unhealthy pods</li>
+                    <li>Scale based on health</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Load Balancers</h3>
+                <ul class="features-list">
+                    <li>Remove from pool</li>
+                    <li>Route to healthy only</li>
+                    <li>Gradual drain</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Monitoring & Alerting</h3>
+                <ul class="features-list">
+                    <li>Dashboard visibility</li>
+                    <li>Alert on failures</li>
+                    <li>Historical tracking</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Incident Response</h3>
+                <ul class="features-list">
+                    <li>Auto-remediation</li>
+                    <li>Escalation policies</li>
+                    <li>On-call notifications</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="intro-box" style="text-align: center; margin: 60px 0 40px;">
+            <p>Health checks are the foundation of reliable, self-healing systems. They enable rapid detection and automatic recovery from failures, ensuring that your applications maintain high availability and provide consistent service to users even when individual components fail.</p>
+        </div>
+    </div>
+</body>
+</html>

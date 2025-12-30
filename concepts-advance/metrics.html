@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Metrics</title>
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/concepts.css">
+    <link rel="stylesheet" href="/css/concepts-advance.css">
+</head>
+<body class="metrics-page">
+    <a href="/" class="home-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 18px; height: 18px;">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
+        </svg>
+        Home
+    </a>
+
+    <div class="container">
+        <div style="text-align: center; margin-bottom: 30px; padding: 20px; background: rgba(102, 126, 234, 0.15); border-radius: 12px; border: 1px solid rgba(102, 126, 234, 0.3);">
+            <p style="color: #a8b8ff; font-size: 1.1em; margin: 0; font-weight: 600;">Architects are building their own tools.</p>
+        </div>
+        <h1><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 40px; height: 40px; display: inline-block; margin-right: 10px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 0 1 3 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V4.125z" /></svg> Metrics</h1>
+
+        <div class="intro-box">
+            <p><strong>Metrics</strong> are quantifiable measurements of system performance, user behavior, and business outcomes. Metrics provide numerical data about how systems are functioning, enabling data-driven decisions about performance optimization, capacity planning, and business strategy. Effective metrics track what matters most: performance, reliability, user experience, and business goals.</p>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Core Concepts</h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>Metric Types</h3>
+                <p>Different ways to measure system behavior.</p>
+                <ul class="features-list">
+                    <li><strong>Gauge:</strong> Single value at point in time</li>
+                    <li><strong>Counter:</strong> Monotonically increasing value</li>
+                    <li><strong>Histogram:</strong> Distribution of values</li>
+                    <li><strong>Summary:</strong> Quantiles over time windows</li>
+                    <li><strong>Rate:</strong> Change per time unit</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Cardinality</h3>
+                <p>Number of unique label combinations in metrics.</p>
+                <ul class="features-list">
+                    <li>High cardinality can cause storage issues</li>
+                    <li>Limit dynamic labels (user IDs, request IDs)</li>
+                    <li>Use aggregation to reduce cardinality</li>
+                    <li>Monitor cardinality explosion</li>
+                    <li>Design labels carefully</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Sampling & Aggregation</h3>
+                <p>Techniques for managing metric data volume.</p>
+                <ul class="features-list">
+                    <li>Sampling: collect subset of data</li>
+                    <li>Aggregation: combine raw metrics</li>
+                    <li>Reduce storage and network costs</li>
+                    <li>Trade precision for efficiency</li>
+                    <li>Time-series databases</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Retention Policies</h3>
+                <p>How long to keep metric data.</p>
+                <ul class="features-list">
+                    <li>High-resolution data: hours/days</li>
+                    <li>Medium resolution: weeks</li>
+                    <li>Downsampling over time</li>
+                    <li>Archive for long-term analysis</li>
+                    <li>Cost vs retention trade-off</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Categories of Metrics</h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>RED Metrics</h3>
+                <p>Request-focused metrics for services.</p>
+                <ul class="features-list">
+                    <li><strong>Rate:</strong> Requests per second</li>
+                    <li><strong>Errors:</strong> Failed requests</li>
+                    <li><strong>Duration:</strong> Latency/response time</li>
+                    <li>User-centric view</li>
+                    <li>Great for APIs and services</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>USE Metrics</h3>
+                <p>Resource-focused metrics for infrastructure.</p>
+                <ul class="features-list">
+                    <li><strong>Utilization:</strong> Resource in use</li>
+                    <li><strong>Saturation:</strong> Queued requests</li>
+                    <li><strong>Errors:</strong> Device errors</li>
+                    <li>CPU, memory, disk, network</li>
+                    <li>Great for servers and resources</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Business Metrics</h3>
+                <p>Metrics aligned with business goals.</p>
+                <ul class="features-list">
+                    <li>Revenue, conversion rate</li>
+                    <li>User engagement</li>
+                    <li>Customer satisfaction</li>
+                    <li>Churn rate</li>
+                    <li>Directly tied to value</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>System Metrics</h3>
+                <p>Low-level system behavior metrics.</p>
+                <ul class="features-list">
+                    <li>CPU, memory, disk usage</li>
+                    <li>Network I/O</li>
+                    <li>Context switches</li>
+                    <li>Page faults</li>
+                    <li>Infrastructure foundation</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Key Application Metrics</h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>Latency</h3>
+                <p>Response time measurement.</p>
+                <ul class="features-list">
+                    <li>p50, p95, p99 percentiles</li>
+                    <li>Average vs tail latency</li>
+                    <li>Microseconds to seconds</li>
+                    <li>User experience impact</li>
+                    <li>Histogram metric type</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Error Rate</h3>
+                <p>Failed requests percentage.</p>
+                <ul class="features-list">
+                    <li>Total errors / total requests</li>
+                    <li>Error types breakdown</li>
+                    <li>HTTP status codes</li>
+                    <li>Exception counts</li>
+                    <li>Gauge or counter</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Throughput</h3>
+                <p>Requests processed per unit time.</p>
+                <ul class="features-list">
+                    <li>Requests per second</li>
+                    <li>Transactions per minute</li>
+                    <li>Capacity indicator</li>
+                    <li>Growth tracking</li>
+                    <li>Counter metric type</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Saturation</h3>
+                <p>How full systems are.</p>
+                <ul class="features-list">
+                    <li>Queue length</li>
+                    <li>Connection pool usage</li>
+                    <li>CPU time waiting</li>
+                    <li>Resource exhaustion indicator</li>
+                    <li>Gauge metric type</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Advantages</h2>
+
+        <div class="pros-cons-grid">
+            <div class="pros-box">
+                <h3>Benefits</h3>
+                <ul class="features-list">
+                    <li><strong>Performance Visibility:</strong> Understand system behavior</li>
+                    <li><strong>Capacity Planning:</strong> Predict resource needs</li>
+                    <li><strong>Problem Detection:</strong> Identify issues early</li>
+                    <li><strong>Data-Driven Decisions:</strong> Optimize based on data</li>
+                    <li><strong>Scalability Insights:</strong> Know when to scale</li>
+                    <li><strong>Cost Optimization:</strong> Reduce wasteful spending</li>
+                    <li><strong>SLA Compliance:</strong> Track agreement commitments</li>
+                    <li><strong>User Experience:</strong> Monitor perceived performance</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle; color: #DD0031;"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 1 1-18 0 9 9 0 0 1 18 0zm-9 3.75h.008v.008H12v-.008z" /></svg> Challenges</h2>
+
+        <div class="pros-cons-grid">
+            <div class="cons-box">
+                <h3>Drawbacks</h3>
+                <ul class="features-list">
+                    <li><strong>Storage Costs:</strong> Metrics data grows exponentially</li>
+                    <li><strong>Cardinality Explosion:</strong> High-cardinality labels cause issues</li>
+                    <li><strong>Data Quality:</strong> Garbage in, garbage out</li>
+                    <li><strong>Overhead:</strong> Metric collection impacts performance</li>
+                    <li><strong>Alert Fatigue:</strong> Too many alerts reduce effectiveness</li>
+                    <li><strong>Choosing Right Metrics:</strong> What to measure is hard</li>
+                    <li><strong>Correlation vs Causation:</strong> Metrics don't explain why</li>
+                    <li><strong>Infrastructure Complexity:</strong> Setup and maintenance required</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Best Practices</h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>What to Measure</h3>
+                <ul class="features-list">
+                    <li>Focus on business outcomes</li>
+                    <li>Track user experience metrics</li>
+                    <li>Monitor resource utilization</li>
+                    <li>Alert on SLA violations</li>
+                    <li>Avoid measuring everything</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Metric Design</h3>
+                <ul class="features-list">
+                    <li>Use consistent naming conventions</li>
+                    <li>Careful label selection</li>
+                    <li>Avoid high cardinality labels</li>
+                    <li>Include meaningful dimensions</li>
+                    <li>Document metric meaning</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Collection & Storage</h3>
+                <ul class="features-list">
+                    <li>Use efficient instrumentation</li>
+                    <li>Implement sampling strategically</li>
+                    <li>Set appropriate retention periods</li>
+                    <li>Use time-series databases</li>
+                    <li>Monitor storage costs</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Analysis & Action</h3>
+                <ul class="features-list">
+                    <li>Create meaningful dashboards</li>
+                    <li>Set context-aware thresholds</li>
+                    <li>Use metrics for debugging</li>
+                    <li>Track trends over time</li>
+                    <li>Share insights with teams</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Popular Metrics Tools</h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>Prometheus</h3>
+                <p>Most popular open-source metrics platform.</p>
+                <ul class="features-list">
+                    <li>Time-series database</li>
+                    <li>Pull-based collection</li>
+                    <li>PromQL query language</li>
+                    <li>Scalable alerting</li>
+                    <li>Kubernetes native</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Grafana</h3>
+                <p>Visualization and dashboard platform.</p>
+                <ul class="features-list">
+                    <li>Visualize Prometheus data</li>
+                    <li>Beautiful dashboards</li>
+                    <li>Alert management</li>
+                    <li>Multi-datasource support</li>
+                    <li>Community-driven</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Datadog</h3>
+                <p>Enterprise monitoring and metrics platform.</p>
+                <ul class="features-list">
+                    <li>Comprehensive monitoring</li>
+                    <li>Advanced alerting</li>
+                    <li>APM integration</li>
+                    <li>Managed service</li>
+                    <li>High cost but feature-rich</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Cloud Native Solutions</h3>
+                <p>Managed metrics from cloud providers.</p>
+                <ul class="features-list">
+                    <li>CloudWatch (AWS)</li>
+                    <li>Stackdriver (GCP)</li>
+                    <li>Azure Monitor</li>
+                    <li>Built-in integrations</li>
+                    <li>Auto-scaling ready</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Real-World Examples</h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>E-Commerce Site</h3>
+                <p>Track user experience and business metrics.</p>
+                <ul class="features-list">
+                    <li>Page load latency (p95)</li>
+                    <li>Checkout success rate</li>
+                    <li>Search latency</li>
+                    <li>Inventory check speed</li>
+                    <li>Payment processing time</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>API Service</h3>
+                <p>RED metrics for API monitoring.</p>
+                <ul class="features-list">
+                    <li>Requests per second by endpoint</li>
+                    <li>Error rate by status code</li>
+                    <li>Response time percentiles</li>
+                    <li>Database query latency</li>
+                    <li>Cache hit ratio</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Infrastructure</h3>
+                <p>USE metrics for resource monitoring.</p>
+                <ul class="features-list">
+                    <li>CPU utilization and saturation</li>
+                    <li>Memory usage by process</li>
+                    <li>Disk I/O metrics</li>
+                    <li>Network bandwidth</li>
+                    <li>Container resource limits</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>SaaS Platform</h3>
+                <p>Business + technical metrics.</p>
+                <ul class="features-list">
+                    <li>Active user count</li>
+                    <li>Feature adoption rate</li>
+                    <li>API quota usage</li>
+                    <li>Data processing throughput</li>
+                    <li>System reliability score</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Metrics vs Logs vs Traces</h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>Metrics</h3>
+                <p>Aggregated numerical data.</p>
+                <ul class="features-list">
+                    <li>Quantitative measurements</li>
+                    <li>Time-series data</li>
+                    <li>Answers "how much?"</li>
+                    <li>Low storage</li>
+                    <li>Real-time dashboards</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Logs</h3>
+                <p>Discrete text events.</p>
+                <ul class="features-list">
+                    <li>Detailed event records</li>
+                    <li>Text or structured</li>
+                    <li>Answers "what happened?"</li>
+                    <li>High storage</li>
+                    <li>Post-mortem analysis</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Traces</h3>
+                <p>Request journey across systems.</p>
+                <ul class="features-list">
+                    <li>Distributed transactions</li>
+                    <li>End-to-end visibility</li>
+                    <li>Answers "how did this happen?"</li>
+                    <li>Medium storage</li>
+                    <li>Performance debugging</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Combined Approach</h3>
+                <ul class="features-list">
+                    <li>Metrics for detection</li>
+                    <li>Logs for diagnosis</li>
+                    <li>Traces for understanding</li>
+                    <li>Three pillars of observability</li>
+                    <li>Together = complete visibility</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Establishing Metrics</h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>Step 1: Define Goals</h3>
+                <ul class="features-list">
+                    <li>What are business objectives?</li>
+                    <li>What matters to users?</li>
+                    <li>What indicates health?</li>
+                    <li>What prevents incidents?</li>
+                    <li>Align with SLOs</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Step 2: Choose Metrics</h3>
+                <ul class="features-list">
+                    <li>RED for services</li>
+                    <li>USE for resources</li>
+                    <li>Business metrics</li>
+                    <li>Avoid vanity metrics</li>
+                    <li>Start small, grow thoughtfully</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Step 3: Instrument Code</h3>
+                <ul class="features-list">
+                    <li>Use metric libraries</li>
+                    <li>Instrument latency</li>
+                    <li>Count requests/errors</li>
+                    <li>Track resource usage</li>
+                    <li>Minimal overhead</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Step 4: Analyze & Act</h3>
+                <ul class="features-list">
+                    <li>Create dashboards</li>
+                    <li>Set meaningful alerts</li>
+                    <li>Identify trends</li>
+                    <li>Optimize based on data</li>
+                    <li>Iterate continuously</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="intro-box" style="text-align: center; margin: 60px 0 40px;">
+            <p>Metrics are the foundation of modern system observability. By collecting and analyzing the right metrics, you gain visibility into your systems, understand user experience, and make data-driven decisions about optimization and resource allocation. Start simple, measure what matters, and build from there.</p>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Replication</title>
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/concepts.css">
+    <link rel="stylesheet" href="/css/concepts-advance.css">
+</head>
+<body class="replication-page">
+    <a href="/" class="home-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 18px; height: 18px;">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
+        </svg>
+        Home
+    </a>
+
+    <div class="container">
+        <div style="text-align: center; margin-bottom: 30px; padding: 20px; background: rgba(102, 126, 234, 0.15); border-radius: 12px; border: 1px solid rgba(102, 126, 234, 0.3);">
+            <p style="color: #a8b8ff; font-size: 1.1em; margin: 0; font-weight: 600;">Architects are building their own tools.</p>
+        </div>
+        <h1><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 40px; height: 40px; display: inline-block; margin-right: 10px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 0 1-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 0 1 1.5.124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 0 0-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 10.375H9.375a1.125 1.125 0 0 1-1.125-1.125v-9.25m12 6.625v-1.875a3.375 3.375 0 0 0-3.375-3.375h-1.5a1.125 1.125 0 0 1-1.125-1.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H9.75" /></svg> Replication</h1>
+
+        <div class="intro-box">
+            <p><strong>Replication</strong> is the process of copying and synchronizing data across multiple databases or servers to ensure availability, durability, and fault tolerance. By maintaining multiple copies of data in different locations, replication enables systems to continue operating even when individual nodes fail and provides read scaling by distributing queries across replica servers.</p>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Core Concepts</h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>Definition</h3>
+                <p>Maintaining copies of data across multiple systems.</p>
+                <ul class="features-list">
+                    <li>Data duplication</li>
+                    <li>Synchronization across nodes</li>
+                    <li>Fault tolerance</li>
+                    <li>Read scaling</li>
+                    <li>Geographic distribution</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>How It Works</h3>
+                <p>Changes propagate from source to replicas.</p>
+                <ul class="features-list">
+                    <li>Write to primary</li>
+                    <li>Log transactions</li>
+                    <li>Replicate to secondaries</li>
+                    <li>Apply changes</li>
+                    <li>Verify consistency</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Replication Types</h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>Master-Slave</h3>
+                <p>Single write source, multiple read replicas.</p>
+                <ul class="features-list">
+                    <li>One master database</li>
+                    <li>Multiple slaves</li>
+                    <li>Master receives writes</li>
+                    <li>Slaves serve reads</li>
+                    <li>Simple, widely used</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Master-Master</h3>
+                <p>Multiple nodes accept writes.</p>
+                <ul class="features-list">
+                    <li>Two or more masters</li>
+                    <li>Bidirectional sync</li>
+                    <li>High availability</li>
+                    <li>Conflict resolution needed</li>
+                    <li>More complex</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Multi-Master</h3>
+                <p>Many nodes in mesh topology.</p>
+                <ul class="features-list">
+                    <li>All nodes equal</li>
+                    <li>Any node can accept writes</li>
+                    <li>Peer-to-peer sync</li>
+                    <li>Conflict detection</li>
+                    <li>Most resilient</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Cascading</h3>
+                <p>Replicas replicate to other replicas.</p>
+                <ul class="features-list">
+                    <li>Tree topology</li>
+                    <li>Reduces primary load</li>
+                    <li>Lag accumulation</li>
+                    <li>Geographic spread</li>
+                    <li>Complex recovery</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Replication Methods</h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>Synchronous Replication</h3>
+                <p>Wait for replicas to confirm before returning.</p>
+                <ul class="features-list">
+                    <li>Write waits for sync</li>
+                    <li>Strong consistency</li>
+                    <li>Higher latency</li>
+                    <li>Data loss prevention</li>
+                    <li>Slower writes</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Asynchronous Replication</h3>
+                <p>Return immediately, replicate in background.</p>
+                <ul class="features-list">
+                    <li>Faster writes</li>
+                    <li>Replication lag</li>
+                    <li>Potential data loss</li>
+                    <li>Eventual consistency</li>
+                    <li>Most common</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Semi-Synchronous</h3>
+                <p>Wait for at least one replica.</p>
+                <ul class="features-list">
+                    <li>Balance of both</li>
+                    <li>At least one copy</li>
+                    <li>Moderate latency</li>
+                    <li>Compromise approach</li>
+                    <li>Configurable nodes</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Quorum-Based</h3>
+                <p>Majority of nodes must confirm.</p>
+                <ul class="features-list">
+                    <li>N/2 + 1 rule</li>
+                    <li>Consensus driven</li>
+                    <li>Split brain proof</li>
+                    <li>High consistency</li>
+                    <li>Raft, Paxos</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Consistency Models</h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>Strong Consistency</h3>
+                <p>All reads see latest write (linearizable).</p>
+                <ul class="features-list">
+                    <li>Synchronous sync required</li>
+                    <li>No stale reads</li>
+                    <li>ACID transactions</li>
+                    <li>Higher latency</li>
+                    <li>Traditional databases</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Eventual Consistency</h3>
+                <p>All replicas eventually match.</p>
+                <ul class="features-list">
+                    <li>Asynchronous replication</li>
+                    <li>Temporary divergence OK</li>
+                    <li>Low latency</li>
+                    <li>Handles partitions</li>
+                    <li>NoSQL systems</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Causal Consistency</h3>
+                <p>Causally related events stay ordered.</p>
+                <ul class="features-list">
+                    <li>Read-after-write</li>
+                    <li>Version vectors</li>
+                    <li>Preserves causality</li>
+                    <li>Moderate latency</li>
+                    <li>Hybrid approach</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Read-After-Write</h3>
+                <p>Read follows own writes immediately.</p>
+                <ul class="features-list">
+                    <li>Session consistency</li>
+                    <li>User perspective correct</li>
+                    <li>Other users see lag</li>
+                    <li>Session affinity</li>
+                    <li>User experience</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Advantages</h2>
+
+        <div class="pros-box">
+            <h3>Benefits of Replication:</h3>
+            <ul class="features-list">
+                <li><strong>High Availability:</strong> System survives node failures</li>
+                <li><strong>Fault Tolerance:</strong> No single point of failure</li>
+                <li><strong>Read Scaling:</strong> Distribute reads across replicas</li>
+                <li><strong>Disaster Recovery:</strong> Geographic redundancy</li>
+                <li><strong>Data Durability:</strong> Multiple copies protect against loss</li>
+                <li><strong>Geographic Distribution:</strong> Serve users from nearby servers</li>
+                <li><strong>Backup:</strong> Built-in redundant backups</li>
+                <li><strong>Failover Support:</strong> Automatic recovery possible</li>
+            </ul>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle; color: #DD0031;"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 1 1-18 0 9 9 0 0 1 18 0zm-9 3.75h.008v.008H12v-.008z" /></svg> Challenges</h2>
+
+        <div class="cons-box">
+            <h3>Replication Complications:</h3>
+            <ul class="features-list">
+                <li><strong>Replication Lag:</strong> Asynchronous replicas may be behind</li>
+                <li><strong>Data Conflicts:</strong> Multi-master writes to same data</li>
+                <li><strong>Consistency Issues:</strong> Replicas temporarily diverge</li>
+                <li><strong>Write Amplification:</strong> Every write goes to all replicas</li>
+                <li><strong>Network Overhead:</strong> Additional bandwidth needed</li>
+                <li><strong>Operational Complexity:</strong> More systems to manage</li>
+                <li><strong>Cascading Failures:</strong> Replication lag causes failures</li>
+                <li><strong>Distributed Transactions:</strong> Harder across replicas</li>
+            </ul>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Replication Lag</h2>
+
+        <div class="intro-box">
+            <h3>Understanding Replication Delay:</h3>
+            <ul class="features-list">
+                <li><strong>Unavoidable in Asynchronous:</strong> Replicas always slightly behind</li>
+                <li><strong>User Impact:</strong> Users may read stale data</li>
+                <li><strong>Monitoring Necessary:</strong> Track lag with metrics</li>
+                <li><strong>Network Dependent:</strong> Distance and congestion matter</li>
+                <li><strong>Workload Dependent:</strong> Heavy writes increase lag</li>
+                <li><strong>Mitigation Strategies:</strong> Route writes to primary, cache consistency</li>
+                <li><strong>Maximum Acceptable Lag:</strong> Define SLOs for lag</li>
+            </ul>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Best Practices</h2>
+
+        <div class="intro-box">
+            <h3>Implementing Effective Replication:</h3>
+            <ul class="features-list">
+                <li><strong>Choose Right Model:</strong> Master-slave for reads, multi-master for HA</li>
+                <li><strong>Monitor Lag:</strong> Track replication lag continuously</li>
+                <li><strong>Set RTO/RPO:</strong> Define acceptable recovery targets</li>
+                <li><strong>Test Failover:</strong> Regular drills ensure readiness</li>
+                <li><strong>Handle Conflicts:</strong> Plan for multi-master conflicts</li>
+                <li><strong>Network Resilience:</strong> Handle partition scenarios</li>
+                <li><strong>Backup Replicas:</strong> Don't rely only on replicas for backup</li>
+                <li><strong>Document Topology:</strong> Clear runbooks for operations</li>
+                <li><strong>Automate Recovery:</strong> Minimal manual intervention needed</li>
+                <li><strong>Consistency Checks:</strong> Periodically verify replica consistency</li>
+            </ul>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Real-World Implementations</h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>MySQL Replication</h3>
+                <ul class="features-list">
+                    <li>Binary log based</li>
+                    <li>Master-slave standard</li>
+                    <li>Asynchronous by default</li>
+                    <li>Group replication available</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>PostgreSQL</h3>
+                <ul class="features-list">
+                    <li>Streaming replication</li>
+                    <li>WAL based</li>
+                    <li>Physical/logical modes</li>
+                    <li>Synchronous option</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>MongoDB</h3>
+                <ul class="features-list">
+                    <li>Replica sets</li>
+                    <li>Multi-master capable</li>
+                    <li>Automatic failover</li>
+                    <li>Quorum based</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Redis</h3>
+                <ul class="features-list">
+                    <li>Master-slave model</li>
+                    <li>Asynchronous</li>
+                    <li>Sentinel for failover</li>
+                    <li>Cluster support</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Conflict Resolution</h2>
+
+        <div class="intro-box">
+            <h3>Handling Multi-Master Conflicts:</h3>
+            <ul class="features-list">
+                <li><strong>Last-Write-Wins:</strong> Latest timestamp takes precedence</li>
+                <li><strong>Vector Clocks:</strong> Track causal order across nodes</li>
+                <li><strong>Conflict-Free Datatypes:</strong> CRDTs automatically merge</li>
+                <li><strong>Application Logic:</strong> Business rules decide winner</li>
+                <li><strong>Manual Intervention:</strong> Alert operators to decide</li>
+                <li><strong>Three-Way Merge:</strong> Merge common ancestor with branches</li>
+                <li><strong>Quorum Reads:</strong> Require majority agreement</li>
+            </ul>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Replication Topologies</h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>Linear</h3>
+                <p>Chain of replicas: A→B→C</p>
+                <ul class="features-list">
+                    <li>Simple structure</li>
+                    <li>Lag accumulation</li>
+                    <li>Single failure point</li>
+                    <li>Low complexity</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Star</h3>
+                <p>Central hub: A←→B,C,D</p>
+                <ul class="features-list">
+                    <li>Central node important</li>
+                    <li>Hub bottleneck</li>
+                    <li>Easy management</li>
+                    <li>Single point failure</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Mesh</h3>
+                <p>Full connectivity: All←→All</p>
+                <ul class="features-list">
+                    <li>Highest redundancy</li>
+                    <li>Most resilient</li>
+                    <li>Complex conflicts</li>
+                    <li>Network overhead</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Hybrid</h3>
+                <p>Combination approaches</p>
+                <ul class="features-list">
+                    <li>Hub + mesh</li>
+                    <li>Optimized topology</li>
+                    <li>Balanced trade-offs</li>
+                    <li>Most flexible</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="intro-box" style="text-align: center; margin: 60px 0 40px;">
+            <p>Replication is fundamental to building resilient, highly available systems. By strategically placing data copies across multiple systems and choosing appropriate consistency models, organizations can achieve both high availability and acceptable latency while protecting against data loss and enabling geographic distribution.</p>
+        </div>
+    </div>
+</body>
+</html>

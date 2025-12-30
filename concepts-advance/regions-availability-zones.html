@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Regions and Availability Zones</title>
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/concepts.css">
+    <link rel="stylesheet" href="/css/concepts-advance.css">
+</head>
+<body class="regions-availability-zones-page">
+    <a href="/" class="home-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 18px; height: 18px;">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
+        </svg>
+        Home
+    </a>
+
+    <div class="container">
+        <div style="text-align: center; margin-bottom: 30px; padding: 20px; background: rgba(102, 126, 234, 0.15); border-radius: 12px; border: 1px solid rgba(102, 126, 234, 0.3);">
+            <p style="color: #a8b8ff; font-size: 1.1em; margin: 0; font-weight: 600;">Geography becomes your infrastructure strategy.</p>
+        </div>
+        <h1><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 40px; height: 40px; display: inline-block; margin-right: 10px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Regions and Availability Zones</h1>
+
+        <div class="intro-box">
+            <p><strong>Regions</strong> are geographically distributed data center locations across the globe, while <strong>Availability Zones</strong> are isolated data centers within a region. This geographic distribution enables low-latency access, compliance with data residency requirements, and resilience to regional outages. Understanding regions and availability zones is critical for designing globally resilient, compliant, and performant cloud architectures.</p>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Core Concepts</h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>What Is a Region</h3>
+                <p>Geographic data center cluster.</p>
+                <ul class="features-list">
+                    <li>Complete infrastructure set</li>
+                    <li>Multiple availability zones</li>
+                    <li>Specific geographic location</li>
+                    <li>Independent network</li>
+                    <li>All services available</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>What Is an Availability Zone</h3>
+                <p>Isolated data center.</p>
+                <ul class="features-list">
+                    <li>One or more data centers</li>
+                    <li>Within a region</li>
+                    <li>Separate power/cooling</li>
+                    <li>Independent network</li>
+                    <li>Connected by fast links</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Regional Isolation</h3>
+                <p>Failure domains.</p>
+                <ul class="features-list">
+                    <li>Regions independent</li>
+                    <li>Failure confined</li>
+                    <li>Data residency control</li>
+                    <li>Compliance boundaries</li>
+                    <li>Replication scope</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Key Hierarchy</h3>
+                <p>Geographic structure.</p>
+                <ul class="features-list">
+                    <li>Global services at top</li>
+                    <li>Regional level below</li>
+                    <li>AZ level within region</li>
+                    <li>Resources in AZs</li>
+                    <li>Clear isolation levels</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Cloud Provider Regions</h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>AWS Regions</h3>
+                <p>Amazon global presence.</p>
+                <ul class="features-list">
+                    <li>30+ regions globally</li>
+                    <li>us-east-1 oldest</li>
+                    <li>Multiple per continent</li>
+                    <li>New regions frequently</li>
+                    <li>Comprehensive coverage</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Google Cloud Regions</h3>
+                <p>Google geographic spread.</p>
+                <ul class="features-list">
+                    <li>40+ regions + multi-regions</li>
+                    <li>europe-west1 popular</li>
+                    <li>Strong data centers</li>
+                    <li>Good Africa/Asia coverage</li>
+                    <li>Growing expansion</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Azure Regions</h3>
+                <p>Microsoft infrastructure.</p>
+                <ul class="features-list">
+                    <li>60+ regions</li>
+                    <li>Largest coverage</li>
+                    <li>Strong in enterprise markets</li>
+                    <li>Good government options</li>
+                    <li>Broad geographic reach</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Availability Zone Count</h3>
+                <p>Redundancy options.</p>
+                <ul class="features-list">
+                    <li>AWS: 3+ per region</li>
+                    <li>Google: varies by service</li>
+                    <li>Azure: 3 per region</li>
+                    <li>More AZs = more resilience</li>
+                    <li>Comes with cost</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Latency & Performance</h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>Intra-AZ Latency</h3>
+                <p>Within data center.</p>
+                <ul class="features-list">
+                    <li>Sub-millisecond</li>
+                    <li>Shared power/cooling</li>
+                    <li>Direct connections</li>
+                    <li>Fastest option</li>
+                    <li>Single point of failure</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Inter-AZ Latency</h3>
+                <p>Between zones in region.</p>
+                <ul class="features-list">
+                    <li>1-2 milliseconds</li>
+                    <li>Same region</li>
+                    <li>High-speed networks</li>
+                    <li>Acceptable for sync</li>
+                    <li>Good redundancy</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Inter-Region Latency</h3>
+                <p>Between regions.</p>
+                <ul class="features-list">
+                    <li>10-300+ milliseconds</li>
+                    <li>Depends on distance</li>
+                    <li>Intercontinental high</li>
+                    <li>Async replication</li>
+                    <li>Geographic spans</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>User Proximity</h3>
+                <p>Geographic user location.</p>
+                <ul class="features-list">
+                    <li>Deploy near users</li>
+                    <li>Multi-region strategy</li>
+                    <li>CDN for static assets</li>
+                    <li>Edge locations</li>
+                    <li>Reduces user latency</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Data Residency & Compliance</h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>Data Residency</h3>
+                <p>Physical data location.</p>
+                <ul class="features-list">
+                    <li>GDPR requires EU data</li>
+                    <li>CCPA requires US data</li>
+                    <li>Some countries ban exports</li>
+                    <li>Provider-specific options</li>
+                    <li>Replication scope matters</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Regulatory Requirements</h3>
+                <p>Compliance by region.</p>
+                <ul class="features-list">
+                    <li>HIPAA (healthcare)</li>
+                    <li>PCI DSS (payments)</li>
+                    <li>FedRAMP (US government)</li>
+                    <li>SOC 2 compliance</li>
+                    <li>Industry-specific rules</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Sovereignty Zones</h3>
+                <p>Government requirements.</p>
+                <ul class="features-list">
+                    <li>Data must stay in country</li>
+                    <li>China, Russia strict</li>
+                    <li>Separate infrastructure</li>
+                    <li>Operator requirements</li>
+                    <li>Higher costs often</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Cross-Border Transfer</h3>
+                <p>Moving data internationally.</p>
+                <ul class="features-list">
+                    <li>Legal restrictions</li>
+                    <li>Data Processing Agreements</li>
+                    <li>Standard Contractual Clauses</li>
+                    <li>Compliance assessment</li>
+                    <li>Ongoing monitoring</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Multi-Region Strategies</h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>Single Region</h3>
+                <p>Simplest approach.</p>
+                <ul class="features-list">
+                    <li>Lowest cost</li>
+                    <li>Easiest operations</li>
+                    <li>Good for startups</li>
+                    <li>Single point of failure</li>
+                    <li>Regional outage risk</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Multi-AZ (Single Region)</h3>
+                <p>Resilient in one region.</p>
+                <ul class="features-list">
+                    <li>Handles AZ failure</li>
+                    <li>Auto failover</li>
+                    <li>Low replication cost</li>
+                    <li>Regional outage still fails</li>
+                    <li>Recommended minimum</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Active-Passive</h3>
+                <p>Primary + standby.</p>
+                <ul class="features-list">
+                    <li>Primary region active</li>
+                    <li>Secondary standby</li>
+                    <li>Async replication</li>
+                    <li>Failover delay</li>
+                    <li>Lower cost than active-active</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Active-Active</h3>
+                <p>Both regions active.</p>
+                <ul class="features-list">
+                    <li>Traffic to both</li>
+                    <li>Sync replication</li>
+                    <li>Zero RPO</li>
+                    <li>Complex consistency</li>
+                    <li>Higher cost</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Disaster Recovery</h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>RTO & RPO</h3>
+                <p>Recovery metrics.</p>
+                <ul class="features-list">
+                    <li>RTO: time to recover</li>
+                    <li>RPO: data loss acceptable</li>
+                    <li>Multi-region reduces both</li>
+                    <li>Trade-off: cost vs metrics</li>
+                    <li>Business requirements drive</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Regional Failover</h3>
+                <p>Switching regions.</p>
+                <ul class="features-list">
+                    <li>DNS updates for routing</li>
+                    <li>Database failover</li>
+                    <li>Application restart</li>
+                    <li>Automated triggers</li>
+                    <li>Data sync verification</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Backup Strategy</h3>
+                <p>Off-region backups.</p>
+                <ul class="features-list">
+                    <li>Cross-region snapshots</li>
+                    <li>Replicated backups</li>
+                    <li>Point-in-time recovery</li>
+                    <li>Regular validation</li>
+                    <li>Test restores</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Chaos Engineering</h3>
+                <p>Testing resilience.</p>
+                <ul class="features-list">
+                    <li>Simulate AZ failure</li>
+                    <li>Simulate region failure</li>
+                    <li>Network latency tests</li>
+                    <li>Regular drills</li>
+                    <li>Improve procedures</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Cost Implications</h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>Regional Pricing</h3>
+                <p>Cost variations.</p>
+                <ul class="features-list">
+                    <li>us-east-1 cheapest AWS</li>
+                    <li>Premium regions higher</li>
+                    <li>Data transfer costs vary</li>
+                    <li>Reserved instances cheaper</li>
+                    <li>Region selection matters</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Data Transfer Costs</h3>
+                <p>Inter-region traffic.</p>
+                <ul class="features-list">
+                    <li>Expensive between regions</li>
+                    <li>Intra-AZ free AWS</li>
+                    <li>Internet egress costly</li>
+                    <li>Replication overhead</li>
+                    <li>Plan traffic carefully</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Multi-Region Cost</h3>
+                <p>Redundancy premium.</p>
+                <ul class="features-list">
+                    <li>2x infrastructure</li>
+                    <li>Replication costs</li>
+                    <li>DNS/LB overhead</li>
+                    <li>Operational complexity</li>
+                    <li>Business value justifies</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Optimization</h3>
+                <p>Cost reduction.</p>
+                <ul class="features-list">
+                    <li>Single primary region</li>
+                    <li>Async replication</li>
+                    <li>Planned failover</li>
+                    <li>Spot instances</li>
+                    <li>Reserved capacity</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Advantages</h2>
+
+        <div class="pros-cons-grid">
+            <div class="pros-box">
+                <h3>Benefits</h3>
+                <ul class="features-list">
+                    <li><strong>Low Latency:</strong> Deploy near users</li>
+                    <li><strong>Resilience:</strong> Survive regional outages</li>
+                    <li><strong>Compliance:</strong> Meet data residency rules</li>
+                    <li><strong>Disaster Recovery:</strong> Backup in different region</li>
+                    <li><strong>Redundancy:</strong> Multiple failure domains</li>
+                    <li><strong>Global Reach:</strong> Serve worldwide users</li>
+                    <li><strong>Sovereignty:</strong> Meet government requirements</li>
+                    <li><strong>Business Continuity:</strong> Keep services running</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle; color: #DD0031;"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 1 1-18 0 9 9 0 0 1 18 0zm-9 3.75h.008v.008H12v-.008z" /></svg> Challenges</h2>
+
+        <div class="pros-cons-grid">
+            <div class="cons-box">
+                <h3>Drawbacks</h3>
+                <ul class="features-list">
+                    <li><strong>Complexity:</strong> Multi-region hard to manage</li>
+                    <li><strong>Cost:</strong> Redundancy is expensive</li>
+                    <li><strong>Data Consistency:</strong> Replication delays</li>
+                    <li><strong>Latency:</strong> Inter-region communication slow</li>
+                    <li><strong>Operational Burden:</strong> Sync data between regions</li>
+                    <li><strong>Vendor Lock-in:</strong> Region-specific services</li>
+                    <li><strong>Network Issues:</strong> Region failures affect users</li>
+                    <li><strong>Compliance Complexity:</strong> Multiple jurisdiction rules</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Best Practices</h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>Region Selection</h3>
+                <ul class="features-list">
+                    <li>Analyze user locations</li>
+                    <li>Compliance requirements</li>
+                    <li>Service availability</li>
+                    <li>Cost comparison</li>
+                    <li>Future expansion</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Multi-AZ Design</h3>
+                <ul class="features-list">
+                    <li>Always use 2+ AZs</li>
+                    <li>Distribute resources evenly</li>
+                    <li>Test AZ failure</li>
+                    <li>Automatic failover</li>
+                    <li>Avoid single AZ</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Replication Strategy</h3>
+                <ul class="features-list">
+                    <li>Define RPO/RTO</li>
+                    <li>Sync vs async</li>
+                    <li>Test recovery</li>
+                    <li>Monitor replication</li>
+                    <li>Regular validation</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Monitoring</h3>
+                <ul class="features-list">
+                    <li>Track latency per region</li>
+                    <li>Monitor replication lag</li>
+                    <li>Alert on anomalies</li>
+                    <li>Regional health checks</li>
+                    <li>User experience metrics</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Real-World Scenarios</h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>Global SaaS</h3>
+                <p>Worldwide user base.</p>
+                <ul class="features-list">
+                    <li>Users across globe</li>
+                    <li>Multi-region deployment</li>
+                    <li>Edge caching for assets</li>
+                    <li>Active-active for scale</li>
+                    <li>Global database</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Regulated Industry</h3>
+                <p>Compliance requirements.</p>
+                <ul class="features-list">
+                    <li>Data residency strict</li>
+                    <li>Regional deployment</li>
+                    <li>Audit trails</li>
+                    <li>Compliance validation</li>
+                    <li>Limited geographic scope</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>High Availability</h3>
+                <p>Mission-critical systems.</p>
+                <ul class="features-list">
+                    <li>Multi-region active-active</li>
+                    <li>Automated failover</li>
+                    <li>Zero RTO goal</li>
+                    <li>Expensive but necessary</li>
+                    <li>Financial services typical</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Cost-Sensitive Startup</h3>
+                <p>Budget limited.</p>
+                <ul class="features-list">
+                    <li>Single region primary</li>
+                    <li>Cheapest region (us-east-1)</li>
+                    <li>Multi-AZ only</li>
+                    <li>Async backup to other</li>
+                    <li>Grow as budget allows</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Regional Architecture Patterns</h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>Hub and Spoke</h3>
+                <p>Central region model.</p>
+                <ul class="features-list">
+                    <li>Primary region hub</li>
+                    <li>Other regions spokes</li>
+                    <li>Async replication out</li>
+                    <li>Write to primary only</li>
+                    <li>Read from local</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Edge Replication</h3>
+                <p>Global data distribution.</p>
+                <ul class="features-list">
+                    <li>Data at multiple edges</li>
+                    <li>Edge locations worldwide</li>
+                    <li>CDN for static</li>
+                    <li>Serverless edge compute</li>
+                    <li>Sub-50ms latency</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Disaster Recovery</h3>
+                <p>DR-focused setup.</p>
+                <ul class="features-list">
+                    <li>Primary in one region</li>
+                    <li>DR in different region</li>
+                    <li>Minimal baseline</li>
+                    <li>Rapid activation</li>
+                    <li>Periodic DR drills</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Federation</h3>
+                <p>Distributed autonomy.</p>
+                <ul class="features-list">
+                    <li>Each region independent</li>
+                    <li>Limited central control</li>
+                    <li>Regional databases</li>
+                    <li>Event-driven sync</li>
+                    <li>Eventually consistent</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Implementation Roadmap</h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>Phase 1: Single Region</h3>
+                <ul class="features-list">
+                    <li>Single region choice</li>
+                    <li>Multi-AZ deployment</li>
+                    <li>Primary region only</li>
+                    <li>Focused on speed</li>
+                    <li>Cost optimized</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Phase 2: Multi-AZ</h3>
+                <ul class="features-list">
+                    <li>Distribute across AZs</li>
+                    <li>Automatic failover</li>
+                    <li>Health monitoring</li>
+                    <li>Test failure scenarios</li>
+                    <li>Production ready</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Phase 3: Multi-Region</h3>
+                <ul class="features-list">
+                    <li>Secondary region setup</li>
+                    <li>Data replication</li>
+                    <li>Regional failover</li>
+                    <li>DNS routing</li>
+                    <li>Disaster ready</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Phase 4: Global Scale</h3>
+                <ul class="features-list">
+                    <li>Multiple regions active</li>
+                    <li>Edge deployment</li>
+                    <li>Global load balancing</li>
+                    <li>Worldwide latency low</li>
+                    <li>Complexity managed</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="intro-box" style="text-align: center; margin: 60px 0 40px;">
+            <p>Regions and Availability Zones form the geographic foundation of cloud architecture. Smart use of these constructs enables building systems that are simultaneously resilient, compliant, and performant. The decision of where to run workloads—by region and across availability zones—shapes every other architectural decision. Understanding these geographic dimensions is essential for building production systems that serve users reliably while meeting regulatory requirements and managing costs effectively.</p>
+        </div>
+    </div>
+</body>
+</html>

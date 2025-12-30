@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monitoring</title>
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/concepts.css">
+    <link rel="stylesheet" href="/css/concepts-advance.css">
+</head>
+<body class="monitoring-page">
+    <a href="/" class="home-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 18px; height: 18px;">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
+        </svg>
+        Home
+    </a>
+
+    <div class="container">
+        <div style="text-align: center; margin-bottom: 30px; padding: 20px; background: rgba(102, 126, 234, 0.15); border-radius: 12px; border: 1px solid rgba(102, 126, 234, 0.3);">
+            <p style="color: #a8b8ff; font-size: 1.1em; margin: 0; font-weight: 600;">Architects are building their own tools.</p>
+        </div>
+        <h1><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 40px; height: 40px; display: inline-block; margin-right: 10px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Monitoring</h1>
+
+        <div class="intro-box">
+            <p><strong>Monitoring</strong> is the continuous collection and analysis of system metrics, logs, and events to understand system health and behavior. Monitoring provides real-time visibility into what's happening, enables early detection of problems, and supports data-driven decision-making. Effective monitoring bridges the gap between raw data and actionable insights, transforming metrics into decisions.</p>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Core Concepts</h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>Observability vs Monitoring</h3>
+                <p>Related but distinct concepts.</p>
+                <ul class="features-list">
+                    <li><strong>Monitoring:</strong> Actively collecting data</li>
+                    <li><strong>Observability:</strong> Understanding via data</li>
+                    <li>Monitoring is necessary for observability</li>
+                    <li>Observability requires asking new questions</li>
+                    <li>Can monitor without true observability</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Three Pillars</h3>
+                <p>Complete monitoring requires three data types.</p>
+                <ul class="features-list">
+                    <li><strong>Metrics:</strong> Quantified measurements</li>
+                    <li><strong>Logs:</strong> Discrete events</li>
+                    <li><strong>Traces:</strong> Request flows</li>
+                    <li>Each pillar answers different questions</li>
+                    <li>Together provide complete visibility</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Monitoring Scope</h3>
+                <p>What to monitor at different layers.</p>
+                <ul class="features-list">
+                    <li><strong>Application:</strong> Business logic</li>
+                    <li><strong>Infrastructure:</strong> Servers, network</li>
+                    <li><strong>Middleware:</strong> Databases, caches</li>
+                    <li><strong>User Experience:</strong> Client-side</li>
+                    <li>Comprehensive coverage required</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Active vs Passive</h3>
+                <p>Two monitoring collection approaches.</p>
+                <ul class="features-list">
+                    <li><strong>Active:</strong> Probes and checks</li>
+                    <li><strong>Passive:</strong> Instruments in code</li>
+                    <li>Active finds external issues</li>
+                    <li>Passive finds internal issues</li>
+                    <li>Both necessary for completeness</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Monitoring Strategies</h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>Pull-Based Monitoring</h3>
+                <p>Monitoring system requests data.</p>
+                <ul class="features-list">
+                    <li>Monitoring scrapes metrics endpoints</li>
+                    <li>Application is passive provider</li>
+                    <li>Easier to control collection rate</li>
+                    <li>Better for large deployments</li>
+                    <li>Example: Prometheus</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Push-Based Monitoring</h3>
+                <p>Applications send data to monitoring.</p>
+                <ul class="features-list">
+                    <li>Application actively sends metrics</li>
+                    <li>Monitoring system is passive receiver</li>
+                    <li>Can send on demand</li>
+                    <li>Better for edge/serverless</li>
+                    <li>Example: Datadog agent</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Real-Time Monitoring</h3>
+                <p>Continuous live surveillance.</p>
+                <ul class="features-list">
+                    <li>Data processed immediately</li>
+                    <li>Detect anomalies within seconds</li>
+                    <li>Streaming data pipelines</li>
+                    <li>Higher cost and complexity</li>
+                    <li>Critical for high-frequency trading</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Periodic Monitoring</h3>
+                <p>Data collected at intervals.</p>
+                <ul class="features-list">
+                    <li>Collect every 60 seconds typical</li>
+                    <li>Lower latency than manual checking</li>
+                    <li>Trade-off between cost and visibility</li>
+                    <li>Good for most scenarios</li>
+                    <li>Balances coverage and cost</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Monitoring Stack Components</h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>Collection</h3>
+                <p>Gathering data from sources.</p>
+                <ul class="features-list">
+                    <li>Agents/SDKs instrument code</li>
+                    <li>Exporters translate formats</li>
+                    <li>Minimal performance overhead</li>
+                    <li>Distributed across servers</li>
+                    <li>Reliable transport required</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Aggregation</h3>
+                <p>Combining data from multiple sources.</p>
+                <ul class="features-list">
+                    <li>Central collection point</li>
+                    <li>Deduplication</li>
+                    <li>Time normalization</li>
+                    <li>Handle network failures</li>
+                    <li>Scale horizontally</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Storage</h3>
+                <p>Persisting collected data.</p>
+                <ul class="features-list">
+                    <li>Time-series databases</li>
+                    <li>Log aggregation platforms</li>
+                    <li>High-cardinality tolerance</li>
+                    <li>Efficient compression</li>
+                    <li>Retention vs cost trade-off</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Analysis & Visualization</h3>
+                <p>Making sense of collected data.</p>
+                <ul class="features-list">
+                    <li>Query engines</li>
+                    <li>Dashboards for visualization</li>
+                    <li>Anomaly detection</li>
+                    <li>Trend analysis</li>
+                    <li>Root cause analysis</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Dashboards & Visualization</h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>Operational Dashboards</h3>
+                <p>Real-time system health view.</p>
+                <ul class="features-list">
+                    <li>Key metrics at a glance</li>
+                    <li>High-level system status</li>
+                    <li>Service availability</li>
+                    <li>Quick incident detection</li>
+                    <li>Refreshed frequently</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Analytical Dashboards</h3>
+                <p>Deep dive investigation tools.</p>
+                <ul class="features-list">
+                    <li>Detailed breakdowns</li>
+                    <li>Historical trends</li>
+                    <li>Correlations</li>
+                    <li>Interactive queries</li>
+                    <li>For troubleshooting</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Business Dashboards</h3>
+                <p>Metrics for non-technical stakeholders.</p>
+                <ul class="features-list">
+                    <li>Business KPIs</li>
+                    <li>Revenue impact</li>
+                    <li>User satisfaction</li>
+                    <li>SLA compliance</li>
+                    <li>Executive visibility</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Dashboard Best Practices</h3>
+                <ul class="features-list">
+                    <li>Purpose-driven design</li>
+                    <li>Avoid information overload</li>
+                    <li>Use appropriate visualizations</li>
+                    <li>Color accessibility</li>
+                    <li>Context-aware thresholds</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Advantages</h2>
+
+        <div class="pros-cons-grid">
+            <div class="pros-box">
+                <h3>Benefits</h3>
+                <ul class="features-list">
+                    <li><strong>Early Problem Detection:</strong> Catch issues before users notice</li>
+                    <li><strong>Reduced MTTR:</strong> Faster mean time to resolution</li>
+                    <li><strong>Capacity Planning:</strong> Understand growth trajectories</li>
+                    <li><strong>Cost Optimization:</strong> Identify resource waste</li>
+                    <li><strong>Proactive Scaling:</strong> Scale before saturation</li>
+                    <li><strong>Performance Insights:</strong> Identify bottlenecks</li>
+                    <li><strong>SLA Compliance:</strong> Track commitment fulfillment</li>
+                    <li><strong>Incident Prevention:</strong> Predictive alerting</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle; color: #DD0031;"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 1 1-18 0 9 9 0 0 1 18 0zm-9 3.75h.008v.008H12v-.008z" /></svg> Challenges</h2>
+
+        <div class="pros-cons-grid">
+            <div class="cons-box">
+                <h3>Drawbacks</h3>
+                <ul class="features-list">
+                    <li><strong>Cost:</strong> Comprehensive monitoring is expensive</li>
+                    <li><strong>Complexity:</strong> Multiple tools and integrations</li>
+                    <li><strong>Alert Fatigue:</strong> Too many false positives</li>
+                    <li><strong>Performance Impact:</strong> Monitoring overhead</li>
+                    <li><strong>Data Explosion:</strong> Storage and retention costs</li>
+                    <li><strong>Skill Requirements:</strong> Expertise to operate effectively</li>
+                    <li><strong>Choosing Right Metrics:</strong> What to monitor is hard</li>
+                    <li><strong>Maintenance Burden:</strong> Alerts need constant tuning</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Best Practices</h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>What to Monitor</h3>
+                <ul class="features-list">
+                    <li>Start with critical systems</li>
+                    <li>Monitor customer-facing metrics</li>
+                    <li>Track dependencies</li>
+                    <li>Infrastructure health</li>
+                    <li>Don't monitor everything</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Alert Design</h3>
+                <ul class="features-list">
+                    <li>Alert on symptoms not causes</li>
+                    <li>Use context-appropriate thresholds</li>
+                    <li>Reduce false positives</li>
+                    <li>Route alerts appropriately</li>
+                    <li>Include context in alert messages</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Data Quality</h3>
+                <ul class="features-list">
+                    <li>Validate metric sources</li>
+                    <li>Check for data gaps</li>
+                    <li>Verify cardinality is manageable</li>
+                    <li>Ensure proper timestamps</li>
+                    <li>Monitor the monitors</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Continuous Improvement</h3>
+                <ul class="features-list">
+                    <li>Post-incident reviews</li>
+                    <li>Refine alert thresholds</li>
+                    <li>Add new metric sources</li>
+                    <li>Update dashboards</li>
+                    <li>Train teams on tools</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Popular Monitoring Tools</h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>Open Source Stack</h3>
+                <p>Prometheus + Grafana + Alertmanager</p>
+                <ul class="features-list">
+                    <li>Prometheus for metrics</li>
+                    <li>Grafana for visualization</li>
+                    <li>Alertmanager for routing</li>
+                    <li>Cost-effective</li>
+                    <li>Requires self-hosting</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>ELK Stack</h3>
+                <p>Elasticsearch, Logstash, Kibana</p>
+                <ul class="features-list">
+                    <li>Primarily for logging</li>
+                    <li>Powerful search capabilities</li>
+                    <li>Log aggregation</li>
+                    <li>Can be expensive at scale</li>
+                    <li>Steep learning curve</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Enterprise Solutions</h3>
+                <p>Datadog, New Relic, Dynatrace</p>
+                <ul class="features-list">
+                    <li>Managed services</li>
+                    <li>Minimal setup needed</li>
+                    <li>Integrated APM</li>
+                    <li>High cost</li>
+                    <li>Vendor lock-in</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Cloud Native</h3>
+                <p>CloudWatch, Stackdriver, Azure Monitor</p>
+                <ul class="features-list">
+                    <li>Provider-specific services</li>
+                    <li>Automatic integrations</li>
+                    <li>Pay-as-you-go pricing</li>
+                    <li>Limited cross-cloud</li>
+                    <li>Ecosystem benefits</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Real-World Examples</h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>E-Commerce Platform</h3>
+                <p>Monitor checkout conversion funnel.</p>
+                <ul class="features-list">
+                    <li>Track page load times</li>
+                    <li>Monitor cart abandonment</li>
+                    <li>Payment processor latency</li>
+                    <li>Inventory service health</li>
+                    <li>Email confirmation delivery</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>SaaS Application</h3>
+                <p>Monitor per-tenant performance.</p>
+                <ul class="features-list">
+                    <li>API response times by tenant</li>
+                    <li>Data storage per customer</li>
+                    <li>Feature usage patterns</li>
+                    <li>Database query performance</li>
+                    <li>Background job processing</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Mobile App Backend</h3>
+                <p>Monitor distributed mobile requests.</p>
+                <ul class="features-list">
+                    <li>API endpoint latency</li>
+                    <li>Error rates by app version</li>
+                    <li>Push notification delivery</li>
+                    <li>Sync service health</li>
+                    <li>Device-specific metrics</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Data Pipeline</h3>
+                <p>Monitor ETL and processing.</p>
+                <ul class="features-list">
+                    <li>Data ingestion rate</li>
+                    <li>Processing latency</li>
+                    <li>Failed job count</li>
+                    <li>Storage utilization</li>
+                    <li>Pipeline SLA compliance</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Monitoring Levels</h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>Level 1: Basic</h3>
+                <p>Essential system monitoring.</p>
+                <ul class="features-list">
+                    <li>CPU, memory, disk</li>
+                    <li>Network I/O</li>
+                    <li>Service availability</li>
+                    <li>Basic alerts</li>
+                    <li>Manual troubleshooting</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Level 2: Intermediate</h3>
+                <p>Application and service monitoring.</p>
+                <ul class="features-list">
+                    <li>Application metrics</li>
+                    <li>Database performance</li>
+                    <li>Request tracing</li>
+                    <li>Log aggregation</li>
+                    <li>Guided troubleshooting</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Level 3: Advanced</h3>
+                <p>Predictive and intelligent monitoring.</p>
+                <ul class="features-list">
+                    <li>Anomaly detection</li>
+                    <li>AI-powered insights</li>
+                    <li>Distributed tracing</li>
+                    <li>Root cause analysis</li>
+                    <li>Automated remediation</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Level 4: Observability</h3>
+                <p>True observability with full context.</p>
+                <ul class="features-list">
+                    <li>Metrics + Logs + Traces</li>
+                    <li>Context propagation</li>
+                    <li>Service dependencies</li>
+                    <li>User journey mapping</li>
+                    <li>Self-service diagnosis</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Implementing Monitoring</h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>Step 1: Define Goals</h3>
+                <ul class="features-list">
+                    <li>What are you trying to achieve?</li>
+                    <li>Who needs visibility?</li>
+                    <li>What impacts business?</li>
+                    <li>What causes most incidents?</li>
+                    <li>Set clear success criteria</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Step 2: Start Simple</h3>
+                <ul class="features-list">
+                    <li>Choose single monitoring tool</li>
+                    <li>Instrument critical paths</li>
+                    <li>Create basic dashboards</li>
+                    <li>Set initial alert thresholds</li>
+                    <li>Get team comfortable</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Step 3: Iterate & Expand</h3>
+                <ul class="features-list">
+                    <li>Review effectiveness</li>
+                    <li>Add more metric sources</li>
+                    <li>Refine alert logic</li>
+                    <li>Improve dashboards</li>
+                    <li>Integrate other tools</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Step 4: Mature Practice</h3>
+                <ul class="features-list">
+                    <li>Full observability</li>
+                    <li>Predictive alerting</li>
+                    <li>Automated response</li>
+                    <li>Cross-team alignment</li>
+                    <li>Continuous optimization</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="intro-box" style="text-align: center; margin: 60px 0 40px;">
+            <p>Monitoring is the foundation of reliable systems. By implementing comprehensive monitoring that spans infrastructure, applications, and user experience, you gain the visibility needed to detect problems early, understand system behavior, and make data-driven decisions. Start simple, measure what matters, and iterate toward true observability.</p>
+        </div>
+    </div>
+</body>
+</html>

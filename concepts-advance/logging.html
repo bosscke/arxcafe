@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Logging</title>
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/concepts.css">
+    <link rel="stylesheet" href="/css/concepts-advance.css">
+</head>
+<body class="logging-page">
+    <a href="/" class="home-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 18px; height: 18px;">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
+        </svg>
+        Home
+    </a>
+
+    <div class="container">
+        <div style="text-align: center; margin-bottom: 30px; padding: 20px; background: rgba(102, 126, 234, 0.15); border-radius: 12px; border: 1px solid rgba(102, 126, 234, 0.3);">
+            <p style="color: #a8b8ff; font-size: 1.1em; margin: 0; font-weight: 600;">Architects are building their own tools.</p>
+        </div>
+        <h1><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 40px; height: 40px; display: inline-block; margin-right: 10px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5zM12 12.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5zM12 18.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5z" /></svg> Logging</h1>
+
+        <div class="intro-box">
+            <p><strong>Logging</strong> is the practice of recording events, transactions, and system activities that occur during application execution. Logs provide detailed information about what happened in a system, when it happened, and why, enabling debugging, monitoring, auditing, and compliance. Effective logging is essential for understanding system behavior, troubleshooting issues, and maintaining security.</p>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Core Concepts</h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>Log Levels</h3>
+                <p>Severity classification for different types of log entries.</p>
+                <ul class="features-list">
+                    <li><strong>DEBUG:</strong> Detailed info for debugging</li>
+                    <li><strong>INFO:</strong> General informational messages</li>
+                    <li><strong>WARN:</strong> Warning conditions</li>
+                    <li><strong>ERROR:</strong> Error conditions</li>
+                    <li><strong>FATAL:</strong> Critical failures</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Structured Logging</h3>
+                <p>Logs with consistent format and key-value pairs.</p>
+                <ul class="features-list">
+                    <li>JSON format preferred</li>
+                    <li>Searchable and parseable</li>
+                    <li>Includes context fields</li>
+                    <li>Machine-readable</li>
+                    <li>Better for analysis</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Log Aggregation</h3>
+                <p>Collecting logs from multiple sources into central location.</p>
+                <ul class="features-list">
+                    <li>Centralized log repository</li>
+                    <li>Multi-source collection</li>
+                    <li>Unified querying</li>
+                    <li>Cross-system correlation</li>
+                    <li>Single source of truth</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Log Retention</h3>
+                <p>Storage and management of historical log data.</p>
+                <ul class="features-list">
+                    <li>Retention policies by type</li>
+                    <li>Compliance requirements</li>
+                    <li>Storage tiering</li>
+                    <li>Archive strategies</li>
+                    <li>Cost optimization</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Logging Strategies</h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>Application Logging</h3>
+                <p>Logs from application code execution.</p>
+                <ul class="features-list">
+                    <li>Business events</li>
+                    <li>User actions</li>
+                    <li>State changes</li>
+                    <li>Exceptions and errors</li>
+                    <li>Request/response details</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>System Logging</h3>
+                <p>Operating system and infrastructure logs.</p>
+                <ul class="features-list">
+                    <li>System events</li>
+                    <li>Performance metrics</li>
+                    <li>Resource usage</li>
+                    <li>Security events</li>
+                    <li>Service status changes</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Access Logging</h3>
+                <p>Records of who accessed what and when.</p>
+                <ul class="features-list">
+                    <li>API requests</li>
+                    <li>HTTP access logs</li>
+                    <li>User authentication</li>
+                    <li>Authorization decisions</li>
+                    <li>Database queries</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Audit Logging</h3>
+                <p>Compliance and security-focused logging.</p>
+                <ul class="features-list">
+                    <li>Data modifications</li>
+                    <li>User actions</li>
+                    <li>Policy changes</li>
+                    <li>Sensitive operations</li>
+                    <li>Regulatory compliance</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Log Storage Options</h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>Local Files</h3>
+                <p>Traditional file-based log storage on servers.</p>
+                <ul class="features-list">
+                    <li>Simple and cheap</li>
+                    <li>Local disk storage</li>
+                    <li>Rotation/archival needed</li>
+                    <li>Limited search capability</li>
+                    <li>Difficult cross-server analysis</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Syslog</h3>
+                <p>Standard Unix logging protocol and daemon.</p>
+                <ul class="features-list">
+                    <li>UDP/TCP transport</li>
+                    <li>Centralized collection</li>
+                    <li>Standardized format</li>
+                    <li>Wide platform support</li>
+                    <li>Lightweight</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Log Aggregation Platform</h3>
+                <p>Dedicated log management systems (ELK, Splunk, etc.)</p>
+                <ul class="features-list">
+                    <li>Full-text search</li>
+                    <li>Real-time analysis</li>
+                    <li>Visualization dashboards</li>
+                    <li>Advanced querying</li>
+                    <li>Alerting capabilities</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Cloud Logging Services</h3>
+                <p>Managed logging in cloud providers.</p>
+                <ul class="features-list">
+                    <li>AWS CloudWatch</li>
+                    <li>Google Cloud Logging</li>
+                    <li>Azure Monitor</li>
+                    <li>Fully managed</li>
+                    <li>Automatic scaling</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Advantages</h2>
+
+        <div class="pros-cons-grid">
+            <div class="pros-box">
+                <h3>Benefits</h3>
+                <ul class="features-list">
+                    <li><strong>Debugging:</strong> Understand and fix issues quickly</li>
+                    <li><strong>Monitoring:</strong> Track system health in real-time</li>
+                    <li><strong>Auditing:</strong> Track who did what and when</li>
+                    <li><strong>Compliance:</strong> Meet regulatory requirements</li>
+                    <li><strong>Performance Analysis:</strong> Identify bottlenecks</li>
+                    <li><strong>Security:</strong> Detect suspicious activity</li>
+                    <li><strong>Accountability:</strong> Full audit trail</li>
+                    <li><strong>Root Cause Analysis:</strong> Understand system behavior</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle; color: #DD0031;"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 1 1-18 0 9 9 0 0 1 18 0zm-9 3.75h.008v.008H12v-.008z" /></svg> Challenges</h2>
+
+        <div class="pros-cons-grid">
+            <div class="cons-box">
+                <h3>Drawbacks</h3>
+                <ul class="features-list">
+                    <li><strong>Storage Costs:</strong> Logs consume significant disk space</li>
+                    <li><strong>Performance Impact:</strong> Logging can slow applications</li>
+                    <li><strong>Data Privacy:</strong> Risk of logging sensitive information</li>
+                    <li><strong>Complexity:</strong> Log aggregation and analysis is complex</li>
+                    <li><strong>Information Overload:</strong> Too many logs to analyze</li>
+                    <li><strong>Retention Overhead:</strong> Managing old logs is costly</li>
+                    <li><strong>Standardization:</strong> Different systems use different formats</li>
+                    <li><strong>Network Overhead:</strong> Shipping logs impacts network</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Best Practices</h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>Log Content</h3>
+                <ul class="features-list">
+                    <li>Include timestamp in every log</li>
+                    <li>Add context: user, session, request ID</li>
+                    <li>Never log sensitive data (passwords, tokens, PII)</li>
+                    <li>Use consistent log levels appropriately</li>
+                    <li>Include stack traces for exceptions</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Log Structure</h3>
+                <ul class="features-list">
+                    <li>Use structured logging (JSON preferred)</li>
+                    <li>Include correlation IDs for tracing</li>
+                    <li>Standardize field names across systems</li>
+                    <li>Add service/component identifiers</li>
+                    <li>Include version information</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Storage & Retention</h3>
+                <ul class="features-list">
+                    <li>Define retention policies per log type</li>
+                    <li>Use log rotation to manage size</li>
+                    <li>Archive old logs to cheaper storage</li>
+                    <li>Implement tiered storage strategy</li>
+                    <li>Encrypt logs at rest and in transit</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Monitoring & Analysis</h3>
+                <ul class="features-list">
+                    <li>Create dashboards for key metrics</li>
+                    <li>Set up alerting on error patterns</li>
+                    <li>Implement log sampling for high volume</li>
+                    <li>Use full-text search effectively</li>
+                    <li>Regular analysis of logs for insights</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Popular Logging Tools</h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>ELK Stack (Elasticsearch, Logstash, Kibana)</h3>
+                <p>Most popular open-source log management platform.</p>
+                <ul class="features-list">
+                    <li>Logstash for log processing</li>
+                    <li>Elasticsearch for storage/search</li>
+                    <li>Kibana for visualization</li>
+                    <li>Highly scalable</li>
+                    <li>Community support</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Splunk</h3>
+                <p>Enterprise-grade log and data analytics platform.</p>
+                <ul class="features-list">
+                    <li>Powerful search capabilities</li>
+                    <li>Advanced analytics</li>
+                    <li>Security features</li>
+                    <li>High cost</li>
+                    <li>Enterprise support</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Cloud Native Solutions</h3>
+                <p>Managed logging services from cloud providers.</p>
+                <ul class="features-list">
+                    <li>AWS CloudWatch Logs</li>
+                    <li>Google Cloud Logging</li>
+                    <li>Azure Monitor</li>
+                    <li>Automatic scaling</li>
+                    <li>Built-in integrations</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Open Source Alternatives</h3>
+                <p>Various open-source logging solutions.</p>
+                <ul class="features-list">
+                    <li>Fluentd for log forwarding</li>
+                    <li>Prometheus for metrics</li>
+                    <li>Loki for log aggregation</li>
+                    <li>Graylog</li>
+                    <li>Low cost, community driven</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Real-World Examples</h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>E-Commerce Platform</h3>
+                <p>Logs for transactions, user behavior, and performance.</p>
+                <ul class="features-list">
+                    <li>Purchase transaction logs</li>
+                    <li>User journey tracking</li>
+                    <li>Payment gateway logs</li>
+                    <li>Inventory updates</li>
+                    <li>Performance monitoring</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Financial System</h3>
+                <p>Comprehensive audit logging for compliance.</p>
+                <ul class="features-list">
+                    <li>All transactions logged</li>
+                    <li>User action audit trail</li>
+                    <li>System state changes</li>
+                    <li>Regulatory compliance</li>
+                    <li>7+ year retention</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>SaaS Application</h3>
+                <p>Multi-tenant logs with isolation and analytics.</p>
+                <ul class="features-list">
+                    <li>Per-tenant log separation</li>
+                    <li>Usage analytics</li>
+                    <li>Performance debugging</li>
+                    <li>API call logging</li>
+                    <li>User behavior analysis</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Security & Monitoring</h3>
+                <p>Logs for threat detection and incident response.</p>
+                <ul class="features-list">
+                    <li>Security event logs</li>
+                    <li>Failed login attempts</li>
+                    <li>Suspicious activity detection</li>
+                    <li>Real-time alerting</li>
+                    <li>Forensic analysis</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Log Levels Guide</h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>DEBUG</h3>
+                <p>Detailed information for developers debugging.</p>
+                <ul class="features-list">
+                    <li>Variable values</li>
+                    <li>Function entry/exit</li>
+                    <li>Verbose state information</li>
+                    <li>Disabled in production</li>
+                    <li>High volume output</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>INFO</h3>
+                <p>General informational messages about normal operation.</p>
+                <ul class="features-list">
+                    <li>Application startup</li>
+                    <li>Configuration changes</li>
+                    <li>Major milestones</li>
+                    <li>User actions</li>
+                    <li>Service status changes</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>WARN</h3>
+                <p>Warning conditions that don't prevent operation.</p>
+                <ul class="features-list">
+                    <li>Deprecated API usage</li>
+                    <li>Performance degradation</li>
+                    <li>Resource limits approaching</li>
+                    <li>Retry operations</li>
+                    <li>Configuration issues</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>ERROR</h3>
+                <p>Error conditions requiring attention.</p>
+                <ul class="features-list">
+                    <li>Exception stack traces</li>
+                    <li>Failed operations</li>
+                    <li>Resource unavailable</li>
+                    <li>Data validation failures</li>
+                    <li>Integration errors</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Structured Logging Example</h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>Unstructured Log</h3>
+                <p>Traditional text-based log format (hard to parse).</p>
+                <ul class="features-list">
+                    <li>2024-12-30 14:25:33 ERROR Database</li>
+                    <li>Connection failed to prod_db</li>
+                    <li>Timeout after 30 seconds</li>
+                    <li>Difficult to search</li>
+                    <li>Manual parsing required</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Structured Log (JSON)</h3>
+                <p>JSON format with key-value pairs (machine-readable).</p>
+                <ul class="features-list">
+                    <li>{"timestamp": "2024-12-30T14:25:33Z"}</li>
+                    <li>{"level": "ERROR"}</li>
+                    <li>{"service": "api", "database": "prod_db"}</li>
+                    <li>Easy to search and filter</li>
+                    <li>Automated analysis</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Benefits of Structured Logging</h3>
+                <ul class="features-list">
+                    <li>Consistent format across systems</li>
+                    <li>Full-text searchable fields</li>
+                    <li>Automated parsing and analysis</li>
+                    <li>Correlation IDs for tracing</li>
+                    <li>Integration with monitoring tools</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Best Practice</h3>
+                <ul class="features-list">
+                    <li>Always use structured logging</li>
+                    <li>JSON is industry standard</li>
+                    <li>Include correlation IDs</li>
+                    <li>Standardize field names</li>
+                    <li>Add context and metadata</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="intro-box" style="text-align: center; margin: 60px 0 40px;">
+            <p>Logging is not just about recording data—it's about building visibility into your systems. Effective logging enables faster debugging, better monitoring, improved security, and compliance with regulations. Invest in structured logging early and use tools that scale with your system, from simple applications to complex distributed systems.</p>
+        </div>
+    </div>
+</body>
+</html>

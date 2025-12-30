@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Failover</title>
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/concepts.css">
+    <link rel="stylesheet" href="/css/concepts-advance.css">
+</head>
+<body class="failover-page">
+    <a href="/" class="home-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 18px; height: 18px;">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
+        </svg>
+        Home
+    </a>
+
+    <div class="container">
+        <div style="text-align: center; margin-bottom: 30px; padding: 20px; background: rgba(102, 126, 234, 0.15); border-radius: 12px; border: 1px solid rgba(102, 126, 234, 0.3);">
+            <p style="color: #a8b8ff; font-size: 1.1em; margin: 0; font-weight: 600;">Architects are building their own tools.</p>
+        </div>
+        <h1><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 40px; height: 40px; display: inline-block; margin-right: 10px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0 3.181 3.183a8.25 8.25 0 0 0 13.803-3.7M4.031 9.865a8.25 8.25 0 0 1 13.803-3.7l3.181 3.182m0-4.991v4.99" /></svg> Failover</h1>
+
+        <div class="intro-box">
+            <p><strong>Failover</strong> is the automatic process of switching from a failed primary system to a backup or redundant system without manual intervention. It enables continuous service availability by detecting failures and redirecting traffic to healthy resources. Effective failover mechanisms minimize downtime and maintain user experience during component failures or maintenance events.</p>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Core Concepts</h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>Definition</h3>
+                <p>Automatic redirection when primary system fails.</p>
+                <ul class="features-list">
+                    <li>Automatic detection</li>
+                    <li>Instant switching</li>
+                    <li>No manual intervention</li>
+                    <li>Minimizes downtime</li>
+                    <li>Improves reliability</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>How It Works</h3>
+                <p>Multi-stage process for detecting and handling failures.</p>
+                <ul class="features-list">
+                    <li>Monitor primary system</li>
+                    <li>Detect failure via health checks</li>
+                    <li>Trigger failover decision</li>
+                    <li>Redirect traffic to backup</li>
+                    <li>Restore primary later</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Types of Failover</h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>Active-Passive</h3>
+                <p>Backup systems remain idle until needed.</p>
+                <ul class="features-list">
+                    <li>Primary handles all traffic</li>
+                    <li>Backup on standby</li>
+                    <li>Slower failover time</li>
+                    <li>Resource efficient</li>
+                    <li>Warm standby approach</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Active-Active</h3>
+                <p>Multiple systems process traffic simultaneously.</p>
+                <ul class="features-list">
+                    <li>All nodes active</li>
+                    <li>Load distributed</li>
+                    <li>Faster recovery</li>
+                    <li>Higher complexity</li>
+                    <li>Better resource usage</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Automatic Failover</h3>
+                <p>System detects and switches without human action.</p>
+                <ul class="features-list">
+                    <li>Immediate response</li>
+                    <li>Reduced RTO</li>
+                    <li>Orchestrator-driven</li>
+                    <li>Kubernetes standard</li>
+                    <li>Health check triggered</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Manual Failover</h3>
+                <p>Human operator initiates the switch.</p>
+                <ul class="features-list">
+                    <li>Operator controlled</li>
+                    <li>Planned maintenance</li>
+                    <li>Lower risk</li>
+                    <li>Slow response</li>
+                    <li>Requires monitoring</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m0 0a6 6 0 1 0 0-12 6 6 0 0 0 0 12z" /></svg> Key Metrics</h2>
+
+        <div class="intro-box">
+            <h3>Failover Performance Indicators:</h3>
+            <ul class="features-list">
+                <li><strong>RTO (Recovery Time Objective):</strong> How long to restore service (seconds to minutes)</li>
+                <li><strong>RPO (Recovery Point Objective):</strong> Maximum acceptable data loss (seconds)</li>
+                <li><strong>Failover Time:</strong> Actual time to detect and switch</li>
+                <li><strong>MTTx (Mean Time To):</strong> Detection, Action, Resolution metrics</li>
+                <li><strong>Availability Target:</strong> Desired uptime percentage (99.9%, 99.99%, etc.)</li>
+                <li><strong>Impact Window:</strong> How many users affected before recovery</li>
+            </ul>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Advantages</h2>
+
+        <div class="pros-box">
+            <h3>Benefits of Failover Systems:</h3>
+            <ul class="features-list">
+                <li><strong>High Availability:</strong> Minimize downtime through automatic recovery</li>
+                <li><strong>Business Continuity:</strong> Maintain operations during failures</li>
+                <li><strong>User Experience:</strong> Seamless service without interruption</li>
+                <li><strong>Rapid Recovery:</strong> Automatic detection and switching</li>
+                <li><strong>Reduced Manual Work:</strong> No need for immediate human intervention</li>
+                <li><strong>Data Protection:</strong> Minimize data loss with RPO planning</li>
+                <li><strong>Compliance:</strong> Meet SLA requirements for uptime</li>
+                <li><strong>Confidence:</strong> Peace of mind in production systems</li>
+            </ul>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle; color: #DD0031;"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 1 1-18 0 9 9 0 0 1 18 0zm-9 3.75h.008v.008H12v-.008z" /></svg> Challenges</h2>
+
+        <div class="cons-box">
+            <h3>Failover Complications:</h3>
+            <ul class="features-list">
+                <li><strong>Complexity:</strong> Multiple systems harder to manage</li>
+                <li><strong>Data Consistency:</strong> Ensuring data is synchronized</li>
+                <li><strong>Cost:</strong> Backup infrastructure is expensive</li>
+                <li><strong>Split Brain:</strong> Both systems think they're primary</li>
+                <li><strong>Network Latency:</strong> Failover decision delay in distributed systems</li>
+                <li><strong>False Positives:</strong> Triggering failover unnecessarily</li>
+                <li><strong>Failback Complexity:</strong> Recovering and restoring primary system</li>
+                <li><strong>Testing Difficulty:</strong> Hard to verify without real failure</li>
+                <li><strong>Cascading Failures:</strong> Backup system overloaded on switch</li>
+            </ul>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Implementation Strategies</h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>Database Replication</h3>
+                <p>Keep backup database synchronized.</p>
+                <ul class="features-list">
+                    <li>Master-slave setup</li>
+                    <li>Real-time sync</li>
+                    <li>Minimal data loss</li>
+                    <li>Read replicas</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>DNS Failover</h3>
+                <p>Switch IP addresses via DNS.</p>
+                <ul class="features-list">
+                    <li>GeoDNS routing</li>
+                    <li>Slow convergence</li>
+                    <li>Simple setup</li>
+                    <li>Global distribution</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Load Balancer Failover</h3>
+                <p>Primary LB backed by secondary.</p>
+                <ul class="features-list">
+                    <li>Health check driven</li>
+                    <li>Fast switching</li>
+                    <li>Session management</li>
+                    <li>Traffic control</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Application-Level Failover</h3>
+                <p>Application handles its own failover.</p>
+                <ul class="features-list">
+                    <li>Custom logic</li>
+                    <li>Service discovery</li>
+                    <li>Connection pooling</li>
+                    <li>Retry mechanisms</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Best Practices</h2>
+
+        <div class="intro-box">
+            <h3>Implementing Reliable Failover:</h3>
+            <ul class="features-list">
+                <li><strong>Test Regularly:</strong> Conduct failover drills to verify systems work</li>
+                <li><strong>Monitor Health:</strong> Robust health checks detect failures quickly</li>
+                <li><strong>Keep Data Synchronized:</strong> Minimize data loss during switch</li>
+                <li><strong>Prevent Split Brain:</strong> Ensure only one system is active</li>
+                <li><strong>Document Procedures:</strong> Clear runbooks for manual failover</li>
+                <li><strong>Plan Failback:</strong> How to restore primary system safely</li>
+                <li><strong>Set Realistic RTO/RPO:</strong> Know what you can achieve</li>
+                <li><strong>Monitor Failover Process:</strong> Alert on switch events</li>
+                <li><strong>Use Orchestration:</strong> Automate complex failover logic</li>
+                <li><strong>Redundancy at All Levels:</strong> No single point of failure</li>
+            </ul>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Real-World Examples</h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>Kubernetes</h3>
+                <p>Pod failover and rescheduling:</p>
+                <ul class="features-list">
+                    <li>Automatic pod restart</li>
+                    <li>Node failure recovery</li>
+                    <li>Service discovery</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Database Systems</h3>
+                <p>Master-slave failover:</p>
+                <ul class="features-list">
+                    <li>MySQL replication</li>
+                    <li>PostgreSQL streaming</li>
+                    <li>MongoDB replica sets</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>AWS Multi-Region</h3>
+                <p>Cross-region failover:</p>
+                <ul class="features-list">
+                    <li>Route 53 health checks</li>
+                    <li>RDS failover</li>
+                    <li>ELB regional failover</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Service Mesh</h3>
+                <p>Istio/Consul failover:</p>
+                <ul class="features-list">
+                    <li>Automatic retries</li>
+                    <li>Circuit breaking</li>
+                    <li>Traffic shifting</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Availability Targets</h2>
+
+        <div class="intro-box">
+            <h3>Common SLA Targets and Downtime:</h3>
+            <ul class="features-list">
+                <li><strong>99% (Two Nines):</strong> 3.65 days downtime/year, Basic redundancy</li>
+                <li><strong>99.9% (Three Nines):</strong> 8.77 hours downtime/year, Single failover</li>
+                <li><strong>99.99% (Four Nines):</strong> 52.6 minutes downtime/year, Regional failover</li>
+                <li><strong>99.999% (Five Nines):</strong> 5.26 minutes downtime/year, Global failover</li>
+                <li><strong>99.9999% (Six Nines):</strong> 31.5 seconds downtime/year, Enterprise grade</li>
+            </ul>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Split Brain Problem</h2>
+
+        <div class="cons-box">
+            <h3>When Both Systems Think They're Primary:</h3>
+            <p style="margin-bottom: 15px;">Split brain occurs when network partition prevents primary and backup from communicating, causing both to believe they should be active.</p>
+            <ul class="features-list">
+                <li><strong>Data Corruption:</strong> Conflicting writes to different systems</li>
+                <li><strong>Inconsistency:</strong> Diverged data states</li>
+                <li><strong>Recovery Nightmare:</strong> Determining correct state</li>
+            </ul>
+        </div>
+
+        <div class="pros-box">
+            <h3>Prevention Strategies:</h3>
+            <ul class="features-list">
+                <li><strong>Quorum-Based:</strong> Majority vote determines primary</li>
+                <li><strong>Distributed Locks:</strong> Only one system acquires lock</li>
+                <li><strong>Fencing:</strong> Forcefully stop failed primary</li>
+                <li><strong>Timeout Tuning:</strong> Balance false positives and detection time</li>
+                <li><strong>Witness Node:</strong> Third party decides in tie situations</li>
+            </ul>
+        </div>
+
+        <div class="intro-box" style="text-align: center; margin: 60px 0 40px;">
+            <p>Failover mechanisms are essential for building resilient systems. By automatically detecting failures and switching to backup resources, organizations can achieve high availability targets and maintain business continuity even when infrastructure fails. Proper planning, testing, and monitoring are key to successful failover implementation.</p>
+        </div>
+    </div>
+</body>
+</html>

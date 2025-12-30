@@ -306,3 +306,102 @@ body[class*="-page"] {
         background-position: 50% 8%;
     }
 }
+
+/* Advanced concepts: use bosanski-tornjak background */
+body.vertical-scaling-page,
+body.horizontal-scaling-page,
+body.load-balancer-page,
+body.cdn-page,
+body.latency-page,
+body.throughput-page,
+body.health-checks-page,
+body.failover-page,
+body.replication-page,
+body.high-availability-page,
+body.disaster-recovery-page,
+body.logging-page,
+body.metrics-page,
+body.monitoring-page,
+body.alerts-page,
+body.distributed-tracing-page,
+body.cicd-pipeline-page,
+body.build-test-deploy-page,
+body.environments-page,
+body.secrets-management-page,
+body.rollback-page,
+body.virtual-machines-page,
+body.containers-page,
+body.docker-page,
+body.managed-services-page,
+body.regions-availability-zones-page {
+    background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('/bosanski-tornjak.jpg') !important;
+    background-position: center top;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+@media (max-width: 768px) {
+    body.vertical-scaling-page,
+    body.horizontal-scaling-page,
+    body.load-balancer-page,
+    body.cdn-page,
+    body.latency-page,
+    body.throughput-page,
+    body.health-checks-page,
+    body.failover-page,
+    body.replication-page,
+    body.high-availability-page,
+    body.disaster-recovery-page,
+    body.logging-page,
+    body.metrics-page,
+    body.monitoring-page,
+    body.alerts-page,
+    body.distributed-tracing-page,
+    body.cicd-pipeline-page,
+    body.build-test-deploy-page,
+    body.environments-page,
+    body.secrets-management-page,
+    body.rollback-page,
+    body.virtual-machines-page,
+    body.containers-page,
+    body.docker-page,
+    body.managed-services-page,
+    body.regions-availability-zones-page {
+        background-attachment: scroll;
+        background-position: 50% 15%;
+        background-size: cover;
+        background-color: #0b1120;
+    }
+}
+
+@media (max-width: 480px) {
+    body.vertical-scaling-page,
+    body.horizontal-scaling-page,
+    body.load-balancer-page,
+    body.cdn-page,
+    body.latency-page,
+    body.throughput-page,
+    body.health-checks-page,
+    body.failover-page,
+    body.replication-page,
+    body.high-availability-page,
+    body.disaster-recovery-page,
+    body.logging-page,
+    body.metrics-page,
+    body.monitoring-page,
+    body.alerts-page,
+    body.distributed-tracing-page,
+    body.cicd-pipeline-page,
+    body.build-test-deploy-page,
+    body.environments-page,
+    body.secrets-management-page,
+    body.rollback-page,
+    body.virtual-machines-page,
+    body.containers-page,
+    body.docker-page,
+    body.managed-services-page,
+    body.regions-availability-zones-page {
+        background-size: 120% auto;
+        background-position: 50% 8%;
+    }
+}

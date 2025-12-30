@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Build – Test – Deploy</title>
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/concepts.css">
+    <link rel="stylesheet" href="/css/concepts-advance.css">
+</head>
+<body class="build-test-deploy-page">
+    <a href="/" class="home-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 18px; height: 18px;">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
+        </svg>
+        Home
+    </a>
+
+    <div class="container">
+        <div style="text-align: center; margin-bottom: 30px; padding: 20px; background: rgba(102, 126, 234, 0.15); border-radius: 12px; border: 1px solid rgba(102, 126, 234, 0.3);">
+            <p style="color: #a8b8ff; font-size: 1.1em; margin: 0; font-weight: 600;">Architects are building their own tools.</p>
+        </div>
+        <h1><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 40px; height: 40px; display: inline-block; margin-right: 10px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Build – Test – Deploy</h1>
+
+        <div class="intro-box">
+            <p><strong>Build – Test – Deploy</strong> represents the three core phases that transform source code into running production software. Build compiles and packages code, test validates quality, and deploy moves it to users. These three stages form the essential lifecycle that ensures code quality, reliability, and safe delivery. Together they create the foundation for confident software releases.</p>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> The Build Phase</h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>Compilation</h3>
+                <p>Converting source code to executable form.</p>
+                <ul class="features-list">
+                    <li>Language-dependent process</li>
+                    <li>Java: bytecode in JAR</li>
+                    <li>Go: static binary</li>
+                    <li>JavaScript: minification only</li>
+                    <li>Check syntax errors early</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Dependency Resolution</h3>
+                <p>Gathering all required libraries.</p>
+                <ul class="features-list">
+                    <li>Package managers (npm, Maven)</li>
+                    <li>Version management</li>
+                    <li>Security scanning</li>
+                    <li>License compliance</li>
+                    <li>Reproducible builds</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Artifact Creation</h3>
+                <p>Packaging for distribution.</p>
+                <ul class="features-list">
+                    <li>JAR, WAR, or binary files</li>
+                    <li>Docker image creation</li>
+                    <li>Tarball or zip archives</li>
+                    <li>Version tagging</li>
+                    <li>Push to registry</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Build Verification</h3>
+                <p>Ensuring build success.</p>
+                <ul class="features-list">
+                    <li>Compilation warnings</li>
+                    <li>Build time tracking</li>
+                    <li>Artifact integrity check</li>
+                    <li>Size analysis</li>
+                    <li>Fail on critical issues</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> The Test Phase</h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>Unit Testing</h3>
+                <p>Testing individual functions/methods.</p>
+                <ul class="features-list">
+                    <li>Fastest feedback</li>
+                    <li>Isolated dependencies</li>
+                    <li>High coverage target</li>
+                    <li>Run frequently</li>
+                    <li>JUnit, pytest, Jest</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Integration Testing</h3>
+                <p>Testing component interactions.</p>
+                <ul class="features-list">
+                    <li>Database integration</li>
+                    <li>Service communication</li>
+                    <li>Message queue behavior</li>
+                    <li>External service mocks</li>
+                    <li>Slower than unit tests</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>End-to-End Testing</h3>
+                <p>Testing complete user workflows.</p>
+                <ul class="features-list">
+                    <li>Browser automation</li>
+                    <li>Full stack testing</li>
+                    <li>Critical path coverage</li>
+                    <li>User journey validation</li>
+                    <li>Slowest test type</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Quality Checks</h3>
+                <p>Code quality validation.</p>
+                <ul class="features-list">
+                    <li>Linting and formatting</li>
+                    <li>Code coverage metrics</li>
+                    <li>Security scanning</li>
+                    <li>Performance tests</li>
+                    <li>Style consistency</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> The Deploy Phase</h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>Pre-Deployment</h3>
+                <p>Preparation before release.</p>
+                <ul class="features-list">
+                    <li>Staging environment deploy</li>
+                    <li>Smoke testing</li>
+                    <li>Load testing</li>
+                    <li>Configuration validation</li>
+                    <li>Backup creation</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Deployment Execution</h3>
+                <p>Moving code to production.</p>
+                <ul class="features-list">
+                    <li>Blue-green switch</li>
+                    <li>Rolling update</li>
+                    <li>Canary release</li>
+                    <li>Database migrations</li>
+                    <li>Configuration updates</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Health Checks</h3>
+                <p>Validating deployment success.</p>
+                <ul class="features-list">
+                    <li>Service readiness probes</li>
+                    <li>Endpoint availability</li>
+                    <li>Database connectivity</li>
+                    <li>Error rate monitoring</li>
+                    <li>Traffic validation</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Rollback Capability</h3>
+                <p>Quick recovery if needed.</p>
+                <ul class="features-list">
+                    <li>Instant version switch</li>
+                    <li>Database rollback plan</li>
+                    <li>Cache invalidation</li>
+                    <li>DNS failover</li>
+                    <li>Sub-minute recovery</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Build Tools</h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>Java Ecosystem</h3>
+                <p>JVM-based build tools.</p>
+                <ul class="features-list">
+                    <li>Maven: XML-based config</li>
+                    <li>Gradle: Groovy/Kotlin DSL</li>
+                    <li>SBT for Scala</li>
+                    <li>Dependency management</li>
+                    <li>Plugin extensibility</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>JavaScript Tools</h3>
+                <p>Node.js build ecosystem.</p>
+                <ul class="features-list">
+                    <li>npm: Package manager</li>
+                    <li>Webpack: Bundler</li>
+                    <li>Rollup: Lightweight bundler</li>
+                    <li>esbuild: Fast transpiler</li>
+                    <li>Task runners</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Container Building</h3>
+                <p>Docker and container tools.</p>
+                <ul class="features-list">
+                    <li>Docker: Industry standard</li>
+                    <li>Buildkit: Fast builds</li>
+                    <li>Kaniko: Kubernetes-native</li>
+                    <li>Multi-stage builds</li>
+                    <li>Layer caching</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Go & Rust Tools</h3>
+                <p>Compiled language tools.</p>
+                <ul class="features-list">
+                    <li>Go: go build simple</li>
+                    <li>Cargo: Rust package manager</li>
+                    <li>Cross-compilation easy</li>
+                    <li>Static binaries</li>
+                    <li>No runtime required</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Testing Frameworks</h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>Unit Test Frameworks</h3>
+                <p>Testing individual units.</p>
+                <ul class="features-list">
+                    <li>JUnit (Java)</li>
+                    <li>pytest (Python)</li>
+                    <li>Jest (JavaScript)</li>
+                    <li>RSpec (Ruby)</li>
+                    <li>xUnit variants</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Integration Testing</h3>
+                <p>Component interaction testing.</p>
+                <ul class="features-list">
+                    <li>Testcontainers</li>
+                    <li>MockServer</li>
+                    <li>WireMock</li>
+                    <li>Docker test fixtures</li>
+                    <li>Database test containers</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>E2E Testing</h3>
+                <p>Full workflow testing.</p>
+                <ul class="features-list">
+                    <li>Selenium: browser automation</li>
+                    <li>Cypress: modern alternative</li>
+                    <li>Playwright: multi-browser</li>
+                    <li>Puppeteer: headless Chrome</li>
+                    <li>Visual regression</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Code Quality Tools</h3>
+                <p>Static analysis and metrics.</p>
+                <ul class="features-list">
+                    <li>SonarQube: quality gate</li>
+                    <li>ESLint: JavaScript linting</li>
+                    <li>Checkstyle: Java style</li>
+                    <li>Coverage tools</li>
+                    <li>Complexity analysis</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Deployment Technologies</h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>Container Orchestration</h3>
+                <p>Managing containerized workloads.</p>
+                <ul class="features-list">
+                    <li>Kubernetes: industry standard</li>
+                    <li>Docker Swarm: simpler</li>
+                    <li>Amazon ECS: AWS-native</li>
+                    <li>Auto-scaling</li>
+                    <li>Health management</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Serverless Deployment</h3>
+                <p>Functions as a service.</p>
+                <ul class="features-list">
+                    <li>AWS Lambda</li>
+                    <li>Google Cloud Functions</li>
+                    <li>Azure Functions</li>
+                    <li>Auto-scaling built-in</li>
+                    <li>Pay per execution</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Platform as a Service</h3>
+                <p>Managed platform services.</p>
+                <ul class="features-list">
+                    <li>Heroku: git-based deploy</li>
+                    <li>Cloud Run: container apps</li>
+                    <li>App Engine: app frameworks</li>
+                    <li>Zero infrastructure management</li>
+                    <li>Scaling automatic</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Traditional Infrastructure</h3>
+                <p>Virtual machines and servers.</p>
+                <ul class="features-list">
+                    <li>EC2 instances</li>
+                    <li>VMs or bare metal</li>
+                    <li>SSH/remote deploy</li>
+                    <li>Configuration management</li>
+                    <li>Manual scaling</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Advantages</h2>
+
+        <div class="pros-cons-grid">
+            <div class="pros-box">
+                <h3>Benefits</h3>
+                <ul class="features-list">
+                    <li><strong>Reliability:</strong> Automated reproducible process</li>
+                    <li><strong>Speed:</strong> Rapid code-to-production cycle</li>
+                    <li><strong>Quality:</strong> Automated testing catches bugs</li>
+                    <li><strong>Safety:</strong> Predictable deployments</li>
+                    <li><strong>Visibility:</strong> Clear build/test/deploy status</li>
+                    <li><strong>Consistency:</strong> Same process every time</li>
+                    <li><strong>Scalability:</strong> Easy to add stages/checks</li>
+                    <li><strong>Cost Reduction:</strong> Less manual work</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle; color: #DD0031;"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 1 1-18 0 9 9 0 0 1 18 0zm-9 3.75h.008v.008H12v-.008z" /></svg> Challenges</h2>
+
+        <div class="pros-cons-grid">
+            <div class="cons-box">
+                <h3>Drawbacks</h3>
+                <ul class="features-list">
+                    <li><strong>Test Maintenance:</strong> Tests need updates</li>
+                    <li><strong>Flaky Tests:</strong> False failures damage trust</li>
+                    <li><strong>Build Time:</strong> Longer builds slow feedback</li>
+                    <li><strong>Environment Setup:</strong> Complex test environments</li>
+                    <li><strong>Database Migrations:</strong> Coordination challenges</li>
+                    <li><strong>Dependency Hell:</strong> Version conflicts</li>
+                    <li><strong>Test Coverage:</strong> Difficult to achieve high coverage</li>
+                    <li><strong>Debugging Failed Builds:</strong> Remote issues harder</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Best Practices</h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>Build Best Practices</h3>
+                <ul class="features-list">
+                    <li>Fail fast on errors</li>
+                    <li>Cache dependencies</li>
+                    <li>Deterministic builds</li>
+                    <li>Version artifacts</li>
+                    <li>Parallel compilation</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Test Best Practices</h3>
+                <ul class="features-list">
+                    <li>Keep tests fast</li>
+                    <li>Avoid flakiness</li>
+                    <li>Clear failure messages</li>
+                    <li>Test data isolation</li>
+                    <li>Meaningful coverage</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Deploy Best Practices</h3>
+                <ul class="features-list">
+                    <li>Test in staging first</li>
+                    <li>Plan rollback</li>
+                    <li>Monitor carefully</li>
+                    <li>Gradual rollout</li>
+                    <li>Health checks</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Pipeline Practices</h3>
+                <ul class="features-list">
+                    <li>Fail early, fail fast</li>
+                    <li>Parallel execution</li>
+                    <li>Clear visibility</li>
+                    <li>Runbook for failures</li>
+                    <li>Regular review</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Real-World Examples</h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>Web Application (Node.js)</h3>
+                <p>JavaScript project deployment.</p>
+                <ul class="features-list">
+                    <li>npm install dependencies</li>
+                    <li>npm test for unit tests</li>
+                    <li>npm run build minification</li>
+                    <li>Docker image creation</li>
+                    <li>Kubernetes deployment</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Java Microservice</h3>
+                <p>JVM-based service deployment.</p>
+                <ul class="features-list">
+                    <li>Maven compile and test</li>
+                    <li>Integration tests</li>
+                    <li>Package as JAR</li>
+                    <li>Docker FROM openjdk</li>
+                    <li>Deploy to Kubernetes</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Go Microservice</h3>
+                <p>Compiled binary service.</p>
+                <ul class="features-list">
+                    <li>go test validation</li>
+                    <li>go build -o binary</li>
+                    <li>Minimal Docker image</li>
+                    <li>Single executable</li>
+                    <li>Fast startup</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Mobile App</h3>
+                <p>Android/iOS release.</p>
+                <ul class="features-list">
+                    <li>Build APK/IPA</li>
+                    <li>Unit and UI tests</li>
+                    <li>Code signing</li>
+                    <li>TestFlight/Play Console</li>
+                    <li>Release to stores</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Build Time Optimization</h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>Parallelization</h3>
+                <p>Running tasks simultaneously.</p>
+                <ul class="features-list">
+                    <li>Parallel test execution</li>
+                    <li>Parallel compilation</li>
+                    <li>Distributed builds</li>
+                    <li>Multi-core utilization</li>
+                    <li>Reduce total time</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Caching</h3>
+                <p>Reusing unchanged artifacts.</p>
+                <ul class="features-list">
+                    <li>Dependency caching</li>
+                    <li>Build cache</li>
+                    <li>Docker layer cache</li>
+                    <li>Avoid re-downloading</li>
+                    <li>Significant speedup</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Incremental Builds</h3>
+                <p>Rebuilding only changes.</p>
+                <ul class="features-list">
+                    <li>Track file changes</li>
+                    <li>Rebuild affected modules</li>
+                    <li>Skip unchanged parts</li>
+                    <li>Gradle, Bazel support</li>
+                    <li>Major time savings</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Test Optimization</h3>
+                <ul class="features-list">
+                    <li>Run fast tests first</li>
+                    <li>Parallel test execution</li>
+                    <li>Skip on minor changes</li>
+                    <li>Quick smoke tests</li>
+                    <li>Full suite nightly</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Implementing BTD</h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>Step 1: Build Setup</h3>
+                <ul class="features-list">
+                    <li>Choose build tool</li>
+                    <li>Configure compilation</li>
+                    <li>Manage dependencies</li>
+                    <li>Create artifact</li>
+                    <li>Test build locally</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Step 2: Testing</h3>
+                <ul class="features-list">
+                    <li>Add unit tests</li>
+                    <li>Configure test runner</li>
+                    <li>Add code coverage</li>
+                    <li>Linting setup</li>
+                    <li>Quality gates</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Step 3: Deployment</h3>
+                <ul class="features-list">
+                    <li>Choose platform</li>
+                    <li>Configure staging</li>
+                    <li>Create deployment script</li>
+                    <li>Health checks</li>
+                    <li>Rollback plan</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Step 4: Optimization</h3>
+                <ul class="features-list">
+                    <li>Measure build time</li>
+                    <li>Parallel execution</li>
+                    <li>Caching strategies</li>
+                    <li>Reduce test time</li>
+                    <li>Monitor metrics</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="intro-box" style="text-align: center; margin: 60px 0 40px;">
+            <p>Build – Test – Deploy is the engine of modern software development. By mastering these three phases, you create a reliable, repeatable process that turns code into value. Focus on fast feedback, comprehensive testing, and safe deployments. The time invested in optimizing this process pays dividends in team velocity, quality, and user satisfaction.</p>
+        </div>
+    </div>
+</body>
+</html>

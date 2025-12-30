@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Environments</title>
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/concepts.css">
+    <link rel="stylesheet" href="/css/concepts-advance.css">
+</head>
+<body class="environments-page">
+    <a href="/" class="home-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 18px; height: 18px;">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
+        </svg>
+        Home
+    </a>
+
+    <div class="container">
+        <div style="text-align: center; margin-bottom: 30px; padding: 20px; background: rgba(102, 126, 234, 0.15); border-radius: 12px; border: 1px solid rgba(102, 126, 234, 0.3);">
+            <p style="color: #a8b8ff; font-size: 1.1em; margin: 0; font-weight: 600;">Architects are building their own tools.</p>
+        </div>
+        <h1><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 40px; height: 40px; display: inline-block; margin-right: 10px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Environments</h1>
+
+        <div class="intro-box">
+            <p><strong>Environments</strong> are separate instances of applications with different configurations and purposes. Development, testing, staging, and production environments isolate changes, protect user data, and provide safe spaces to validate deployments. Proper environment management reduces risk, enables parallel work, and ensures production stability while allowing rapid iteration.</p>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Core Concepts</h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>Environment Types</h3>
+                <p>Different deployment stages.</p>
+                <ul class="features-list">
+                    <li>Development: developer machines</li>
+                    <li>Testing: QA validation</li>
+                    <li>Staging: production replica</li>
+                    <li>Production: live users</li>
+                    <li>Sometimes additional tiers</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Environment Parity</h3>
+                <p>Consistency between environments.</p>
+                <ul class="features-list">
+                    <li>Same code in each tier</li>
+                    <li>Same infrastructure setup</li>
+                    <li>Same dependencies versions</li>
+                    <li>Catches env-specific bugs</li>
+                    <li>Reduces surprises</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Configuration Management</h3>
+                <p>Environment-specific settings.</p>
+                <ul class="features-list">
+                    <li>Database connections</li>
+                    <li>API endpoints</li>
+                    <li>Feature flags</li>
+                    <li>Secrets and credentials</li>
+                    <li>Logging levels</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Promotion Pipeline</h3>
+                <p>Moving code through stages.</p>
+                <ul class="features-list">
+                    <li>Dev → Test → Staging → Prod</li>
+                    <li>Same artifact throughout</li>
+                    <li>Testing at each stage</li>
+                    <li>Validation gates</li>
+                    <li>Approvals required</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Development Environment</h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>Purpose</h3>
+                <p>Rapid iteration and testing.</p>
+                <ul class="features-list">
+                    <li>Developer coding</li>
+                    <li>Local or shared dev server</li>
+                    <li>Fast feedback loops</li>
+                    <li>Easy to reset</li>
+                    <li>No user data</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Characteristics</h3>
+                <p>Dev environment traits.</p>
+                <ul class="features-list">
+                    <li>Minimal security controls</li>
+                    <li>Full logging/debugging</li>
+                    <li>May not reflect production</li>
+                    <li>Mock external services</li>
+                    <li>Easy to break/reset</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Data Management</h3>
+                <p>Handling dev data.</p>
+                <ul class="features-list">
+                    <li>Synthetic test data</li>
+                    <li>Database reset scripts</li>
+                    <li>Sample users</li>
+                    <li>No PII ever</li>
+                    <li>Version control SQL</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Infrastructure</h3>
+                <p>Dev environment setup.</p>
+                <ul class="features-list">
+                    <li>Docker containers</li>
+                    <li>docker-compose files</li>
+                    <li>Local databases</li>
+                    <li>Lightweight setup</li>
+                    <li>Reproducible environment</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Testing Environment</h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>Purpose</h3>
+                <p>QA and validation testing.</p>
+                <ul class="features-list">
+                    <li>Automated test runs</li>
+                    <li>QA manual testing</li>
+                    <li>Integration testing</li>
+                    <li>Regression testing</li>
+                    <li>Bug discovery</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Characteristics</h3>
+                <p>Test environment traits.</p>
+                <ul class="features-list">
+                    <li>Closer to production</li>
+                    <li>More realistic load</li>
+                    <li>Network simulation</li>
+                    <li>Failure injection</li>
+                    <li>Performance testing</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Data Management</h3>
+                <p>Test data handling.</p>
+                <ul class="features-list">
+                    <li>Representative dataset</li>
+                    <li>Production data snapshots</li>
+                    <li>Anonymized real data</li>
+                    <li>Regular refreshes</li>
+                    <li>Test scenarios</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Access & Control</h3>
+                <p>Who can access testing.</p>
+                <ul class="features-list">
+                    <li>QA team access</li>
+                    <li>Developers</li>
+                    <li>No production data</li>
+                    <li>Limited external access</li>
+                    <li>Audit logging</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Staging Environment</h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>Purpose</h3>
+                <p>Production replica testing.</p>
+                <ul class="features-list">
+                    <li>Pre-production validation</li>
+                    <li>Production-like setup</li>
+                    <li>Final approval step</li>
+                    <li>User acceptance testing</li>
+                    <li>Smoke testing</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Characteristics</h3>
+                <p>Staging environment traits.</p>
+                <ul class="features-list">
+                    <li>Identical to production</li>
+                    <li>Same infrastructure</li>
+                    <li>Same load balancing</li>
+                    <li>Real-world scale test</li>
+                    <li>No production traffic</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Data Management</h3>
+                <p>Staging data handling.</p>
+                <ul class="features-list">
+                    <li>Anonymized production data</li>
+                    <li>Regular syncs from prod</li>
+                    <li>No PII exposure</li>
+                    <li>Large realistic dataset</li>
+                    <li>Reset before major tests</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Access & Control</h3>
+                <ul class="features-list">
+                    <li>Dev/QA teams</li>
+                    <li>Product managers</li>
+                    <li>Stakeholders UAT</li>
+                    <li>Strict audit logging</li>
+                    <li>No direct data export</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Production Environment</h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>Purpose</h3>
+                <p>Serving real users.</p>
+                <ul class="features-list">
+                    <li>Live user traffic</li>
+                    <li>Revenue-generating</li>
+                    <li>Business-critical</li>
+                    <li>Real data and users</li>
+                    <li>Maximum uptime</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Characteristics</h3>
+                <p>Production traits.</p>
+                <ul class="features-list">
+                    <li>Maximum security</li>
+                    <li>High availability</li>
+                    <li>Multi-region/zone</li>
+                    <li>Load balanced</li>
+                    <li>24/7 monitoring</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Data Management</h3>
+                <p>Production data handling.</p>
+                <ul class="features-list">
+                    <li>Real customer data</li>
+                    <li>Strict backups</li>
+                    <li>Encryption at rest</li>
+                    <li>Compliance required</li>
+                    <li>Disaster recovery</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Access & Control</h3>
+                <ul class="features-list">
+                    <li>Limited access</li>
+                    <li>On-call rotation</li>
+                    <li>Approval required</li>
+                    <li>Full audit trail</li>
+                    <li>SOC 2 compliance</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Environment Configuration</h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>Configuration Types</h3>
+                <p>Environment-specific settings.</p>
+                <ul class="features-list">
+                    <li>Database URLs</li>
+                    <li>API endpoints</li>
+                    <li>Cache servers</li>
+                    <li>Message queues</li>
+                    <li>External service keys</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Secrets Management</h3>
+                <p>Handling sensitive data.</p>
+                <ul class="features-list">
+                    <li>API keys vault</li>
+                    <li>Database passwords</li>
+                    <li>Encryption keys</li>
+                    <li>Never in source code</li>
+                    <li>Rotation policies</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Configuration as Code</h3>
+                <p>Infrastructure definition.</p>
+                <ul class="features-list">
+                    <li>Terraform/CloudFormation</li>
+                    <li>Version control</li>
+                    <li>Reproducible setup</li>
+                    <li>Code review changes</li>
+                    <li>Automated deployment</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Feature Flags</h3>
+                <p>Runtime feature control.</p>
+                <ul class="features-list">
+                    <li>Enable features per env</li>
+                    <li>Gradual rollout</li>
+                    <li>A/B testing</li>
+                    <li>Quick disable if issues</li>
+                    <li>User segment targeting</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Advantages</h2>
+
+        <div class="pros-cons-grid">
+            <div class="pros-box">
+                <h3>Benefits</h3>
+                <ul class="features-list">
+                    <li><strong>Risk Reduction:</strong> Separate prod from testing</li>
+                    <li><strong>Parallel Work:</strong> Teams work independently</li>
+                    <li><strong>Safety:</strong> Test before production release</li>
+                    <li><strong>User Protection:</strong> Isolation prevents data exposure</li>
+                    <li><strong>Rollback Option:</strong> Quick recovery if needed</li>
+                    <li><strong>Performance Testing:</strong> Load test before users</li>
+                    <li><strong>Compliance:</strong> Security and audit requirements</li>
+                    <li><strong>Confidence:</strong> Validation before production</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle; color: #DD0031;"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 1 1-18 0 9 9 0 0 1 18 0zm-9 3.75h.008v.008H12v-.008z" /></svg> Challenges</h2>
+
+        <div class="pros-cons-grid">
+            <div class="cons-box">
+                <h3>Drawbacks</h3>
+                <ul class="features-list">
+                    <li><strong>Cost:</strong> Multiple environments expensive</li>
+                    <li><strong>Complexity:</strong> Managing configuration drift</li>
+                    <li><strong>Data Sync:</strong> Keeping test data current</li>
+                    <li><strong>Parity Drift:</strong> Environments diverge over time</li>
+                    <li><strong>Slow Feedback:</strong> Multiple stages slow iteration</li>
+                    <li><strong>Context Switching:</strong> Different configs confusing</li>
+                    <li><strong>Secret Management:</strong> Securing across environments</li>
+                    <li><strong>Maintenance Burden:</strong> Keeping all in sync</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Best Practices</h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>Environment Parity</h3>
+                <ul class="features-list">
+                    <li>Same code everywhere</li>
+                    <li>Identical infrastructure</li>
+                    <li>Same dependency versions</li>
+                    <li>Regular parity checks</li>
+                    <li>Automated provisioning</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Configuration Management</h3>
+                <ul class="features-list">
+                    <li>Externalize all config</li>
+                    <li>Environment variables</li>
+                    <li>Config files per environment</li>
+                    <li>Never hardcode secrets</li>
+                    <li>Vault for secrets</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Data Handling</h3>
+                <ul class="features-list">
+                    <li>Never copy real user data</li>
+                    <li>Anonymize test data</li>
+                    <li>Automated data pipelines</li>
+                    <li>Regular data refreshes</li>
+                    <li>Compliance awareness</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Promotion Process</h3>
+                <ul class="features-list">
+                    <li>Same artifact all stages</li>
+                    <li>Automated tests at each</li>
+                    <li>Approval gates</li>
+                    <li>Runbooks available</li>
+                    <li>Rollback planned</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Environment Promotion Strategy</h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>Commit Stage</h3>
+                <p>Developer commits code.</p>
+                <ul class="features-list">
+                    <li>Push to feature branch</li>
+                    <li>CI builds automatically</li>
+                    <li>Unit tests run</li>
+                    <li>Code quality checks</li>
+                    <li>Artifact created</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Test Stage</h3>
+                <p>QA validation phase.</p>
+                <ul class="features-list">
+                    <li>Deploy to test environment</li>
+                    <li>Integration tests</li>
+                    <li>QA manual testing</li>
+                    <li>Performance tests</li>
+                    <li>Bug discovery</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Staging Stage</h3>
+                <p>Production replica testing.</p>
+                <ul class="features-list">
+                    <li>Deploy to staging</li>
+                    <li>Smoke testing</li>
+                    <li>User acceptance testing</li>
+                    <li>Load testing</li>
+                    <li>Final approval</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Production Deployment</h3>
+                <p>Release to users.</p>
+                <ul class="features-list">
+                    <li>Approval required</li>
+                    <li>Canary deployment</li>
+                    <li>Monitor metrics</li>
+                    <li>Rollback ready</li>
+                    <li>Support on-call</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Real-World Examples</h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>Startup (Minimal Envs)</h3>
+                <p>Early stage setup.</p>
+                <ul class="features-list">
+                    <li>Dev environment locally</li>
+                    <li>Staging = production copy</li>
+                    <li>Production (live)</li>
+                    <li>Cost conscious</li>
+                    <li>Fast iteration</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Mid-Size Company</h3>
+                <p>Standard four-tier setup.</p>
+                <ul class="features-list">
+                    <li>Development (local/shared)</li>
+                    <li>Testing (QA focused)</li>
+                    <li>Staging (prod replica)</li>
+                    <li>Production (real users)</li>
+                    <li>Formal promotions</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Enterprise (Complex)</h3>
+                <p>Many specialized environments.</p>
+                <ul class="features-list">
+                    <li>Dev per team</li>
+                    <li>Pre-test stage</li>
+                    <li>Test environment</li>
+                    <li>UAT environment</li>
+                    <li>Production + DR</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Multi-Region Deployment</h3>
+                <p>Distributed architecture.</p>
+                <ul class="features-list">
+                    <li>Dev global</li>
+                    <li>Test regions</li>
+                    <li>Staging per region</li>
+                    <li>Production multi-region</li>
+                    <li>Complex coordination</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Environment Tools & Infrastructure</h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>Container Orchestration</h3>
+                <p>Managing environments at scale.</p>
+                <ul class="features-list">
+                    <li>Kubernetes namespaces</li>
+                    <li>Separate clusters</li>
+                    <li>Network isolation</li>
+                    <li>Resource quotas</li>
+                    <li>Auto-scaling per env</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Infrastructure as Code</h3>
+                <p>Defining environments.</p>
+                <ul class="features-list">
+                    <li>Terraform modules</li>
+                    <li>CloudFormation stacks</li>
+                    <li>Version controlled</li>
+                    <li>Reproducible</li>
+                    <li>Change tracking</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Configuration Management</h3>
+                <p>Managing environment config.</p>
+                <ul class="features-list">
+                    <li>Consul for config</li>
+                    <li>etcd for discovery</li>
+                    <li>Config servers</li>
+                    <li>Environment variables</li>
+                    <li>Feature flag services</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Secrets Management</h3>
+                <p>Handling sensitive data.</p>
+                <ul class="features-list">
+                    <li>HashiCorp Vault</li>
+                    <li>AWS Secrets Manager</li>
+                    <li>Kubernetes Secrets</li>
+                    <li>Encryption at rest</li>
+                    <li>Rotation policies</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Implementing Environments</h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>Step 1: Plan Environment Strategy</h3>
+                <ul class="features-list">
+                    <li>Assess needs</li>
+                    <li>How many environments?</li>
+                    <li>Budget constraints</li>
+                    <li>Team size</li>
+                    <li>Risk profile</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Step 2: Infrastructure Setup</h3>
+                <ul class="features-list">
+                    <li>Provision resources</li>
+                    <li>Use IaC</li>
+                    <li>Network isolation</li>
+                    <li>Backup systems</li>
+                    <li>Monitoring setup</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Step 3: Configuration System</h3>
+                <ul class="features-list">
+                    <li>Externalize config</li>
+                    <li>Secrets vault</li>
+                    <li>Environment variables</li>
+                    <li>Config server</li>
+                    <li>Test locally</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Step 4: Promotion Pipeline</h3>
+                <ul class="features-list">
+                    <li>CI/CD setup</li>
+                    <li>Automated tests</li>
+                    <li>Approval gates</li>
+                    <li>Deployment runbooks</li>
+                    <li>Training team</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="intro-box" style="text-align: center; margin: 60px 0 40px;">
+            <p>Multiple environments provide the safety net that modern software development requires. By carefully managing development, testing, staging, and production environments with proper isolation and configuration management, you enable rapid iteration without risking user data or system stability. The investment in proper environment architecture pays dividends through reduced risk and increased team velocity.</p>
+        </div>
+    </div>
+</body>
+</html>

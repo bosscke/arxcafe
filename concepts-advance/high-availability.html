@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>High Availability</title>
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/concepts.css">
+    <link rel="stylesheet" href="/css/concepts-advance.css">
+</head>
+<body class="high-availability-page">
+    <a href="/" class="home-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 18px; height: 18px;">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
+        </svg>
+        Home
+    </a>
+
+    <div class="container">
+        <div style="text-align: center; margin-bottom: 30px; padding: 20px; background: rgba(102, 126, 234, 0.15); border-radius: 12px; border: 1px solid rgba(102, 126, 234, 0.3);">
+            <p style="color: #a8b8ff; font-size: 1.1em; margin: 0; font-weight: 600;">Architects are building their own tools.</p>
+        </div>
+        <h1><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 40px; height: 40px; display: inline-block; margin-right: 10px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 0 1 3.598 6 11.99 11.99 0 0 0 3 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.57-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" /></svg> High Availability</h1>
+
+        <div class="intro-box">
+            <p><strong>High Availability (HA)</strong> is a system design approach that ensures a service remains operational and accessible for the maximum possible time, minimizing downtime through redundancy, failover mechanisms, and fault tolerance. HA systems are measured by uptime percentages, with enterprise systems typically targeting 99.9% (three nines) to 99.999% (five nines) availability.</p>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Core Concepts</h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>Uptime</h3>
+                <p>Percentage of time a system is operational and accessible.</p>
+                <ul class="features-list">
+                    <li>99% = 3.65 days downtime/year</li>
+                    <li>99.9% = 8.76 hours/year</li>
+                    <li>99.99% = 52.6 minutes/year</li>
+                    <li>99.999% = 5.26 minutes/year</li>
+                    <li>Measured over time period</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Redundancy</h3>
+                <p>Duplicate components eliminate single points of failure.</p>
+                <ul class="features-list">
+                    <li>Multiple servers</li>
+                    <li>Backup power supplies</li>
+                    <li>Network path diversity</li>
+                    <li>Data replication</li>
+                    <li>Geographic distribution</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Fault Tolerance</h3>
+                <p>System continues operating despite component failures.</p>
+                <ul class="features-list">
+                    <li>Graceful degradation</li>
+                    <li>Automatic recovery</li>
+                    <li>No single point of failure</li>
+                    <li>Self-healing capabilities</li>
+                    <li>Error handling</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>SLA (Service Level Agreement)</h3>
+                <p>Contractual guarantee of availability levels.</p>
+                <ul class="features-list">
+                    <li>Uptime commitments</li>
+                    <li>Performance metrics</li>
+                    <li>Response time targets</li>
+                    <li>Compensation clauses</li>
+                    <li>Measurement methods</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Availability Tiers</h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>99% (Two Nines)</h3>
+                <p>Basic availability with 3.65 days downtime per year.</p>
+                <ul class="features-list">
+                    <li>Acceptable for non-critical apps</li>
+                    <li>Single server setup</li>
+                    <li>Manual recovery</li>
+                    <li>Limited redundancy</li>
+                    <li>Cost-effective</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>99.9% (Three Nines)</h3>
+                <p>Standard availability with 8.76 hours downtime per year.</p>
+                <ul class="features-list">
+                    <li>Most web applications</li>
+                    <li>Basic redundancy</li>
+                    <li>Automated failover</li>
+                    <li>Load balancing</li>
+                    <li>Common SLA target</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>99.99% (Four Nines)</h3>
+                <p>High availability with 52.6 minutes downtime per year.</p>
+                <ul class="features-list">
+                    <li>Enterprise applications</li>
+                    <li>Full redundancy</li>
+                    <li>Multi-region setup</li>
+                    <li>Advanced monitoring</li>
+                    <li>Significant investment</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>99.999% (Five Nines)</h3>
+                <p>Mission-critical with only 5.26 minutes downtime per year.</p>
+                <ul class="features-list">
+                    <li>Financial systems</li>
+                    <li>Healthcare platforms</li>
+                    <li>Telecom infrastructure</li>
+                    <li>Full geographic redundancy</li>
+                    <li>Very expensive</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Key Components</h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>Load Balancing</h3>
+                <p>Distributes traffic across multiple servers to prevent overload.</p>
+                <ul class="features-list">
+                    <li>Health checks</li>
+                    <li>Traffic distribution</li>
+                    <li>Session persistence</li>
+                    <li>SSL termination</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Failover Systems</h3>
+                <p>Automatic switching to backup when primary fails.</p>
+                <ul class="features-list">
+                    <li>Active-passive setup</li>
+                    <li>Active-active setup</li>
+                    <li>Detection mechanisms</li>
+                    <li>Minimal switchover time</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Monitoring</h3>
+                <p>Continuous tracking of system health and performance.</p>
+                <ul class="features-list">
+                    <li>Real-time metrics</li>
+                    <li>Alerting systems</li>
+                    <li>Log aggregation</li>
+                    <li>Performance tracking</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Data Replication</h3>
+                <p>Synchronizing data across multiple locations.</p>
+                <ul class="features-list">
+                    <li>Synchronous replication</li>
+                    <li>Asynchronous replication</li>
+                    <li>Multi-region copies</li>
+                    <li>Consistency guarantees</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Advantages</h2>
+
+        <div class="pros-cons-grid">
+            <div class="pros-box">
+                <h3>Benefits</h3>
+                <ul class="features-list">
+                    <li><strong>Minimized Downtime:</strong> Reduces business disruption and revenue loss</li>
+                    <li><strong>Better User Experience:</strong> Users experience consistent service access</li>
+                    <li><strong>Business Continuity:</strong> Operations continue during failures</li>
+                    <li><strong>Improved Reliability:</strong> System handles failures gracefully</li>
+                    <li><strong>Competitive Advantage:</strong> Builds customer trust and loyalty</li>
+                    <li><strong>Disaster Recovery:</strong> Protection against regional outages</li>
+                    <li><strong>Scalability:</strong> Easier to add capacity without downtime</li>
+                    <li><strong>Compliance:</strong> Meets regulatory requirements</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle; color: #DD0031;"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 1 1-18 0 9 9 0 0 1 18 0zm-9 3.75h.008v.008H12v-.008z" /></svg> Challenges</h2>
+
+        <div class="pros-cons-grid">
+            <div class="cons-box">
+                <h3>Drawbacks</h3>
+                <ul class="features-list">
+                    <li><strong>High Cost:</strong> Requires duplicate infrastructure and resources</li>
+                    <li><strong>Complexity:</strong> More components to manage and maintain</li>
+                    <li><strong>Data Consistency:</strong> Keeping replicas synchronized is difficult</li>
+                    <li><strong>Testing Challenges:</strong> Hard to simulate all failure scenarios</li>
+                    <li><strong>Network Dependencies:</strong> Requires reliable network connectivity</li>
+                    <li><strong>Configuration Overhead:</strong> Complex setup and orchestration</li>
+                    <li><strong>Split-Brain Risk:</strong> Multiple primaries can cause data conflicts</li>
+                    <li><strong>Monitoring Complexity:</strong> More systems to track and alert on</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Implementation Strategies</h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>Active-Active</h3>
+                <p>All servers actively handle traffic simultaneously.</p>
+                <ul class="features-list">
+                    <li>Maximum resource utilization</li>
+                    <li>Instant failover</li>
+                    <li>No idle resources</li>
+                    <li>Complex data synchronization</li>
+                    <li>Best for stateless apps</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Active-Passive</h3>
+                <p>Backup servers on standby, activated when primary fails.</p>
+                <ul class="features-list">
+                    <li>Simpler to implement</li>
+                    <li>Data consistency easier</li>
+                    <li>Wasted standby resources</li>
+                    <li>Slower failover time</li>
+                    <li>Good for stateful apps</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Multi-Region</h3>
+                <p>Infrastructure deployed across geographic regions.</p>
+                <ul class="features-list">
+                    <li>Disaster recovery</li>
+                    <li>Latency optimization</li>
+                    <li>Regulatory compliance</li>
+                    <li>Higher costs</li>
+                    <li>Complex orchestration</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Database Clustering</h3>
+                <p>Multiple database nodes working together.</p>
+                <ul class="features-list">
+                    <li>Master-slave replication</li>
+                    <li>Multi-master setup</li>
+                    <li>Automatic failover</li>
+                    <li>Read scaling</li>
+                    <li>Consistency challenges</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Best Practices</h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>Design Principles</h3>
+                <ul class="features-list">
+                    <li>Eliminate single points of failure</li>
+                    <li>Design for graceful degradation</li>
+                    <li>Implement comprehensive monitoring</li>
+                    <li>Automate failover processes</li>
+                    <li>Regular disaster recovery testing</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Operational Excellence</h3>
+                <ul class="features-list">
+                    <li>Maintain runbooks for incidents</li>
+                    <li>Conduct chaos engineering tests</li>
+                    <li>Monitor all critical metrics</li>
+                    <li>Implement alerting thresholds</li>
+                    <li>Practice incident response</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Infrastructure</h3>
+                <ul class="features-list">
+                    <li>Use multiple availability zones</li>
+                    <li>Implement health checks everywhere</li>
+                    <li>Configure automatic scaling</li>
+                    <li>Maintain backup power/network</li>
+                    <li>Use managed services when possible</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Data Management</h3>
+                <ul class="features-list">
+                    <li>Replicate data across regions</li>
+                    <li>Implement point-in-time recovery</li>
+                    <li>Regular backup testing</li>
+                    <li>Define RPO and RTO targets</li>
+                    <li>Use consistent data stores</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Real-World Examples</h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>Amazon Web Services (AWS)</h3>
+                <p>Achieves 99.99% availability through multi-AZ deployments.</p>
+                <ul class="features-list">
+                    <li>Multiple availability zones per region</li>
+                    <li>Auto Scaling Groups</li>
+                    <li>Elastic Load Balancing</li>
+                    <li>RDS Multi-AZ deployments</li>
+                    <li>Route 53 health checks</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Netflix</h3>
+                <p>Targets five nines (99.999%) with chaos engineering.</p>
+                <ul class="features-list">
+                    <li>Multi-region active-active</li>
+                    <li>Chaos Monkey testing</li>
+                    <li>Microservices architecture</li>
+                    <li>Hystrix circuit breakers</li>
+                    <li>Automated failover</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Google Cloud Platform</h3>
+                <p>Offers 99.99% SLA with global infrastructure.</p>
+                <ul class="features-list">
+                    <li>Regional load balancing</li>
+                    <li>Cloud SQL HA configuration</li>
+                    <li>Kubernetes auto-healing</li>
+                    <li>Global anycast IPs</li>
+                    <li>Live migration of VMs</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Financial Trading Platforms</h3>
+                <p>Mission-critical systems with sub-second failover.</p>
+                <ul class="features-list">
+                    <li>Hot-hot datacenter setup</li>
+                    <li>Synchronous replication</li>
+                    <li>Dedicated fiber connections</li>
+                    <li>Hardware redundancy</li>
+                    <li>99.999%+ uptime targets</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Calculating Availability</h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>Serial Components</h3>
+                <p>Availability = A1 × A2 × A3...</p>
+                <ul class="features-list">
+                    <li>Components in sequence</li>
+                    <li>All must be available</li>
+                    <li>Lower than any single component</li>
+                    <li>Example: 99.9% × 99.9% = 99.8%</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Parallel Components</h3>
+                <p>Availability = 1 - [(1-A1) × (1-A2)]</p>
+                <ul class="features-list">
+                    <li>Redundant components</li>
+                    <li>Only one needs to work</li>
+                    <li>Higher than any single component</li>
+                    <li>Example: 1 - (0.001 × 0.001) = 99.9999%</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Downtime Calculation</h3>
+                <p>Yearly downtime based on availability percentage.</p>
+                <ul class="features-list">
+                    <li>Minutes/year = (1 - A) × 525,600</li>
+                    <li>Account for planned maintenance</li>
+                    <li>Track actual vs SLA</li>
+                    <li>Report uptime metrics</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Composite Systems</h3>
+                <p>Combine serial and parallel calculations.</p>
+                <ul class="features-list">
+                    <li>Calculate parallel first</li>
+                    <li>Then multiply serial</li>
+                    <li>Complex architectures</li>
+                    <li>Model failure scenarios</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="intro-box" style="text-align: center; margin: 60px 0 40px;">
+            <p>High availability is fundamental to modern system design. By implementing redundancy, automated failover, and comprehensive monitoring, organizations can achieve uptime targets that meet business requirements and maintain user trust. The key is balancing cost, complexity, and the actual availability needed for your specific use case.</p>
+        </div>
+    </div>
+</body>
+</html>

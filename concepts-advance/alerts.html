@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alerts</title>
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/concepts.css">
+    <link rel="stylesheet" href="/css/concepts-advance.css">
+</head>
+<body class="alerts-page">
+    <a href="/" class="home-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 18px; height: 18px;">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
+        </svg>
+        Home
+    </a>
+
+    <div class="container">
+        <div style="text-align: center; margin-bottom: 30px; padding: 20px; background: rgba(102, 126, 234, 0.15); border-radius: 12px; border: 1px solid rgba(102, 126, 234, 0.3);">
+            <p style="color: #a8b8ff; font-size: 1.1em; margin: 0; font-weight: 600;">Architects are building their own tools.</p>
+        </div>
+        <h1><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 40px; height: 40px; display: inline-block; margin-right: 10px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Alerts</h1>
+
+        <div class="intro-box">
+            <p><strong>Alerts</strong> are notifications triggered when monitored metrics breach defined thresholds or when anomalies are detected. Alerts bridge the gap between monitoring data and human action, ensuring teams know immediately when systems require attention. Effective alerting focuses on symptoms that require action, not all anomalies, reducing noise while catching real problems.</p>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Core Concepts</h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>Alert vs Warning</h3>
+                <p>Different urgency levels.</p>
+                <ul class="features-list">
+                    <li><strong>Alert:</strong> Immediate action required</li>
+                    <li><strong>Warning:</strong> Investigate but not urgent</li>
+                    <li>Alerts page on-call engineers</li>
+                    <li>Warnings trigger dashboards</li>
+                    <li>Clear severity definition</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Alert Components</h3>
+                <p>What makes up an alert.</p>
+                <ul class="features-list">
+                    <li><strong>Metric:</strong> What is being measured</li>
+                    <li><strong>Threshold:</strong> When to trigger</li>
+                    <li><strong>Duration:</strong> How long before alerting</li>
+                    <li><strong>Severity:</strong> How critical</li>
+                    <li><strong>Action:</strong> How to respond</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Alert Lifecycle</h3>
+                <p>States an alert progresses through.</p>
+                <ul class="features-list">
+                    <li>Firing: Condition is true</li>
+                    <li>Acknowledged: Engineer is investigating</li>
+                    <li>Resolved: Problem fixed</li>
+                    <li>Silenced: Temporarily ignored</li>
+                    <li>Escalation: Increased urgency</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Alert Routing</h3>
+                <p>Getting alerts to right people.</p>
+                <ul class="features-list">
+                    <li>Severity-based routing</li>
+                    <li>Service/team ownership</li>
+                    <li>On-call rotations</li>
+                    <li>Escalation policies</li>
+                    <li>Multiple channels</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Alert Types</h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>Threshold Alerts</h3>
+                <p>Triggered when metric crosses boundary.</p>
+                <ul class="features-list">
+                    <li>Most common alert type</li>
+                    <li>Simple comparison logic</li>
+                    <li>Static threshold values</li>
+                    <li>CPU > 80%, Memory > 90%</li>
+                    <li>Easy to understand</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Anomaly Alerts</h3>
+                <p>Triggered by unusual patterns.</p>
+                <ul class="features-list">
+                    <li>ML-based detection</li>
+                    <li>Detects deviations from baseline</li>
+                    <li>Adapts to normal variations</li>
+                    <li>Fewer false positives</li>
+                    <li>Requires historical data</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Composite Alerts</h3>
+                <p>Multiple conditions combined.</p>
+                <ul class="features-list">
+                    <li>AND/OR logic rules</li>
+                    <li>Correlate multiple metrics</li>
+                    <li>Reduce false positives</li>
+                    <li>E.g., CPU high AND requests high</li>
+                    <li>More complex to manage</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Absence Alerts</h3>
+                <p>Triggered when data stops arriving.</p>
+                <ul class="features-list">
+                    <li>No metric update received</li>
+                    <li>Indicates scraper/agent failure</li>
+                    <li>Service down detection</li>
+                    <li>Heartbeat monitoring</li>
+                    <li>Prevents silent failures</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Alert Severity Levels</h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>Critical</h3>
+                <p>Immediate response required.</p>
+                <ul class="features-list">
+                    <li>Service down</li>
+                    <li>Data loss risk</li>
+                    <li>Security incident</li>
+                    <li>Pages on-call immediately</li>
+                    <li>Requires 5-minute response</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>High</h3>
+                <p>Significant impact, act quickly.</p>
+                <ul class="features-list">
+                    <li>Performance degradation</li>
+                    <li>Increased error rate</li>
+                    <li>Resource exhaustion coming</li>
+                    <li>Pages primary on-call</li>
+                    <li>Respond within 15 minutes</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Medium</h3>
+                <p>Investigate within business hours.</p>
+                <ul class="features-list">
+                    <li>Non-critical service affected</li>
+                    <li>Minor performance issues</li>
+                    <li>Warning signs present</li>
+                    <li>Email/Slack notification</li>
+                    <li>Respond within 1 hour</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Low</h3>
+                <p>Information and trends.</p>
+                <ul class="features-list">
+                    <li>Informational only</li>
+                    <li>Planning purposes</li>
+                    <li>Long-term trends</li>
+                    <li>Dashboard visibility only</li>
+                    <li>No page required</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Notification Channels</h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>Real-Time Channels</h3>
+                <p>Immediate notification delivery.</p>
+                <ul class="features-list">
+                    <li>Phone call (critical only)</li>
+                    <li>SMS/text messages</li>
+                    <li>Push notifications</li>
+                    <li>Highest priority alerts</li>
+                    <li>Instant acknowledgment</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Chat/Messaging</h3>
+                <p>Team communication platforms.</p>
+                <ul class="features-list">
+                    <li>Slack channels</li>
+                    <li>Microsoft Teams</li>
+                    <li>Discord servers</li>
+                    <li>Visible to entire team</li>
+                    <li>Threaded discussion</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Email</h3>
+                <p>For lower urgency alerts.</p>
+                <ul class="features-list">
+                    <li>Async notification</li>
+                    <li>Searchable records</li>
+                    <li>Multiple recipients easily</li>
+                    <li>Not ideal for critical</li>
+                    <li>Easy to ignore/filter</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>PagerDuty/Incident Management</h3>
+                <p>Specialized alerting platform.</p>
+                <ul class="features-list">
+                    <li>On-call rotation management</li>
+                    <li>Escalation policies</li>
+                    <li>Alert de-duplication</li>
+                    <li>Acknowledgment tracking</li>
+                    <li>Post-mortem integration</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle; color: #DD0031;"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 1 1-18 0 9 9 0 0 1 18 0zm-9 3.75h.008v.008H12v-.008z" /></svg> Alert Fatigue Problems</h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>False Positives</h3>
+                <p>Alerts that don't matter.</p>
+                <ul class="features-list">
+                    <li>Incorrect threshold values</li>
+                    <li>Transient spikes ignored</li>
+                    <li>Seasonal variations</li>
+                    <li>Team ignores all alerts</li>
+                    <li>Dangerous: real alerts missed</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Over-Alerting</h3>
+                <p>Too many alerts fired.</p>
+                <ul class="features-list">
+                    <li>Monitoring everything</li>
+                    <li>Low thresholds</li>
+                    <li>Same incident multiple alerts</li>
+                    <li>Team becomes numb</li>
+                    <li>Burn-out risk</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Alert Noise</h3>
+                <p>Alerts unrelated to problems.</p>
+                <ul class="features-list">
+                    <li>Network blips</li>
+                    <li>Maintenance windows</li>
+                    <li>Expected load patterns</li>
+                    <li>Degraded signal quality</li>
+                    <li>Need intelligent suppression</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Silent Failures</h3>
+                <p>Critical issues missed.</p>
+                <ul class="features-list">
+                    <li>Too many alerts to notice</li>
+                    <li>Missing alert configurations</li>
+                    <li>Alert system down</li>
+                    <li>Critical threshold too high</li>
+                    <li>Worst possible outcome</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Best Practices</h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>Alert on Symptoms</h3>
+                <ul class="features-list">
+                    <li>Alert on user impact</li>
+                    <li>High error rates</li>
+                    <li>Slow responses</li>
+                    <li>Service unavailability</li>
+                    <li>Not internal metrics only</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Context in Alerts</h3>
+                <ul class="features-list">
+                    <li>Include runbook links</li>
+                    <li>Show relevant metrics</li>
+                    <li>Team/owner information</li>
+                    <li>Severity and impact</li>
+                    <li>Enable fast action</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Tune Thresholds</h3>
+                <ul class="features-list">
+                    <li>Based on historical data</li>
+                    <li>Consider normal variation</li>
+                    <li>Time-based thresholds</li>
+                    <li>Regular tuning cycles</li>
+                    <li>Track accuracy metrics</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Actionability</h3>
+                <ul class="features-list">
+                    <li>Every alert needs action</li>
+                    <li>Clear next steps</li>
+                    <li>Right person/team</li>
+                    <li>Runbooks available</li>
+                    <li>Silence non-actionable</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Alert Management Strategies</h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>De-duplication</h3>
+                <p>Consolidate related alerts.</p>
+                <ul class="features-list">
+                    <li>Same incident multiple sources</li>
+                    <li>Reduce noise</li>
+                    <li>Group by root cause</li>
+                    <li>One incident, one page</li>
+                    <li>Intelligent correlation</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Suppression/Silence</h3>
+                <p>Temporarily disable alerts.</p>
+                <ul class="features-list">
+                    <li>Maintenance windows</li>
+                    <li>Scheduled deployments</li>
+                    <li>Known false positives</li>
+                    <li>Prevent page spam</li>
+                    <li>Time-limited silence</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Escalation Policies</h3>
+                <p>Route alerts appropriately.</p>
+                <ul class="features-list">
+                    <li>Primary/secondary on-call</li>
+                    <li>Time-based escalation</li>
+                    <li>Severity-based routing</li>
+                    <li>Team ownership</li>
+                    <li>Manager notification</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Runbooks</h3>
+                <p>Documentation for response.</p>
+                <ul class="features-list">
+                    <li>Step-by-step guides</li>
+                    <li>Linked from alert</li>
+                    <li>Common solutions</li>
+                    <li>Diagnostic commands</li>
+                    <li>Escalation procedures</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Alert Quality Metrics</h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>Precision</h3>
+                <p>Ratio of valid to total alerts.</p>
+                <ul class="features-list">
+                    <li>True positives / all alerts</li>
+                    <li>Higher is better</li>
+                    <li>Target: > 90%</li>
+                    <li>Reduce false positives</li>
+                    <li>Improves team trust</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Recall</h3>
+                <p>Ratio of caught to total issues.</p>
+                <ul class="features-list">
+                    <li>True positives / all problems</li>
+                    <li>Higher is better</li>
+                    <li>Target: > 95%</li>
+                    <li>Catch real problems</li>
+                    <li>Avoid silent failures</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Alert Latency</h3>
+                <p>Time from problem to alert.</p>
+                <ul class="features-list">
+                    <li>Problem occurs → alert fires</li>
+                    <li>Lower is better</li>
+                    <li>Critical: < 1 minute</li>
+                    <li>Fast detection</li>
+                    <li>Affects MTTR</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>MTTR Impact</h3>
+                <p>Mean time to resolution.</p>
+                <ul class="features-list">
+                    <li>Good alerts reduce MTTR</li>
+                    <li>Track with alert context</li>
+                    <li>Measure team effectiveness</li>
+                    <li>Improve alert quality</li>
+                    <li>Reduce customer impact</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Real-World Examples</h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>E-Commerce</h3>
+                <p>Critical checkout alerts.</p>
+                <ul class="features-list">
+                    <li>Payment processing error rate > 1%</li>
+                    <li>Checkout latency p99 > 3s</li>
+                    <li>Cart service unavailable</li>
+                    <li>Inventory sync delay > 5min</li>
+                    <li>Revenue-impacting metrics</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>SaaS Platform</h3>
+                <p>Per-customer impact alerts.</p>
+                <ul class="features-list">
+                    <li>API endpoint down</li>
+                    <li>Database response time spikes</li>
+                    <li>Data sync failures</li>
+                    <li>Job queue depth growing</li>
+                    <li>Customer-specific degradation</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Mobile App</h3>
+                <p>Client-side issue detection.</p>
+                <ul class="features-list">
+                    <li>App crash rate > 0.5%</li>
+                    <li>API timeout rate spike</li>
+                    <li>Sync service failures</li>
+                    <li>Push notification delivery</li>
+                    <li>Version-specific issues</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Infrastructure</h3>
+                <p>System-level monitoring.</p>
+                <ul class="features-list">
+                    <li>Node unavailable</li>
+                    <li>Disk space < 10%</li>
+                    <li>Network latency > 100ms</li>
+                    <li>Package manager down</li>
+                    <li>Security rule violations</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Implementing Effective Alerting</h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>Step 1: Define What Matters</h3>
+                <ul class="features-list">
+                    <li>User-visible problems</li>
+                    <li>Business impact</li>
+                    <li>Team responsibilities</li>
+                    <li>SLO alignment</li>
+                    <li>Create rubric</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Step 2: Create Initial Alerts</h3>
+                <ul class="features-list">
+                    <li>Start with critical only</li>
+                    <li>Use conservative thresholds</li>
+                    <li>Test with real data</li>
+                    <li>Include context/runbook</li>
+                    <li>Route to right team</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Step 3: Measure Quality</h3>
+                <ul class="features-list">
+                    <li>Track precision/recall</li>
+                    <li>Count false positives</li>
+                    <li>Measure MTTR</li>
+                    <li>Survey team satisfaction</li>
+                    <li>Identify patterns</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Step 4: Iterate & Improve</h3>
+                <ul class="features-list">
+                    <li>Tune thresholds based on data</li>
+                    <li>Adjust severity levels</li>
+                    <li>Add missing alerts</li>
+                    <li>Remove noisy alerts</li>
+                    <li>Update runbooks</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="intro-box" style="text-align: center; margin: 60px 0 40px;">
+            <p>Effective alerting is about balance: catch real problems quickly while avoiding alert fatigue that leads to dangerous alert blindness. Alert on user-visible symptoms, provide actionable context, continuously measure quality, and iterate. Remember: too many alerts is often worse than too few.</p>
+        </div>
+    </div>
+</body>
+</html>

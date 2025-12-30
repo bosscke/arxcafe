@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Throughput</title>
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/concepts.css">
+    <link rel="stylesheet" href="/css/concepts-advance.css">
+</head>
+<body class="throughput-page">
+    <a href="/" class="home-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 18px; height: 18px;">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
+        </svg>
+        Home
+    </a>
+
+    <div class="container">
+        <div style="text-align: center; margin-bottom: 30px; padding: 20px; background: rgba(102, 126, 234, 0.15); border-radius: 12px; border: 1px solid rgba(102, 126, 234, 0.3);">
+            <p style="color: #a8b8ff; font-size: 1.1em; margin: 0; font-weight: 600;">Architects are building their own tools.</p>
+        </div>
+        <h1><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 40px; height: 40px; display: inline-block; margin-right: 10px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 0 1 3 19.875v-6.75zm6.75-4.5c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V8.625zm6.75-4.5c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V4.125z" /></svg> Throughput</h1>
+
+        <div class="intro-box">
+            <p><strong>Throughput</strong> is the amount of data, requests, or transactions a system can process in a given period of time. It measures the system's capacity to handle workload and is typically expressed as requests per second (RPS), transactions per second (TPS), or bits per second (bps). High throughput means the system can handle many concurrent operations efficiently.</p>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Core Concepts</h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>Definition</h3>
+                <p>The rate at which a system processes work over time.</p>
+                <ul class="features-list">
+                    <li>Volume per time unit</li>
+                    <li>System capacity measure</li>
+                    <li>Sustained performance</li>
+                    <li>Overall efficiency indicator</li>
+                    <li>Scalability metric</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Common Measurements</h3>
+                <p>Different ways to measure throughput based on context.</p>
+                <ul class="features-list">
+                    <li>Requests per second (RPS)</li>
+                    <li>Transactions per second (TPS)</li>
+                    <li>Queries per second (QPS)</li>
+                    <li>Bits/bytes per second (bps)</li>
+                    <li>Messages per second (MPS)</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M7.5 21 3 16.5m0 0L7.5 12M3 16.5h13.5m0-13.5L21 7.5m0 0L16.5 12M21 7.5H7.5" /></svg> Throughput vs Latency</h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>Throughput</h3>
+                <p>How much work gets done overall.</p>
+                <ul class="features-list">
+                    <li>Volume-focused</li>
+                    <li>Aggregate measure</li>
+                    <li>System-level metric</li>
+                    <li>Example: 10,000 requests/sec</li>
+                    <li>Batch processing oriented</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Latency</h3>
+                <p>How fast individual requests complete.</p>
+                <ul class="features-list">
+                    <li>Speed-focused</li>
+                    <li>Individual measure</li>
+                    <li>Request-level metric</li>
+                    <li>Example: 50ms per request</li>
+                    <li>Real-time oriented</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="intro-box">
+            <h3>The Relationship:</h3>
+            <p>You can have high throughput with high latency (processing many slow requests), or low throughput with low latency (processing few fast requests). Ideal systems optimize both: high throughput AND low latency.</p>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Factors Affecting Throughput</h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>Bandwidth</h3>
+                <p>Network capacity limits data transfer rate.</p>
+                <ul class="features-list">
+                    <li>Physical connection speed</li>
+                    <li>Network congestion</li>
+                    <li>Protocol overhead</li>
+                    <li>Compression efficiency</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Processing Capacity</h3>
+                <p>CPU and memory available for computation.</p>
+                <ul class="features-list">
+                    <li>CPU cores and speed</li>
+                    <li>Memory availability</li>
+                    <li>Algorithm efficiency</li>
+                    <li>I/O performance</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Concurrency</h3>
+                <p>Number of parallel operations possible.</p>
+                <ul class="features-list">
+                    <li>Thread/process limits</li>
+                    <li>Connection pooling</li>
+                    <li>Async processing</li>
+                    <li>Resource contention</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Bottlenecks</h3>
+                <p>Slowest component limits overall throughput.</p>
+                <ul class="features-list">
+                    <li>Database queries</li>
+                    <li>Disk I/O</li>
+                    <li>External API calls</li>
+                    <li>Lock contention</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" /></svg> How to Increase Throughput</h2>
+
+        <div class="pros-box">
+            <h3>Optimization Strategies:</h3>
+            <ul class="features-list">
+                <li><strong>Horizontal Scaling:</strong> Add more servers to distribute load</li>
+                <li><strong>Vertical Scaling:</strong> Upgrade hardware (CPU, RAM, SSD)</li>
+                <li><strong>Load Balancing:</strong> Distribute requests evenly across servers</li>
+                <li><strong>Caching:</strong> Reduce redundant processing (Redis, Memcached)</li>
+                <li><strong>Async Processing:</strong> Use message queues for background tasks</li>
+                <li><strong>Database Optimization:</strong> Indexes, query optimization, read replicas</li>
+                <li><strong>Connection Pooling:</strong> Reuse database connections</li>
+                <li><strong>CDN Usage:</strong> Offload static content delivery</li>
+                <li><strong>Compression:</strong> Reduce data transfer size</li>
+                <li><strong>Batch Processing:</strong> Process multiple items together</li>
+                <li><strong>Remove Bottlenecks:</strong> Profile and optimize slow code paths</li>
+                <li><strong>Parallel Processing:</strong> Multi-threading and concurrency</li>
+            </ul>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle; color: #DD0031;"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 1 1-18 0 9 9 0 0 1 18 0zm-9 3.75h.008v.008H12v-.008z" /></svg> Common Bottlenecks</h2>
+
+        <div class="cons-box">
+            <h3>What Limits Throughput:</h3>
+            <ul class="features-list">
+                <li><strong>Database Locks:</strong> Concurrent write operations blocking each other</li>
+                <li><strong>N+1 Queries:</strong> Excessive database round trips</li>
+                <li><strong>Single-threaded Processing:</strong> Not utilizing available CPU cores</li>
+                <li><strong>Synchronous I/O:</strong> Blocking operations preventing parallelism</li>
+                <li><strong>Memory Leaks:</strong> Gradual performance degradation</li>
+                <li><strong>Network Saturation:</strong> Bandwidth limits reached</li>
+                <li><strong>CPU Saturation:</strong> Processing power maxed out</li>
+                <li><strong>Disk I/O Limits:</strong> Slow hard drives or excessive writes</li>
+                <li><strong>External Dependencies:</strong> Slow third-party APIs</li>
+            </ul>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Measuring Throughput</h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>Load Testing Tools</h3>
+                <ul class="features-list">
+                    <li>Apache JMeter</li>
+                    <li>Gatling</li>
+                    <li>k6</li>
+                    <li>Locust</li>
+                    <li>Artillery</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Benchmarking Tools</h3>
+                <ul class="features-list">
+                    <li>Apache Bench (ab)</li>
+                    <li>wrk</li>
+                    <li>hey</li>
+                    <li>siege</li>
+                    <li>vegeta</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Monitoring Solutions</h3>
+                <ul class="features-list">
+                    <li>Prometheus + Grafana</li>
+                    <li>New Relic</li>
+                    <li>Datadog</li>
+                    <li>CloudWatch</li>
+                    <li>Application Insights</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Key Metrics</h3>
+                <ul class="features-list">
+                    <li>Requests per second</li>
+                    <li>Error rate (%)</li>
+                    <li>Response time (avg, p95, p99)</li>
+                    <li>Concurrent connections</li>
+                    <li>Resource utilization</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Best Practices</h2>
+
+        <div class="intro-box">
+            <h3>Optimizing for High Throughput:</h3>
+            <ul class="features-list">
+                <li><strong>Profile Before Optimizing:</strong> Measure to find actual bottlenecks</li>
+                <li><strong>Design for Concurrency:</strong> Use async/await, non-blocking I/O</li>
+                <li><strong>Batch Operations:</strong> Process multiple items in single database call</li>
+                <li><strong>Use Connection Pools:</strong> Reuse expensive connections</li>
+                <li><strong>Implement Caching:</strong> Cache at multiple layers (CDN, app, database)</li>
+                <li><strong>Monitor Continuously:</strong> Track throughput trends over time</li>
+                <li><strong>Load Test Regularly:</strong> Verify system can handle expected traffic</li>
+                <li><strong>Set SLOs:</strong> Define acceptable throughput targets</li>
+                <li><strong>Optimize Hot Paths:</strong> Focus on most-used code paths</li>
+                <li><strong>Use Appropriate Data Structures:</strong> Choose efficient algorithms</li>
+            </ul>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Throughput Benchmarks</h2>
+
+        <div class="intro-box">
+            <h3>Real-World Examples:</h3>
+            <ul class="features-list">
+                <li><strong>Nginx:</strong> Can handle 10,000+ requests/second per server</li>
+                <li><strong>Redis:</strong> 100,000+ operations/second on commodity hardware</li>
+                <li><strong>Kafka:</strong> Millions of messages/second with proper tuning</li>
+                <li><strong>PostgreSQL:</strong> 10,000-50,000 TPS depending on queries</li>
+                <li><strong>MongoDB:</strong> 100,000+ writes/second in sharded clusters</li>
+                <li><strong>Cassandra:</strong> Millions of writes/second across cluster</li>
+                <li><strong>Elasticsearch:</strong> 10,000+ documents/second indexing</li>
+            </ul>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Real-World Use Cases</h2>
+
+        <div class="architecture-grid">
+            <div class="arch-card">
+                <h3>E-Commerce</h3>
+                <p>Handle thousands of concurrent shoppers during sales events.</p>
+                <ul class="features-list">
+                    <li>Black Friday traffic spikes</li>
+                    <li>Flash sales</li>
+                    <li>Product launches</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Social Media</h3>
+                <p>Process millions of posts, likes, and comments per second.</p>
+                <ul class="features-list">
+                    <li>Twitter: 6,000 tweets/second peak</li>
+                    <li>Facebook: billions of posts/day</li>
+                    <li>Instagram: millions of photos/day</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Streaming Services</h3>
+                <p>Deliver video to millions of concurrent users.</p>
+                <ul class="features-list">
+                    <li>Netflix: 200M+ subscribers</li>
+                    <li>YouTube: billions of views/day</li>
+                    <li>Spotify: 500M+ users</li>
+                </ul>
+            </div>
+
+            <div class="arch-card">
+                <h3>Financial Systems</h3>
+                <p>Process high-frequency trading and transactions.</p>
+                <ul class="features-list">
+                    <li>Stock exchanges: millions TPS</li>
+                    <li>Payment gateways</li>
+                    <li>Banking systems</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px; display: inline-block; margin-right: 8px; vertical-align: middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" /></svg> Capacity Planning</h2>
+
+        <div class="pros-box">
+            <h3>Planning for Growth:</h3>
+            <ul class="features-list">
+                <li><strong>Estimate Peak Load:</strong> Calculate maximum expected traffic</li>
+                <li><strong>Add Buffer:</strong> Plan for 2-3x expected load</li>
+                <li><strong>Test Limits:</strong> Load test to find breaking points</li>
+                <li><strong>Monitor Trends:</strong> Track growth over time</li>
+                <li><strong>Auto-Scaling:</strong> Automatically adjust capacity</li>
+                <li><strong>Cost Optimization:</strong> Balance performance vs infrastructure cost</li>
+                <li><strong>Redundancy:</strong> Ensure no single point of failure</li>
+            </ul>
+        </div>
+
+        <div class="intro-box" style="text-align: center; margin: 60px 0 40px;">
+            <p>Throughput is a critical measure of system capacity. While latency focuses on individual request speed, throughput determines how many users your system can serve simultaneously. Optimizing throughput requires understanding bottlenecks, efficient resource utilization, and strategic scaling.</p>
+        </div>
+    </div>
+</body>
+</html>
