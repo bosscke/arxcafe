@@ -7,7 +7,8 @@
     "start": "node server.js"
   },
   "dependencies": {
-    "google-trends-api": "^4.9.0"
+    "google-trends-api": "^4.9.0",
+    "ws": "^8.18.0"
   },
   "keywords": [],
   "author": "",

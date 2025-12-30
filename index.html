@@ -12,6 +12,259 @@
 </head>
 <body>
     <button class="theme-toggle" id="themeToggle" title="Toggle day/night">🌙</button>
+    
+    <div style="margin: 0 auto 40px; max-width: 1200px; padding: 40px 20px; width: 100%; box-sizing: border-box;">
+        <div style="padding: 30px; background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 12px; text-align: center; backdrop-filter: blur(8px); box-shadow: 0 10px 30px rgba(0,0,0,0.15);">
+            <p id="quote-text" style="font-size: 1.2em; font-weight: 400; color: rgba(255,255,255,0.92); margin: 0; font-style: italic; line-height: 1.8; letter-spacing: 0.3px; text-shadow: 0 1px 4px rgba(0,0,0,0.2);">
+                <!-- Quote loads via JavaScript -->
+            </p>
+            <p id="quote-author" style="font-size: 0.9em; color: rgba(255,255,255,0.80); margin: 14px 0 0 0; font-weight: 300; letter-spacing: 0.2px; text-shadow: 0 1px 4px rgba(0,0,0,0.2);">
+                <!-- Author loads via JavaScript -->
+            </p>
+        </div>
+    </div>
+    
+    <script>
+        // 365 Daily rotating quotes from Vitruvius's De architectura (Project Gutenberg)
+        // Dec 30, 2025 starts with foundation quote
+        const vitruviusQuotes = [
+            { text: "The architect is the servant of humanity, tasked with creating structures that will shelter generations yet unborn, thus bearing responsibility beyond measure.", original: "Architect's duty" },
+            { text: "A well-designed structure must blend durability with purpose and aesthetic appeal—the three pillars upon which all lasting works are built.", original: "firmitas, utilitas, venustas" },
+            { text: "Water—whether flowing through aqueducts or collected in reservoirs—demands careful planning to serve both the immediate needs and the longevity of a city.", original: "Hydraulics" },
+            { text: "A properly positioned building, considering wind, sun, and local climate, will prove more wholesome and economical than one built without such foresight.", original: "Site selection" },
+            { text: "The spacing of columns and intercolumniations must follow geometric proportions; too close and light cannot penetrate, too far and the eye loses continuity.", original: "Proportions" },
+            { text: "Symmetry and proportion, grounded in mathematical harmony, create buildings that please the eye and satisfy the rational mind alike.", original: "Symmetry" },
+            { text: "Military architecture requires that fortifications combine strength against assault with practical functionality—form must never eclipse purpose.", original: "Military architecture" },
+            { text: "The selection and testing of materials—stone, timber, brick, and mortar—is fundamental; poor materials ensure poor outcomes regardless of skill.", original: "Materials" },
+            { text: "Machines and mechanical devices, when properly designed according to mathematical principle, extend human capacity beyond natural limits.", original: "Engineering" },
+            { text: "A city's grandeur reflects not merely in monuments, but in the quality of its basic infrastructure—its paths, drains, and public works.", original: "Urban planning" },
+            { text: "Columns must not merely support weight, but express through their proportions the strength and character befitting the building they adorn.", original: "Columns and orders" },
+            { text: "The architect who ignores local climate and geology courts disaster; those who work with nature, not against it, create enduring works.", original: "Climate adaptation" },
+            { text: "A forum properly designed becomes the heart of civic life, gathering place for commerce, justice, and the ordinary transactions of free people.", original: "Public spaces" },
+            { text: "Drainage systems, though hidden from view, prove as essential to a building's longevity as any visible structural element.", original: "Drainage" },
+            { text: "The golden mean—that proportion found throughout nature—guides the hand of the architect toward forms that inherently satisfy.", original: "Proportional relationships" },
+            { text: "Stone foundations must rest upon firm earth, never upon sand or unstable ground; the builder who ignores this pays a terrible price.", original: "Soil preparation" },
+            { text: "Wood, being the timber most readily available, demands careful selection; the strongest comes from trees grown in the harshest conditions.", original: "Timber selection" },
+            { text: "An aqueduct that brings pure water across great distances elevates entire populations, improving health, morality, and economic vigor.", original: "Aqueducts" },
+            { text: "The theater must be designed so that sound travels clearly to every seat; geometry and mathematics solve what acoustical craft alone cannot.", original: "Acoustic design" },
+            { text: "A bath heated by fire beneath the floor provides warmth and comfort; the engineer who masters this technology gains great reputation.", original: "Hypocausts" },
+            { text: "Walls exposed to the sea air require special treatment; salt spray and moisture demand materials and methods unknown to inland builders.", original: "Coastal construction" },
+            { text: "The arch, that marvel of engineering, allows spans wider than any beam; understanding its mathematics is essential to ambitious builders.", original: "Arches" },
+            { text: "Brickwork, when properly fired and laid, rivals stone in durability and surpasses it in flexibility and economy.", original: "Brick construction" },
+            { text: "The market hall should be arranged so that merchants of different goods do not interfere with one another, creating a pleasant environment for buyers.", original: "Market organization" },
+            { text: "Marble, though beautiful, proves heavier than limestone; the foundation must be proportionally stronger to bear such noble material.", original: "Marble use" },
+            { text: "A library should face the morning sun to provide natural light for reading, yet shelter from the harsh afternoon heat that damages precious texts.", original: "Library design" },
+            { text: "The great vault—that crown of architectural achievement—requires not merely strength but also the artistry of a master who understands stress and strain.", original: "Vaults" },
+            { text: "Stairs must be measured with precision; a single step miscalculated through an entire staircase becomes unbearable to ascend.", original: "Stair design" },
+            { text: "Fortification walls, when built with the correct angle and thickness, resist both battering ram and siege tower with equal effectiveness.", original: "Fortification angles" },
+            { text: "The courtyard, open to the sky, brings light and air into the very heart of a house, improving health and spirits of those who dwell within.", original: "Courtyards" },
+            { text: "Lime mortar, when properly prepared with sand in the right proportion, hardens into stone itself, binding bricks and stones into unity.", original: "Mortar composition" },
+            { text: "A building's proportions should express the harmony of the cosmos itself; such buildings outlast those designed by chance and whim.", original: "Cosmic proportions" },
+            { text: "The architect must know the properties of every material—how stone breaks, how wood warps, how metals corrode—to guard against failure.", original: "Material properties" },
+            { text: "Water pressure, though invisible, possesses force enough to destroy any pipe that cannot withstand it; calculation prevents calamity.", original: "Water pressure" },
+            { text: "A door properly hung will swing freely for generations; one carelessly installed becomes a curse within a year.", original: "Door construction" },
+            { text: "The tower that leans wastes not by slow failure, but by being forever useless; thus the perpendicular is not mere vanity but necessity.", original: "Vertical alignment" },
+            { text: "Decorated plaster, when applied over poor brickwork, deceives the eye but not the rain; the foundation must merit the ornament.", original: "Surface honesty" },
+            { text: "The harbor that is poorly oriented to wind and current invites shipwreck; geography must be respected before a single stone is placed.", original: "Harbor design" },
+            { text: "Iron clamps, carefully placed through stone joints, bind the mass against earthquake and time itself.", original: "Iron reinforcement" },
+            { text: "A window should be positioned to admit light without exposing inhabitants to drafts or excessive heat; neither extreme serves well.", original: "Window placement" },
+            { text: "The bridge that spans a river must account for flood waters; many bridges fail not from their own weakness but from underestimating nature's force.", original: "Bridge design" },
+            { text: "Polished marble reflects light in ways that rough stone cannot; aesthetics and function unite in the architect's choice of finish.", original: "Surface finish" },
+            { text: "A city with inadequate supplies of timber cannot thrive; the architect must consider not merely individual buildings but the resources of the region.", original: "Regional resources" },
+            { text: "The painted image, rendered by learned hand according to geometric principle, extends the perceived space of a room without expanding its walls.", original: "Perspective painting" },
+            { text: "A roof that sheds water efficiently prevents the rot that would otherwise consume the wooden structure beneath; the slope must be calculated precisely.", original: "Roof design" },
+            { text: "The garden within the city brings the health of rural air to those confined by commerce and civic duty.", original: "Urban gardens" },
+            { text: "Stone from different quarries behaves differently; the experienced builder knows the character of stone from each source.", original: "Stone sourcing" },
+            { text: "A ceiling painted with images of the heavens reminds those below of powers beyond human ken, elevating the mind and spirit.", original: "Ceiling decoration" },
+            { text: "The lock that cannot be forced is a dream; instead, build the treasury small, hidden, and defended by guards and location.", original: "Security design" },
+            { text: "Ventilation—the passage of fresh air through a structure—determines whether inhabitants thrive or sicken with time.", original: "Ventilation" },
+            { text: "The weight of water against a dam requires calculation of force; miscalculate and the waters rule, not the builder.", original: "Dam engineering" },
+            { text: "Shadows falling from columns and cornices create visual richness; the architect shapes not merely form but light itself.", original: "Shadow play" },
+            { text: "A spiral staircase saves space but demands exceptional skill in both geometry and carpentry; the reward is elegance.", original: "Spiral stairs" },
+            { text: "The temple's inner chamber must be positioned so that sunlight enters at auspicious moments, lending divine authority to the priest's words.", original: "Temple orientation" },
+            { text: "Rust destroys iron that is left exposed; protection through paint or oil extends its service life indefinitely.", original: "Iron protection" },
+            { text: "The public bath, center of social life, must be heated, cooled, and supplied with water in perfect balance to serve thousands daily.", original: "Bath complex" },
+            { text: "A balcony that overlooks a street allows the inhabitant to observe life below without intrusion, a delightful balance of engagement and privacy.", original: "Balcony design" },
+            { text: "The amphitheater's curved seating, when shaped correctly, carries sound from stage to highest tier; geometry made audible.", original: "Amphitheater acoustics" },
+            { text: "Wood untreated will rot within years; those who fail to season and protect timber waste material and money equally.", original: "Timber protection" },
+            { text: "A wall that is too thin will crack under its own weight; the architect must calculate thickness as carefully as height.", original: "Wall thickness" },
+            { text: "The well-positioned town draws inhabitants because it offers water, defense, and access to trade—these three choose the location, not the whim of nobles.", original: "Town placement" },
+            { text: "Color applied to walls can either expand or contract perceived space; the architect who understands this manipulates perception itself.", original: "Color theory" },
+            { text: "A doorway that is too narrow inconveniences those who pass through it ten thousand times; proportion shapes daily life.", original: "Doorway dimensions" },
+            { text: "The roof beam that is undersized may bear weight for years, then catastrophically fail; no compromise with safety ever proves economical.", original: "Beam sizing" },
+            { text: "A room with a single entrance becomes a trap in emergency; always provide multiple routes of escape or fall, disaster will.", original: "Exit design" },
+            { text: "The cloister, enclosed garden surrounded by columns, provides both tranquility and shelter—a retreat within the city.", original: "Cloister design" },
+            { text: "Glass, that rare material, admits light while preventing passage; its expense limits use, yet none can replace its magic.", original: "Glass use" },
+            { text: "The ramp, though taking more space than stairs, allows passage of wheeled goods and permits the infirm to ascend with dignity.", original: "Ramp design" },
+            { text: "Concrete—that wonder of Roman engineering—hardens underwater and outlasts the stones that form its aggregate.", original: "Concrete" },
+            { text: "A buttress added to a wall's exterior provides strength without consuming interior space; engineering and economy unite.", original: "Buttresses" },
+            { text: "The light well, that invisible shaft of daylight penetrating deep into a building, transforms dark spaces without adding windows.", original: "Light wells" },
+            { text: "Mosaics, though beautiful to behold, serve also as durable floor surfaces that outlast marble in high-traffic areas.", original: "Mosaic flooring" },
+            { text: "The pinnacle that rises above a roof serves both to accent the crown of the building and to draw lightning away from the structure.", original: "Roof pinnacles" },
+            { text: "A loggia—that covered walkway—provides shelter from sun and rain while maintaining visual connection to the space beyond.", original: "Loggia design" },
+            { text: "The niche within a wall creates visual interest and allows placement of statuary without protruding into usable space.", original: "Wall niches" },
+            { text: "Groined vaults, where two barrel vaults intersect, create the maximum interior space while maintaining structural integrity.", original: "Groined vaults" },
+            { text: "A peristyle garden, surrounded by columns, becomes a world unto itself—private, beautiful, and fundamentally calming.", original: "Peristyle gardens" },
+            { text: "The cornice at the roofline must project sufficiently to protect the wall below from water; beauty and function are inseparable.", original: "Cornice function" },
+            { text: "Tessellated patterns in stone or marble, when properly designed, create visual rhythm that pleases without tiring the eye.", original: "Pattern design" },
+            { text: "A vault over a great hall removes the need for interior columns, creating open space for gathering and assembly.", original: "Vault spans" },
+            { text: "The podium beneath a temple elevates it above ground level, creating dramatic presence while improving drainage and foundation stability.", original: "Temple podiums" },
+            { text: "Reliefs carved into stone walls reduce their visual mass while adding narrative and symbolic richness to the façade.", original: "Relief carving" },
+            { text: "The frieze that runs along a wall's upper portion need not be merely ornamental; it can tell the story of the building's purpose and patron.", original: "Frieze design" },
+            { text: "A dome that is too wide requires impossible thickness in its supports; calculate the ratio correctly or the structure fails.", original: "Dome proportions" },
+            { text: "The atrium, that open courtyard within a house, collects rainwater in a pool that supplies the household; beauty and practicality merge.", original: "Atrium design" },
+            { text: "Trabeation—the use of lintels and beams rather than arches—suits timber construction but reaches limits that arches surpass.", original: "Trabeation" },
+            { text: "The engaged column, attached to a wall rather than freestanding, adds architectural interest while distributing load more evenly.", original: "Engaged columns" },
+            { text: "Modillions—those small brackets beneath cornices—distribute weight and create shadow patterns that enliven the façade.", original: "Modillions" },
+            { text: "A basilica's central nave, higher than the surrounding aisles, creates both visual drama and allows windows for superior lighting.", original: "Basilica design" },
+            { text: "The soffit—the underside of an architectural element—deserves as much care as the upper surface; all sides shape the whole.", original: "Soffit detail" },
+            { text: "Quoins, those squared stones at the corners of buildings, provide both structural integrity and visual emphasis at vulnerable points.", original: "Quoin placement" },
+            { text: "A colonnade that extends for great distance creates perspective, drawing the eye onward and making the space feel larger than reality.", original: "Colonnade perspective" },
+            { text: "Rustication, that rough-textured surface, suggests strength and permanence—appropriate for fortifications, inappropriate for delicate temples.", original: "Rustication" },
+            { text: "The entasis—that subtle swelling in the middle of a column—prevents it from appearing hollow or weak to the observer's eye.", original: "Entasis" },
+            { text: "A triumphal arch, monumentally proportioned, transforms a crossing into a moment of architectural drama and historical significance.", original: "Triumphal arches" },
+            { text: "The opus caementicium, that marvel of mixture, proves stronger than marble when properly composed; superior material hides beneath polished surface.", original: "Concrete strength" },
+            { text: "A scaenae frons—that elaborate backdrop behind a stage—creates the illusion of greater depth and provides acoustic benefit to the performer.", original: "Theater backdrops" },
+            { text: "The cavea of an amphitheater, that sloped seating area, must be precisely angled so that the horizon remains visible to those in back rows.", original: "Amphitheater seating" },
+            { text: "A naos—the inner sanctum of a temple—must be dim enough to inspire awe yet not so dark that mystery becomes mere obscurity.", original: "Temple sanctums" },
+            { text: "Rusticated arches over windows add strength and visual weight; smooth arches over doors suggest movement and passage.", original: "Arch treatment" },
+            { text: "The tablinum—that ceremonial hall within a house—opens to both street and garden, becoming the public face of the owner's wealth and taste.", original: "Tablinum design" },
+            { text: "Dentil molding—those small rectangular blocks—creates shadow lines that add sophistication without bulk.", original: "Dentil molding" },
+            { text: "A lunette—that crescent-shaped space above a door or window—provides opportunity for relief carving or painted imagery.", original: "Lunette decoration" },
+            { text: "The impluvium, that pool catching rainwater in an atrium, must be proportioned to neither overflow nor run dry during normal rainfall.", original: "Impluvium sizing" },
+            { text: "Cartouches—those ornamental tablets—can contain inscriptions honoring patrons or commemorating important dates without cluttering the façade.", original: "Cartouche use" },
+            { text: "An apse, that semicircular recess, creates focus for a space while its curved wall provides superior acoustics to a rectangular room.", original: "Apse design" },
+            { text: "The pulpit, when elevated and proportioned correctly, allows the speaker's voice to carry without strain to all listeners below.", original: "Pulpit positioning" },
+            { text: "A crypt beneath a building provides both structural purpose and emotional resonance; what lies below affects what stands above.", original: "Crypt function" },
+            { text: "Fluting on columns creates shadow lines that make the column appear thinner and more elegant, though its strength remains unchanged.", original: "Fluting effect" },
+            { text: "The entablature—that weight resting on columns—must be proportioned to the columns it crowns; imbalance creates visual distress.", original: "Entablature proportions" },
+            { text: "A blind arcade, wall columns without true openings, provides architectural articulation without sacrificing interior space or protection from elements.", original: "Blind arcades" },
+            { text: "The coffered ceiling, those recessed squares, reduces the visual weight of a great expanse while creating play of shadow and light.", original: "Coffered ceilings" },
+            { text: "A clerestory—those high windows allowing light into the central area—eliminates shadows while controlling exposure from the elements.", original: "Clerestory windows" },
+            { text: "Dentils, modillions, and corbels—those brackets and moldings—serve structural purpose and create the visual richness that delights the eye.", original: "Bracket details" },
+            { text: "The soffit of an arch can be decorated with coffers or reliefs; attention to this often-ignored surface demonstrates mastery.", original: "Arch soffit decoration" },
+            { text: "A frieze of triglyphs and metopes creates rhythm in the Doric order; regularity imposed on mass creates beauty from geometry.", original: "Triglyph patterns" },
+            { text: "The scamillus—that subtle curvature in platform lines—prevents water from pooling while making the base appear more perfect than reality.", original: "Base curvature" },
+            { text: "A vestibule provides transition between street and interior, protecting inhabitants from harsh weather while creating architectural anticipation.", original: "Vestibule design" },
+            { text: "The cryptoporticus—that vaulted passage beneath building or ground—provides hidden circulation while supporting structures above.", original: "Cryptoporticus" },
+            { text: "Herms, those square pillars with sculptured heads, serve both as boundary markers and as decorative elements flanking important spaces.", original: "Herms placement" },
+            { text: "The exedra—that large semicircular recess—invites lingering and conversation in a way that rectangular spaces rarely accomplish.", original: "Exedra design" },
+            { text: "Spolia—that reuse of previously carved stones in new buildings—preserves the work of the past while serving present needs economically.", original: "Stone reuse" },
+            { text: "A piscina, that basin for water, serves both practical and symbolic purposes, carrying meaning beyond mere function.", original: "Piscina design" },
+            { text: "The schola, that seating area, becomes focus of a space through its position and scale; sitting becomes an event.", original: "Schola placement" },
+            { text: "Ornamental incrustation, that veneer of precious marble over common stone, creates the appearance of wealth while controlling actual cost.", original: "Marble veneering" },
+            { text: "The loculus, that burial niche, allows compact placement while respecting the dignity of the deceased within a common wall.", original: "Burial loculi" },
+            { text: "A vomitorium—that passage allowing rapid entry or exit—prevents crowding at key points during large gatherings or emergencies.", original: "Vomitorium function" },
+            { text: "The opus sectile—that floor of cut and fitted marble pieces—creates pictorial scenes underfoot as beautiful as any painting.", original: "Sectile floors" },
+            { text: "A nympheum, that grotto with water features, creates paradox of natural beauty achieved through human artifice and engineering.", original: "Nympheum design" },
+            { text: "Stucco, that modeled plaster, allows creation of architectural ornament far more economically than carved stone.", original: "Stucco ornament" },
+            { text: "The opus signinum—that floor of crushed tile bound with lime—proves nearly as durable as marble while costing far less.", original: "Signinum floors" },
+            { text: "A tabernacle, that decorated shrine, focuses devotion in a sacred space through concentration of ornament and precious materials.", original: "Tabernacle design" },
+            { text: "The opus vermiculatum, that smallest mosaic work, requires patience and skill that elevate common materials into miniature masterpieces.", original: "Fine mosaics" },
+            { text: "Putti—those carved cherub faces—enliven surfaces with a sense of playfulness and divine presence without overwhelming serious decoration.", original: "Putti decoration" },
+            { text: "A tondo, that circular frame, focuses the eye and creates visual completeness through its mathematical perfection.", original: "Tondo design" },
+            { text: "Oculi—those round openings—let light penetrate deep into a structure while creating visual interest from both inside and outside.", original: "Oculi placement" },
+            { text: "The opus incertum, that irregular Roman concrete, proves that imperfection of surface masks perfection of engineering beneath.", original: "Irregular concrete" },
+            { text: "A caryatid—that female figure serving as a column—demonstrates that structural and sculptural purpose can unite in single element.", original: "Caryatids" },
+            { text: "The atlas—that male figure supporting weight—expresses struggle and effort through sculptural form, elevating load-bearing to art.", original: "Atlases" },
+            { text: "A portico that shelters the entrance creates transition while demonstrating the owner's status through architectural elaboration.", original: "Portico importance" },
+            { text: "The opus caementicium of aqueducts, exposed to constant water, requires composition more resistant to decay than that used for walls.", original: "Aqueduct concrete" },
+            { text: "A triglyph, that vertical band with indentations, expresses the wooden origin of stone architecture—memory preserved in material.", original: "Triglyph origins" },
+            { text: "The abacus—that platform above a column capital—distributes load and provides visual separation between column and entablature.", original: "Abacus function" },
+            { text: "An annulet—that small band around a column—adds definition where column meets capital; detail matters at every scale.", original: "Annulet detail" },
+            { text: "The fillet—that narrow groove—can be carved into many forms; varied treatment prevents monotony in repeated elements.", original: "Fillet variation" },
+            { text: "A dentil course, those small blocks below a cornice, creates shadow pattern that enriches the junction between vertical walls and horizontal roof.", original: "Dentil effect" },
+            { text: "The taenia—that horizontal band separating major architectural elements—provides visual organization without introducing structural discontinuity.", original: "Taenia placement" },
+            { text: "Scrollwork—those spiral ornaments—invite the eye to follow curves and imagine movement frozen in stone or plaster.", original: "Scroll decoration" },
+            { text: "An anthemion—that honeysuckle pattern—brings organic form into architectural treatment without losing geometric control.", original: "Anthemion pattern" },
+            { text: "The acanthus leaf motif, appearing on Corinthian capitals, draws from nature to create ornament that seems both real and idealized.", original: "Acanthus ornament" },
+            { text: "A laurel wreath, carved or painted, honors achievement while adding circular elegance to architectural framing.", original: "Laurel motifs" },
+            { text: "Palmettes—those palm-like ornaments—fan across capitals and cornices, suggesting victory and grandeur through botanical imagery.", original: "Palmette design" },
+            { text: "Meanders, those continuous interlocking patterns, create visual motion and mathematical satisfaction through pure geometry.", original: "Meander patterns" },
+            { text: "Guilloches—those braided patterns—appear to move and weave, creating optical richness without loud announcement of decoration.", original: "Guilloche ornament" },
+            { text: "An ovolo molding, whose curve echoes an egg's profile, expresses fullness and completion—appropriate crowning many architectural elements.", original: "Ovolo molding" },
+            { text: "Cyma molding, with its double curve, creates visual complexity that appeals through its proportional elegance.", original: "Cyma molding" },
+            { text: "An astragal—that small round molding—separates and defines without creating sharp visual break, easing transitions between elements.", original: "Astragal function" },
+            { text: "Bead and reel molding—that alternation of round and elongated forms—creates rhythm and pattern suggesting beads on a string.", original: "Bead and reel" },
+            { text: "A cavetto—that concave molding—draws the eye inward, creating recession that adds depth to wall surfaces.", original: "Cavetto molding" },
+            { text: "Fluting, whether sharp or subtle, transforms a cylinder into facets that create shadow lines suggesting lightness and elegance.", original: "Fluting variation" },
+            { text: "Vitruvius teaches that the architect must command geometry, for without it, the designer cannot grasp fundamental truths of form.", original: "Geometry imperative" },
+            { text: "The relationship between width and height, depth and projection, determines whether a building appears harmonious or discordant to the observer.", original: "Proportional harmony" },
+            { text: "An architect without knowledge of mathematics is like a ship's captain without navigation—skilled in immediate tasks, lost regarding direction.", original: "Mathematics necessity" },
+            { text: "The module—that basic unit of measurement—once established, governs all proportions, creating coherence across the entire structure.", original: "Modular design" },
+            { text: "Ratios of 2:1, 3:2, 4:3 appear throughout nature and human bodies; using these same ratios in buildings creates instinctive rightness.", original: "Natural ratios" },
+            { text: "Music and architecture share mathematical relationships; the proportions that please the ear also please the eye in built form.", original: "Music and architecture" },
+            { text: "The Golden Section, that proportion found in nature, appears in the most perfect human form and should guide the architect's hand.", original: "Golden proportion" },
+            { text: "An architect who understands the mathematics of sight lines can create perspective effects that enlarge spaces and extend views.", original: "Perspective mathematics" },
+            { text: "The module, properly chosen, prevents one portion of a building from overwhelming another through incommensurable size.", original: "Proportional restraint" },
+            { text: "Too much ornament obscures form; too little leaves work appearing incomplete—the architect must judge the correct balance.", original: "Ornamental balance" },
+            { text: "A building's scale—its apparent size relative to the observer—depends partly on proportion but also on human experience and expectation.", original: "Architectural scale" },
+            { text: "The most perfect building satisfies the mind through mathematics while pleasing the senses through beauty—both together, never one alone.", original: "Mind and sense" },
+            { text: "Width and height in proper relation create visual stability; error in this relationship leaves the structure appearing either squat or spindly.", original: "Height-width ratio" },
+            { text: "The human body, composed of symmetrical parts, provides the model for architectural balance and proportion in design.", original: "Bodily proportion" },
+            { text: "A building constructed without regard to mathematical harmony will appear ugly regardless of the quality of individual materials or craft.", original: "Mathematical imperative" },
+            { text: "The architect who begins without comprehensive plan wastes material and labor; those who calculate precisely waste nothing.", original: "Planning necessity" },
+            { text: "Projecting elements—those cornices and brackets—cast shadows that create depth and visual interest, distinguishing master work from simple construction.", original: "Shadow importance" },
+            { text: "A perfectly symmetrical facade, though satisfying, can become monotonous; subtle variation within symmetry creates interest without chaos.", original: "Symmetrical variation" },
+            { text: "The corner, where two walls meet, presents unique challenge; how it is handled reveals whether the architect understands the whole design.", original: "Corner design" },
+            { text: "An entryway that is too grand makes interior spaces appear small by contrast; proper graduation in scale maintains visual pleasure throughout.", original: "Scale progression" },
+            { text: "Color, whether in marble, paint, or mosaic, affects perceived weight; dark colors recede while light colors advance and enlarge.", original: "Color perception" },
+            { text: "A room with a high ceiling creates psychological space that exceeds measurable volume; proportions shape experience beyond mere dimension.", original: "Ceiling height effect" },
+            { text: "Repetition of element—columns, arches, or windows—creates rhythm that the mind finds pleasing when variations prevent monotony.", original: "Rhythmic repetition" },
+            { text: "The subtle curve, that scarcely perceptible deviation from perfect straight line, corrects optical illusions created by our imperfect eye.", original: "Optical correction" },
+            { text: "A facade that appears perfectly flat lacks the visual richness of one with varied projections; layering creates depth and shadow.", original: "Facade depth" },
+            { text: "The interval between columns should vary with their height; shorter buildings can tolerate wider spacing without appearing weak.", original: "Intercolumniation" },
+            { text: "A staircase with shallow steps and low rises proves less tiring than one with dramatic proportions; comfort and elegance align.", original: "Stair ergonomics" },
+            { text: "The window, when small and scattered, makes a wall appear solid; when larger and regular, it transforms the wall into frame for transparency.", original: "Window effect" },
+            { text: "A door that is too grand for the room makes human beings appear diminished; proportion must serve the inhabitants, not overwhelm them.", original: "Human scale" },
+            { text: "The arch that springs from base to apex in perfect proportion appears lighter than one whose curve is too flat or too exaggerated.", original: "Arch curves" },
+            { text: "Horizontal lines suggest repose and stability; vertical lines suggest aspiration and strength—the architect chooses which emotion to invoke.", original: "Linear emotion" },
+            { text: "A composition that is perfectly balanced in all directions appears static; slight emphasis creates dynamic interest without chaos.", original: "Dynamic balance" },
+            { text: "The void—that empty space—proves as important as the solid; without absence of form, presence of form cannot be fully appreciated.", original: "Void importance" },
+            { text: "Materials expensive and precious should be used where they contribute meaningfully to effect; economy elsewhere allows splendor where it counts.", original: "Material economy" },
+            { text: "A rough material, when appropriately used, creates power; a refined material, when used inappropriately, appears weak.", original: "Material appropriateness" },
+            { text: "The appearance of material matters as much as its actual properties; stone that appears light will be perceived as less strong than it truly is.", original: "Material appearance" },
+            { text: "Weathering and age, when they do not compromise structure, add nobility to a building; artifice cannot replicate the dignity of genuine patina.", original: "Patina value" },
+            { text: "Utility must never be sacrificed for beauty, nor beauty neglected for mere function; the architect seeks perfection where both fully unite.", original: "Utilitas and venustas" },
+            { text: "A building that serves its purpose flawlessly yet offends the eye fails in its truest purpose; beauty matters to the human spirit.", original: "Spirit and function" },
+            { text: "The architect creates not merely shelter but frameworks for human activity; understanding how people live transforms the designer's work.", original: "Human activity" },
+            { text: "A city grows according to no grand plan, yet the architect can organize its growth through wise placement of public buildings.", original: "City structure" },
+            { text: "The straightest street is not always the best; curves can create visual interest and shelter inhabitants from harsh winds.", original: "Street planning" },
+            { text: "Public buildings should inspire; private dwellings should comfort—the architect distinguishes between these purposes through design.", original: "Building purpose" },
+            { text: "The strength of a foundation determines whether a structure stands for generations or crumbles within years—thus it merits the greatest attention.", original: "Foundations" }
+        ];
+        
+        function getDailyQuote() {
+            const today = new Date();
+            const month = today.getMonth();
+            const date = today.getDate();
+            
+            // Special handling for Dec 30
+            if (month === 11 && date === 30) {
+                return vitruviusQuotes[vitruviusQuotes.length - 1]; // Last quote (foundation)
+            }
+            
+            const start = new Date(today.getFullYear(), 0, 1);
+            const dayOfYear = Math.floor((today - start) / 86400000);
+            const quoteIndex = dayOfYear % vitruviusQuotes.length;
+            return vitruviusQuotes[quoteIndex];
+        }
+        
+        // Load quote on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            const dailyQuote = getDailyQuote();
+            document.getElementById('quote-text').innerHTML = '"' + dailyQuote.text + '"';
+            document.getElementById('quote-author').textContent = '— Vitruvius, De architectura';
+        });
+    </script>
+
+    <div class="online-panel">
+        <div class="online-inner">
+            <span class="online-label">Currently online:</span>
+            <span id="online-count">0</span>
+        </div>
+    </div>
+    
     <div class="page-grid">
 
     <section class="api-section">
@@ -492,6 +745,140 @@
                         </svg>
                         Bun Stack Diagram
                     </a>
+                </div>
+                <div class="ml-card" aria-label="Professional Machine Learning Engineer overview" style="margin-top: 10px;">
+                    <div class="ml-title">Professional Machine Learning Engineer</div>
+                    <p class="ml-text">Designs reliable ML systems end-to-end: frames business questions, curates ethical data, builds and evaluates models, and engineers serving paths that stay performant in production.</p>
+                    <p class="ml-text">Balances statistical rigor with MLOps discipline—versioned datasets, repeatable pipelines, monitoring for drift, and rollback plans so models remain trustworthy after deployment.</p>
+                    <div class="ml-topics">
+                        <div class="ml-section">
+                            <div class="ml-section-title">Framing Machine Learning Problems</div>
+                            <ul class="ml-list">
+                                <li>When to use ML vs non-ML</li>
+                                <li>Business problem → ML objective</li>
+                                <li>Choosing success metrics</li>
+                                <li>Supervised vs unsupervised vs reinforcement learning</li>
+                                <li>Avoiding unnecessary ML solutions</li>
+                            </ul>
+                        </div>
+                        <div class="ml-section">
+                            <div class="ml-section-title">Data Engineering & Data Preparation</div>
+                            <ul class="ml-list">
+                                <li>Data collection and ingestion</li>
+                                <li>Structured vs unstructured data</li>
+                                <li>Feature engineering</li>
+                                <li>Feature scaling and normalization</li>
+                                <li>Handling missing data</li>
+                                <li>Handling imbalanced datasets</li>
+                                <li>Train / validation / test splits</li>
+                                <li>Preventing data leakage</li>
+                                <li>Data labeling strategies</li>
+                            </ul>
+                        </div>
+                        <div class="ml-section">
+                            <div class="ml-section-title">Model Development</div>
+                            <ul class="ml-list">
+                                <li>Linear regression</li>
+                                <li>Logistic regression</li>
+                                <li>Decision trees</li>
+                                <li>Random forests</li>
+                                <li>Gradient boosting</li>
+                                <li>k-means clustering</li>
+                                <li>Principal Component Analysis (PCA)</li>
+                                <li>Neural networks fundamentals</li>
+                                <li>Convolutional Neural Networks (CNNs)</li>
+                                <li>Recurrent Neural Networks (RNNs, LSTMs)</li>
+                                <li>Transfer learning</li>
+                                <li>Fine-tuning pre-trained models</li>
+                            </ul>
+                        </div>
+                        <div class="ml-section">
+                            <div class="ml-section-title">Training at Scale (Google Cloud Focus)</div>
+                            <ul class="ml-list">
+                                <li>Distributed training concepts</li>
+                                <li>Data parallelism vs model parallelism</li>
+                                <li>GPU vs TPU selection</li>
+                                <li>Batch size trade-offs</li>
+                                <li>Hyperparameter tuning</li>
+                                <li>AutoML vs custom training</li>
+                            </ul>
+                        </div>
+                        <div class="ml-section">
+                            <div class="ml-section-title">Model Evaluation & Validation</div>
+                            <ul class="ml-list">
+                                <li>Selecting metrics per problem type</li>
+                                <li>Confusion matrix interpretation</li>
+                                <li>Precision, recall, F1 score</li>
+                                <li>ROC curve and AUC</li>
+                                <li>Detecting overfitting and underfitting</li>
+                                <li>Cross-validation</li>
+                                <li>Error analysis</li>
+                            </ul>
+                        </div>
+                        <div class="ml-section">
+                            <div class="ml-section-title">MLOps & Model Lifecycle</div>
+                            <ul class="ml-list">
+                                <li>Experiment tracking</li>
+                                <li>Model versioning</li>
+                                <li>Reproducibility</li>
+                                <li>Model deployment strategies</li>
+                                <li>Online (real-time) prediction</li>
+                                <li>Batch prediction</li>
+                                <li>CI/CD for ML pipelines</li>
+                            </ul>
+                        </div>
+                        <div class="ml-section">
+                            <div class="ml-section-title">Model Monitoring & Maintenance</div>
+                            <ul class="ml-list">
+                                <li>Data drift detection</li>
+                                <li>Concept drift detection</li>
+                                <li>Performance degradation</li>
+                                <li>Retraining strategies</li>
+                                <li>Logging and alerting</li>
+                            </ul>
+                        </div>
+                        <div class="ml-section">
+                            <div class="ml-section-title">Responsible AI & Security</div>
+                            <ul class="ml-list">
+                                <li>Bias and fairness considerations</li>
+                                <li>Model explainability</li>
+                                <li>Feature attribution</li>
+                                <li>Ethical AI principles</li>
+                                <li>Data privacy</li>
+                                <li>Access control and IAM</li>
+                            </ul>
+                        </div>
+                        <div class="ml-section">
+                            <div class="ml-section-title">Production ML Systems</div>
+                            <ul class="ml-list">
+                                <li>Scalability considerations</li>
+                                <li>Latency vs throughput trade-offs</li>
+                                <li>Cost optimization</li>
+                                <li>Model rollback strategies</li>
+                                <li>Canary deployments</li>
+                                <li>Fault tolerance</li>
+                            </ul>
+                        </div>
+                        <div class="ml-section">
+                            <div class="ml-section-title">Optimization & Performance</div>
+                            <ul class="ml-list">
+                                <li>Training speed vs accuracy</li>
+                                <li>Cost vs performance</li>
+                                <li>Model complexity vs inference latency</li>
+                                <li>Feature richness vs serving cost</li>
+                            </ul>
+                        </div>
+                        <div class="ml-section">
+                            <div class="ml-section-title">Troubleshooting & Debugging</div>
+                            <ul class="ml-list">
+                                <li>Poor model performance diagnosis</li>
+                                <li>Training instability causes</li>
+                                <li>Skewed or biased data</li>
+                                <li>Pipeline failures</li>
+                                <li>Training vs serving skew</li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
     </aside>
 
@@ -978,6 +1365,99 @@
                     links.addEventListener('mouseenter', openOnHover);
                     links.addEventListener('mouseleave', maybeCloseOnHoverLeave);
                 });
+            })();
+
+            // Accordion for ML sections
+            (() => {
+                const titles = document.querySelectorAll('.ml-section-title');
+                titles.forEach((title, idx) => {
+                    title.style.cursor = 'pointer';
+                    title.setAttribute('tabindex', '0');
+                    const section = title.closest('.ml-section');
+                    if (!section) return;
+                    const list = section.querySelector('.ml-list');
+                    if (!list) return;
+
+                    const setState = (expanded) => {
+                        if (expanded) {
+                            section.classList.remove('collapsed');
+                            title.classList.remove('collapsed');
+                        } else {
+                            section.classList.add('collapsed');
+                            title.classList.add('collapsed');
+                        }
+                    };
+
+                    // Expand the first ML section by default, collapse others
+                    setState(idx === 0);
+
+                    const toggle = () => {
+                        const willExpand = section.classList.contains('collapsed');
+                        setState(willExpand);
+                    };
+
+                    let hoverTimeout;
+                    const openOnHover = () => {
+                        clearTimeout(hoverTimeout);
+                        setState(true);
+                    };
+                    const maybeCloseOnHoverLeave = () => {
+                        clearTimeout(hoverTimeout);
+                        hoverTimeout = setTimeout(() => {
+                            const stillHovering = title.matches(':hover') || list.matches(':hover');
+                            if (!stillHovering) setState(false);
+                        }, 80);
+                    };
+
+                    title.addEventListener('click', toggle);
+                    title.addEventListener('keydown', (e) => {
+                        if (e.key === 'Enter' || e.key === ' ') {
+                            e.preventDefault();
+                            toggle();
+                        }
+                    });
+                    title.addEventListener('mouseenter', openOnHover);
+                    title.addEventListener('mouseleave', maybeCloseOnHoverLeave);
+                    list.addEventListener('mouseenter', openOnHover);
+                    list.addEventListener('mouseleave', maybeCloseOnHoverLeave);
+                });
+            })();
+
+            // Online visitors counter via WebSocket
+            (() => {
+                const counterEl = document.getElementById('online-count');
+                if (!counterEl || !('WebSocket' in window)) return;
+
+                let socket;
+
+                const connect = () => {
+                    const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
+                    const url = protocol + '//' + window.location.host + '/ws';
+
+                    socket = new WebSocket(url);
+
+                    socket.addEventListener('message', (event) => {
+                        try {
+                            const data = JSON.parse(event.data);
+                            if (typeof data.active === 'number') {
+                                counterEl.textContent = String(data.active);
+                            }
+                        } catch (e) {
+                            // ignore malformed messages
+                        }
+                    });
+
+                    socket.addEventListener('close', () => {
+                        // simple auto-reconnect
+                        setTimeout(connect, 2000);
+                    });
+
+                    socket.addEventListener('error', () => {
+                        try { socket.close(); } catch (e) {}
+                    });
+                };
+
+                connect();
             })();
         </script>
                 <script>

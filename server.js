@@ -1,6 +1,7 @@
 const http = require('http');
 const fs = require('fs');
 const path = require('path');
+const WebSocket = require('ws');
 const googleTrends = require('google-trends-api');
 
 ////////////////////////////////////////////
@@ -1157,6 +1158,29 @@ const server  = http.createServer((req,res) => {
         res.writeHead(404);
         res.end('page not found');
     }
+});
+
+// WebSocket server for "currently online" counter
+const wss = new WebSocket.Server({ server, path: '/ws' });
+let activeConnections = 0;
+
+const broadcastActiveCount = () => {
+    const payload = JSON.stringify({ active: activeConnections });
+    wss.clients.forEach((client) => {
+        if (client.readyState === WebSocket.OPEN) {
+            client.send(payload);
+        }
+    });
+};
+
+wss.on('connection', (ws) => {
+    activeConnections += 1;
+    broadcastActiveCount();
+
+    ws.on('close', () => {
+        activeConnections = Math.max(0, activeConnections - 1);
+        broadcastActiveCount();
+    });
 });
 
 const PORT = process.env.PORT || 8080;
