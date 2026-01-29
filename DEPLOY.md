@@ -113,6 +113,7 @@ gcloud run revisions list --service arxcafe --region europe-west1
 - Frontend: Vanilla HTML/CSS/JS; client routing via `api.html?api=slug`
 - Backend: Minimal HTTP server in `server.js` (no Express), static asset serving
 - Data: Google Trends via `google-trends-api` with cached results
+- Data (ML topics, dev only): MongoDB local instance (Compass) for storing/searching Professional ML Engineer topics
 - Container: Docker single-stage; Cloud Run (managed) in `europe-west1`
 - Registry: Artifact Registry (AR) in `europe-west1`
 
@@ -128,6 +129,10 @@ gcloud run revisions list --service arxcafe --region europe-west1
   - Lookback: 30 days (`LOOKBACK_DAYS`)
   - Method: average interest over time per keyword
   - Edit keywords and redeploy to change results
+- `GET /ml-topics.json?q=<query>`: search stored ML topics related to the Professional Machine Learning Engineer card (dev only)
+  - Backend collection: `ml_topics` in local MongoDB `arxcafe`
+  - Document shape (example): `{ section: "Framing Machine Learning Problems", sectionOrder: 1, order: 1, text: "When to use ML vs non-ML" }`
+  - Notes: you can manage/seed this collection via MongoDB Compass in your local dev environment
 
 ## Cost Control
 - Use AR in `europe-west1` (done); avoid cross-region pulls

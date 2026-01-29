@@ -2,6 +2,7 @@ const http = require('http');
 const fs = require('fs');
 const path = require('path');
 const WebSocket = require('ws');
+const { MongoClient } = require('mongodb');
 const googleTrends = require('google-trends-api');
 
 ////////////////////////////////////////////
@@ -78,6 +79,35 @@ const serveStaticFile = (filePath, res) => {
     });
 };
 
+// Development-only MongoDB connection (local MongoDB, managed via Compass)
+// Uses MONGO_DEV_URI if provided, otherwise defaults to localhost.
+const devMongoUri = process.env.MONGO_DEV_URI || 'mongodb://127.0.0.1:27017/arxcafe';
+let mongoClient;
+let mongoDb;
+
+async function connectDevMongo() {
+    // Only attempt connection in non-production environments
+    if (process.env.NODE_ENV === 'production') {
+        return;
+    }
+
+    try {
+        mongoClient = new MongoClient(devMongoUri, {
+            serverSelectionTimeoutMS: 3000,
+        });
+        await mongoClient.connect();
+        mongoDb = mongoClient.db();
+        console.log('[MongoDB] Connected to local development database:', mongoDb.databaseName);
+    } catch (err) {
+        console.error('[MongoDB] Failed to connect to local development database:', err.message);
+    }
+}
+
+// Collection name for ML topics (used for legacy ML search)
+const ML_TOPICS_COLLECTION = 'ml_topics';
+// Collection name for knowledge base topics (HTML documents)
+const TOPICS_COLLECTION = 'topics';
+
 const server  = http.createServer((req,res) => {
     const pathName = req.url.split('?')[0];
 
@@ -91,6 +121,114 @@ const server  = http.createServer((req,res) => {
                 res.writeHead(200, { 'Content-Type': 'application/json', 'Cache-Control': 'public, max-age=300' });
                 res.end(JSON.stringify({ items: trendsCache.items }));
             });
+        return;
+    }
+
+    // Simple JSON search endpoint for ML topics (legacy)
+    if (pathName === '/ml-topics.json') {
+        (async () => {
+            try {
+                if (!mongoDb) {
+                    res.writeHead(503, { 'Content-Type': 'application/json' });
+                    res.end(JSON.stringify({ items: [], error: 'ML topics search is not available (no database connection).' }));
+                    return;
+                }
+
+                const url = new URL(req.url, 'http://localhost');
+                const q = (url.searchParams.get('q') || '').trim();
+
+                const coll = mongoDb.collection(ML_TOPICS_COLLECTION);
+                const filter = q
+                    ? { text: { $regex: q, $options: 'i' } }
+                    : {};
+
+                const docs = await coll
+                    .find(filter)
+                    .sort({ sectionOrder: 1, order: 1 })
+                    .limit(50)
+                    .toArray();
+
+                const items = docs.map(doc => ({
+                    section: doc.section,
+                    text: doc.text,
+                }));
+
+                res.writeHead(200, { 'Content-Type': 'application/json', 'Cache-Control': 'no-store' });
+                res.end(JSON.stringify({ items }));
+            } catch (err) {
+                console.error('[ML search] Failed:', err.message);
+                res.writeHead(500, { 'Content-Type': 'application/json' });
+                res.end(JSON.stringify({ items: [], error: 'Internal server error.' }));
+            }
+        })();
+        return;
+    }
+
+    // JSON search endpoint for knowledge base topics (HTML documents)
+    if (pathName === '/topics.json') {
+        (async () => {
+            try {
+                if (!mongoDb) {
+                    res.writeHead(503, { 'Content-Type': 'application/json' });
+                    res.end(JSON.stringify({ items: [], error: 'Knowledge base search is not available (no database connection).' }));
+                    return;
+                }
+
+                const url = new URL(req.url, 'http://localhost');
+                const q = (url.searchParams.get('q') || '').trim();
+
+                if (!q || q.length < 2) {
+                    res.writeHead(200, { 'Content-Type': 'application/json', 'Cache-Control': 'no-store' });
+                    res.end(JSON.stringify({ items: [] }));
+                    return;
+                }
+
+                const coll = mongoDb.collection(TOPICS_COLLECTION);
+                const escaped = q.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+                const regex = new RegExp(escaped, 'i');
+
+                const docs = await coll
+                    .find({
+                        $or: [
+                            { title: regex },
+                            { keywords: regex },
+                            { content_html: regex }
+                        ]
+                    })
+                    .project({ title: 1, category: 1, difficulty: 1, tags: 1 })
+                    .limit(20)
+                    .toArray();
+
+                const items = docs.map(doc => ({
+                    id: doc._id,
+                    title: doc.title,
+                    category: doc.category || null,
+                    difficulty: doc.difficulty || null,
+                    tags: Array.isArray(doc.tags) ? doc.tags : []
+                }));
+
+                res.writeHead(200, { 'Content-Type': 'application/json', 'Cache-Control': 'no-store' });
+                res.end(JSON.stringify({ items }));
+            } catch (err) {
+                console.error('[Topics search] Failed:', err.message);
+                res.writeHead(500, { 'Content-Type': 'application/json' });
+                res.end(JSON.stringify({ items: [], error: 'Internal server error.' }));
+            }
+        })();
+        return;
+    }
+
+    // Knowledge base topic pages (HTML)
+    if (pathName === '/topics/when-to-use-ml-vs-non-ml.html') {
+        fs.readFile(path.join(__dirname, 'topics/when-to-use-ml-vs-non-ml.html'), 'utf8', (err, data) => {
+            if (err) {
+                res.writeHead(500, { 'Content-Type': 'text/plain' });
+                res.end('Error loading topic');
+                return;
+            }
+            res.writeHead(200, { 'Content-Type': 'text/html', 'Cache-Control': 'no-store' });
+            res.end(data);
+        });
         return;
     }
 
@@ -1184,6 +1322,10 @@ wss.on('connection', (ws) => {
 });
 
 const PORT = process.env.PORT || 8080;
+
+// Start HTTP server, then connect to local dev MongoDB (if not production)
 server.listen(PORT, '0.0.0.0', () => {
-    console.log(`The arxcafe server started on port ${PORT}`)
+    console.log(`The arxcafe server started on port ${PORT}`);
+    console.log(`Server running at http://localhost:${PORT}`);
+    connectDevMongo();
 });

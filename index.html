@@ -258,11 +258,58 @@
         });
     </script>
 
-    <div class="online-panel">
-        <div class="online-inner">
-            <span class="online-label">Currently online:</span>
-            <span id="online-count">0</span>
+    <div style="margin: 0 auto 30px; max-width: 1200px; padding: 0 20px; width: 100%; box-sizing: border-box;">
+        <div style="padding: 24px; background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.18); border-radius: 12px; backdrop-filter: blur(8px); box-shadow: 0 8px 24px rgba(0,0,0,0.18); color: rgba(255,255,255,0.9);">
+            <h2 style="margin: 0 0 8px; font-size: 1.1em; letter-spacing: 0.04em; text-transform: uppercase; opacity: 0.9;">Firmitas · Utilitas · Venustas</h2>
+            <div style="display: flex; flex-wrap: wrap; gap: 16px; font-size: 0.95em; line-height: 1.6;">
+                <p style="margin: 0; min-width: 180px;">
+                    <strong>Firmitas: Strength</strong><br>
+                    Structural integrity<br>
+                    Durability<br>
+                    Reliability over time
+                </p>
+                <p style="margin: 0; min-width: 180px;">
+                    <strong>Utilitas: Use</strong><br>
+                    Fitness for purpose<br>
+                    Human needs<br>
+                    Function without friction
+                </p>
+                <p style="margin: 0; min-width: 180px;">
+                    <strong>Venustas: Beauty</strong><br>
+                    Harmony<br>
+                    Proportion<br>
+                    Meaning and dignity
+                </p>
+            </div>
         </div>
+    </div>
+
+    <div style="margin: 0 auto 30px; max-width: 1200px; padding: 0 20px; width: 100%; box-sizing: border-box;">
+        <div style="padding: 24px; background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.18); border-radius: 12px; backdrop-filter: blur(8px); box-shadow: 0 8px 24px rgba(0,0,0,0.18); color: rgba(255,255,255,0.9);">
+            <h2 style="margin: 0 0 8px; font-size: 1.05em; letter-spacing: 0.04em; text-transform: uppercase; opacity: 0.9;">Skill: Craft + Technique</h2>
+            <p style="margin: 0; font-size: 0.95em; line-height: 1.7;">
+                Learning by doing, where practice, repetition, and reflection turn raw talent into reliable technique. As Vitruvius reminds us:
+                <br><em>&ldquo;For neither talent without instruction nor instruction without talent can produce the perfect craftsman.&rdquo;</em>
+            </p>
+        </div>
+    </div>
+
+    <div style="margin: 0 auto 30px; max-width: 1200px; padding: 0 20px; width: 100%; box-sizing: border-box;">
+        <div style="padding: 24px; background: rgba(255, 255, 255, 0.06); border: 1px solid rgba(255, 255, 255, 0.18); border-radius: 12px; backdrop-filter: blur(8px); box-shadow: 0 6px 20px rgba(0,0,0,0.16); color: rgba(255,255,255,0.9);">
+            <p style="margin: 0; font-size: 0.96em; line-height: 1.7;">
+                Before you design systems, you must understand the world they live in.
+                Architects often feel like generalists among specialists.
+                The architect is not the best engineer, artist, or builder,
+                but the one who knows enough of each to arbitrate wisely.
+            </p>
+        </div>
+    </div>
+
+    <div class="online-panel">
+            <div class="online-inner">
+                <span class="online-label">Currently learning:</span>
+                <span id="online-count">0</span>
+            </div>
     </div>
     
     <div class="page-grid">
@@ -892,6 +939,17 @@
         <div class="card">
             <h1>🍰 ArxCafe</h1>
             <p>Welcome to ArxCafe a calm, secure place to sit your exams online.</p>
+            <div class="ml-search-container" aria-label="Search Professional Machine Learning Engineer topics">
+                <input
+                    type="search"
+                    id="ml-search-input"
+                    class="ml-search-input"
+                    placeholder="Search ML topics (e.g. overfitting, drift, MLOps)"
+                    autocomplete="off"
+                >
+                <button type="button" id="ml-search-button" class="ml-search-button">Search</button>
+            </div>
+            <div id="ml-search-results" class="ml-search-results" aria-live="polite"></div>
         </div>
         <div class="panel web-network-panel" aria-live="polite">
             <div class="web-network-header">
@@ -1409,6 +1467,27 @@
                         }, 80);
                     };
 
+                    // Make ML subtitles behave like buttons for accessibility and navigation
+                    list.querySelectorAll('li').forEach((item) => {
+                        const label = item.textContent.trim();
+                        item.setAttribute('role', 'button');
+                        item.setAttribute('tabindex', '0');
+
+                        const navigate = () => {
+                            if (label === 'When to use ML vs non-ML') {
+                                window.location.href = '/topics/when-to-use-ml-vs-non-ml.html';
+                            }
+                        };
+
+                        item.addEventListener('click', navigate);
+                        item.addEventListener('keydown', (e) => {
+                            if (e.key === 'Enter' || e.key === ' ') {
+                                e.preventDefault();
+                                navigate();
+                            }
+                        });
+                    });
+
                     title.addEventListener('click', toggle);
                     title.addEventListener('keydown', (e) => {
                         if (e.key === 'Enter' || e.key === ' ') {
@@ -1458,6 +1537,99 @@
                 };
 
                 connect();
+            })();
+
+            // ML topics search in ArxCafe card
+            (() => {
+                const input = document.getElementById('ml-search-input');
+                const button = document.getElementById('ml-search-button');
+                const resultsEl = document.getElementById('ml-search-results');
+
+                if (!input || !resultsEl) return;
+
+                const renderResults = (items, query) => {
+                    if (!query || query.trim().length < 2) {
+                        resultsEl.textContent = '';
+                        return;
+                    }
+
+                    if (!items || !items.length) {
+                        resultsEl.textContent = 'No matching ML topics found yet.';
+                        return;
+                    }
+
+                    const list = document.createElement('ul');
+                    list.className = 'ml-search-results-list';
+
+                    items.forEach((item) => {
+                        const li = document.createElement('li');
+                        li.className = 'ml-search-result-item';
+
+                        const section = document.createElement('div');
+                        section.className = 'ml-search-result-section';
+                        const labelParts = [];
+                        if (item.category) labelParts.push(item.category);
+                        if (item.difficulty) labelParts.push(item.difficulty);
+                        section.textContent = labelParts.join(' · ') || 'ML topic';
+
+                        const text = document.createElement('div');
+                        text.className = 'ml-search-result-text';
+                        text.textContent = item.title || item.text || '';
+
+                        li.appendChild(section);
+                        li.appendChild(text);
+                        list.appendChild(li);
+                    });
+
+                    resultsEl.innerHTML = '';
+                    resultsEl.appendChild(list);
+                };
+
+                const search = async () => {
+                    const q = input.value.trim();
+                    if (q.length < 2) {
+                        resultsEl.textContent = '';
+                        return;
+                    }
+
+                    try {
+                        const res = await fetch('/topics.json?q=' + encodeURIComponent(q));
+                        if (!res.ok) {
+                            resultsEl.textContent = 'ML search is not available right now.';
+                            return;
+                        }
+                        const data = await res.json();
+                        renderResults(data.items || [], q);
+                    } catch (e) {
+                        resultsEl.textContent = 'Unable to search ML topics right now.';
+                    }
+                };
+
+                if (button) {
+                    button.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        search();
+                    });
+                }
+
+                input.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter') {
+                        e.preventDefault();
+                        search();
+                    }
+                });
+
+                let debounce;
+                input.addEventListener('input', () => {
+                    clearTimeout(debounce);
+                    debounce = setTimeout(() => {
+                        if (input.value.trim().length === 0) {
+                            resultsEl.textContent = '';
+                            return;
+                        }
+                        search();
+                    }, 300);
+                });
             })();
         </script>
                 <script>

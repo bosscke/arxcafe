@@ -37,6 +37,92 @@
 .online-label { font-weight: 500; }
 #online-count { font-weight: 700; }
 
+.ml-search-container {
+  margin-top: 1rem;
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.ml-search-input {
+  flex: 1;
+  padding: 0.45rem 0.75rem;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  background: rgba(5, 10, 25, 0.85);
+  color: #f5f5ff;
+  font-size: 0.9rem;
+  outline: none;
+}
+
+.ml-search-input::placeholder {
+  color: rgba(245, 245, 255, 0.55);
+}
+
+.ml-search-input:focus {
+  border-color: rgba(120, 180, 255, 0.9);
+  box-shadow: 0 0 0 1px rgba(120, 180, 255, 0.75);
+}
+
+.ml-search-button {
+  padding: 0.4rem 0.9rem;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  background: radial-gradient(circle at 0 0, rgba(150, 200, 255, 0.35), rgba(60, 90, 170, 0.85));
+  color: #fdfdff;
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: transform 0.08s ease-out, box-shadow 0.08s ease-out, background 0.12s ease-out, border-color 0.12s ease-out;
+  white-space: nowrap;
+}
+
+.ml-search-button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
+  border-color: rgba(190, 220, 255, 0.95);
+}
+
+.ml-search-button:active {
+  transform: translateY(0);
+  box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+}
+
+.ml-search-results {
+  margin-top: 0.75rem;
+  font-size: 0.85rem;
+  line-height: 1.4;
+  max-height: 210px;
+  overflow-y: auto;
+}
+
+.ml-search-results-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.ml-search-result-item {
+  padding: 0.4rem 0.6rem;
+  border-radius: 0.55rem;
+  background: rgba(5, 10, 30, 0.88);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.ml-search-result-section {
+  font-size: 0.76rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: rgba(190, 210, 255, 0.82);
+}
+
+.ml-search-result-text {
+  margin-top: 0.1rem;
+  color: #f7f7ff;
+}
 /* Desktop layout: show sidebar + content */
 @media (min-width: 961px) {
   .page-grid {
@@ -178,9 +264,32 @@
 .ml-section-title:hover { background: rgba(255,255,255,0.05); color: rgba(255,255,255,0.95); }
 .ml-section-title::after { content: "▼"; font-size: 8px; transition: transform 0.2s ease; display: inline-block; }
 .ml-section-title.collapsed::after { transform: rotate(-90deg); }
-.ml-list { margin: 0; padding: 0 10px 8px 20px; font-size: 11px; line-height: 1.4; color: rgba(255,255,255,0.8); max-height: 999px; overflow: hidden; transition: max-height 0.2s ease; }
+.ml-list { margin: 0; padding: 0 10px 8px 20px; font-size: 11px; line-height: 1.4; color: rgba(255,255,255,0.8); max-height: 999px; overflow: hidden; transition: max-height 0.2s ease; list-style: none; }
 .ml-section.collapsed .ml-list { max-height: 0; padding: 0 10px 0 20px; }
-.ml-list li { margin: 4px 0; }
+/* Make ML bullet items look and feel like clickable buttons */
+.ml-list li {
+  margin: 4px 0;
+  display: block;
+  padding: 6px 8px;
+  border-radius: 8px;
+  background: rgba(255,255,255,0.02);
+  border: 1px solid rgba(255,255,255,0.06);
+  box-shadow: 0 3px 8px rgba(0,0,0,0.12);
+  cursor: pointer;
+  user-select: none;
+  transition: transform 0.12s ease, background 0.12s ease, box-shadow 0.12s ease;
+}
+.ml-list li:hover,
+.ml-list li:focus {
+  background: rgba(255,255,255,0.05);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.18);
+  outline: none;
+}
+.ml-list li:active {
+  transform: translateY(0);
+  box-shadow: 0 3px 10px rgba(0,0,0,0.16);
+}
 .architecture-inner { max-width: 1100px; width: 100%; text-align: center; }
 .architecture-title { margin: 0; font-size: 16px; font-weight: 700; color: rgba(255,255,255,0.95); }
 .architecture-note { margin: 4px 0 0; color: rgba(255,255,255,0.85); font-size: 13px; }
