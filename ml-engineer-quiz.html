@@ -369,8 +369,8 @@
 
         // Escape HTML
         function escapeHtml(text) {
-            const map = { '&': '&amp;', '<': '&lt;', '>': '&gt;', '\"': '&quot;', \"'\": '&#039;' };
-            return text.replace(/[&<>\"']/g, m => map[m]);
+            const map = { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' };
+            return text.replace(/[&<>"']/g, m => map[m]);
         }
 
         // Request AI explanation
@@ -554,6 +554,7 @@
             const correctIdx = ['A', 'B', 'C', 'D'].indexOf(correct);
             const isCorrect = selectedIdx === correctIdx;
             userAnswer = ['A', 'B', 'C', 'D'][selectedIdx];
+            const answeredIndex = currentQuestionIndex;
 
             // Disable all buttons
             document.querySelectorAll('.answers button').forEach(btn => btn.disabled = true);
@@ -570,15 +571,30 @@
                 document.getElementById('feedback').className = 'feedback wrong';
             }
 
-            // Show explanation button
-            explainBtn.style.display = 'inline-block';
-            explainBtn.onclick = requestAiExplanation;
-
-            // Move to next question after delay
-            setTimeout(() => {
+            // Use AI Quiz Assist for Continue vs auto-advance behavior
+            const advance = () => {
                 currentQuestionIndex++;
                 showQuestion();
-            }, 3000);
+            };
+
+            if (window.CzechLessonAiQuizAssist && window.CzechLessonAiQuizAssist.afterAnswer) {
+                window.CzechLessonAiQuizAssist.afterAnswer({
+                    quizId: 'ml-engineer-exam',
+                    questionText: q.question_text,
+                    userAnswer: q.options[selectedIdx] || '',
+                    correctAnswer: q.options[correctIdx] || '',
+                    isCorrect: isCorrect,
+                    feedbackEl: document.getElementById('feedback').parentElement,
+                    autoAdvanceDelayMs: 5000,
+                    aiFetchTimeoutMs: 12000,
+                    aiEnabled: true,
+                    onAdvance: advance,
+                    isStillCurrent: () => currentQuestionIndex === answeredIndex
+                });
+            } else {
+                // Fallback if AI assist not loaded
+                setTimeout(advance, 5000);
+            }
         }
 
         // Show results
@@ -611,5 +627,6 @@
         // Load questions on page load
         loadQuestions();
     </script>
+    <script src="/js/ai-quiz-assist.js"></script>
 </body>
 </html>

@@ -4,7 +4,7 @@ const path = require('path');
 const WebSocket = require('ws');
 const { MongoClient } = require('mongodb');
 const googleTrends = require('google-trends-api');
-const { handleAiExplain } = require('./ai-explain');
+const { handleAiExplain } = require('./routes/aiExplain');
 
 ////////////////////////////////////////////
 ///// Server ARXCAFE
@@ -267,14 +267,26 @@ const server  = http.createServer((req,res) => {
         return;
     }
 
-    // AI explanation endpoint (Gemini 2.5)
-    if (pathName === '/ai-explain.json') {
+    // AI explanation endpoint (Gemini 2.5) - 1:1 PHP port
+    if (pathName === '/api/ai/explain' || pathName === '/api/ai/explain.php') {
         if (req.method !== 'POST') {
             res.writeHead(405, { 'Content-Type': 'application/json' });
             res.end(JSON.stringify({ ok: false, error: 'POST required' }));
             return;
         }
-        handleAiExplain(req, res, mongoDb);
+        
+        // Parse JSON body for POST requests
+        let body = '';
+        req.on('data', chunk => body += chunk);
+        req.on('end', async () => {
+            try {
+                req.body = JSON.parse(body);
+                await handleAiExplain(req, res, mongoDb);
+            } catch (err) {
+                res.writeHead(400, { 'Content-Type': 'application/json' });
+                res.end(JSON.stringify({ ok: false, error: 'Invalid JSON' }));
+            }
+        });
         return;
     }
 
