@@ -1,6 +1,9 @@
 # Dependencies
 node_modules/
 
+# Environment variables (contains API keys)
+.env
+
 # Local content not tracked
 /topics/
 vitruvius.txt
