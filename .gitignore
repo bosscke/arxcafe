@@ -1,0 +1,10 @@
+# Dependencies
+node_modules/
+
+# Local content not tracked
+/topics/
+vitruvius.txt
+workflow.md
+
+# npm internal files
+node_modules/.package-lock.json
