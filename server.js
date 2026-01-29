@@ -4,6 +4,7 @@ const path = require('path');
 const WebSocket = require('ws');
 const { MongoClient } = require('mongodb');
 const googleTrends = require('google-trends-api');
+const { handleAiExplain } = require('./ai-explain');
 
 ////////////////////////////////////////////
 ///// Server ARXCAFE
@@ -232,6 +233,51 @@ const server  = http.createServer((req,res) => {
         return;
     }
 
+    // ML Engineer Quiz endpoint
+    if (pathName === '/ml-quiz-questions.json') {
+        (async () => {
+            try {
+                if (!mongoDb) {
+                    res.writeHead(503, { 'Content-Type': 'application/json' });
+                    res.end(JSON.stringify({ questions: [], error: 'Database not connected' }));
+                    return;
+                }
+
+                const url = new URL(req.url, 'http://localhost');
+                const phase = url.searchParams.get('phase') || 'all';
+                const domain = url.searchParams.get('domain') || 'all';
+
+                const coll = mongoDb.collection('ml_engineer_questions');
+                const filter = {};
+                if (phase !== 'all') filter.phase = parseInt(phase);
+                if (domain !== 'all') filter.domain = domain;
+
+                const questions = await coll
+                    .find(filter)
+                    .sort({ _id: 1 })
+                    .toArray();
+
+                res.writeHead(200, { 'Content-Type': 'application/json', 'Cache-Control': 'public, max-age=3600' });
+                res.end(JSON.stringify({ questions: questions }));
+            } catch (err) {
+                res.writeHead(500, { 'Content-Type': 'application/json' });
+                res.end(JSON.stringify({ questions: [], error: err.message }));
+            }
+        })();
+        return;
+    }
+
+    // AI explanation endpoint (Gemini 2.5)
+    if (pathName === '/ai-explain.json') {
+        if (req.method !== 'POST') {
+            res.writeHead(405, { 'Content-Type': 'application/json' });
+            res.end(JSON.stringify({ ok: false, error: 'POST required' }));
+            return;
+        }
+        handleAiExplain(req, res, mongoDb);
+        return;
+    }
+
     // Serve static files (hero.jpg, CSS, JS) and handle leading '/'
     if (pathName.match(/\.(jpg|jpeg|png|gif|svg|css|js)$/)) {
         const staticPath = pathName.replace(/^\/+/, '');
@@ -252,6 +298,26 @@ const server  = http.createServer((req,res) => {
         });
     } else if (pathName === '/api' || pathName === '/api.html') {
         fs.readFile(path.join(__dirname, 'api.html'), 'utf8', (err, data) => {
+            if (err) {
+                res.writeHead(500, {'Content-Type': 'text/plain'});
+                res.end('Error loading page');
+                return;
+            }
+            res.writeHead(200, {'Content-Type': 'text/html', 'Cache-Control': 'no-store'});
+            res.end(data);
+        });
+    } else if (pathName === '/assesment' || pathName === '/assesment.html' || pathName === '/assessment' || pathName === '/assessment.html') {
+        fs.readFile(path.join(__dirname, 'assesment.html'), 'utf8', (err, data) => {
+            if (err) {
+                res.writeHead(500, {'Content-Type': 'text/plain'});
+                res.end('Error loading page');
+                return;
+            }
+            res.writeHead(200, {'Content-Type': 'text/html', 'Cache-Control': 'no-store'});
+            res.end(data);
+        });
+    } else if (pathName === '/ml-engineer-quiz' || pathName === '/ml-engineer-quiz.html') {
+        fs.readFile(path.join(__dirname, 'ml-engineer-quiz.html'), 'utf8', (err, data) => {
             if (err) {
                 res.writeHead(500, {'Content-Type': 'text/plain'});
                 res.end('Error loading page');

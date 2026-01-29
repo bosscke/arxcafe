@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ML Engineer Quiz • ArxCafe</title>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231f2a44'/%3E%3Ctext x='50%25' y='58%25' text-anchor='middle' font-size='34'%3E🍰%3C/text%3E%3C/svg%3E">
+    <link rel="stylesheet" href="/css/global.css">
+    <style>
+        .quiz-container {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+        .quiz-box {
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.18);
+            border-radius: 20px;
+            padding: 50px 30px;
+            box-shadow: 0 12px 40px rgba(0,0,0,0.2);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+        .hide {
+            display: none !important;
+        }
+        .quiz-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .quiz-header h1 {
+            font-size: 36px;
+            margin: 0 0 10px;
+            color: #ffffff;
+        }
+        .subtitle {
+            color: rgba(255,255,255,0.82);
+            margin: 0;
+            font-size: 16px;
+        }
+        .info-box {
+            background: rgba(120, 180, 255, 0.15);
+            border: 1px solid rgba(120, 180, 255, 0.3);
+            padding: 30px;
+            border-radius: 12px;
+            margin: 30px 0;
+            border-left: 4px solid rgba(120, 180, 255, 0.8);
+        }
+        .info-box h3 {
+            margin-top: 0;
+            color: #ffffff;
+        }
+        .info-box ul {
+            line-height: 1.8;
+            color: rgba(255,255,255,0.85);
+            margin: 0;
+        }
+        .select-wrapper {
+            max-width: 520px;
+            margin: 30px auto;
+        }
+        .select-wrapper label {
+            display: block;
+            font-weight: 600;
+            color: #ffffff;
+            margin: 10px 0 8px;
+        }
+        .select-wrapper select {
+            width: 100%;
+            padding: 14px;
+            border-radius: 10px;
+            border: 2px solid rgba(255,255,255,0.2);
+            background: rgba(255,255,255,0.1);
+            color: #ffffff;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .select-wrapper select option {
+            background: #1a2332;
+            color: #ffffff;
+        }
+        .btn {
+            background: radial-gradient(circle at 0 0, rgba(150, 200, 255, 0.4), rgba(60, 90, 170, 0.9));
+            color: white;
+            padding: 16px 32px;
+            font-size: 18px;
+            font-weight: 600;
+            border: 1px solid rgba(255,255,255,0.3);
+            border-radius: 10px;
+            cursor: pointer;
+            width: 100%;
+            max-width: 520px;
+            margin: 20px auto;
+            display: block;
+            transition: transform 0.12s ease, box-shadow 0.12s ease;
+        }
+        .btn:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+        }
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        .back-link {
+            text-align: center;
+            margin-top: 30px;
+        }
+        .back-link a {
+            color: rgba(255,255,255,0.9);
+            text-decoration: none;
+            border-bottom: 1px solid rgba(255,255,255,0.3);
+        }
+        .back-link a:hover {
+            color: #fff;
+            border-color: rgba(255,255,255,0.6);
+        }
+        .progress {
+            background: rgba(255,255,255,0.1);
+            height: 8px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+        .progress-bar {
+            background: linear-gradient(90deg, rgba(120, 180, 255, 0.8), rgba(60, 90, 170, 0.9));
+            height: 100%;
+            width: 0;
+            border-radius: 5px;
+            transition: width 0.5s ease;
+        }
+        #progressText {
+            text-align: center;
+            font-weight: 600;
+            color: #ffffff;
+            margin-bottom: 20px;
+        }
+        #sectionTitle {
+            text-align: center;
+            color: rgba(255,255,255,0.75);
+            margin-bottom: 30px;
+        }
+        .question {
+            font-size: 19px;
+            font-weight: 600;
+            margin-bottom: 25px;
+            line-height: 1.5;
+            color: #ffffff;
+        }
+        .answers button {
+            width: 100%;
+            padding: 18px;
+            margin: 10px 0;
+            background: rgba(255,255,255,0.05);
+            border: 2px solid rgba(255,255,255,0.2);
+            border-radius: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            text-align: left;
+            color: #ffffff;
+            transition: all 0.2s ease;
+        }
+        .answers button:hover {
+            border-color: rgba(120, 180, 255, 0.6);
+            background: rgba(120, 180, 255, 0.1);
+        }
+        .answers button.correct {
+            border-color: #4caf50;
+            background: rgba(76, 175, 80, 0.2);
+        }
+        .answers button.wrong {
+            border-color: #f44336;
+            background: rgba(244, 67, 54, 0.2);
+        }
+        .feedback {
+            margin-top: 18px;
+            font-size: 16px;
+            text-align: center;
+            min-height: 24px;
+        }
+        .feedback.correct {
+            color: #4caf50;
+        }
+        .feedback.wrong {
+            color: #f44336;
+        }
+        .result {
+            text-align: center;
+        }
+        .result h2 {
+            font-size: 32px;
+            margin-bottom: 20px;
+            color: #ffffff;
+        }
+        .score {
+            font-size: 48px;
+            font-weight: 700;
+            color: rgba(120, 180, 255, 0.95);
+            margin: 20px 0;
+        }
+        #resultMsg {
+            font-size: 18px;
+            line-height: 1.6;
+            margin: 20px 0;
+            color: rgba(255,255,255,0.85);
+        }
+        #categoryBreakdown {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.15);
+            padding: 25px;
+            border-radius: 12px;
+            margin: 30px 0;
+            text-align: left;
+        }
+        .explanation-btn {
+            background: rgba(100, 180, 255, 0.2);
+            border: 1px solid rgba(100, 180, 255, 0.4);
+            color: rgba(150, 220, 255, 0.95);
+            padding: 10px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 600;
+            transition: all 0.2s ease;
+            margin-top: 12px;
+        }
+        .explanation-btn:hover:not(:disabled) {
+            background: rgba(100, 180, 255, 0.35);
+            border-color: rgba(150, 220, 255, 0.6);
+        }
+        .explanation-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        .explanation-panel {
+            background: rgba(100, 180, 255, 0.1);
+            border: 1px solid rgba(100, 180, 255, 0.3);
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 15px;
+            font-size: 14px;
+            line-height: 1.6;
+            color: rgba(255,255,255,0.9);
+        }
+        .explanation-loading {
+            color: rgba(255,255,255,0.6);
+            font-style: italic;
+        }
+        .explanation-error {
+            color: rgba(255, 100, 100, 0.9);
+        }
+        .result-btn-primary {
+            display: inline-block;
+            margin: 10px;
+            padding: 14px 28px;
+            background: radial-gradient(circle at 0 0, rgba(150, 200, 255, 0.4), rgba(60, 90, 170, 0.9));
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+        .result-btn-secondary {
+            display: inline-block;
+            margin: 10px;
+            padding: 14px 28px;
+            background: rgba(255,255,255,0.08);
+            color: #ffffff;
+            border: 2px solid rgba(255,255,255,0.3);
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        @media (max-width: 720px) {
+            .quiz-container {
+                margin: 20px auto;
+                padding: 10px;
+            }
+            .quiz-box {
+                padding: 30px 20px;
+            }
+            .quiz-header h1 {
+                font-size: 28px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="quiz-container">
+        <!-- Step 1: Introduction -->
+        <div id="step1" class="quiz-box">
+            <div class="quiz-header">
+                <h1>Professional Machine Learning Engineer Quiz</h1>
+                <p class="subtitle">Comprehensive exam preparation • Practice questions covering all exam topics</p>
+            </div>
+
+            <div class="info-box">
+                <h3>How This Quiz Works</h3>
+                <ul>
+                    <li><strong>Select a topic</strong> or <strong>All topics</strong> for comprehensive practice.</li>
+                    <li>Each question has 4 choices (A–D).</li>
+                    <li>At the end you'll see your score and a per-topic breakdown.</li>
+                </ul>
+            </div>
+
+            <div class="select-wrapper">
+                <label for="topicSelect">Choose topic</label>
+                <select id="topicSelect">
+                    <option value="all">All topics (comprehensive)</option>
+                    <option value="framing">Framing ML Problems</option>
+                    <option value="architecture">ML Solution Architecture</option>
+                    <option value="data">Data Preparation & Processing</option>
+                    <option value="development">ML Model Development</option>
+                    <option value="automation">ML Pipeline Automation</option>
+                    <option value="monitoring">Monitoring & Optimization</option>
+                </select>
+            </div>
+
+            <button class="btn" id="startBtn">Start Quiz</button>
+            <p class="back-link"><a href="/assesment.html">← Back to Assessment</a></p>
+        </div>
+
+        <!-- Step 2: Quiz -->
+        <div id="step2" class="quiz-box hide">
+            <div class="progress"><div id="progressBar" class="progress-bar"></div></div>
+            <p id="progressText"></p>
+            <h3 id="sectionTitle"></h3>
+            <div id="question" class="question"></div>
+            <div id="answers" class="answers"></div>
+            <div id="feedback" class="feedback" aria-live="polite"></div>
+            <button class="explanation-btn" id="explainBtn" style="display: none;">📚 Explain this answer</button>
+            <div id="explanationPanel" class="explanation-panel" style="display: none;"></div>
+        </div>
+
+        <!-- Step 3: Results -->
+        <div id="step3" class="quiz-box hide">
+            <div class="result">
+                <div id="icon" style="font-size: 72px; margin-bottom: 20px;"></div>
+                <h2 id="resultTitle"></h2>
+                <div id="resultScore" class="score"></div>
+                <p id="resultMsg"></p>
+                <div id="categoryBreakdown"></div>
+                <a href="/" class="result-btn-primary">Back to Home</a>
+                <button class="result-btn-secondary" id="retryBtn">Retake Quiz</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Quiz state
+        let questions = [];
+        let currentQuestionIndex = 0;
+        let score = 0;
+        let selectedTopic = 'all';
+        const answers = {};
+        let currentQuestion = null;
+        let userAnswer = null;
+        let isAnswered = false;
+
+        // DOM elements
+        const step1 = document.getElementById('step1');
+        const step2 = document.getElementById('step2');
+        const step3 = document.getElementById('step3');
+        const startBtn = document.getElementById('startBtn');
+        const retryBtn = document.getElementById('retryBtn');
+        const topicSelect = document.getElementById('topicSelect');
+        const explainBtn = document.getElementById('explainBtn');
+        const explanationPanel = document.getElementById('explanationPanel');
+
+        // Escape HTML
+        function escapeHtml(text) {
+            const map = { '&': '&amp;', '<': '&lt;', '>': '&gt;', '\"': '&quot;', \"'\": '&#039;' };
+            return text.replace(/[&<>\"']/g, m => map[m]);
+        }
+
+        // Request AI explanation
+        async function requestAiExplanation() {
+            if (!currentQuestion) return;
+            
+            explainBtn.disabled = true;
+            explainBtn.textContent = '⏳ Loading explanation...';
+            explanationPanel.style.display = 'block';
+            explanationPanel.innerHTML = '<div class="explanation-loading">Generating AI explanation...</div>';
+
+            try {
+                const payload = {
+                    question_id: currentQuestion._id?.toString() || 'q-' + currentQuestionIndex,
+                    question_text: currentQuestion.question_text,
+                    user_answer: userAnswer || '',
+                    correct_answer: currentQuestion.correct_answer,
+                    is_correct: userAnswer === currentQuestion.correct_answer,
+                    explanation_level: 'short',
+                    quiz_id: 'ml-engineer-exam',
+                    difficulty: 'medium'
+                };
+
+                const response = await fetch('/ai-explain.json', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                const result = await response.json();
+
+                if (result.ok && result.short_explanation) {
+                    let html = '<div style="white-space: pre-wrap;">' + escapeHtml(result.short_explanation) + '</div>';
+                    
+                    if (result.expandable && result.model) {
+                        html += '<br><button class="explanation-btn" onclick="requestLongExplanation()">📖 Read more</button>';
+                    }
+                    
+                    if (result.model) {
+                        html += '<div style="margin-top: 12px; font-size: 12px; color: rgba(255,255,255,0.5);">Powered by ' + escapeHtml(result.model) + '</div>';
+                    }
+                    
+                    explanationPanel.innerHTML = html;
+                } else {
+                    explanationPanel.innerHTML = '<div class="explanation-error">Could not generate explanation. Using stored explanation instead.</div>';
+                    if (currentQuestion.explanation) {
+                        explanationPanel.innerHTML += '<div style="white-space: pre-wrap;">' + escapeHtml(currentQuestion.explanation) + '</div>';
+                    }
+                }
+            } catch (err) {
+                console.error('Explanation error:', err);
+                explanationPanel.innerHTML = '<div class="explanation-error">Error loading explanation</div>';
+                if (currentQuestion.explanation) {
+                    explanationPanel.innerHTML += '<div style="white-space: pre-wrap;">' + escapeHtml(currentQuestion.explanation) + '</div>';
+                }
+            } finally {
+                explainBtn.disabled = false;
+                explainBtn.textContent = '📚 Explain this answer';
+            }
+        }
+
+        // Request long explanation
+        async function requestLongExplanation() {
+            if (!currentQuestion) return;
+            
+            const btn = event.target;
+            btn.disabled = true;
+            btn.textContent = '⏳ Loading...';
+
+            try {
+                const payload = {
+                    question_id: currentQuestion._id?.toString() || 'q-' + currentQuestionIndex,
+                    question_text: currentQuestion.question_text,
+                    user_answer: userAnswer || '',
+                    correct_answer: currentQuestion.correct_answer,
+                    is_correct: userAnswer === currentQuestion.correct_answer,
+                    explanation_level: 'long',
+                    quiz_id: 'ml-engineer-exam',
+                    difficulty: 'medium'
+                };
+
+                const response = await fetch('/ai-explain.json', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                const result = await response.json();
+
+                if (result.ok && result.long_explanation) {
+                    const panel = document.getElementById('explanationPanel');
+                    let html = '<div style="white-space: pre-wrap;">' + escapeHtml(result.long_explanation) + '</div>';
+                    if (result.model) {
+                        html += '<div style="margin-top: 12px; font-size: 12px; color: rgba(255,255,255,0.5);">Powered by ' + escapeHtml(result.model) + '</div>';
+                    }
+                    panel.innerHTML = html;
+                }
+            } catch (err) {
+                console.error('Long explanation error:', err);
+            } finally {
+                btn.disabled = false;
+                btn.textContent = '📖 Read more';
+            }
+        }
+
+        // Load questions from server
+        async function loadQuestions() {
+            try {
+                const response = await fetch(`/ml-quiz-questions.json?phase=1`);
+                const data = await response.json();
+                questions = data.questions || [];
+                
+                if (questions.length === 0) {
+                    startBtn.textContent = 'No questions available yet';
+                    startBtn.disabled = true;
+                }
+            } catch (err) {
+                console.error('Error loading questions:', err);
+                startBtn.textContent = 'Error loading questions';
+                startBtn.disabled = true;
+            }
+        }
+
+        // Start quiz
+        startBtn.addEventListener('click', () => {
+            if (questions.length === 0) return;
+            
+            currentQuestionIndex = 0;
+            score = 0;
+            selectedTopic = topicSelect.value;
+            
+            step1.classList.add('hide');
+            step2.classList.remove('hide');
+            showQuestion();
+        });
+
+        // Show current question
+        function showQuestion() {
+            if (currentQuestionIndex >= questions.length) {
+                showResults();
+                return;
+            }
+
+            const q = questions[currentQuestionIndex];
+            currentQuestion = q;
+            userAnswer = null;
+            isAnswered = false;
+            
+            const progress = currentQuestionIndex + 1;
+            const total = questions.length;
+            
+            document.getElementById('progressText').textContent = `Question ${progress} of ${total}`;
+            document.getElementById('progressBar').style.width = `${(progress / total) * 100}%`;
+            document.getElementById('sectionTitle').textContent = `Topic: ${q.domain || 'Unknown'}`;
+            document.getElementById('question').textContent = q.question_text;
+
+            // Render answer buttons
+            const answersDiv = document.getElementById('answers');
+            answersDiv.innerHTML = '';
+            
+            if (q.options && Array.isArray(q.options)) {
+                q.options.forEach((option, idx) => {
+                    const btn = document.createElement('button');
+                    btn.textContent = option;
+                    btn.onclick = () => selectAnswer(btn, q.correct_answer, idx, q);
+                    answersDiv.appendChild(btn);
+                });
+            }
+
+            document.getElementById('feedback').textContent = '';
+            explainBtn.style.display = 'none';
+            explanationPanel.style.display = 'none';
+            explanationPanel.innerHTML = '';
+        }
+
+        // Handle answer selection
+        function selectAnswer(button, correct, selectedIdx, q) {
+            if (isAnswered) return; // Prevent double-clicking
+            isAnswered = true;
+            
+            const correctIdx = ['A', 'B', 'C', 'D'].indexOf(correct);
+            const isCorrect = selectedIdx === correctIdx;
+            userAnswer = ['A', 'B', 'C', 'D'][selectedIdx];
+
+            // Disable all buttons
+            document.querySelectorAll('.answers button').forEach(btn => btn.disabled = true);
+
+            if (isCorrect) {
+                button.classList.add('correct');
+                document.getElementById('feedback').textContent = '✓ Correct!';
+                document.getElementById('feedback').className = 'feedback correct';
+                score++;
+            } else {
+                button.classList.add('wrong');
+                document.querySelectorAll('.answers button')[correctIdx].classList.add('correct');
+                document.getElementById('feedback').textContent = '✗ Incorrect. The correct answer is ' + ['A', 'B', 'C', 'D'][correctIdx];
+                document.getElementById('feedback').className = 'feedback wrong';
+            }
+
+            // Show explanation button
+            explainBtn.style.display = 'inline-block';
+            explainBtn.onclick = requestAiExplanation;
+
+            // Move to next question after delay
+            setTimeout(() => {
+                currentQuestionIndex++;
+                showQuestion();
+            }, 3000);
+        }
+
+        // Show results
+        function showResults() {
+            step2.classList.add('hide');
+            step3.classList.remove('hide');
+
+            const percentage = Math.round((score / questions.length) * 100);
+            const icon = percentage >= 70 ? '✓' : '○';
+            const status = percentage >= 70 ? 'Passed' : 'Keep Practicing';
+
+            document.getElementById('icon').textContent = icon;
+            document.getElementById('resultTitle').textContent = status;
+            document.getElementById('resultScore').textContent = `${score} / ${questions.length} (${percentage}%)`;
+            
+            let msg = '';
+            if (percentage >= 90) msg = 'Excellent! You have mastered this topic.';
+            else if (percentage >= 70) msg = 'Good! You understand the core concepts. Review weak areas.';
+            else msg = 'Keep studying! Review the definitions and try again.';
+            
+            document.getElementById('resultMsg').textContent = msg;
+        }
+
+        // Retry quiz
+        retryBtn.addEventListener('click', () => {
+            step3.classList.add('hide');
+            step1.classList.remove('hide');
+        });
+
+        // Load questions on page load
+        loadQuestions();
+    </script>
+</body>
+</html>
