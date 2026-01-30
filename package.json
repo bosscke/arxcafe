@@ -7,8 +7,18 @@
     "start": "node server.js"
   },
   "dependencies": {
+    "bcrypt": "^6.0.0",
+    "connect-mongo": "^6.0.0",
+    "dotenv": "^17.2.3",
+    "express": "^5.2.1",
+    "express-session": "^1.19.0",
     "google-trends-api": "^4.9.0",
     "mongodb": "^6.9.0",
+    "mongoose": "^9.1.5",
+    "nodemailer": "^7.0.13",
+    "passport": "^0.7.0",
+    "passport-local": "^1.0.0",
+    "stripe": "^20.3.0",
     "ws": "^8.18.0"
   },
   "keywords": [],

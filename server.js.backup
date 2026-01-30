@@ -1,27 +1,13 @@
-// Load environment variables from .env file
-require('dotenv').config();
-
-const express = require('express');
 const http = require('http');
 const fs = require('fs');
 const path = require('path');
 const WebSocket = require('ws');
-const mongoose = require('mongoose');
-const session = require('express-session');
-const { MongoStore } = require('connect-mongo');
-const passport = require('./config/passport');
 const { MongoClient } = require('mongodb');
 const googleTrends = require('google-trends-api');
 const { handleAiExplain } = require('./routes/aiExplain');
 
-// Import routes
-const authRoutes = require('./routes/auth');
-const paymentRoutes = require('./routes/payment');
-const adminRoutes = require('./routes/admin');
-const { requirePaid } = require('./middleware/auth');
-
-// Initialize Express app
-const app = express();
+// Load environment variables from .env file
+require('dotenv').config();
 
 ////////////////////////////////////////////
 ///// Server ARXCAFE
@@ -126,60 +112,7 @@ const ML_TOPICS_COLLECTION = 'ml_topics';
 // Collection name for knowledge base topics (HTML documents)
 const TOPICS_COLLECTION = 'topics';
 
-// Express middleware configuration
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-
-// Session configuration
-app.use(session({
-    secret: process.env.SESSION_SECRET || 'arxcafe-secret-key-change-in-production',
-    resave: false,
-    saveUninitialized: false,
-    store: new MongoStore({
-        mongoUrl: devMongoUri,
-        touchAfter: 24 * 3600 // lazy session update
-    }),
-    cookie: {
-        maxAge: 30 * 24 * 60 * 60 * 1000, // 30 days
-        httpOnly: true,
-        secure: process.env.NODE_ENV === 'production'
-    }
-}));
-
-// Passport authentication
-app.use(passport.initialize());
-app.use(passport.session());
-
-// Make user available in all responses
-app.use((req, res, next) => {
-    res.locals.user = req.user || null;
-    next();
-});
-
-// Mount auth routes
-app.use('/', authRoutes);
-app.use('/', paymentRoutes);
-app.use('/', adminRoutes);
-
-// AI Explain endpoint - Express route
-app.post('/api/ai/explain', async (req, res) => {
-    try {
-        console.log('[AI Explain] Request received:', req.body.question_id);
-        console.log('[AI Explain] GEMINI_API_KEY exists:', !!process.env.GEMINI_API_KEY);
-        await handleAiExplain(req, res, mongoDb);
-    } catch (err) {
-        console.error('[AI Explain] Error:', err.message);
-        console.error('[AI Explain] Stack:', err.stack);
-        res.status(400).json({ ok: false, error: 'Error: ' + err.message });
-    }
-});
-
-// Protect assessment and quiz routes
-app.use('/assessment.html', requirePaid);
-app.use('/ml-engineer-quiz.html', requirePaid);
-
-// Legacy request handler (will be converted to Express routes)
-app.use((req, res, next) => {
+const server  = http.createServer((req,res) => {
     const pathName = req.url.split('?')[0];
 
     if (pathName === '/trends.json') {
@@ -334,6 +267,31 @@ app.use((req, res, next) => {
                 res.end(JSON.stringify({ questions: [], error: err.message }));
             }
         })();
+        return;
+    }
+
+    // AI explanation endpoint (Gemini 2.5) - 1:1 PHP port
+    if (pathName === '/api/ai/explain' || pathName === '/api/ai/explain.php') {
+        if (req.method !== 'POST') {
+            res.writeHead(405, { 'Content-Type': 'application/json' });
+            res.end(JSON.stringify({ ok: false, error: 'POST required' }));
+            return;
+        }
+        
+        // Parse JSON body for POST requests
+        let body = '';
+        req.on('data', chunk => body += chunk);
+        req.on('end', async () => {
+            try {
+                req.body = JSON.parse(body);
+                console.log('[AI Explain] Request received:', req.body.question_id);
+                await handleAiExplain(req, res, mongoDb);
+            } catch (err) {
+                console.error('[AI Explain] Error:', err.message);
+                res.writeHead(400, { 'Content-Type': 'application/json' });
+                res.end(JSON.stringify({ ok: false, error: 'Invalid JSON: ' + err.message }));
+            }
+        });
         return;
     }
 
@@ -1421,18 +1379,6 @@ app.use((req, res, next) => {
         res.writeHead(404);
         res.end('page not found');
     }
-});
-
-// Create HTTP server with Express app
-const server = http.createServer(app);
-
-// Connect to MongoDB with Mongoose (for auth/subscriptions)
-mongoose.connect(devMongoUri, {
-    serverSelectionTimeoutMS: 3000,
-}).then(() => {
-    console.log('[Mongoose] Connected to MongoDB for authentication');
-}).catch(err => {
-    console.error('[Mongoose] Connection error:', err.message);
 });
 
 // WebSocket server for "currently online" counter

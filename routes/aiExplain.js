@@ -3,7 +3,9 @@ const crypto = require('crypto');
 
 // Helper functions
 function jsonError(res, status, message) {
-  return res.status(status).json({ ok: false, error: message });
+  res.writeHead(status, { 'Content-Type': 'application/json' });
+  res.end(JSON.stringify({ ok: false, error: message }));
+  return;
 }
 
 function normalizeDifficulty(difficulty) {
@@ -90,6 +92,8 @@ function buildMetaPrompt(questionText, userAnswer, correctAnswer, isCorrect, sho
 async function geminiGenerate({ apiKey, model, payload, signal }) {
   const url = `https://generativelanguage.googleapis.com/v1beta/models/${encodeURIComponent(model)}:generateContent?key=${encodeURIComponent(apiKey)}`;
 
+  console.log('[Gemini] Calling URL:', url.replace(apiKey, 'API_KEY_HIDDEN'));
+
   const res = await fetch(url, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
@@ -100,6 +104,8 @@ async function geminiGenerate({ apiKey, model, payload, signal }) {
   const text = await res.text().catch(() => '');
   let decoded = null;
   try { decoded = JSON.parse(text); } catch { decoded = null; }
+
+  console.log('[Gemini] Response:', res.status, decoded ? JSON.stringify(decoded).substring(0, 200) : text.substring(0, 200));
 
   return { ok: res.ok, status: res.status, decoded, rawText: text };
 }
@@ -192,7 +198,8 @@ async function handleAiExplain(req, res, mongoDb) {
 
         if (explanation_level !== 'long' || long !== '') {
           await logRequest({ cached: true, provider_http_status: null, provider_status: '', provider_message: '' });
-          return res.json({
+          res.writeHead(200, { 'Content-Type': 'application/json' });
+          res.end(JSON.stringify({
             ok: true,
             question_id,
             model: row.model || process.env.AI_ASSIST_MODEL || 'gemini-2.5-flash',
@@ -201,7 +208,8 @@ async function handleAiExplain(req, res, mongoDb) {
             expandable,
             confidence,
             cached: true
-          });
+          }));
+          return;
         }
       }
     }
@@ -209,12 +217,14 @@ async function handleAiExplain(req, res, mongoDb) {
     // Cache read errors should not kill UX
   }
 
-  const model = process.env.AI_ASSIST_MODEL || 'gemini-2.5-flash';
+  const model = process.env.AI_ASSIST_MODEL || 'gemini-1.5-flash';
   const apiKey = process.env.GEMINI_API_KEY;
 
   if (!apiKey) {
+    console.log('[AI Explain] No API key configured');
     await logRequest({ cached: false, provider_http_status: null, provider_status: 'NO_API_KEY', provider_message: 'GEMINI_API_KEY is not configured' });
-    return res.json({
+    res.writeHead(200, { 'Content-Type': 'application/json' });
+    res.end(JSON.stringify({
       ok: true,
       question_id,
       model,
@@ -223,8 +233,11 @@ async function handleAiExplain(req, res, mongoDb) {
       expandable: false,
       confidence: 'partial',
       cached: false
-    });
+    }));
+    return;
   }
+
+  console.log('[AI Explain] Starting Gemini API call for question:', question_id.substring(0, 10));
 
   // 2) Generate short first
   const shortPrompt = buildShortPrompt(question_text, user_answer, correct_answer, is_correct);
@@ -247,12 +260,16 @@ async function handleAiExplain(req, res, mongoDb) {
     const r = await geminiGenerate({ apiKey, model, payload: payloadShort, signal: controller.signal });
     providerHttpStatus = r.status;
 
+    console.log('[AI Explain] Gemini response status:', r.status, 'ok:', r.ok);
+
     if (!r.ok) {
       const perr = debug ? extractGeminiError(r.decoded) : {};
       providerStatus = String(perr.status || '');
       providerMessage = String(perr.message || '') || `HTTP ${r.status}`;
+      console.log('[AI Explain] Gemini error:', providerStatus, providerMessage);
       await logRequest({ cached: false, provider_http_status: r.status, provider_status: providerStatus, provider_message: providerMessage });
-      return res.json({
+      res.writeHead(200, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify({
         ok: true,
         question_id,
         model,
@@ -261,14 +278,19 @@ async function handleAiExplain(req, res, mongoDb) {
         expandable: false,
         confidence: 'partial',
         cached: false
-      });
+      }));
+      return;
     }
 
     shortText = extractGeminiText(r.decoded).trim();
 
+    console.log('[AI Explain] Short explanation generated, length:', shortText.length);
+
     if (!shortText) {
+      console.log('[AI Explain] Empty response from Gemini');
       await logRequest({ cached: false, provider_http_status: r.status, provider_status: 'EMPTY_RESPONSE', provider_message: 'Gemini returned empty text' });
-      return res.json({
+      res.writeHead(200, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify({
         ok: true,
         question_id,
         model,
@@ -277,12 +299,16 @@ async function handleAiExplain(req, res, mongoDb) {
         expandable: false,
         confidence: 'partial',
         cached: false
-      });
+      }));
+      return;
     }
   } catch (e) {
     const msg = (e && typeof e.message === 'string') ? e.message : 'AI request failed';
+    console.log('[AI Explain] Exception during Gemini call:', msg);
+    console.log('[AI Explain] Stack:', e.stack);
     await logRequest({ cached: false, provider_http_status: providerHttpStatus, provider_status: 'FETCH_ERROR', provider_message: msg });
-    return res.json({
+    res.writeHead(200, { 'Content-Type': 'application/json' });
+    res.end(JSON.stringify({
       ok: true,
       question_id,
       model,
@@ -291,7 +317,8 @@ async function handleAiExplain(req, res, mongoDb) {
       expandable: false,
       confidence: 'partial',
       cached: false
-    });
+    }));
+    return;
   } finally {
     clearTimeout(t);
   }
@@ -369,7 +396,8 @@ async function handleAiExplain(req, res, mongoDb) {
 
   await logRequest({ cached: false, provider_http_status: 200, provider_status: '', provider_message: '' });
 
-  return res.json({
+  res.writeHead(200, { 'Content-Type': 'application/json' });
+  res.end(JSON.stringify({
     ok: true,
     question_id,
     model,
@@ -378,7 +406,7 @@ async function handleAiExplain(req, res, mongoDb) {
     expandable,
     confidence,
     cached: false
-  });
+  }));
 }
 
 module.exports = { handleAiExplain };

@@ -136,6 +136,11 @@
       if (advanced) return;
       advanced = true;
       if (autoAdvanceTimer) clearTimeout(autoAdvanceTimer);
+      
+      // Remove AI UI when continuing
+      const aiContainer = feedbackEl.querySelector('.ai-assist');
+      if (aiContainer) aiContainer.remove();
+      
       if (onAdvance) onAdvance();
     };
 
