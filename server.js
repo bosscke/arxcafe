@@ -97,27 +97,25 @@ const serveStaticFile = (filePath, res) => {
     });
 };
 
-// Development-only MongoDB connection (local MongoDB, managed via Compass)
-// Uses MONGO_DEV_URI if provided, otherwise defaults to localhost.
-const devMongoUri = process.env.MONGO_DEV_URI || 'mongodb://127.0.0.1:27017/arxcafe';
+// MongoDB connection (switches between dev and production)
+const mongoUri = process.env.NODE_ENV === 'production' 
+    ? process.env.MONGO_PROD_URI 
+    : (process.env.MONGO_DEV_URI || 'mongodb://127.0.0.1:27017/arxcafe');
+
 let mongoClient;
 let mongoDb;
 
-async function connectDevMongo() {
-    // Only attempt connection in non-production environments
-    if (process.env.NODE_ENV === 'production') {
-        return;
-    }
-
+async function connectMongo() {
     try {
-        mongoClient = new MongoClient(devMongoUri, {
+        mongoClient = new MongoClient(mongoUri, {
             serverSelectionTimeoutMS: 3000,
         });
         await mongoClient.connect();
         mongoDb = mongoClient.db();
-        console.log('[MongoDB] Connected to local development database:', mongoDb.databaseName);
+        console.log('[MongoDB] Connected to database:', mongoDb.databaseName);
+        console.log('[MongoDB] Environment:', process.env.NODE_ENV || 'development');
     } catch (err) {
-        console.error('[MongoDB] Failed to connect to local development database:', err.message);
+        console.error('[MongoDB] Failed to connect:', err.message);
     }
 }
 
@@ -136,7 +134,7 @@ app.use(session({
     resave: false,
     saveUninitialized: false,
     store: new MongoStore({
-        mongoUrl: devMongoUri,
+        mongoUrl: mongoUri,
         touchAfter: 24 * 3600 // lazy session update
     }),
     cookie: {
@@ -1427,7 +1425,7 @@ app.use((req, res, next) => {
 const server = http.createServer(app);
 
 // Connect to MongoDB with Mongoose (for auth/subscriptions)
-mongoose.connect(devMongoUri, {
+mongoose.connect(mongoUri, {
     serverSelectionTimeoutMS: 3000,
 }).then(() => {
     console.log('[Mongoose] Connected to MongoDB for authentication');
@@ -1460,9 +1458,9 @@ wss.on('connection', (ws) => {
 
 const PORT = process.env.PORT || 8080;
 
-// Start HTTP server, then connect to local dev MongoDB (if not production)
+// Start HTTP server, then connect to MongoDB
 server.listen(PORT, '0.0.0.0', () => {
     console.log(`The arxcafe server started on port ${PORT}`);
     console.log(`Server running at http://localhost:${PORT}`);
-    connectDevMongo();
+    connectMongo();
 });
