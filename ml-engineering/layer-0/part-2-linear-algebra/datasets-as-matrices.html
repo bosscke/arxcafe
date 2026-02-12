@@ -1,0 +1,300 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Chapter 0.5 — Datasets as Matrices | ArxCafe</title>
+  <link rel="stylesheet" href="/css/global.css" />
+  <link rel="stylesheet" href="/css/ml-engineering.css" />
+</head>
+<body>
+  <a class="home-btn" href="/">← Home</a>
+
+  <div class="ml-shell">
+    <div class="ml-topbar">
+      <div class="ml-breadcrumbs">
+        <a href="/">ArxCafe</a> /
+        <a href="/ml-engineering">ML Engineering</a> /
+        <a href="/ml-engineering/layer-0">Layer 0</a> /
+        <a href="/ml-engineering/layer-0/part-2-linear-algebra">Part 2</a> /
+        <span>Chapter 0.5</span>
+      </div>
+      <span class="ml-pill">Book 0 · Chapter 0.5</span>
+    </div>
+
+    <section class="ml-panel ml-hero">
+      <div class="ml-eyebrow">Book 0 — Chapter 0.5</div>
+      <h1>Datasets as Matrices</h1>
+      <div class="ml-subtitle">
+        A dataset is not “a bunch of examples.” It is a structured mathematical object with shape, sparsity, and semantics.
+      </div>
+    </section>
+
+    <section class="ml-grid">
+      <article class="ml-panel">
+        <div class="ml-section-title">0.5.1 From single examples to datasets</div>
+        <div class="ml-body">
+          <p>
+            In Chapter 0.4, we established that one data point is a vector — a point in feature space.
+            A dataset is simply many such points stacked together.
+          </p>
+          <p>Formally, given:</p>
+          <ul>
+            <li><code>n</code> examples</li>
+            <li><code>d</code> features</li>
+          </ul>
+          <p>we represent the dataset as a matrix:</p>
+          <div class="ml-math-block"><code>X ∈ R^{n×d}</code></div>
+          <ul>
+            <li>each row = one example</li>
+            <li>each column = one feature</li>
+          </ul>
+          <p>This matrix representation is called the design matrix.</p>
+          <p>
+            Once you see datasets as matrices, most of machine learning becomes linear algebra plus statistics.
+          </p>
+        </div>
+
+        <div class="ml-section-title" style="margin-top: 14px;">0.5.2 Why the matrix view matters</div>
+        <div class="ml-body">
+          <p>The matrix view is not just notation. It determines:</p>
+          <ul>
+            <li>how training scales</li>
+            <li>how memory is used</li>
+            <li>how fast models run</li>
+            <li>which algorithms are feasible</li>
+          </ul>
+          <p>
+            Modern ML systems are essentially pipelines for building, transforming, and multiplying very large matrices.
+          </p>
+          <p>
+            If you misunderstand this layer, scaling ML systems becomes guesswork.
+          </p>
+        </div>
+
+        <div class="ml-section-title" style="margin-top: 14px;">0.5.3 Rows as samples: statistical meaning</div>
+        <div class="ml-body">
+          <p>Each row of <code>X</code> is assumed to be:</p>
+          <ul>
+            <li>a draw from some underlying distribution</li>
+            <li>comparable to other rows</li>
+            <li>interchangeable (under IID assumptions)</li>
+          </ul>
+          <p>Statistical concepts apply across rows:</p>
+          <ul>
+            <li>mean feature values</li>
+            <li>variance estimates</li>
+            <li>sampling error</li>
+            <li>train/test splits</li>
+          </ul>
+          <p>
+            When rows are not interchangeable (time series, user sessions), naive matrix assumptions break — leading to evaluation errors.
+          </p>
+        </div>
+
+        <div class="ml-section-title" style="margin-top: 14px;">0.5.4 Columns as features: semantic meaning</div>
+        <div class="ml-body">
+          <p>Each column represents:</p>
+          <ul>
+            <li>one measurable property</li>
+            <li>one axis in feature space</li>
+            <li>one degree of freedom for the model</li>
+          </ul>
+          <p>Operations across columns include:</p>
+          <ul>
+            <li>normalization</li>
+            <li>feature selection</li>
+            <li>dimensionality reduction</li>
+            <li>regularization</li>
+          </ul>
+          <div class="ml-callout">
+            <div class="ml-callout-title">Critical insight</div>
+            <p>Models learn weights per column. Bad columns create bad models.</p>
+          </div>
+        </div>
+
+        <div class="ml-section-title" style="margin-top: 14px;">0.5.5 Labels as vectors (or matrices)</div>
+        <div class="ml-body">
+          <p>Targets are also represented algebraically.</p>
+          <p>For regression:</p>
+          <div class="ml-math-block"><code>y ∈ R^n</code></div>
+          <p>For classification:</p>
+          <ul>
+            <li>binary: <code>y ∈ {0,1}^n</code></li>
+            <li>multi-class: <code>Y ∈ R^{n×k}</code> (one-hot or probabilities)</li>
+          </ul>
+          <p>This alignment matters:</p>
+          <ul>
+            <li>every row of <code>X</code> must align with exactly one label</li>
+            <li>misalignment silently corrupts training</li>
+          </ul>
+          <div class="ml-callout">
+            <div class="ml-callout-title">Production reality</div>
+            <p>Many production bugs are indexing bugs, not ML bugs.</p>
+          </div>
+        </div>
+
+        <div class="ml-section-title" style="margin-top: 14px;">0.5.6 Linear models in matrix form (why this abstraction exists)</div>
+        <div class="ml-body">
+          <p>Linear regression can be written compactly as:</p>
+          <div class="ml-math-block"><code>ŷ = Xw + b</code></div>
+          <p>or, with bias absorbed:</p>
+          <div class="ml-math-block"><code>ŷ = Xθ</code></div>
+          <p>Loss becomes:</p>
+          <div class="ml-math-block"><code>L = ||Xθ − y||^2</code></div>
+          <p>This formulation explains:</p>
+          <ul>
+            <li>why training is matrix multiplication</li>
+            <li>why GPUs help</li>
+            <li>why batch size matters</li>
+          </ul>
+          <p>Neural networks generalize this idea: repeated matrix multiplications plus nonlinearities.</p>
+        </div>
+
+        <div class="ml-section-title" style="margin-top: 14px;">0.5.7 Dense vs sparse matrices</div>
+        <div class="ml-body">
+          <p>Not all datasets are dense.</p>
+          <p>Examples of sparse data:</p>
+          <ul>
+            <li>one-hot encoded categorical features</li>
+            <li>text bag-of-words</li>
+            <li>recommender interaction matrices</li>
+          </ul>
+          <p>Sparse matrices:</p>
+          <ul>
+            <li>store only non-zero values</li>
+            <li>enable massive dimensionality</li>
+            <li>change algorithm choice</li>
+          </ul>
+          <p>Some algorithms scale with:</p>
+          <ul>
+            <li>number of rows × columns (dense)</li>
+            <li>number of non-zero entries (sparse)</li>
+          </ul>
+          <p>Confusing these leads to catastrophic performance decisions.</p>
+        </div>
+
+        <div class="ml-section-title" style="margin-top: 14px;">0.5.8 Memory layout and performance (engineering reality)</div>
+        <div class="ml-body">
+          <p>Matrices are stored in memory in specific layouts:</p>
+          <ul>
+            <li>row-major</li>
+            <li>column-major</li>
+          </ul>
+          <p>This affects:</p>
+          <ul>
+            <li>cache efficiency</li>
+            <li>training speed</li>
+            <li>data pipeline design</li>
+          </ul>
+          <p>Batching, shuffling, and streaming are matrix operations, not conceptual conveniences.</p>
+        </div>
+
+        <div class="ml-section-title" style="margin-top: 14px;">0.5.9 Feature scaling as column-wise transformation</div>
+        <div class="ml-body">
+          <p>Operations like:</p>
+          <ul>
+            <li>standardization</li>
+            <li>normalization</li>
+            <li>log transforms</li>
+          </ul>
+          <p>are applied column-wise:</p>
+          <div class="ml-math-block"><code>X_{:,j}' = f(X_{:,j})</code></div>
+          <p>This reinforces:</p>
+          <ul>
+            <li>features are global axes</li>
+            <li>transformations must be consistent between training and serving</li>
+          </ul>
+          <p>Mismatch here causes training–serving skew.</p>
+        </div>
+
+        <div class="ml-section-title" style="margin-top: 14px;">0.5.10 Matrix operations explain many ML constraints</div>
+        <div class="ml-body">
+          <p>Seeing datasets as matrices explains:</p>
+          <ul>
+            <li>why adding features increases compute</li>
+            <li>why wide datasets overfit easily</li>
+            <li>why dimensionality reduction helps</li>
+            <li>why shuffling rows matters</li>
+            <li>why distributed training partitions by rows</li>
+          </ul>
+          <p>Almost every scalability trade-off reduces to matrix size and structure.</p>
+        </div>
+
+        <div class="ml-section-title" style="margin-top: 14px;">0.5.11 When the matrix abstraction breaks</div>
+        <div class="ml-body">
+          <p>The matrix abstraction assumes:</p>
+          <ul>
+            <li>fixed feature set</li>
+            <li>aligned rows</li>
+            <li>homogeneous examples</li>
+          </ul>
+          <p>It struggles with:</p>
+          <ul>
+            <li>variable-length sequences</li>
+            <li>graphs</li>
+            <li>ragged data</li>
+            <li>multimodal inputs</li>
+          </ul>
+          <p>Modern systems handle this by:</p>
+          <ul>
+            <li>padding</li>
+            <li>masking</li>
+            <li>multiple matrices</li>
+            <li>specialized data structures</li>
+          </ul>
+          <p>Understanding the limits of the abstraction is as important as using it.</p>
+        </div>
+
+        <div class="ml-section-title" style="margin-top: 14px;">0.5.12 Engineering mindset: datasets are objects with shape</div>
+        <div class="ml-body">
+          <p>A professional ML engineer always asks:</p>
+          <ul>
+            <li>How many rows?</li>
+            <li>How many columns?</li>
+            <li>How sparse?</li>
+            <li>How fast does it grow?</li>
+            <li>How often does it change?</li>
+          </ul>
+          <p>These questions predict:</p>
+          <ul>
+            <li>cost</li>
+            <li>latency</li>
+            <li>failure modes</li>
+          </ul>
+          <p>Before choosing a model, understand the matrix.</p>
+        </div>
+
+        <div class="ml-section-title" style="margin-top: 14px;">0.5.13 Chapter takeaway</div>
+        <div class="ml-body">
+          <p>
+            A dataset is not “a bunch of examples.” It is a structured mathematical object with shape, sparsity, and semantics.
+          </p>
+          <p>Most ML engineering decisions are consequences of that structure.</p>
+
+          <div class="ml-callout" style="margin-top: 14px;">
+            <div class="ml-callout-title">✔ Chapter 0.5 Readiness Check</div>
+            <p>You should now be able to:</p>
+            <ul>
+              <li>represent datasets as matrices formally</li>
+              <li>explain rows vs columns statistically and semantically</li>
+              <li>reason about dense vs sparse data</li>
+              <li>understand why matrix size drives scalability</li>
+              <li>diagnose data alignment bugs conceptually</li>
+            </ul>
+          </div>
+        </div>
+      </article>
+
+      <aside class="ml-panel">
+        <div class="ml-section-title">Navigation</div>
+        <div class="ml-toc">
+          <a href="/ml-engineering/layer-0/part-2-linear-algebra">Part 2 — Linear Algebra</a>
+          <a href="/ml-engineering/layer-0/part-2-linear-algebra/scalars-vectors-feature-spaces">← Chapter 0.4: Scalars, Vectors, Feature Spaces</a>
+          <a href="/ml-engineering/layer-0/part-2-linear-algebra/dot-products-similarity">Next: Chapter 0.6 — Dot Products, Projections, and Similarity →</a>
+        </div>
+      </aside>
+    </section>
+  </div>
+</body>
+</html>

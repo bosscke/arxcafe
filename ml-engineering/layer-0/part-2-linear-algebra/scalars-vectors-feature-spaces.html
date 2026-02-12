@@ -1,0 +1,361 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Chapter 0.4 — Scalars, Vectors, and Feature Spaces | ArxCafe</title>
+  <link rel="stylesheet" href="/css/global.css" />
+  <link rel="stylesheet" href="/css/ml-engineering.css" />
+</head>
+<body>
+  <a class="home-btn" href="/">← Home</a>
+
+  <div class="ml-shell">
+    <div class="ml-topbar">
+      <div class="ml-breadcrumbs">
+        <a href="/">ArxCafe</a> /
+        <a href="/ml-engineering">ML Engineering</a> /
+        <a href="/ml-engineering/layer-0">Layer 0</a> /
+        <a href="/ml-engineering/layer-0/part-2-linear-algebra">Part 2</a> /
+        <span>Chapter 0.4</span>
+      </div>
+      <span class="ml-pill">Book 0 · Chapter 0.4</span>
+    </div>
+
+    <section class="ml-panel ml-hero">
+      <div class="ml-eyebrow">Book 0 — Chapter 0.4</div>
+      <h1>Scalars, Vectors, and Feature Spaces</h1>
+      <div class="ml-subtitle">
+        Concept page: once reality is mapped into numbers, the model can only reason inside that geometry. Feature design is the first irreversible decision.
+      </div>
+    </section>
+
+    <section class="ml-grid">
+      <article class="ml-panel">
+        <div class="ml-section-title">0.4.1 Why everything becomes numbers</div>
+        <div class="ml-body">
+          <p>
+            Machine learning models cannot operate on things — only on numbers. Users, images, sentences, transactions, sensors, documents — all must be converted into numerical form before any learning can occur.
+          </p>
+          <p>
+            This conversion is not incidental. It is the first irreversible design decision in any ML system.
+          </p>
+          <p>
+            Once reality is mapped into numbers, the model can only reason within that numerical representation.
+          </p>
+        </div>
+
+        <div class="ml-section-title" style="margin-top: 14px;">0.4.2 Scalars: single measurements</div>
+        <div class="ml-body">
+          <p>A scalar is a single real number:</p>
+          <div class="ml-math-block"><code>x ∈ R</code></div>
+          <p>Examples:</p>
+          <ul>
+            <li><code>age = 42</code></li>
+            <li><code>temperature = 18.7</code></li>
+            <li><code>account_balance = 1520.35</code></li>
+          </ul>
+          <p>Scalars are the simplest features and often the most dangerous:</p>
+          <ul>
+            <li>they imply linear ordering</li>
+            <li>they imply magnitude comparisons</li>
+            <li>they invite extrapolation</li>
+          </ul>
+          <div class="ml-callout">
+            <div class="ml-callout-title">Engineering implication</div>
+            <p>
+              If a scalar’s meaning is non-linear (e.g., risk scores, IDs), treating it as a scalar can mislead the model.
+            </p>
+          </div>
+        </div>
+
+        <div class="ml-section-title" style="margin-top: 14px;">0.4.3 Vectors: describing an entity with multiple attributes</div>
+        <div class="ml-body">
+          <p>A vector is an ordered collection of scalars:</p>
+          <div class="ml-math-block"><code>x = (x_1, x_2, …, x_d) ∈ R^d</code></div>
+          <p>This is the canonical representation of a data point in ML.</p>
+          <p>Examples:</p>
+          <ul>
+            <li><code>user = [age, country_code, avg_session_time, purchase_count]</code></li>
+            <li><code>house = [square_feet, bedrooms, distance_to_city, year_built]</code></li>
+          </ul>
+          <p>Each component defines one axis in feature space.</p>
+          <div class="ml-callout">
+            <div class="ml-callout-title">Key insight</div>
+            <p>A data point is not “an object” — it is a location in space.</p>
+          </div>
+        </div>
+
+        <div class="ml-section-title" style="margin-top: 14px;">0.4.4 Feature space: the universe the model lives in</div>
+        <div class="ml-body">
+          <p>The feature space is the set of all possible vectors your model might see.</p>
+          <ul>
+            <li>3 numeric features → 3D space</li>
+            <li>100 features → 100D space</li>
+            <li>10,000 features → 10,000D space</li>
+          </ul>
+          <p>Models do not see:</p>
+          <ul>
+            <li>semantics</li>
+            <li>causality</li>
+            <li>meaning</li>
+          </ul>
+          <p>They see:</p>
+          <ul>
+            <li>distances</li>
+            <li>angles</li>
+            <li>projections</li>
+            <li>regions</li>
+          </ul>
+          <p>Once you define the feature space, you define what the model can learn.</p>
+        </div>
+
+        <div class="ml-section-title" style="margin-top: 14px;">0.4.5 Coordinate systems and meaning</div>
+        <div class="ml-body">
+          <p>Choosing features is choosing a coordinate system for reality.</p>
+          <p>Two representations of the same object can lead to radically different learning outcomes.</p>
+          <p>Example:</p>
+          <ul>
+            <li>raw timestamps vs cyclical encoding (<code>sin</code>/<code>cos</code> of hour)</li>
+            <li>zip code as number vs one-hot encoding</li>
+            <li>text as word counts vs embeddings</li>
+          </ul>
+          <p>
+            Mathematically, these are different spaces — even if they describe the same thing.
+          </p>
+        </div>
+
+        <div class="ml-section-title" style="margin-top: 14px;">0.4.6 Categorical data and the danger of fake geometry</div>
+        <div class="ml-body">
+          <p>Many real-world attributes are categorical:</p>
+          <ul>
+            <li>country</li>
+            <li>device type</li>
+            <li>product ID</li>
+          </ul>
+          <p>They have no natural ordering.</p>
+          <p>If you encode them as integers:</p>
+          <div class="ml-math-block"><code>country = 1, country = 2, country = 3</code></div>
+          <p>you accidentally introduce:</p>
+          <ul>
+            <li>distance</li>
+            <li>magnitude</li>
+            <li>ordering</li>
+          </ul>
+          <p>
+            One-hot encoding fixes this by expanding into a higher-dimensional space:
+          </p>
+          <ul>
+            <li>each category becomes its own axis</li>
+            <li>distance reflects equality, not magnitude</li>
+          </ul>
+          <p>Trade-off:</p>
+          <ul>
+            <li>correctness vs dimensionality explosion</li>
+          </ul>
+        </div>
+
+        <div class="ml-section-title" style="margin-top: 14px;">0.4.7 Binary features and indicator variables</div>
+        <div class="ml-body">
+          <p>Binary features (0/1) are everywhere:</p>
+          <ul>
+            <li>clicked / not clicked</li>
+            <li>fraud / not fraud</li>
+            <li>active / inactive</li>
+          </ul>
+          <p>They:</p>
+          <ul>
+            <li>carve space into regions</li>
+            <li>create sharp decision boundaries</li>
+            <li>interact strongly with linear models</li>
+          </ul>
+          <p>
+            In many systems, most signal comes from binary indicators, not continuous values.
+          </p>
+        </div>
+
+        <div class="ml-section-title" style="margin-top: 14px;">0.4.8 Continuous features and scaling</div>
+        <div class="ml-body">
+          <p>Continuous features introduce geometry:</p>
+          <ul>
+            <li>distance</li>
+            <li>direction</li>
+            <li>scale</li>
+          </ul>
+          <p>
+            If one feature ranges from 0–1 and another from 0–1,000,000:
+          </p>
+          <ul>
+            <li>the larger dominates dot products</li>
+            <li>gradients become ill-conditioned</li>
+            <li>training becomes unstable</li>
+          </ul>
+          <p>This is why:</p>
+          <ul>
+            <li>normalization</li>
+            <li>standardization</li>
+            <li>log transforms</li>
+          </ul>
+          <p>
+            exist. They are geometric corrections, not cosmetic preprocessing.
+          </p>
+        </div>
+
+        <div class="ml-section-title" style="margin-top: 14px;">0.4.9 High-dimensional spaces and intuition failure</div>
+        <div class="ml-body">
+          <p>As dimensionality increases:</p>
+          <ul>
+            <li>distances concentrate</li>
+            <li>nearest neighbors become less meaningful</li>
+            <li>volume grows exponentially</li>
+          </ul>
+          <p>This is the curse of dimensionality.</p>
+          <p>Engineering consequences:</p>
+          <ul>
+            <li>simple distance-based methods degrade</li>
+            <li>feature selection becomes critical</li>
+            <li>regularization becomes mandatory</li>
+          </ul>
+          <p>
+            High-dimensional space behaves nothing like 2D or 3D intuition.
+          </p>
+        </div>
+
+        <div class="ml-section-title" style="margin-top: 14px;">0.4.10 Sparsity: when most dimensions are zero</div>
+        <div class="ml-body">
+          <p>Many feature spaces are sparse:</p>
+          <ul>
+            <li>text (bag-of-words)</li>
+            <li>categorical one-hot encodings</li>
+            <li>recommender systems</li>
+          </ul>
+          <p>Sparsity is not a bug — it is a structure.</p>
+          <p>Benefits:</p>
+          <ul>
+            <li>efficient storage</li>
+            <li>fast dot products</li>
+            <li>interpretable signals</li>
+          </ul>
+          <p>But it also:</p>
+          <ul>
+            <li>increases dimensionality</li>
+            <li>complicates similarity</li>
+            <li>demands specialized algorithms</li>
+          </ul>
+        </div>
+
+        <div class="ml-section-title" style="margin-top: 14px;">0.4.11 Embeddings: learned feature spaces</div>
+        <div class="ml-body">
+          <p>Embeddings map discrete objects into continuous vector spaces:</p>
+          <div class="ml-math-block"><code>object → R^k</code></div>
+          <p>Properties:</p>
+          <ul>
+            <li>similar objects are close</li>
+            <li>distances become meaningful</li>
+            <li>dimensionality is controlled</li>
+          </ul>
+          <p>
+            Embeddings learn the geometry instead of you defining it manually.
+          </p>
+          <p>This bridges:</p>
+          <ul>
+            <li>feature engineering</li>
+            <li>deep learning</li>
+            <li>retrieval systems</li>
+          </ul>
+        </div>
+
+        <div class="ml-section-title" style="margin-top: 14px;">0.4.12 Linear separability and model limits</div>
+        <div class="ml-body">
+          <p>
+            In feature space, many models are simply: “Can I draw a surface that separates these points?”
+          </p>
+          <p>Linear models:</p>
+          <ul>
+            <li>draw flat surfaces (hyperplanes)</li>
+            <li>rely heavily on feature design</li>
+          </ul>
+          <p>If data is not linearly separable in your space:</p>
+          <ul>
+            <li>no amount of training will fix it</li>
+            <li>you must change representation or model family</li>
+          </ul>
+        </div>
+
+        <div class="ml-section-title" style="margin-top: 14px;">0.4.13 Feature interactions as geometry</div>
+        <div class="ml-body">
+          <p>Interactions (e.g., age × income) correspond to:</p>
+          <ul>
+            <li>bending space</li>
+            <li>introducing new dimensions</li>
+            <li>changing separability</li>
+          </ul>
+          <p>
+            Polynomial features and neural networks both:
+          </p>
+          <ul>
+            <li>enrich feature space</li>
+            <li>increase expressiveness</li>
+            <li>increase overfitting risk</li>
+          </ul>
+          <p>
+            Representation power always trades off with stability.
+          </p>
+        </div>
+
+        <div class="ml-section-title" style="margin-top: 14px;">0.4.14 Engineering mindset: features define reality</div>
+        <div class="ml-body">
+          <p>
+            A model does not fail because it “missed something.” It fails because that information was never represented — or was represented in a misleading way.
+          </p>
+          <p>Feature design is ontological:</p>
+          <ul>
+            <li>it defines what exists in the model’s universe</li>
+          </ul>
+        </div>
+
+        <div class="ml-section-title" style="margin-top: 14px;">0.4.15 Chapter takeaway</div>
+        <div class="ml-body">
+          <p>
+            Machine learning models do not learn about the world. They learn about points in a feature space you designed.
+          </p>
+          <p>If the geometry is wrong:</p>
+          <ul>
+            <li>optimization will still succeed</li>
+            <li>metrics may look good</li>
+            <li>deployment will fail</li>
+          </ul>
+        </div>
+
+        <div class="ml-section-title" style="margin-top: 14px;">Readiness Check</div>
+        <div class="ml-body">
+          <p><strong>You should now be able to:</strong></p>
+          <ul>
+            <li>Explain why all ML inputs are vectors</li>
+            <li>Reason about feature spaces geometrically</li>
+            <li>Identify fake structure introduced by bad encoding</li>
+            <li>Explain why scaling affects training</li>
+            <li>Understand why representation often matters more than algorithm</li>
+          </ul>
+        </div>
+      </article>
+
+      <aside class="ml-panel">
+        <div class="ml-section-title">Navigation</div>
+        <div class="ml-toc">
+          <a href="/ml-engineering/layer-0">Layer 0 (Book 0)</a>
+          <a href="/ml-engineering/layer-0/part-2-linear-algebra">Part 2 — Linear Algebra</a>
+          <a href="/ml-engineering/layer-0/part-1-learning">← Part 1 — Learning</a>
+        </div>
+
+        <div class="ml-section-title" style="margin-top: 14px;">Next Nodes</div>
+        <div class="ml-toc">
+          <a href="/ml-engineering/layer-0/part-2-linear-algebra/datasets-as-matrices">Datasets as Matrices (coming soon)</a>
+          <a href="/ml-engineering/layer-0/part-2-linear-algebra/dot-products-similarity">Dot Products &amp; Similarity (coming soon)</a>
+          <a href="/ml-engineering/layer-0/part-2-linear-algebra/norms-distances">Norms &amp; Distances (coming soon)</a>
+        </div>
+      </aside>
+    </section>
+  </div>
+</body>
+</html>

@@ -1,18 +1,91 @@
 const express = require('express');
-const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
+const stripeFactory = require('stripe');
 const { requireAuth } = require('../middleware/auth');
 const Subscription = require('../models/Subscription');
 
 const router = express.Router();
 
+let stripeClient = null;
+function getStripeClient() {
+  const apiKey = process.env.STRIPE_SECRET_KEY;
+  if (!apiKey) return null;
+  if (!stripeClient) stripeClient = stripeFactory(apiKey);
+  return stripeClient;
+}
+
+function stripeNotConfigured(res) {
+  res.status(503).json({ ok: false, error: 'Stripe is not configured on this service.' });
+}
+
+function getBaseUrl(req) {
+  const xfProto = req.headers['x-forwarded-proto'];
+  const proto = (Array.isArray(xfProto) ? xfProto[0] : xfProto) || req.protocol || 'http';
+  return `${proto}://${req.get('host')}`;
+}
+
+function sanitizeInternalPath(value, fallback) {
+  const p = String(value || '').trim();
+  if (!p) return fallback;
+  if (!p.startsWith('/') || p.startsWith('//') || p.includes('\\')) return fallback;
+  return p;
+}
+
+// POST /api/billing/portal - create a Stripe customer portal session
+router.post('/api/billing/portal', requireAuth, async (req, res) => {
+  try {
+    const stripe = getStripeClient();
+    if (!stripe) return stripeNotConfigured(res);
+
+    const sub = await Subscription.findOne({ user_id: req.user._id })
+      .select({ stripe_customer_id: 1 })
+      .lean();
+
+    if (!sub?.stripe_customer_id) {
+      return res.status(404).json({ ok: false, error: 'No subscription customer found for this account.' });
+    }
+
+    const returnUrl = `${getBaseUrl(req)}/profile.html`;
+    const session = await stripe.billingPortal.sessions.create({
+      customer: sub.stripe_customer_id,
+      return_url: returnUrl,
+    });
+
+    return res.json({ ok: true, url: session.url });
+  } catch (err) {
+    console.error('[BillingPortal] Error:', err);
+    return res.status(500).json({ ok: false, error: 'Failed to open billing portal' });
+  }
+});
+
 // GET /paywall
 router.get('/paywall', requireAuth, (req, res) => {
-  res.send(renderPaywallPage(req.user));
+  const publishableKey = process.env.STRIPE_PUBLISHABLE_KEY;
+  if (!getStripeClient() || !publishableKey || publishableKey === 'your_stripe_publishable_key_here') {
+    res.status(503).send(renderStripeDisabledPage());
+    return;
+  }
+  const next = sanitizeInternalPath(req.query.next, '/analytics.html');
+  try {
+    void req.app.locals.trackEvent?.(req, 'paywall_view', { next });
+  } catch (e) {
+    // ignore
+  }
+  res.send(renderPaywallPage(req.user, next));
 });
 
 // POST /api/create-checkout-session
 router.post('/api/create-checkout-session', requireAuth, async (req, res) => {
   try {
+    const stripe = getStripeClient();
+    if (!stripe || !process.env.STRIPE_PRICE_ID) return stripeNotConfigured(res);
+
+    const next = sanitizeInternalPath(req.body?.next, '/analytics.html');
+    try {
+      void req.app.locals.trackEvent?.(req, 'checkout_session_create', { next });
+    } catch (e) {
+      // ignore
+    }
+
     const session = await stripe.checkout.sessions.create({
       customer_email: req.user.email,
       payment_method_types: ['card'],
@@ -23,10 +96,11 @@ router.post('/api/create-checkout-session', requireAuth, async (req, res) => {
         },
       ],
       mode: 'subscription',
-      success_url: `${req.protocol}://${req.get('host')}/checkout-success?session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `${req.protocol}://${req.get('host')}/paywall`,
+      success_url: `${getBaseUrl(req)}/checkout-success?session_id={CHECKOUT_SESSION_ID}&next=${encodeURIComponent(next)}`,
+      cancel_url: `${getBaseUrl(req)}/paywall?next=${encodeURIComponent(next)}`,
       metadata: {
-        user_id: req.user._id.toString()
+        user_id: req.user._id.toString(),
+        next
       }
     });
 
@@ -40,41 +114,60 @@ router.post('/api/create-checkout-session', requireAuth, async (req, res) => {
 // GET /checkout-success
 router.get('/checkout-success', requireAuth, async (req, res) => {
   const sessionId = req.query.session_id;
+  const next = sanitizeInternalPath(req.query.next, '/analytics.html');
 
   if (!sessionId) {
-    return res.redirect('/paywall');
+    return res.redirect('/paywall?next=' + encodeURIComponent(next));
   }
 
   try {
+    const stripe = getStripeClient();
+    if (!stripe) {
+      res.status(503).send(renderStripeDisabledPage());
+      return;
+    }
+
     // Retrieve the session to confirm payment
     const session = await stripe.checkout.sessions.retrieve(sessionId);
 
     if (session.payment_status === 'paid') {
+      try {
+        void req.app.locals.trackEvent?.(req, 'checkout_success_paid', { next, sessionId });
+      } catch (e) {
+        // ignore
+      }
+
       // Check if subscription already exists
       const existingSub = await Subscription.findOne({
         user_id: req.user._id,
         stripe_subscription_id: session.subscription
       });
 
-      if (!existingSub) {
-        // Subscription will be created by webhook, but show success page anyway
-        res.send(renderSuccessPage(true));
-      } else {
-        res.send(renderSuccessPage(true));
-      }
+      // Subscription will be created by webhook, but show success page anyway
+      res.send(renderSuccessPage(true, next));
     } else {
-      res.send(renderSuccessPage(false));
+      try {
+        void req.app.locals.trackEvent?.(req, 'checkout_success_pending', { next, sessionId, payment_status: session.payment_status });
+      } catch (e) {
+        // ignore
+      }
+      res.send(renderSuccessPage(false, next));
     }
   } catch (err) {
     console.error('Checkout success error:', err);
-    res.redirect('/paywall');
+    res.redirect('/paywall?next=' + encodeURIComponent(next));
   }
 });
 
 // POST /api/stripe-webhook
 router.post('/api/stripe-webhook', express.raw({ type: 'application/json' }), async (req, res) => {
+  const stripe = getStripeClient();
+  if (!stripe) return stripeNotConfigured(res);
+
   const sig = req.headers['stripe-signature'];
   const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET;
+
+  if (!webhookSecret) return stripeNotConfigured(res);
 
   let event;
 
@@ -89,7 +182,7 @@ router.post('/api/stripe-webhook', express.raw({ type: 'application/json' }), as
   try {
     switch (event.type) {
       case 'checkout.session.completed':
-        await handleCheckoutCompleted(event.data.object);
+        await handleCheckoutCompleted(stripe, event.data.object);
         break;
 
       case 'customer.subscription.updated':
@@ -112,7 +205,7 @@ router.post('/api/stripe-webhook', express.raw({ type: 'application/json' }), as
 });
 
 // Webhook handler: Checkout completed
-async function handleCheckoutCompleted(session) {
+async function handleCheckoutCompleted(stripe, session) {
   const userId = session.metadata.user_id;
   const subscriptionId = session.subscription;
 
@@ -169,7 +262,8 @@ async function handleSubscriptionDeleted(subscription) {
 }
 
 // Helper: Render paywall page
-function renderPaywallPage(user) {
+function renderPaywallPage(user, next) {
+  const publishableKey = process.env.STRIPE_PUBLISHABLE_KEY;
   return `
 <!DOCTYPE html>
 <html lang="en">
@@ -184,18 +278,19 @@ function renderPaywallPage(user) {
             max-width: 600px;
             margin: 80px auto;
             padding: 40px;
-            background: white;
+        background: var(--color-surface);
             border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        box-shadow: var(--shadow-sm);
             text-align: center;
         }
         .paywall-container h1 {
             margin-bottom: 20px;
+        color: var(--color-primary);
         }
         .price {
             font-size: 48px;
             font-weight: bold;
-            color: #007bff;
+        color: var(--color-primary);
             margin: 30px 0;
         }
         .features {
@@ -208,16 +303,16 @@ function renderPaywallPage(user) {
         }
         .btn-subscribe {
             padding: 16px 40px;
-            background: #007bff;
+        border: 1px solid rgba(74, 52, 46, 0.35);
+        background: linear-gradient(135deg, rgba(198, 169, 146, 0.95), rgba(74, 52, 46, 0.95));
             color: white;
-            border: none;
             border-radius: 4px;
             font-size: 18px;
             font-weight: 600;
             cursor: pointer;
         }
         .btn-subscribe:hover {
-            background: #0056b3;
+        filter: brightness(0.96);
         }
     </style>
 </head>
@@ -238,19 +333,21 @@ function renderPaywallPage(user) {
         
         <button id="checkout-button" class="btn-subscribe">Subscribe Now</button>
         
-        <p style="margin-top: 20px; color: #666;">
+        <p style="margin-top: 20px; color: var(--color-secondary);">
             Logged in as ${user.email} | <a href="/logout">Logout</a>
         </p>
     </div>
     
     <script>
         const stripe = Stripe('${process.env.STRIPE_PUBLISHABLE_KEY}');
+      const nextPath = ${JSON.stringify(next || '/analytics.html')};
         
         document.getElementById('checkout-button').addEventListener('click', async () => {
             try {
                 const response = await fetch('/api/create-checkout-session', {
                     method: 'POST',
-                    headers: { 'Content-Type': 'application/json' }
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ next: nextPath })
                 });
                 
                 const { sessionId } = await response.json();
@@ -270,9 +367,35 @@ function renderPaywallPage(user) {
   `;
 }
 
+  function renderStripeDisabledPage() {
+    return `
+  <!DOCTYPE html>
+  <html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payments Unavailable - ArxCafe</title>
+    <link rel="stylesheet" href="/css/global.css">
+    <style>
+      .container{max-width:760px;margin:80px auto;padding:24px;background:var(--color-surface);border-radius:8px;box-shadow:var(--shadow-sm);border:1px solid var(--border)}
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Payments are not configured</h1>
+      <p>This environment does not have Stripe keys configured yet.</p>
+      <p>If you expected payments to work, set <code>STRIPE_SECRET_KEY</code>, <code>STRIPE_PUBLISHABLE_KEY</code>, <code>STRIPE_PRICE_ID</code>, and <code>STRIPE_WEBHOOK_SECRET</code> in Cloud Run.</p>
+      <p><a href="/">Back to home</a></p>
+    </div>
+  </body>
+  </html>
+  `;
+  }
+
 // Helper: Render success page
-function renderSuccessPage(success) {
+function renderSuccessPage(success, next) {
   if (success) {
+    const nextSafe = sanitizeInternalPath(next, '/analytics.html');
     return `
 <!DOCTYPE html>
 <html lang="en">
@@ -286,21 +409,21 @@ function renderSuccessPage(success) {
             max-width: 600px;
             margin: 80px auto;
             padding: 40px;
-            background: white;
+        background: var(--color-surface);
             border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        box-shadow: var(--shadow-sm);
             text-align: center;
         }
         .success-icon {
             font-size: 64px;
-            color: #28a745;
+        color: var(--color-primary);
             margin-bottom: 20px;
         }
         .btn-primary {
             padding: 14px 40px;
-            background: #007bff;
+        border: 1px solid rgba(74, 52, 46, 0.35);
+        background: linear-gradient(135deg, rgba(198, 169, 146, 0.95), rgba(74, 52, 46, 0.95));
             color: white;
-            border: none;
             border-radius: 4px;
             font-size: 16px;
             font-weight: 600;
@@ -308,6 +431,7 @@ function renderSuccessPage(success) {
             display: inline-block;
             margin-top: 20px;
         }
+      .btn-primary:hover { filter: brightness(0.96); }
     </style>
 </head>
 <body>
@@ -315,12 +439,14 @@ function renderSuccessPage(success) {
         <div class="success-icon">✓</div>
         <h1>Payment Successful!</h1>
         <p>Thank you for subscribing. You now have full access to all premium content.</p>
-        <a href="/assessment.html" class="btn-primary">Start Learning</a>
+      <a href="${nextSafe}" class="btn-primary">Continue</a>
+      <div style="margin-top: 10px;"><a href="/profile.html">Go to Profile</a></div>
     </div>
 </body>
 </html>
     `;
   } else {
+    const nextSafe = sanitizeInternalPath(next, '/analytics.html');
     return `
 <!DOCTYPE html>
 <html lang="en">
@@ -334,7 +460,7 @@ function renderSuccessPage(success) {
     <div style="max-width: 600px; margin: 80px auto; padding: 40px; text-align: center;">
         <h1>Payment Pending</h1>
         <p>Your payment is being processed. Please check back in a few minutes.</p>
-        <a href="/assessment.html">Return to Assessment</a>
+      <a href="${nextSafe}">Continue</a>
     </div>
 </body>
 </html>

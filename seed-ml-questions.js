@@ -1,5 +1,8 @@
 // seed-ml-questions.js
-// Run with: node seed-ml-questions.js
+// Run with:
+//   NODE_ENV=production MONGO_PROD_URI=... node seed-ml-questions.js
+// Optional:
+//   --force   Clears existing questions first
 
 const { MongoClient } = require('mongodb');
 
@@ -407,19 +410,38 @@ const questions = [
 ];
 
 async function seedQuestions() {
-  const client = new MongoClient('mongodb://127.0.0.1:27017');
+  const mongoUri = process.env.NODE_ENV === 'production'
+    ? process.env.MONGO_PROD_URI
+    : (process.env.MONGO_DEV_URI || 'mongodb://127.0.0.1:27017/arxcafe');
+
+  if (!mongoUri) {
+    console.error('Missing MongoDB URI. Set MONGO_PROD_URI (NODE_ENV=production) or MONGO_DEV_URI.');
+    process.exit(1);
+  }
+
+  const force = process.argv.includes('--force');
+  const client = new MongoClient(mongoUri);
   
   try {
     await client.connect();
-    const db = client.db('arxcafe');
+    const dbName = process.env.MONGO_DB_NAME;
+    const db = dbName ? client.db(dbName) : client.db();
     const collection = db.collection('ml_engineer_questions');
 
-    // Clear existing questions
-    await collection.deleteMany({});
-    
-    // Insert new questions
+    const existingCount = await collection.countDocuments({});
+
+    if (existingCount > 0 && !force) {
+      console.log(`Collection already has ${existingCount} documents. Skipping seed (use --force to reset).`);
+      return;
+    }
+
+    if (force && existingCount > 0) {
+      await collection.deleteMany({});
+      console.log(`✓ Cleared ${existingCount} existing questions`);
+    }
+
     const result = await collection.insertMany(questions);
-    console.log(`✓ Inserted ${result.insertedCount} questions`);
+    console.log(`✓ Inserted ${result.insertedCount} questions into db '${db.databaseName}'`);
     
   } catch (err) {
     console.error('Error:', err.message);

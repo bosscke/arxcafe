@@ -45,7 +45,6 @@
         provider: 'Amazon Web Services',
         category: 'Cloud & Infrastructure',
         docs: 'https://docs.aws.amazon.com/',
-        bg: "url('/blagaj.jpg')",
         desc: 'Programmatic access to AWS services including compute, storage, IAM, networking, and more. Automate infrastructure and integrate cloud-native capabilities into your apps.',
         tags: ['IAM','S3','EC2','Lambda','CloudWatch'],
         links: [
@@ -59,7 +58,6 @@
         provider: 'Google Cloud',
         category: 'Cloud & Infrastructure',
         docs: 'https://cloud.google.com/apis',
-        bg: "url('/srebrenik.jpg')",
         desc: 'Unified access to Google Cloud services such as Compute Engine, Cloud Run, BigQuery, and more with standardized auth via OAuth 2.0 and service accounts.',
         tags: ['Cloud Run','GCE','GKE','BigQuery','IAM'],
         links: [
@@ -70,7 +68,6 @@
       },
       cloudflare: {
         name: 'Cloudflare API', provider: 'Cloudflare', category: 'Networking & Edge', docs: 'https://api.cloudflare.com/',
-        bg: "url('/stolac.jpg')",
         desc: 'Manage DNS, CDN, security rules, and Workers. Automate zone settings and retrieve analytics.',
         tags: ['DNS','CDN','WAF','Workers'],
         links: [
@@ -202,8 +199,6 @@
       const badge = document.getElementById('api-badge');
 
       if (!data) {
-        root.style.setProperty('--hero', "url('/hero-api.jpg')");
-        root.style.setProperty('--hero-size', 'cover');
         sub.textContent = 'Unknown · —';
         desc.textContent = 'We could not find details for this API key.';
         docs.textContent = 'Back to Home';
@@ -212,8 +207,6 @@
         return;
       }
 
-      root.style.setProperty('--hero', data.bg || "url('/hero-api.jpg')");
-      root.style.setProperty('--hero-size', data.size || 'cover');
       sub.textContent = `${data.category} · ${data.provider}`;
       desc.textContent = data.desc;
       docs.textContent = 'Open Docs';

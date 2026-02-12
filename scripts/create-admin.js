@@ -4,13 +4,26 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const User = require('../models/User');
 
-const ADMIN_EMAIL = 'bosscke@yahoo.com';
-const ADMIN_PASSWORD = 'Admin@2026!'; // CHANGE THIS AFTER FIRST LOGIN
+const ADMIN_EMAIL = process.env.ADMIN_EMAIL;
+const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD;
 
 async function createAdmin() {
   try {
+    if (!ADMIN_EMAIL || !ADMIN_PASSWORD) {
+      console.error('Missing ADMIN_EMAIL and/or ADMIN_PASSWORD environment variables.');
+      process.exit(1);
+    }
+
     // Connect to MongoDB
-    const mongoUri = process.env.MONGO_DEV_URI || 'mongodb://127.0.0.1:27017/arxcafe';
+    const mongoUri = process.env.NODE_ENV === 'production'
+      ? process.env.MONGO_PROD_URI
+      : (process.env.MONGO_DEV_URI || 'mongodb://127.0.0.1:27017/arxcafe');
+
+    if (!mongoUri) {
+      console.error('Missing MongoDB URI. Set MONGO_PROD_URI (NODE_ENV=production) or MONGO_DEV_URI.');
+      process.exit(1);
+    }
+
     await mongoose.connect(mongoUri);
     console.log('Connected to MongoDB');
 
@@ -27,8 +40,7 @@ async function createAdmin() {
         await existingAdmin.save();
         console.log('✅ Password updated for existing admin');
         console.log('Email:', ADMIN_EMAIL);
-        console.log('Password:', ADMIN_PASSWORD);
-        console.log('\n⚠️  IMPORTANT: Change your password after first login!');
+        console.log('Password was set from ADMIN_PASSWORD env var.');
       } else if (existingAdmin.role !== 'admin') {
         existingAdmin.role = 'admin';
         await existingAdmin.save();
@@ -51,8 +63,7 @@ async function createAdmin() {
 
     console.log('✅ Admin user created successfully!');
     console.log('Email:', ADMIN_EMAIL);
-    console.log('Password:', ADMIN_PASSWORD);
-    console.log('\n⚠️  IMPORTANT: Change your password after first login!');
+    console.log('Password was set from ADMIN_PASSWORD env var.');
 
     process.exit(0);
   } catch (err) {

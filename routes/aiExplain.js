@@ -217,8 +217,10 @@ async function handleAiExplain(req, res, mongoDb) {
     // Cache read errors should not kill UX
   }
 
-  const model = process.env.AI_ASSIST_MODEL || 'gemini-1.5-flash';
-  const apiKey = process.env.GEMINI_API_KEY;
+  // Default to a currently supported model. Can be overridden via AI_ASSIST_MODEL.
+  const model = process.env.AI_ASSIST_MODEL || 'gemini-2.5-flash';
+  // Secret Manager values may include trailing newlines; trim to avoid %0D%0A in URLs.
+  const apiKey = String(process.env.GEMINI_API_KEY || '').trim();
 
   if (!apiKey) {
     console.log('[AI Explain] No API key configured');

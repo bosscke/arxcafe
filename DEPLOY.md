@@ -14,6 +14,55 @@ gcloud config set run/region europe-west1
 gcloud services enable run.googleapis.com cloudbuild.googleapis.com
 ```
 
+### MongoDB Atlas (Recommended): Static Egress IP for Cloud Run
+
+Your Atlas allowlist cannot use your home IP when running on Cloud Run. The recommended approach is:
+1) Give Cloud Run a static outbound IP via Serverless VPC Access + Cloud NAT
+2) Add that single IP (`/32`) to the Atlas Network Access allowlist
+
+#### One-time: create static egress IP + VPC connector + NAT (europe-west1)
+```bash
+# APIs (one-time)
+gcloud services enable compute.googleapis.com vpcaccess.googleapis.com
+
+# Reserve a static regional IP for NAT
+gcloud compute addresses create arxcafe-egress-ip --region=europe-west1
+
+# Create Serverless VPC Access connector (pick a /28 that doesn't overlap your VPC)
+gcloud compute networks vpc-access connectors create arxcafe-connector \
+  --region=europe-west1 \
+  --network=default \
+  --range=10.8.0.0/28
+
+# Create router + NAT using the reserved IP
+gcloud compute routers create arxcafe-router --network=default --region=europe-west1
+
+gcloud compute routers nats create arxcafe-nat \
+  --router=arxcafe-router \
+  --region=europe-west1 \
+  --nat-external-ip-pool=arxcafe-egress-ip \
+  --nat-all-subnet-ip-ranges
+
+# Print the egress IP to allowlist in Atlas
+gcloud compute addresses describe arxcafe-egress-ip --region=europe-west1 --format='get(address)'
+```
+
+#### Update Cloud Run to use the connector (pins egress)
+For an existing service:
+```bash
+gcloud run services update arxcafe \
+  --region europe-west1 \
+  --vpc-connector arxcafe-connector \
+  --vpc-egress all-traffic
+```
+
+For a new deploy, include these flags in `gcloud run deploy`:
+- `--vpc-connector arxcafe-connector`
+- `--vpc-egress all-traffic`
+
+#### Atlas allowlist
+Add the printed IP as `x.x.x.x/32` in Atlas: **Network Access → IP Access List**.
+
 ### Deploy Steps (Recommended: Artifact Registry in europe-west1)
 
 #### 1. Enable Artifact Registry (one-time)
@@ -49,7 +98,74 @@ gcloud run deploy arxcafe \
   --platform managed \
   --region europe-west1 \
   --allow-unauthenticated \
-  --port 8080
+  --port 8080 \
+  --vpc-connector arxcafe-connector \
+  --vpc-egress all-traffic
+```
+
+### Production Environment Variables (Required)
+
+Cloud Run does not automatically set `NODE_ENV=production`. For secure session cookies and production DB routing, set it explicitly.
+
+Minimum required variables for production:
+- `NODE_ENV=production`
+- `MONGO_PROD_URI=...`
+- `SESSION_SECRET=...` (strong random secret)
+
+If you enable paid access:
+- `STRIPE_SECRET_KEY=...`
+- `STRIPE_PUBLISHABLE_KEY=...`
+- `STRIPE_PRICE_ID=...`
+- `STRIPE_WEBHOOK_SECRET=...`
+
+If you enable AI explanations:
+- `GEMINI_API_KEY=...`
+- `AI_ASSIST_MODEL=gemini-2.5-flash`
+
+If you enable "Forgot password" emails:
+- `PUBLIC_BASE_URL=https://arxcafe.com` (optional; otherwise derived from request host)
+- `SMTP_HOST=...`
+- `SMTP_PORT=587` (or `465` for implicit TLS)
+- `SMTP_SECURE=false` (set `true` for implicit TLS)
+- `SMTP_USER=...` (optional; depends on your SMTP)
+- `SMTP_PASS=...` (optional; depends on your SMTP)
+- `SMTP_FROM="ArxCafe <no-reply@arxcafe.com>"`
+
+#### Option A: set env vars directly (quick)
+```bash
+gcloud run services update arxcafe \
+  --region europe-west1 \
+  --set-env-vars NODE_ENV=production \
+  --set-env-vars MONGO_PROD_URI="mongodb+srv://..." \
+  --set-env-vars SESSION_SECRET="..." \
+  --set-env-vars GEMINI_API_KEY="..." \
+  --set-env-vars AI_ASSIST_MODEL=gemini-2.5-flash \
+  --set-env-vars STRIPE_SECRET_KEY="..." \
+  --set-env-vars STRIPE_PUBLISHABLE_KEY="..." \
+  --set-env-vars STRIPE_PRICE_ID="..." \
+  --set-env-vars STRIPE_WEBHOOK_SECRET="..."
+```
+
+#### Option B: use Secret Manager (recommended)
+Create secrets:
+```bash
+printf "%s" "your-session-secret" | gcloud secrets create arxcafe-session-secret --data-file=-
+printf "%s" "your-mongo-uri"       | gcloud secrets create arxcafe-mongo-prod-uri  --data-file=-
+printf "%s" "your-gemini-key"      | gcloud secrets create arxcafe-gemini-api-key  --data-file=-
+printf "%s" "your-stripe-secret"   | gcloud secrets create arxcafe-stripe-secret   --data-file=-
+printf "%s" "your-stripe-webhook"  | gcloud secrets create arxcafe-stripe-webhook  --data-file=-
+```
+
+Attach secrets to the service:
+```bash
+gcloud run services update arxcafe \
+  --region europe-west1 \
+  --set-env-vars NODE_ENV=production \
+  --set-secrets SESSION_SECRET=arxcafe-session-secret:latest \
+  --set-secrets MONGO_PROD_URI=arxcafe-mongo-prod-uri:latest \
+  --set-secrets GEMINI_API_KEY=arxcafe-gemini-api-key:latest \
+  --set-secrets STRIPE_SECRET_KEY=arxcafe-stripe-secret:latest \
+  --set-secrets STRIPE_WEBHOOK_SECRET=arxcafe-stripe-webhook:latest
 ```
 
 #### 1. Build & Push Image to Google Container Registry
@@ -65,7 +181,9 @@ gcloud run deploy arxcafe \
   --platform managed \
   --region europe-west1 \
   --allow-unauthenticated \
-  --port 8080
+  --port 8080 \
+  --vpc-connector arxcafe-connector \
+  --vpc-egress all-traffic
 ```
 
 #### 3. Verify Deployment
@@ -86,7 +204,7 @@ gcloud beta run domain-mappings list --region europe-west1
 - All static assets (`.jpg`, `.png`, `.css`, `.js`) in the root directory are served via the server
 - Ensure `srebrenik.jpg` is in the project root before deploying
 - The server listens on port 8080 (as configured in `server.js` and Dockerfile)
-- Environment: `NODE_ENV=production` is set in Cloud Run
+- Cloud Run: set `NODE_ENV=production` explicitly (see above)
 
 ### Rollback to Previous Version
 ```bash
@@ -98,7 +216,7 @@ gcloud run deploy arxcafe \
 
 ### View Logs
 ```bash
-gcloud run logs read arxcafe --region europe-west1 --limit 50
+gcloud run services logs read arxcafe --region europe-west1 --limit 50
 ```
 
 ### List All Deployments
@@ -111,7 +229,7 @@ gcloud run revisions list --service arxcafe --region europe-west1
 ## Tech Stack (Quick Reference)
 - Runtime: Node.js 18 (Docker base `node:18-slim`)
 - Frontend: Vanilla HTML/CSS/JS; client routing via `api.html?api=slug`
-- Backend: Minimal HTTP server in `server.js` (no Express), static asset serving
+- Backend: Express app in `server.js` (sessions + Passport auth + Stripe + Gemini routes)
 - Data: Google Trends via `google-trends-api` with cached results
 - Data (ML topics, dev only): MongoDB local instance (Compass) for storing/searching Professional ML Engineer topics
 - Container: Docker single-stage; Cloud Run (managed) in `europe-west1`
@@ -165,7 +283,7 @@ gcloud run services describe arxcafe --platform managed --region europe-west1 --
 gcloud beta run domain-mappings list --region europe-west1
 
 # Logs
-gcloud run logs read arxcafe --region europe-west1 --limit 50
+gcloud run services logs read arxcafe --region europe-west1 --limit 50
 
 # Billing link
 gcloud beta billing projects describe my-project-5640-1765674689812
@@ -208,7 +326,7 @@ curl -I https://arxcafe-832624474718.europe-west1.run.app
 
 ### Logs
 ```bash
-gcloud run logs read arxcafe --region europe-west1 --limit 100
+gcloud run services logs read arxcafe --region europe-west1 --limit 100
 ```
 
 ### Domain & TLS

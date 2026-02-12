@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Onboarding • ArxCafe</title>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231f2a44'/%3E%3Ctext x='50%25' y='58%25' text-anchor='middle' font-size='34'%3E🍰%3C/text%3E%3C/svg%3E">
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/elearn.css">
+</head>
+<body class="onboarding-page">
+    <div class="app-shell">
+        <header class="topbar">
+            <div class="topbar-inner">
+                <button class="icon-btn" id="menuBtn" aria-label="Menu">☰</button>
+                <div class="brand">
+                    ArxCafe
+                    <small>Welcome</small>
+                </div>
+                <div class="avatar" id="avatar" aria-label="Profile">AR</div>
+            </div>
+        </header>
+
+        <div class="drawer" id="drawer" aria-hidden="true">
+            <div class="drawer-backdrop" id="drawerBackdrop"></div>
+            <nav class="drawer-panel" aria-label="Menu">
+                <div class="drawer-title">Menu</div>
+                <a class="drawer-link" href="/"><strong>Home</strong><span>→</span></a>
+                <a class="drawer-link" href="/concepts/http-methods.html"><strong>Learn</strong><span>→</span></a>
+                <a class="drawer-link" href="/assesment.html"><strong>Dashboard</strong><span>→</span></a>
+                <a class="drawer-link" href="/paywall" id="paywallLink"><strong>Unlock</strong><span>→</span></a>
+                <a class="drawer-link" href="/profile.html"><strong>Profile</strong><span>→</span></a>
+                <a class="drawer-link" href="/logout"><strong>Logout</strong><span>→</span></a>
+                <a class="drawer-link" href="/admin" id="adminMenuLink" style="display:none"><strong>Admin</strong><span>→</span></a>
+            </nav>
+        </div>
+
+        <main class="main">
+            <div class="container">
+                <section class="hero">
+                    <h1>Welcome to ArxCafe</h1>
+                    <p>Here’s the fastest way to get value in your first 5 minutes.</p>
+                </section>
+
+                <section class="section">
+                    <div class="card card-pad">
+                        <p class="progress-title">Your account <span id="roleChip">—</span></p>
+                        <div class="progress-sub" id="emailLine">Loading…</div>
+                        <div class="stats" style="margin-top: 12px;">
+                            <div class="stat"><strong id="accessState">—</strong><span>Access</span></div>
+                            <div class="stat"><strong id="nextStep">—</strong><span>Next step</span></div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="section">
+                    <h2>Get started</h2>
+                    <div class="cards">
+                        <a class="action" href="/assesment.html">
+                            <div class="action-icon">🧭</div>
+                            <div>
+                                <h3>Open your Dashboard</h3>
+                                <p>See progress tracking and take your next quiz.</p>
+                            </div>
+                        </a>
+
+                        <a class="action" href="/concepts/http-methods.html">
+                            <div class="action-icon">📚</div>
+                            <div>
+                                <h3>Start Learning</h3>
+                                <p>Short concept lessons before you test yourself.</p>
+                            </div>
+                        </a>
+
+                        <a class="action" href="/ml-engineer-quiz.html" id="quizCta">
+                            <div class="action-icon">📝</div>
+                            <div>
+                                <h3>Take the ML Engineer quiz</h3>
+                                <p id="quizCtaSub">Save attempts and discover weak areas.</p>
+                            </div>
+                        </a>
+
+                        <a class="action" href="/paywall" id="upgradeCta">
+                            <div class="action-icon">🔓</div>
+                            <div>
+                                <h3>Unlock full access</h3>
+                                <p>Upgrade to track attempts and access premium quizzes.</p>
+                            </div>
+                        </a>
+                    </div>
+                </section>
+
+                <section class="section">
+                    <h2>Tips</h2>
+                    <div class="card card-pad">
+                        <div class="progress-sub">
+                            - Do one quiz run, then review your weak areas.
+                            <br>
+                            - Consistency beats intensity: a short daily streak wins.
+                            <br>
+                            - Use Profile to manage your account and billing.
+                        </div>
+                    </div>
+                </section>
+
+                <section class="section">
+                    <h2>Ready?</h2>
+                    <div class="card card-pad">
+                        <div class="progress-sub" id="finishCopy">When you’re done here, mark setup complete and jump into your profile.</div>
+                        <div class="cta-row" style="margin-top: 12px;">
+                            <button class="btn-primary" id="finishBtn" type="button">Finish setup →</button>
+                            <a class="btn-secondary" href="/profile.html">Skip for now</a>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
+
+        <nav class="bottom-nav" aria-label="Bottom navigation">
+            <div class="bottom-inner">
+                <a class="nav-item" href="/" aria-label="Home">
+                    <span class="dot">🏠</span>
+                    Home
+                </a>
+                <a class="nav-item" href="/concepts/http-methods.html" aria-label="Learn">
+                    <span class="dot">📚</span>
+                    Learn
+                </a>
+                <a class="nav-item" href="/assesment.html" aria-label="Quiz">
+                    <span class="dot">📝</span>
+                    Quiz
+                </a>
+                <a class="nav-item" href="/profile.html" aria-label="Profile">
+                    <span class="dot">👤</span>
+                    Profile
+                </a>
+            </div>
+        </nav>
+    </div>
+
+    <script>
+        (function () {
+            const drawer = document.getElementById('drawer');
+            const menuBtn = document.getElementById('menuBtn');
+            const backdrop = document.getElementById('drawerBackdrop');
+
+            function openDrawer() {
+                drawer.classList.add('open');
+                drawer.setAttribute('aria-hidden', 'false');
+            }
+
+            function closeDrawer() {
+                drawer.classList.remove('open');
+                drawer.setAttribute('aria-hidden', 'true');
+            }
+
+            menuBtn?.addEventListener('click', openDrawer);
+            backdrop?.addEventListener('click', closeDrawer);
+        })();
+
+        (async function () {
+            try {
+                const [meRes, accessRes] = await Promise.all([
+                    fetch('/api/me', { credentials: 'same-origin' }),
+                    fetch('/api/access', { credentials: 'same-origin' }),
+                ]);
+
+                const me = await meRes.json();
+                const access = await accessRes.json();
+
+                const emailLine = document.getElementById('emailLine');
+                const roleChip = document.getElementById('roleChip');
+                const accessState = document.getElementById('accessState');
+                const nextStep = document.getElementById('nextStep');
+
+                const quizCta = document.getElementById('quizCta');
+                const quizCtaSub = document.getElementById('quizCtaSub');
+                const upgradeCta = document.getElementById('upgradeCta');
+                const adminMenuLink = document.getElementById('adminMenuLink');
+                const avatar = document.getElementById('avatar');
+                const finishBtn = document.getElementById('finishBtn');
+                const finishCopy = document.getElementById('finishCopy');
+
+                if (emailLine) emailLine.textContent = me?.email ? me.email : 'Signed in';
+
+                if (avatar && me?.email) {
+                    const initials = String(me.email).trim().slice(0, 2).toUpperCase();
+                    avatar.textContent = initials || 'AR';
+                }
+
+                const role = me?.role || access?.role || 'user';
+                if (roleChip) roleChip.textContent = role;
+
+                const paid = !!access?.paid;
+                if (accessState) accessState.textContent = paid ? 'Unlocked' : 'Locked';
+
+                if (adminMenuLink && role === 'admin') adminMenuLink.style.display = 'flex';
+
+                if (paid || role === 'admin') {
+                    if (upgradeCta) upgradeCta.style.display = 'none';
+                    if (nextStep) nextStep.textContent = 'Take a quiz';
+                } else {
+                    if (nextStep) nextStep.textContent = 'Upgrade to unlock';
+                    // If not paid, make the quiz CTA visually "locked" but keep it navigable
+                    // so middleware can redirect appropriately.
+                    if (quizCta) quizCta.classList.add('locked');
+                    if (quizCtaSub) quizCtaSub.textContent = 'Upgrade required to access this quiz.';
+                }
+
+                if (finishBtn) {
+                    const already = !!me?.onboardingCompleted;
+                    if (already) {
+                        finishBtn.textContent = 'Go to profile →';
+                        if (finishCopy) finishCopy.textContent = 'You’re already set up. Continue to your profile.';
+                        finishBtn.addEventListener('click', () => {
+                            window.location.href = '/profile.html';
+                        });
+                    } else {
+                        finishBtn.addEventListener('click', async () => {
+                            try {
+                                finishBtn.disabled = true;
+                                finishBtn.textContent = 'Saving…';
+                                await fetch('/api/onboarding/complete', {
+                                    method: 'POST',
+                                    credentials: 'same-origin',
+                                    headers: { 'Content-Type': 'application/json' },
+                                    body: '{}'
+                                });
+                            } catch (e) {
+                                // ignore
+                            } finally {
+                                window.location.href = '/profile.html';
+                            }
+                        });
+                    }
+                }
+            } catch (e) {
+                // ignore
+            }
+        })();
+    </script>
+</body>
+</html>

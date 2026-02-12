@@ -30,11 +30,11 @@ async function requirePaid(req, res, next) {
       return next();
     }
 
-    // No active subscription - redirect to paywall
-    res.redirect('/paywall');
+    // No active subscription - redirect to paywall and preserve intent
+    res.redirect('/paywall?next=' + encodeURIComponent(req.originalUrl));
   } catch (err) {
     console.error('Error checking subscription:', err);
-    res.redirect('/paywall');
+    res.redirect('/paywall?next=' + encodeURIComponent(req.originalUrl));
   }
 }
 

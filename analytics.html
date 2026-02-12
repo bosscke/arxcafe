@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analytics • ArxCafe</title>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%234A342E'/%3E%3Ctext x='50%25' y='58%25' text-anchor='middle' font-size='34'%3E%F0%9F%8D%B0%3C/text%3E%3C/svg%3E">
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/elearn.css">
+    <style>
+        .list { display: grid; gap: 10px; }
+        .attempt {
+            display:flex; align-items:flex-start; justify-content:space-between; gap:12px;
+            padding: 12px; border: 1px solid var(--border); border-radius: 14px; background: var(--color-surface);
+        }
+        .attempt strong { font-size: 14px; }
+        .pill { padding: 4px 10px; border-radius: 999px; border: 1px solid var(--border); background: rgba(74, 52, 46, 0.06); font-weight: 800; font-size: 12px; }
+        .muted { color: var(--color-secondary); }
+        .mono { font-variant-numeric: tabular-nums; }
+    </style>
+</head>
+<body class="profile-page">
+    <div class="app-shell">
+        <header class="topbar">
+            <div class="topbar-inner">
+                <button class="icon-btn" id="menuBtn" aria-label="Menu">☰</button>
+                <div class="brand">
+                    ArxCafe
+                    <small>Analytics</small>
+                </div>
+                <div class="avatar" id="avatar" aria-label="Profile">AR</div>
+            </div>
+        </header>
+
+        <div class="drawer" id="drawer" aria-hidden="true">
+            <div class="drawer-backdrop" id="drawerBackdrop"></div>
+            <nav class="drawer-panel" aria-label="Menu">
+                <div class="drawer-title">Menu</div>
+                <a class="drawer-link" href="/"><strong>Home</strong><span>→</span></a>
+                <a class="drawer-link" href="/concepts/http-methods.html"><strong>Learn</strong><span>→</span></a>
+                <a class="drawer-link" href="/assesment.html"><strong>Dashboard</strong><span>→</span></a>
+                <a class="drawer-link" href="/profile.html"><strong>Profile</strong><span>→</span></a>
+                <a class="drawer-link" href="/logout"><strong>Logout</strong><span>→</span></a>
+                <a class="drawer-link" href="/admin" id="adminMenuLink" style="display:none"><strong>Admin</strong><span>→</span></a>
+            </nav>
+        </div>
+
+        <main class="main">
+            <div class="container">
+                <section class="hero">
+                    <h1>Your Learning Analytics</h1>
+                    <p>Streaks, progress, and your most recent quiz runs.</p>
+                    <div class="cta-row">
+                        <a class="btn-primary" href="/ml-engineer-quiz.html">Start / Continue Quiz</a>
+                        <a class="btn-secondary" href="/assesment.html">Back to Dashboard</a>
+                    </div>
+                </section>
+
+                <section class="section">
+                    <div class="card card-pad">
+                        <p class="progress-title">Key stats <span class="muted" id="asOf">—</span></p>
+                        <div class="progress-sub" id="statMsg">Loading…</div>
+                        <div class="stats" style="margin-top: 12px;">
+                            <div class="stat"><strong id="attempts">—</strong><span>Attempts</span></div>
+                            <div class="stat"><strong id="best">—</strong><span>Best score</span></div>
+                            <div class="stat"><strong id="currentStreak">—</strong><span>Current streak</span></div>
+                            <div class="stat"><strong id="longestStreak">—</strong><span>Longest streak</span></div>
+                            <div class="stat"><strong id="lastAt">—</strong><span>Last attempt</span></div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="section">
+                    <h2>Recent attempts</h2>
+                    <div class="card card-pad">
+                        <div class="progress-sub" id="historyMsg">Loading…</div>
+                        <div class="list" id="historyList" style="margin-top: 12px;"></div>
+                    </div>
+                </section>
+
+                <section class="section">
+                    <h2>Next steps</h2>
+                    <div class="cards">
+                        <a class="action" href="/ml-engineer-quiz.html">
+                            <div class="action-icon">Q</div>
+                            <div>
+                                <h3>Practice another run</h3>
+                                <p>Small daily reps build long streaks.</p>
+                            </div>
+                        </a>
+                        <a class="action" href="/concepts/http-status-codes.html">
+                            <div class="action-icon">L</div>
+                            <div>
+                                <h3>Review a concept</h3>
+                                <p>Use short notes to reinforce weak areas.</p>
+                            </div>
+                        </a>
+                    </div>
+                </section>
+            </div>
+        </main>
+
+        <nav class="bottom-nav" aria-label="Bottom navigation">
+            <div class="bottom-inner">
+                <a class="nav-item" href="/" aria-label="Home">
+                    <span class="dot">🏠</span>
+                    Home
+                </a>
+                <a class="nav-item" href="/concepts/http-methods.html" aria-label="Learn">
+                    <span class="dot">📚</span>
+                    Learn
+                </a>
+                <a class="nav-item" href="/assesment.html" aria-label="Quiz">
+                    <span class="dot">📝</span>
+                    Quiz
+                </a>
+                <a class="nav-item active" href="/analytics.html" aria-label="Analytics">
+                    <span class="dot">📈</span>
+                    Analytics
+                </a>
+                <a class="nav-item" href="/profile.html" aria-label="Profile">
+                    <span class="dot">👤</span>
+                    Profile
+                </a>
+            </div>
+        </nav>
+    </div>
+
+    <script>
+        (function () {
+            const drawer = document.getElementById('drawer');
+            const menuBtn = document.getElementById('menuBtn');
+            const backdrop = document.getElementById('drawerBackdrop');
+
+            function openDrawer() {
+                drawer.classList.add('open');
+                drawer.setAttribute('aria-hidden', 'false');
+            }
+
+            function closeDrawer() {
+                drawer.classList.remove('open');
+                drawer.setAttribute('aria-hidden', 'true');
+            }
+
+            menuBtn?.addEventListener('click', openDrawer);
+            backdrop?.addEventListener('click', closeDrawer);
+        })();
+
+        function fmtDate(d) {
+            try {
+                const dt = new Date(d);
+                if (isNaN(dt.getTime())) return '—';
+                return dt.toLocaleDateString();
+            } catch {
+                return '—';
+            }
+        }
+
+        (async function () {
+            try {
+                const meRes = await fetch('/api/me', { credentials: 'same-origin' });
+                const me = await meRes.json();
+                if (me && me.authenticated && me.role === 'admin') {
+                    const adminMenuLink = document.getElementById('adminMenuLink');
+                    if (adminMenuLink) adminMenuLink.style.display = 'flex';
+                }
+            } catch {
+                // ignore
+            }
+        })();
+
+        (async function () {
+            const statMsg = document.getElementById('statMsg');
+            const asOf = document.getElementById('asOf');
+
+            try {
+                const [progressRes, streakRes, historyRes] = await Promise.all([
+                    fetch('/api/quiz/progress', { credentials: 'same-origin' }),
+                    fetch('/api/quiz/streak', { credentials: 'same-origin' }),
+                    fetch('/api/quiz/history?limit=20', { credentials: 'same-origin' }),
+                ]);
+
+                const progress = await progressRes.json().catch(() => ({ ok: false }));
+                const streak = await streakRes.json().catch(() => ({ ok: false }));
+                const history = await historyRes.json().catch(() => ({ ok: false, attempts: [] }));
+
+                if (asOf) asOf.textContent = '(updated ' + new Date().toLocaleTimeString() + ')';
+
+                const attempts = Number.isFinite(progress?.attempts) ? progress.attempts : 0;
+                const best = Number.isFinite(progress?.bestPercentage) ? progress.bestPercentage : null;
+                const lastAt = progress?.lastAt || null;
+
+                const currentStreak = Number.isFinite(streak?.currentStreak) ? streak.currentStreak : 0;
+                const longestStreak = Number.isFinite(streak?.longestStreak) ? streak.longestStreak : 0;
+
+                const attemptsEl = document.getElementById('attempts');
+                const bestEl = document.getElementById('best');
+                const currentEl = document.getElementById('currentStreak');
+                const longestEl = document.getElementById('longestStreak');
+                const lastEl = document.getElementById('lastAt');
+
+                if (attemptsEl) attemptsEl.textContent = String(attempts);
+                if (bestEl) bestEl.textContent = best === null ? '—' : best + '%';
+                if (currentEl) currentEl.textContent = currentStreak ? (currentStreak + ' day' + (currentStreak === 1 ? '' : 's')) : '—';
+                if (longestEl) longestEl.textContent = longestStreak ? (longestStreak + ' day' + (longestStreak === 1 ? '' : 's')) : '—';
+                if (lastEl) lastEl.textContent = lastAt ? fmtDate(lastAt) : '—';
+
+                if (statMsg) {
+                    statMsg.textContent = attempts ? 'Nice — keep your momentum.' : 'No attempts yet. Start a quiz run to populate analytics.';
+                }
+
+                // Render history
+                const list = document.getElementById('historyList');
+                const msg = document.getElementById('historyMsg');
+                const items = Array.isArray(history?.attempts) ? history.attempts : [];
+
+                if (msg) msg.textContent = items.length ? 'Your latest quiz runs.' : 'No attempts yet.';
+
+                if (list) {
+                    list.innerHTML = '';
+                    for (const a of items) {
+                        const pct = Number.isFinite(a?.percentage) ? a.percentage : null;
+                        const score = Number.isFinite(a?.score) ? a.score : null;
+                        const total = Number.isFinite(a?.total) ? a.total : null;
+                        const when = a?.created_at || null;
+                        const quizId = String(a?.quiz_id || 'quiz');
+
+                        const left = document.createElement('div');
+                        left.innerHTML =
+                            '<div><strong>' + quizId + '</strong></div>' +
+                            '<div class="muted">' + (when ? fmtDate(when) : '—') + '</div>';
+
+                        const right = document.createElement('div');
+                        right.style.display = 'grid';
+                        right.style.justifyItems = 'end';
+                        right.style.gap = '6px';
+
+                        const pill = document.createElement('div');
+                        pill.className = 'pill mono';
+                        pill.textContent = pct === null ? '—' : pct + '%';
+
+                        const detail = document.createElement('div');
+                        detail.className = 'muted mono';
+                        detail.textContent = (score === null || total === null) ? '' : (score + '/' + total);
+
+                        right.appendChild(pill);
+                        right.appendChild(detail);
+
+                        const row = document.createElement('div');
+                        row.className = 'attempt';
+                        row.appendChild(left);
+                        row.appendChild(right);
+
+                        list.appendChild(row);
+                    }
+                }
+            } catch (e) {
+                if (statMsg) statMsg.textContent = 'Could not load analytics.';
+            }
+        })();
+    </script>
+</body>
+</html>

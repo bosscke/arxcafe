@@ -11,3 +11,8 @@ workflow.md
 
 # npm internal files
 node_modules/.package-lock.json
+
+# Temp / local artifacts
+tmp-*.html
+tmp-cookies*.txt
+robocopy_*.log

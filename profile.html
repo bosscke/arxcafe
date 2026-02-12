@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile • ArxCafe</title>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231f2a44'/%3E%3Ctext x='50%25' y='58%25' text-anchor='middle' font-size='34'%3E🍰%3C/text%3E%3C/svg%3E">
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/elearn.css">
+</head>
+<body class="profile-page">
+    <div class="app-shell">
+        <header class="topbar">
+            <div class="topbar-inner">
+                <button class="icon-btn" id="menuBtn" aria-label="Menu">☰</button>
+                <div class="brand">
+                    ArxCafe
+                    <small>Profile</small>
+                </div>
+                <div class="avatar" id="avatar" aria-label="Profile">AR</div>
+            </div>
+        </header>
+
+        <div class="drawer" id="drawer" aria-hidden="true">
+            <div class="drawer-backdrop" id="drawerBackdrop"></div>
+            <nav class="drawer-panel" aria-label="Menu">
+                <div class="drawer-title">Menu</div>
+                <a class="drawer-link" href="/"><strong>Home</strong><span>→</span></a>
+                <a class="drawer-link" href="/concepts/http-methods.html"><strong>Learn</strong><span>→</span></a>
+                <a class="drawer-link" href="/assesment.html"><strong>Dashboard</strong><span>→</span></a>
+                <a class="drawer-link" href="/paywall" id="paywallLink"><strong>Unlock</strong><span>→</span></a>
+                <a class="drawer-link" href="/logout"><strong>Logout</strong><span>→</span></a>
+                <a class="drawer-link" href="/admin" id="adminMenuLink" style="display:none"><strong>Admin</strong><span>→</span></a>
+            </nav>
+        </div>
+
+        <main class="main">
+            <div class="container">
+                <section class="hero">
+                    <h1>Your Profile</h1>
+                    <p>Account status, access, and quick actions.</p>
+                </section>
+
+                <section class="section">
+                    <div class="card card-pad">
+                        <p class="progress-title">Account <span id="roleChip">—</span></p>
+                        <div class="progress-sub" id="emailLine">Loading…</div>
+                        <div class="stats" style="margin-top: 12px;">
+                            <div class="stat"><strong id="accessState">—</strong><span>Access</span></div>
+                            <div class="stat"><strong id="attemptsCount">—</strong><span>Quiz attempts</span></div>
+                            <div class="stat"><strong id="subEnds">—</strong><span>Access until</span></div>
+                            <div class="stat"><strong id="subStatus">—</strong><span>Subscription</span></div>
+                        </div>
+                        <div class="stats" style="margin-top: 10px;">
+                            <div class="stat"><strong id="streakDays">—</strong><span>Streak</span></div>
+                            <div class="stat"><strong id="lastAttempt">—</strong><span>Last attempt</span></div>
+                        </div>
+                        <div style="margin-top: 12px; display:flex; gap:10px; flex-wrap:wrap;">
+                            <button class="btn-secondary" id="billingPortalBtn" type="button" style="width:auto;">Manage billing</button>
+                            <div class="progress-sub" id="billingPortalMsg" role="status" aria-live="polite"></div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="section">
+                    <h2>Actions</h2>
+                    <div class="cards">
+                        <a class="action" href="/assesment.html">
+                            <div class="action-icon">🧭</div>
+                            <div>
+                                <h3>Go to Dashboard</h3>
+                                <p>See progress and next steps.</p>
+                            </div>
+                        </a>
+
+                        <a class="action" href="/paywall" id="upgradeCard">
+                            <div class="action-icon">🔓</div>
+                            <div>
+                                <h3>Upgrade Access</h3>
+                                <p>Unlock quizzes and mock exams.</p>
+                            </div>
+                        </a>
+
+                        <a class="action" href="/analytics.html" id="analyticsCard">
+                            <div class="action-icon">📈</div>
+                            <div>
+                                <h3>Analytics</h3>
+                                <p>See trends, streaks, and recent runs.</p>
+                            </div>
+                        </a>
+
+                        <a class="action" href="/reset-password">
+                            <div class="action-icon">🔐</div>
+                            <div>
+                                <h3>Reset Password</h3>
+                                <p>Send yourself a reset link.</p>
+                            </div>
+                        </a>
+
+                        <a class="action" href="/logout">
+                            <div class="action-icon">🚪</div>
+                            <div>
+                                <h3>Logout</h3>
+                                <p>End this session on this device.</p>
+                            </div>
+                        </a>
+                    </div>
+                </section>
+
+                <section class="section">
+                    <h2>Change password</h2>
+                    <div class="card card-pad">
+                        <form id="changePasswordForm" autocomplete="off">
+                            <div style="display:grid; gap:10px; margin-top: 8px;">
+                                <label style="display:grid; gap:6px; font-weight:800; color: var(--color-text);">
+                                    Current password
+                                    <input class="input" type="password" id="currentPassword" required minlength="8" style="padding:12px; border-radius:12px; border:1px solid var(--border); background: var(--color-surface);">
+                                </label>
+                                <label style="display:grid; gap:6px; font-weight:800; color: var(--color-text);">
+                                    New password
+                                    <input class="input" type="password" id="newPassword" required minlength="8" style="padding:12px; border-radius:12px; border:1px solid var(--border); background: var(--color-surface);">
+                                </label>
+                                <label style="display:grid; gap:6px; font-weight:800; color: var(--color-text);">
+                                    Confirm new password
+                                    <input class="input" type="password" id="confirmPassword" required minlength="8" style="padding:12px; border-radius:12px; border:1px solid var(--border); background: var(--color-surface);">
+                                </label>
+                                <button class="btn-primary" type="submit" id="changePasswordBtn">Update password</button>
+                                <div class="progress-sub" id="changePasswordMsg" role="status" aria-live="polite"></div>
+                            </div>
+                        </form>
+                    </div>
+                </section>
+
+                <section class="section">
+                    <h2>Recent attempts</h2>
+                    <div class="card card-pad">
+                        <div class="progress-sub" id="historyMsg">Loading…</div>
+                        <div id="attemptList" style="display:grid; gap:10px; margin-top: 12px;"></div>
+                    </div>
+                </section>
+
+                <section class="section">
+                    <h2>Weak areas</h2>
+                    <div class="card card-pad">
+                        <div class="progress-sub" id="weakAreasMsg">We’ll calculate this from your recent attempts.</div>
+                        <div id="weakAreas" style="display:grid; gap:10px; margin-top: 12px;"></div>
+                    </div>
+                </section>
+            </div>
+        </main>
+
+        <nav class="bottom-nav" aria-label="Bottom navigation">
+            <div class="bottom-inner">
+                <a class="nav-item" href="/" aria-label="Home">
+                    <span class="dot">🏠</span>
+                    Home
+                </a>
+                <a class="nav-item" href="/concepts/http-methods.html" aria-label="Learn">
+                    <span class="dot">📚</span>
+                    Learn
+                </a>
+                <a class="nav-item" href="/assesment.html" aria-label="Quiz">
+                    <span class="dot">📝</span>
+                    Quiz
+                </a>
+                <a class="nav-item active" href="/profile.html" aria-label="Profile">
+                    <span class="dot">👤</span>
+                    Profile
+                </a>
+            </div>
+        </nav>
+    </div>
+
+    <script>
+        (function () {
+            const drawer = document.getElementById('drawer');
+            const menuBtn = document.getElementById('menuBtn');
+            const backdrop = document.getElementById('drawerBackdrop');
+
+            function openDrawer() {
+                drawer.classList.add('open');
+                drawer.setAttribute('aria-hidden', 'false');
+            }
+
+            function closeDrawer() {
+                drawer.classList.remove('open');
+                drawer.setAttribute('aria-hidden', 'true');
+            }
+
+            menuBtn?.addEventListener('click', openDrawer);
+            backdrop?.addEventListener('click', closeDrawer);
+        })();
+
+        (async function () {
+            try {
+                const [meRes, accessRes, progressRes, streakRes, statusRes, historyRes] = await Promise.all([
+                    fetch('/api/me', { credentials: 'same-origin' }),
+                    fetch('/api/access', { credentials: 'same-origin' }),
+                    fetch('/api/quiz/progress', { credentials: 'same-origin' }),
+                    fetch('/api/quiz/streak', { credentials: 'same-origin' }),
+                    fetch('/api/account/status', { credentials: 'same-origin' }),
+                    fetch('/api/quiz/history?limit=12', { credentials: 'same-origin' }),
+                ]);
+
+                const me = await meRes.json();
+                const access = await accessRes.json();
+                const progress = await progressRes.json();
+                const streak = await streakRes.json().catch(() => ({ ok: false }));
+                const status = await statusRes.json();
+                const history = await historyRes.json().catch(() => ({ ok: false, attempts: [] }));
+
+                const emailLine = document.getElementById('emailLine');
+                const roleChip = document.getElementById('roleChip');
+                const accessState = document.getElementById('accessState');
+                const attemptsCount = document.getElementById('attemptsCount');
+                const subEnds = document.getElementById('subEnds');
+                const subStatus = document.getElementById('subStatus');
+                const upgradeCard = document.getElementById('upgradeCard');
+                const adminMenuLink = document.getElementById('adminMenuLink');
+                const historyMsg = document.getElementById('historyMsg');
+                const attemptList = document.getElementById('attemptList');
+                const weakAreasMsg = document.getElementById('weakAreasMsg');
+                const weakAreas = document.getElementById('weakAreas');
+                const streakEl = document.getElementById('streakDays');
+                const lastAttemptEl = document.getElementById('lastAttempt');
+
+                if (emailLine) {
+                    emailLine.textContent = me?.email ? me.email : 'Signed in';
+                }
+
+                const role = me?.role || access?.role || 'user';
+                if (roleChip) {
+                    roleChip.textContent = role;
+                }
+
+                const paid = !!access?.paid;
+
+                if (streakEl && streak?.ok) {
+                    const s = Number.isFinite(streak.currentStreak) ? streak.currentStreak : 0;
+                    streakEl.textContent = s ? `${s} day${s === 1 ? '' : 's'}` : '—';
+                }
+
+                const lastAt = progress?.lastAt || streak?.lastAttemptAt;
+                if (lastAttemptEl && lastAt) {
+                    try {
+                        const d = new Date(lastAt);
+                        lastAttemptEl.textContent = isNaN(d.getTime()) ? '—' : d.toLocaleDateString();
+                    } catch {
+                        lastAttemptEl.textContent = '—';
+                    }
+                }
+                if (accessState) {
+                    accessState.textContent = paid ? 'Unlocked' : 'Locked';
+                }
+
+                if (subEnds) {
+                    const end = status?.subscription?.currentPeriodEnd ? new Date(status.subscription.currentPeriodEnd) : null;
+                    subEnds.textContent = end ? end.toLocaleDateString() : '—';
+                }
+
+                if (subStatus) {
+                    const raw = status?.subscription?.status ? String(status.subscription.status) : '';
+                    subStatus.textContent = raw ? raw : (paid ? 'active' : 'none');
+                }
+
+                if (upgradeCard && paid) {
+                    upgradeCard.style.display = 'none';
+                }
+
+                if (adminMenuLink && role === 'admin') {
+                    adminMenuLink.style.display = 'flex';
+                }
+
+                const attempts = Number.isFinite(progress?.attempts) ? progress.attempts : 0;
+                if (attemptsCount) {
+                    attemptsCount.textContent = String(attempts);
+                }
+
+                // Render history list
+                const attemptsArr = Array.isArray(history?.attempts) ? history.attempts : [];
+                if (historyMsg) {
+                    historyMsg.textContent = attemptsArr.length ? 'Your latest quiz runs.' : 'No attempts yet.';
+                }
+
+                if (attemptList) {
+                    attemptList.innerHTML = '';
+                    attemptsArr.slice(0, 12).forEach((a) => {
+                        const when = a?.created_at ? new Date(a.created_at) : null;
+                        const pct = Number.isFinite(a?.percentage) ? a.percentage : null;
+                        const score = Number.isFinite(a?.score) ? a.score : null;
+                        const total = Number.isFinite(a?.total) ? a.total : null;
+                        const quiz = a?.quiz_id ? String(a.quiz_id) : 'quiz';
+
+                        const pctText = pct !== null ? pct + '%' : '—';
+                        const scoreText = score !== null && total !== null ? score + '/' + total : '—';
+                        const join = ' • ';
+                        const line = document.createElement('div');
+                        line.className = 'stat';
+                        line.innerHTML = `
+                            <strong>${pctText}${join}${scoreText}</strong>
+                            <span>${quiz}${when ? ' • ' + when.toLocaleString() : ''}</span>
+                        `;
+                        attemptList.appendChild(line);
+                    });
+                }
+
+                // Compute weak areas from domain stats (aggregate across attempts)
+                const domainAgg = new Map();
+                for (const a of attemptsArr) {
+                    const ds = Array.isArray(a?.domain_stats) ? a.domain_stats : [];
+                    for (const d of ds) {
+                        const domain = d?.domain ? String(d.domain) : '';
+                        const correct = Number(d?.correct);
+                        const totalD = Number(d?.total);
+                        if (!domain || !Number.isFinite(correct) || !Number.isFinite(totalD) || totalD <= 0) continue;
+                        const existing = domainAgg.get(domain) || { correct: 0, total: 0 };
+                        existing.correct += correct;
+                        existing.total += totalD;
+                        domainAgg.set(domain, existing);
+                    }
+                }
+
+                const domainRows = Array.from(domainAgg.entries())
+                    .map(([domain, v]) => ({
+                        domain,
+                        correct: v.correct,
+                        total: v.total,
+                        pct: v.total > 0 ? Math.round((v.correct / v.total) * 100) : 0,
+                    }))
+                    .filter((r) => r.total >= 5)
+                    .sort((a, b) => a.pct - b.pct)
+                    .slice(0, 5);
+
+                if (weakAreasMsg) {
+                    weakAreasMsg.textContent = domainRows.length ? 'Focus here to improve fastest.' : 'Not enough data yet (needs a few more attempts).';
+                }
+
+                if (weakAreas) {
+                    weakAreas.innerHTML = '';
+                    domainRows.forEach((r) => {
+                        const row = document.createElement('div');
+                        row.className = 'stat';
+                        row.innerHTML = `
+                            <strong>${r.domain}</strong>
+                            <span>${r.pct}% correct (${r.correct}/${r.total})</span>
+                        `;
+                        weakAreas.appendChild(row);
+                    });
+                }
+            } catch (e) {
+                // ignore
+            }
+        })();
+
+        (function () {
+            const btn = document.getElementById('billingPortalBtn');
+            const msg = document.getElementById('billingPortalMsg');
+
+            btn?.addEventListener('click', async () => {
+                if (msg) msg.textContent = '';
+                btn.setAttribute('disabled', 'disabled');
+                try {
+                    const res = await fetch('/api/billing/portal', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        credentials: 'same-origin',
+                        body: JSON.stringify({})
+                    });
+                    const data = await res.json().catch(() => ({}));
+                    if (!res.ok || !data?.ok || !data?.url) {
+                        if (msg) msg.textContent = data?.error || 'Could not open billing portal.';
+                        return;
+                    }
+                    window.location.href = data.url;
+                } catch (e) {
+                    if (msg) msg.textContent = 'Could not open billing portal.';
+                } finally {
+                    btn.removeAttribute('disabled');
+                }
+            });
+        })();
+
+        (function () {
+            const form = document.getElementById('changePasswordForm');
+            const msg = document.getElementById('changePasswordMsg');
+            const btn = document.getElementById('changePasswordBtn');
+
+            form?.addEventListener('submit', async (ev) => {
+                ev.preventDefault();
+                if (msg) msg.textContent = '';
+                if (btn) btn.setAttribute('disabled', 'disabled');
+                try {
+                    const payload = {
+                        currentPassword: document.getElementById('currentPassword')?.value || '',
+                        newPassword: document.getElementById('newPassword')?.value || '',
+                        confirmPassword: document.getElementById('confirmPassword')?.value || '',
+                    };
+
+                    const res = await fetch('/api/account/password', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        credentials: 'same-origin',
+                        body: JSON.stringify(payload)
+                    });
+
+                    const data = await res.json().catch(() => ({}));
+                    if (!res.ok || !data?.ok) {
+                        if (msg) msg.textContent = data?.error || 'Could not change password.';
+                        return;
+                    }
+
+                    if (data?.loggedOut) {
+                        if (msg) msg.textContent = 'Password updated. Please log in again.';
+                        setTimeout(() => {
+                            window.location.href = '/login?redirect=' + encodeURIComponent('/profile.html');
+                        }, 600);
+                        return;
+                    }
+
+                    if (msg) msg.textContent = 'Password updated.';
+                    form.reset();
+                } catch (e) {
+                    if (msg) msg.textContent = 'Could not change password.';
+                } finally {
+                    if (btn) btn.removeAttribute('disabled');
+                }
+            });
+        })();
+    </script>
+</body>
+</html>

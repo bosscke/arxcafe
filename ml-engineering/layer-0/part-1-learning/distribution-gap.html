@@ -1,0 +1,367 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Chapter 0.2 — Data, Reality, and the Distribution Gap | ArxCafe</title>
+  <link rel="stylesheet" href="/css/global.css" />
+  <link rel="stylesheet" href="/css/ml-engineering.css" />
+</head>
+<body>
+  <a class="home-btn" href="/">← Home</a>
+
+  <div class="ml-shell">
+    <div class="ml-topbar">
+      <div class="ml-breadcrumbs">
+        <a href="/">ArxCafe</a> /
+        <a href="/ml-engineering/layer-0">ML Engineering</a> /
+        <a href="/ml-engineering/layer-0">Layer 0</a> /
+        <a href="/ml-engineering/layer-0/part-1-learning">Part 1</a> /
+        <span>Chapter 0.2</span>
+      </div>
+      <span class="ml-pill">Book 0 · Chapter 0.2</span>
+    </div>
+
+    <section class="ml-panel ml-hero">
+      <div class="ml-eyebrow">Book 0 — Chapter 0.2</div>
+      <h1>Data, Reality, and the Distribution Gap</h1>
+      <div class="ml-subtitle">
+        Concept page: models train on data, deploy into reality. This chapter names the mismatch and gives a practical taxonomy for diagnosing shift.
+      </div>
+    </section>
+
+    <section class="ml-grid">
+      <article class="ml-panel">
+        <div class="ml-section-title">0.2.1 The uncomfortable truth: data is a proxy for reality</div>
+        <div class="ml-body">
+          <p>
+            Machine learning systems are trained on data, but they are deployed into reality. These two are never identical.
+          </p>
+          <p>Formally, training assumes examples are drawn from a fixed distribution:</p>
+          <div class="ml-math-block"><code>(x, y) ~ D</code></div>
+          <p>But in practice:</p>
+          <ul>
+            <li>data is collected by imperfect processes</li>
+            <li>labels are delayed, noisy, or biased</li>
+            <li>user behavior changes over time</li>
+            <li>systems interact with the environment they predict</li>
+          </ul>
+          <div class="ml-callout">
+            <div class="ml-callout-title">Engineering truth</div>
+            <p>
+              The central problem of ML engineering is not learning from data — it is learning from a distorted, delayed, and drifting shadow of reality.
+            </p>
+          </div>
+        </div>
+
+        <div class="ml-section-title" style="margin-top: 14px;">0.2.2 The IID assumption (and why it almost always fails)</div>
+        <div class="ml-body">
+          <p>Most ML theory assumes data is IID:</p>
+          <ul>
+            <li><strong>Independent:</strong> samples do not influence each other</li>
+            <li><strong>Identically Distributed:</strong> all samples come from the same distribution</li>
+          </ul>
+          <p>
+            This assumption is mathematically convenient — and operationally fragile.
+          </p>
+          <p>Examples of violations:</p>
+          <ul>
+            <li><strong>Time series:</strong> yesterday affects today</li>
+            <li><strong>User data:</strong> users generate multiple correlated samples</li>
+            <li><strong>Recommendation systems:</strong> predictions affect future data</li>
+            <li><strong>Logging changes:</strong> distribution changes without warning</li>
+          </ul>
+          <div class="ml-callout">
+            <div class="ml-callout-title">Engineering takeaway</div>
+            <p>
+              IID is a modeling assumption, not a fact. Systems must be designed expecting it to fail.
+            </p>
+          </div>
+        </div>
+
+        <div class="ml-section-title" style="margin-top: 14px;">0.2.3 Training distribution ≠ serving distribution</div>
+        <div class="ml-body">
+          <p>Let:</p>
+          <ul>
+            <li><span class="ml-math">D_train</span>: distribution of training data</li>
+            <li><span class="ml-math">D_serve</span>: distribution seen in production</li>
+          </ul>
+          <p>Generalization quietly assumes:</p>
+          <div class="ml-math-block"><code>D_train ≈ D_serve</code></div>
+          <p>In real systems:</p>
+          <div class="ml-math-block"><code>D_train ≠ D_serve</code></div>
+          <p>This mismatch is called the <strong>distribution gap</strong>.</p>
+          <p>
+            Everything from sudden metric drops to silent model decay traces back to this inequality.
+          </p>
+        </div>
+
+        <div class="ml-section-title" style="margin-top: 14px;">0.2.4 Types of distribution shift (critical taxonomy)</div>
+        <div class="ml-body">
+          <p>
+            Not all shifts are the same. Diagnosing the type matters.
+          </p>
+
+          <h3 style="margin: 0 0 6px; color: var(--color-primary);">a) Covariate shift</h3>
+          <p>
+            <span class="ml-math">P_train(x) ≠ P_serve(x)</span>, while <span class="ml-math">P(y | x)</span> is unchanged.
+          </p>
+          <p>Examples:</p>
+          <ul>
+            <li>new user demographics</li>
+            <li>seasonal effects</li>
+            <li>product UI changes</li>
+          </ul>
+          <p>Often mitigated by:</p>
+          <ul>
+            <li>reweighting</li>
+            <li>retraining</li>
+            <li>feature normalization</li>
+          </ul>
+
+          <h3 style="margin: 14px 0 6px; color: var(--color-primary);">b) Label shift</h3>
+          <p>
+            <span class="ml-math">P_train(y) ≠ P_serve(y)</span>
+          </p>
+          <p>Examples:</p>
+          <ul>
+            <li>fraud rates increase during holidays</li>
+            <li>rare events become more common</li>
+          </ul>
+          <p>This breaks:</p>
+          <ul>
+            <li>calibrated probabilities</li>
+            <li>threshold-based decisions</li>
+          </ul>
+
+          <h3 style="margin: 14px 0 6px; color: var(--color-primary);">c) Concept drift</h3>
+          <p>
+            <span class="ml-math">P_train(y | x) ≠ P_serve(y | x)</span>
+          </p>
+          <p>Examples:</p>
+          <ul>
+            <li>user intent changes</li>
+            <li>adversaries adapt</li>
+            <li>market conditions change</li>
+          </ul>
+          <div class="ml-callout">
+            <div class="ml-callout-title">Hardest form of drift</div>
+            <p>
+              No static model can survive concept drift indefinitely.
+            </p>
+          </div>
+        </div>
+
+        <div class="ml-section-title" style="margin-top: 14px;">0.2.5 Why offline evaluation lies</div>
+        <div class="ml-body">
+          <p>Offline evaluation assumes:</p>
+          <ul>
+            <li>test data ≈ future data</li>
+            <li>labels are correct and timely</li>
+            <li>no feedback loops exist</li>
+          </ul>
+          <p>In production:</p>
+          <ul>
+            <li>labels arrive late or never</li>
+            <li>predictions influence behavior</li>
+            <li>metrics are delayed proxies</li>
+          </ul>
+          <p>This is why:</p>
+          <ul>
+            <li>models pass validation and fail in prod</li>
+            <li>A/B tests disagree with offline metrics</li>
+            <li>“accuracy” improves while business metrics decline</li>
+          </ul>
+          <p>
+            Offline metrics estimate performance under assumptions that reality violates.
+          </p>
+        </div>
+
+        <div class="ml-section-title" style="margin-top: 14px;">0.2.6 Temporal structure: why random splits fail</div>
+        <div class="ml-body">
+          <p>Random train-test splits implicitly assume:</p>
+          <ul>
+            <li>time does not matter</li>
+            <li>future resembles the past</li>
+          </ul>
+          <p>For temporal data:</p>
+          <ul>
+            <li>random splits leak future information</li>
+            <li>validation becomes optimistic</li>
+            <li>deployment performance collapses</li>
+          </ul>
+          <p>Correct approach:</p>
+          <ul>
+            <li>time-based splits</li>
+            <li>rolling windows</li>
+            <li>backtesting</li>
+          </ul>
+          <div class="ml-callout">
+            <div class="ml-callout-title">Exam signal</div>
+            <p>
+              If time is involved, random splitting is suspicious.
+            </p>
+          </div>
+        </div>
+
+        <div class="ml-section-title" style="margin-top: 14px;">0.2.7 Sampling bias: who gets into the dataset?</div>
+        <div class="ml-body">
+          <p>
+            Datasets are rarely random samples of reality.
+          </p>
+          <p>Common sources:</p>
+          <ul>
+            <li>logging bias (only some events recorded)</li>
+            <li>survivorship bias (failures disappear)</li>
+            <li>self-selection (only certain users participate)</li>
+            <li>human labeling bias</li>
+          </ul>
+          <p>
+            Once bias enters the dataset, training amplifies it.
+          </p>
+          <div class="ml-callout">
+            <div class="ml-callout-title">Not just ethics</div>
+            <p>
+              This is not an ethical issue alone — it is a statistical inevitability.
+            </p>
+          </div>
+        </div>
+
+        <div class="ml-section-title" style="margin-top: 14px;">0.2.8 Feedback loops: models change the data they learn from</div>
+        <div class="ml-body">
+          <p>When a model’s predictions affect the environment:</p>
+          <ul>
+            <li>recommendations influence clicks</li>
+            <li>risk scores influence approvals</li>
+            <li>alerts influence investigation rates</li>
+          </ul>
+          <p>The data-generating process becomes:</p>
+          <div class="ml-math-block"><code>D_(t+1) = f(D_t, model_t)</code></div>
+          <p>
+            This violates stationarity and IID assumptions completely.
+          </p>
+          <p>Result: models can reinforce their own mistakes.</p>
+        </div>
+
+        <div class="ml-section-title" style="margin-top: 14px;">0.2.9 Dataset shift vs model failure (diagnostic thinking)</div>
+        <div class="ml-body">
+          <p>When performance drops, ask:</p>
+          <ul>
+            <li>Did the data distribution change?</li>
+            <li>Did the feature pipeline change?</li>
+            <li>Did labeling change?</li>
+            <li>Did thresholds change?</li>
+            <li>Did the business objective change?</li>
+          </ul>
+          <p>Do not immediately:</p>
+          <ul>
+            <li>blame the algorithm</li>
+            <li>tune hyperparameters</li>
+            <li>add model complexity</li>
+          </ul>
+          <div class="ml-callout">
+            <div class="ml-callout-title">Rule of thumb</div>
+            <p>
+              Most failures are data failures, not model failures.
+            </p>
+          </div>
+        </div>
+
+        <div class="ml-section-title" style="margin-top: 14px;">0.2.10 Why “retraining” is not a silver bullet</div>
+        <div class="ml-body">
+          <p>Retraining assumes:</p>
+          <ul>
+            <li>fresh data reflects reality</li>
+            <li>labels are correct</li>
+            <li>drift is slow</li>
+          </ul>
+          <p>But:</p>
+          <ul>
+            <li>retraining on biased data reinforces bias</li>
+            <li>retraining too often increases variance</li>
+            <li>retraining too late misses change</li>
+          </ul>
+          <div class="ml-callout">
+            <div class="ml-callout-title">Frame it correctly</div>
+            <p>
+              Retraining is a control mechanism, not a fix.
+            </p>
+          </div>
+        </div>
+
+        <div class="ml-section-title" style="margin-top: 14px;">0.2.11 Engineering consequences of the distribution gap</div>
+        <div class="ml-body">
+          <p>This chapter directly motivates:</p>
+          <ul>
+            <li>validation strategies</li>
+            <li>monitoring and drift detection</li>
+            <li>shadow deployments</li>
+            <li>canary releases</li>
+            <li>human-in-the-loop systems</li>
+          </ul>
+          <p>
+            You cannot eliminate distribution shift. You can only detect it early and respond safely.
+          </p>
+        </div>
+
+        <div class="ml-section-title" style="margin-top: 14px;">0.2.12 Chapter takeaway</div>
+        <div class="ml-body">
+          <p>If Chapter 0.1 says:</p>
+          <div class="ml-callout">
+            <div class="ml-callout-title">Chapter 0.1</div>
+            <p>
+              “We optimize the wrong objective on purpose.”
+            </p>
+          </div>
+          <p>Then Chapter 0.2 adds:</p>
+          <div class="ml-callout">
+            <div class="ml-callout-title">Chapter 0.2</div>
+            <p>
+              “And we optimize it on the wrong data, from the wrong time, about the wrong world.”
+            </p>
+          </div>
+          <p>
+            Machine learning works anyway — not because these problems don’t exist, but because systems are engineered with them in mind.
+          </p>
+        </div>
+
+        <div class="ml-section-title" style="margin-top: 14px;">Readiness Check</div>
+        <div class="ml-body">
+          <p><strong>You should now be able to:</strong></p>
+          <ul>
+            <li>Explain why IID is an assumption, not reality</li>
+            <li>Identify covariate shift vs label shift vs concept drift</li>
+            <li>Explain why offline metrics fail in production</li>
+            <li>Design a correct train/validation split for time-based data</li>
+            <li>Reason about feedback loops in deployed ML systems</li>
+          </ul>
+        </div>
+      </article>
+
+      <aside class="ml-panel">
+        <div class="ml-section-title">Concept Template (arxcafe)</div>
+        <div class="ml-body" style="font-size: 13px;">
+          <ul>
+            <li>Single idea (title)</li>
+            <li>Intuition</li>
+            <li>Formal definition</li>
+            <li>Why this exists in ML</li>
+            <li>What breaks if misunderstood</li>
+            <li>Appears later in… (cross-links)</li>
+            <li>Mental checklist (“you understand this if…“)</li>
+          </ul>
+        </div>
+
+        <div class="ml-section-title" style="margin-top: 14px;">Navigation</div>
+        <div class="ml-toc">
+          <a href="/ml-engineering/layer-0/part-1-learning/expected-loss-minimization">← Chapter 0.1: Expected Loss Minimization</a>
+          <a href="/ml-engineering/layer-0/part-1-learning/training-is-optimization">Chapter 0.3 — Why Training Is Optimization, Not Intelligence</a>
+          <a href="/ml-engineering/layer-0/part-2-linear-algebra/scalars-vectors-feature-spaces">Chapter 0.4 — Scalars, Vectors, and Feature Spaces</a>
+          <a href="/ml-engineering/layer-0/part-1-learning/empirical-risk">Empirical Risk (coming soon)</a>
+          <a href="/ml-engineering/layer-0/part-1-learning/generalization-gap">Generalization Gap (coming soon)</a>
+        </div>
+      </aside>
+    </section>
+  </div>
+</body>
+</html>

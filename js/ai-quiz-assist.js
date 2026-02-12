@@ -57,7 +57,7 @@
   function createAiAssistUI() {
     const container = document.createElement('div');
     container.className = 'ai-assist';
-    container.style.cssText = 'background: rgba(100, 180, 255, 0.1); border: 1px solid rgba(100, 180, 255, 0.3); border-radius: 10px; padding: 20px; margin-top: 20px; display: none;';
+    container.style.cssText = 'background: var(--color-surface); border: 1px solid var(--border); border-radius: 10px; padding: 20px; margin-top: 20px; display: none; box-shadow: var(--shadow-sm);';
 
     // Header row
     const header = document.createElement('div');
@@ -66,12 +66,12 @@
     const title = document.createElement('div');
     title.className = 'ai-assist-title';
     title.textContent = 'AI explanation';
-    title.style.cssText = 'font-weight: 600; color: rgba(255,255,255,0.9);';
+    title.style.cssText = 'font-weight: 800; color: var(--color-primary);';
 
     const toggle = document.createElement('button');
     toggle.className = 'ai-assist-toggle';
     toggle.textContent = isAiEnabled() ? 'AI: On' : 'AI: Off';
-    toggle.style.cssText = 'background: rgba(100, 180, 255, 0.2); border: 1px solid rgba(100, 180, 255, 0.4); color: rgba(150, 220, 255, 0.95); padding: 6px 12px; border-radius: 6px; cursor: pointer; font-size: 13px; font-weight: 600;';
+    toggle.style.cssText = 'background: rgba(198, 169, 146, 0.22); border: 1px solid rgba(74, 52, 46, 0.25); color: var(--color-primary); padding: 6px 12px; border-radius: 10px; cursor: pointer; font-size: 13px; font-weight: 800;';
 
     header.appendChild(title);
     header.appendChild(toggle);
@@ -79,7 +79,7 @@
     // Body
     const shortDiv = document.createElement('div');
     shortDiv.className = 'ai-assist-short';
-    shortDiv.style.cssText = 'font-size: 14px; line-height: 1.6; color: rgba(255,255,255,0.9); margin-bottom: 12px;';
+    shortDiv.style.cssText = 'font-size: 14px; line-height: 1.6; color: var(--color-text); margin-bottom: 12px;';
 
     const actionsDiv = document.createElement('div');
     actionsDiv.className = 'ai-assist-actions';
@@ -88,7 +88,7 @@
     const continueBtn = document.createElement('button');
     continueBtn.className = 'ai-assist-continue';
     continueBtn.textContent = 'Continue';
-    continueBtn.style.cssText = 'background: rgba(100, 180, 255, 0.3); border: 1px solid rgba(100, 180, 255, 0.5); color: #fff; padding: 10px 20px; border-radius: 6px; cursor: pointer; font-size: 14px; font-weight: 600;';
+    continueBtn.style.cssText = 'background: linear-gradient(135deg, rgba(198, 169, 146, 0.95), rgba(74, 52, 46, 0.95)); border: 1px solid rgba(74, 52, 46, 0.35); color: #fff; padding: 10px 20px; border-radius: 12px; cursor: pointer; font-size: 14px; font-weight: 800;';
 
     actionsDiv.appendChild(continueBtn);
 

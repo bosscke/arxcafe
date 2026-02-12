@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Layer 0 — Mathematical & Statistical Foundations (Bedrock) | ArxCafe</title>
+  <link rel="stylesheet" href="/css/global.css" />
+  <link rel="stylesheet" href="/css/ml-engineering.css" />
+</head>
+<body>
+  <a class="home-btn" href="/">← Home</a>
+
+  <div class="ml-shell">
+    <div class="ml-topbar">
+      <div class="ml-breadcrumbs">
+        <a href="/">ArxCafe</a> / <span>ML Engineering</span> / <span>Layer 0</span>
+      </div>
+      <span class="ml-pill">Book 0</span>
+    </div>
+
+    <section class="ml-panel ml-hero">
+      <div class="ml-eyebrow">Google Professional Machine Learning Engineer</div>
+      <h1>Layer 0 — Mathematical &amp; Statistical Foundations (Bedrock)</h1>
+      <div class="ml-subtitle">
+        This layer explains the learning objective beneath every supervised ML system: expected loss minimization under uncertainty.
+        Everything above this layer is engineering around the gap between what we want (real-world performance) and what we can optimize (training-set performance).
+      </div>
+    </section>
+
+    <section class="ml-grid">
+      <div class="ml-panel">
+        <div class="ml-section-title">Why This Layer Exists</div>
+        <div class="ml-body">
+          <p>
+            In arxcafe, a “book” is not one giant page. It is a network (graph) of atomic concept pages.
+            Each concept is linkable, searchable, and reusable across multiple layers.
+          </p>
+
+          <div class="ml-callout">
+            <div class="ml-callout-title">Core Claim</div>
+            <p>
+              Machine learning is the art of minimizing the wrong objective in a controlled way.
+            </p>
+          </div>
+
+          <p>
+            Layer 0 gives you the language to explain why models work when they work, and why they break when they break.
+          </p>
+
+          <div class="ml-section-title" style="margin-top: 14px;">What This Layer Enables</div>
+          <ul>
+            <li>Reason about generalization (why training success doesn’t guarantee production success)</li>
+            <li>Explain overfitting without buzzwords</li>
+            <li>Choose losses/metrics intentionally (success is defined, not discovered)</li>
+            <li>Predict failures under distribution shift and data drift</li>
+          </ul>
+
+          <div class="ml-section-title" style="margin-top: 14px;">What Breaks If Skipped</div>
+          <ul>
+            <li>“Model selection” becomes trial-and-error rather than reasoning</li>
+            <li>Monitoring and retraining feel optional instead of inevitable</li>
+            <li>Offline metrics get mistaken for business outcomes</li>
+          </ul>
+
+          <div class="ml-section-title" style="margin-top: 14px;">arxcafe Implementation Plan (Summary)</div>
+          <ul>
+            <li><strong>Layer (Book)</strong> → folder namespace (e.g., <span class="ml-math">/ml-engineering/layer-0/</span>)</li>
+            <li><strong>Part (Section)</strong> → section index page</li>
+            <li><strong>Concept (Topic)</strong> → atomic HTML page using a consistent template</li>
+            <li>No monolithic <span class="ml-math">book.html</span>; the “book” is the table-of-contents plus interlinked pages</li>
+          </ul>
+
+          <div class="ml-footer">
+            Next: work through Parts 1–6 in order.
+          </div>
+        </div>
+      </div>
+
+      <aside class="ml-panel">
+        <div class="ml-section-title">Quick Start (Ch. 0.1–0.5)</div>
+        <div class="ml-toc">
+          <a href="/ml-engineering/layer-0/part-1-learning/expected-loss-minimization">Start Chapter 0.1 — Learning as Expected Loss Minimization</a>
+          <a href="/ml-engineering/layer-0/part-1-learning/distribution-gap">Chapter 0.2 — Data, Reality, and the Distribution Gap</a>
+          <a href="/ml-engineering/layer-0/part-1-learning/training-is-optimization">Chapter 0.3 — Why Training Is Optimization, Not Intelligence</a>
+          <a href="/ml-engineering/layer-0/part-2-linear-algebra/scalars-vectors-feature-spaces">Chapter 0.4 — Scalars, Vectors, and Feature Spaces</a>
+          <a href="/ml-engineering/layer-0/part-2-linear-algebra/datasets-as-matrices">Chapter 0.5 — Datasets as Matrices</a>
+        </div>
+
+        <div class="ml-section-title">Table of Contents</div>
+        <div class="ml-toc">
+          <a href="/ml-engineering/layer-0/part-1-learning">Part 1 — Learning as Optimization</a>
+          <a href="/ml-engineering/layer-0/part-2-linear-algebra">Part 2 — Linear Algebra for ML</a>
+          <a href="/ml-engineering/layer-0/part-3-probability">Part 3 — Probability Theory</a>
+          <a href="/ml-engineering/layer-0/part-4-statistics">Part 4 — Statistics for Learning</a>
+          <a href="/ml-engineering/layer-0/part-5-optimization">Part 5 — Optimization</a>
+          <a href="/ml-engineering/layer-0/part-6-metrics">Part 6 — Metrics &amp; Decision Theory</a>
+        </div>
+
+        <div class="ml-section-title" style="margin-top: 14px;">Layer Navigation</div>
+        <div class="ml-toc">
+          <a href="/ml-engineering">← Back to ML Engineering</a>
+          <a href="/ml-engineering/layer-1">Next: Layer 1 — Data &amp; Programming Foundations →</a>
+        </div>
+
+        <div class="ml-section-title" style="margin-top: 14px;">Dependency Sketch</div>
+        <div class="ml-body" style="font-size: 13px;">
+          <div class="ml-math-block"><code>Layer 0 (Math/Stats) → Layer 1 (Data/Programming) → Layer 2+ (Models, Features, Systems, MLOps)</code></div>
+        </div>
+      </aside>
+    </section>
+  </div>
+</body>
+</html>

@@ -2,3 +2,8 @@
 .gitignore
 node_modules
 npm-debug.log
+.env
+.env.*
+tmp-*
+*.log
+.vscode

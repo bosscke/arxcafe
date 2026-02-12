@@ -1,0 +1,222 @@
+:root {
+  --ml-max-width: 1100px;
+}
+
+.ml-shell {
+  max-width: var(--ml-max-width);
+  margin: 0 auto;
+  padding: 16px 16px 32px;
+  box-sizing: border-box;
+}
+
+.ml-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin: 12px 0 14px;
+}
+
+.ml-breadcrumbs {
+  font-size: 12px;
+  color: var(--color-secondary);
+}
+
+.ml-breadcrumbs a {
+  color: var(--color-primary);
+  text-decoration: none;
+  font-weight: 800;
+}
+
+.ml-breadcrumbs a:hover {
+  text-decoration: underline;
+}
+
+.ml-panel {
+  background: rgba(255, 255, 255, 0.78);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  box-shadow: var(--shadow);
+  padding: 18px 18px;
+}
+
+.ml-hero {
+  margin-top: 8px;
+}
+
+.ml-hero .ml-eyebrow {
+  margin: 0 0 6px;
+  font-weight: 900;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-secondary);
+}
+
+.ml-hero h1 {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 950;
+  color: var(--color-primary);
+}
+
+.ml-subtitle {
+  margin-top: 8px;
+  color: var(--color-secondary);
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.ml-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+  margin-top: 12px;
+}
+
+@media (min-width: 961px) {
+  .ml-grid {
+    grid-template-columns: 1.1fr 0.9fr;
+    align-items: start;
+  }
+}
+
+.ml-section-title {
+  margin: 0 0 8px;
+  font-size: 12px;
+  font-weight: 950;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--color-primary);
+}
+
+.ml-body {
+  color: var(--color-text);
+  line-height: 1.65;
+  font-size: 14px;
+}
+
+.ml-body p {
+  margin: 0 0 10px;
+}
+
+.ml-body ul,
+.ml-body ol {
+  margin: 0 0 10px;
+  padding-left: 18px;
+}
+
+.ml-kv {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.ml-kv .ml-kv-item {
+  background: var(--color-surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 12px 12px;
+  box-shadow: var(--shadow-sm);
+}
+
+.ml-kv .ml-kv-k {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--color-secondary);
+  font-weight: 900;
+  margin: 0 0 6px;
+}
+
+.ml-kv .ml-kv-v {
+  margin: 0;
+  color: var(--color-text);
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+.ml-toc {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.ml-toc a {
+  display: block;
+  padding: 10px 12px;
+  border-radius: 12px;
+  background: var(--color-surface);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-sm);
+  color: var(--color-text);
+  text-decoration: none;
+  font-weight: 800;
+}
+
+.ml-toc a:hover {
+  background: rgba(198, 169, 146, 0.18);
+  border-color: rgba(43,43,43,0.18);
+  box-shadow: var(--shadow);
+}
+
+.ml-pill {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 11px;
+  border: 1px solid rgba(74, 52, 46, 0.25);
+  background: rgba(198, 169, 146, 0.22);
+  color: var(--color-primary);
+  font-weight: 900;
+}
+
+.ml-math {
+  display: inline-block;
+  padding: 0 6px;
+  border-radius: 8px;
+  background: rgba(198, 169, 146, 0.16);
+  border: 1px solid rgba(74, 52, 46, 0.16);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  font-size: 0.95em;
+}
+
+.ml-math-block {
+  margin: 10px 0 12px;
+  padding: 10px 12px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.88);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-sm);
+  overflow-x: auto;
+}
+
+.ml-math-block code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  font-size: 13px;
+  color: var(--color-text);
+}
+
+.ml-callout {
+  margin-top: 10px;
+  padding: 12px 12px;
+  border-radius: 12px;
+  border: 1px solid rgba(74, 52, 46, 0.18);
+  background: rgba(198, 169, 146, 0.18);
+}
+
+.ml-callout .ml-callout-title {
+  margin: 0 0 6px;
+  font-weight: 950;
+  color: var(--color-primary);
+}
+
+.ml-callout p {
+  margin: 0;
+}
+
+.ml-footer {
+  margin-top: 14px;
+  color: var(--color-secondary);
+  font-size: 12px;
+}
