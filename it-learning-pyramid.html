@@ -1,0 +1,4543 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>IT Learning Pyramid Quiz • ArxCafe</title>
+  <link rel="stylesheet" href="/css/global.css" />
+  <link rel="stylesheet" href="/css/elearn.css" />
+  <style>
+    :root {
+      --pyr-top: rgba(74, 52, 46, 0.94);
+      --pyr-2: rgba(74, 52, 46, 0.82);
+      --pyr-3: rgba(74, 52, 46, 0.72);
+      --pyr-4: rgba(74, 52, 46, 0.62);
+      --pyr-5: rgba(74, 52, 46, 0.52);
+    }
+
+    .page {
+      max-width: 980px;
+      margin: 24px auto;
+      padding: 16px;
+    }
+
+    .hero {
+      background: var(--color-surface);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 18px;
+      box-shadow: var(--shadow);
+    }
+
+    .eyebrow {
+      font-size: 12px;
+      color: var(--color-secondary);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 8px 0 8px;
+      font-size: 24px;
+      line-height: 1.15;
+      color: var(--color-primary);
+    }
+
+    .subtitle {
+      margin: 0;
+      color: var(--color-text);
+      opacity: 0.9;
+      font-size: 14px;
+      line-height: 1.55;
+    }
+
+    .grid {
+      display: grid;
+      gap: 14px;
+      margin-top: 14px;
+    }
+
+    @media (min-width: 880px) {
+      .grid {
+        grid-template-columns: 1.1fr 0.9fr;
+        align-items: start;
+      }
+      h1 { font-size: 30px; }
+      .subtitle { font-size: 15px; }
+    }
+
+    .panel {
+      background: var(--color-surface);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 16px;
+      box-shadow: var(--shadow);
+    }
+
+    .section-title {
+      font-weight: 700;
+      color: var(--color-primary);
+      margin: 0 0 10px;
+    }
+
+    .pyramid {
+      display: grid;
+      gap: 10px;
+      margin: 10px 0 0;
+    }
+
+    .layer {
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,0.12);
+      color: #fff;
+      padding: 14px 12px;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .layer .name {
+      font-weight: 800;
+      letter-spacing: 0.01em;
+      line-height: 1.2;
+    }
+
+    .layer .hint {
+      font-size: 12px;
+      opacity: 0.88;
+      margin-top: 4px;
+      line-height: 1.35;
+    }
+
+    .layer button {
+      border: 1px solid rgba(255,255,255,0.24);
+      background: rgba(255,255,255,0.12);
+      color: #fff;
+      border-radius: 10px;
+      padding: 10px 12px;
+      cursor: pointer;
+      font-weight: 700;
+      min-width: 108px;
+    }
+
+    .layer button:hover {
+      background: rgba(255,255,255,0.18);
+    }
+
+    /* Pyramid shape: mobile-first (full width), then indent on larger screens */
+    .layer[data-w="1"] { background: var(--pyr-top); }
+    .layer[data-w="2"] { background: var(--pyr-2); }
+    .layer[data-w="3"] { background: var(--pyr-3); }
+    .layer[data-w="4"] { background: var(--pyr-4); }
+    .layer[data-w="5"] { background: var(--pyr-5); }
+
+    @media (min-width: 520px) {
+      .layer[data-w="1"] { width: 72%; justify-self: center; }
+      .layer[data-w="2"] { width: 80%; justify-self: center; }
+      .layer[data-w="3"] { width: 88%; justify-self: center; }
+      .layer[data-w="4"] { width: 94%; justify-self: center; }
+      .layer[data-w="5"] { width: 100%; justify-self: center; }
+    }
+
+    .pill-row {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 10px;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 10px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: rgba(198, 169, 146, 0.16);
+      color: var(--color-text);
+      font-size: 13px;
+      font-weight: 650;
+    }
+
+    .pill strong { color: var(--color-primary); }
+
+    .quiz {
+      display: grid;
+      gap: 12px;
+    }
+
+    .domain-picker {
+      border: 1px solid var(--border);
+      background: rgba(198, 169, 146, 0.12);
+      border-radius: 14px;
+      padding: 12px;
+    }
+
+    .muted {
+      color: var(--color-secondary);
+      font-size: 13px;
+      line-height: 1.45;
+      margin: 0;
+    }
+
+    .progress {
+      background: rgba(74, 52, 46, 0.12);
+      height: 8px;
+      border-radius: 999px;
+      overflow: hidden;
+    }
+
+    .progress > div,
+    .progress-bar {
+      height: 100%;
+      width: 0;
+      background: linear-gradient(90deg, rgba(198, 169, 146, 0.95), rgba(74, 52, 46, 0.95));
+      transition: width 0.35s ease;
+    }
+
+    #progressText {
+      text-align: center;
+      font-weight: 750;
+      color: var(--color-text);
+      margin: 6px 0 0;
+      font-size: 13px;
+    }
+
+    #sectionTitle {
+      text-align: center;
+      color: var(--color-secondary);
+      margin: 10px 0 0;
+      font-size: 13px;
+    }
+
+    .q {
+      font-size: 16px;
+      font-weight: 750;
+      color: var(--color-text);
+      line-height: 1.45;
+      margin: 0;
+    }
+
+    .answers {
+      display: grid;
+      gap: 10px;
+    }
+
+    .answers button {
+      width: 100%;
+      text-align: left;
+      padding: 14px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: var(--color-surface);
+      color: var(--color-text);
+      cursor: pointer;
+      transition: transform 0.08s ease, box-shadow 0.08s ease;
+    }
+
+    .answers button:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 10px 18px rgba(0,0,0,0.12);
+    }
+
+    .answers button.correct {
+      border-color: rgba(46, 125, 50, 0.55);
+      background: rgba(46, 125, 50, 0.12);
+    }
+
+    .answers button.wrong {
+      border-color: rgba(198, 40, 40, 0.55);
+      background: rgba(198, 40, 40, 0.10);
+    }
+
+    .feedback {
+      margin-top: 12px;
+      font-size: 15px;
+      text-align: center;
+      min-height: 22px;
+    }
+
+    .feedback.correct {
+      color: rgba(46, 125, 50, 0.95);
+    }
+
+    .feedback.wrong {
+      color: rgba(198, 40, 40, 0.95);
+    }
+
+    .row {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .btn {
+      border-radius: 12px;
+      padding: 12px 14px;
+      border: 1px solid var(--border);
+      background: linear-gradient(135deg, rgba(198, 169, 146, 0.95), rgba(74, 52, 46, 0.95));
+      color: #fff;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    .btn.secondary {
+      background: var(--color-surface);
+      color: var(--color-text);
+      font-weight: 750;
+    }
+
+    .btn:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    .score {
+      font-weight: 850;
+      color: var(--color-primary);
+      font-size: 18px;
+    }
+
+    .footer-links {
+      margin-top: 14px;
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .footer-links a {
+      color: var(--color-primary);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(74, 52, 46, 0.35);
+      padding-bottom: 2px;
+    }
+
+    .footer-links a:hover {
+      border-bottom-color: rgba(74, 52, 46, 0.6);
+    }
+
+    .hide { display: none !important; }
+  </style>
+</head>
+<body>
+  <a class="home-btn" href="/">← Home</a>
+
+  <main class="page">
+    <section class="panel" id="step1" aria-label="Introduction">
+      <div class="eyebrow">Quiz</div>
+      <h1>IT Learning Pyramid</h1>
+      <p class="subtitle">
+        A quiz that checks whether you can reason bottom-up: hardware → networking → OS → security/reliability → applications/services.
+      </p>
+
+      <div class="panel" style="margin-top: 14px;">
+        <h2 class="section-title">How this quiz works</h2>
+        <ul class="muted" style="margin: 0; padding-left: 18px;">
+          <li><strong>Select a quiz</strong> (layer/domain) or <strong>All layers</strong> (mixed).</li>
+          <li>Each question has 4 choices.</li>
+          <li>At the end you’ll see your score and a breakdown.</li>
+        </ul>
+      </div>
+
+      <div class="panel" style="margin-top: 14px;">
+        <h2 class="section-title">Members-only access</h2>
+        <p class="muted" style="margin: 0;">You must be logged in to take this quiz. If you are not logged in, you will be redirected to the login page.</p>
+      </div>
+
+      <div class="grid" style="grid-template-columns: 1fr; max-width: 760px; margin: 14px auto 0;">
+        <div class="panel">
+          <h2 class="section-title">Choose a layer</h2>
+          <div class="pyramid" id="layerPyramid" aria-label="IT Learning Pyramid layers">
+            <div class="layer" data-layer="apps" data-w="1">
+              <div>
+                <div class="name">Applications / Services</div>
+                <div class="hint">Top-level systems, product features, APIs, dependencies.</div>
+              </div>
+              <button type="button" data-layer-btn="apps">Select</button>
+            </div>
+            <div class="layer" data-layer="security" data-w="2">
+              <div>
+                <div class="name">Security &amp; Reliability</div>
+                <div class="hint">Auth, least privilege, SLOs, overload protection.</div>
+              </div>
+              <button type="button" data-layer-btn="security">Select</button>
+            </div>
+            <div class="layer" data-layer="os" data-w="3">
+              <div>
+                <div class="name">Operating Systems</div>
+                <div class="hint">Processes, memory, ports, and system tools.</div>
+              </div>
+              <button type="button" data-layer-btn="os">Select</button>
+            </div>
+            <div class="layer" data-layer="networking" data-w="4">
+              <div>
+                <div class="name">Networking</div>
+                <div class="hint">Domains, batches, and bottom-up reasoning for connectivity.</div>
+              </div>
+              <button type="button" data-layer-btn="networking">Select</button>
+            </div>
+            <div class="layer" data-layer="hardware" data-w="5">
+              <div>
+                <div class="name">Hardware</div>
+                <div class="hint">CPU, RAM, storage, and physical constraints.</div>
+              </div>
+              <button type="button" data-layer-btn="hardware">Select</button>
+            </div>
+          </div>
+
+          <div class="pill-row" style="margin-top: 12px;">
+            <span class="pill"><strong>Optional</strong> Mixed mode: full pool across all layers</span>
+            <button class="btn secondary" type="button" id="mixedBtn" style="padding: 10px 12px;">All layers (mixed)</button>
+          </div>
+        </div>
+
+        <div class="panel">
+          <h2 class="section-title" id="selectedLayerTitle">Selected layer: Networking</h2>
+
+          <div id="networkingConfig">
+            <label for="networkingDomainSelect" style="display:block; font-weight: 750; color: var(--color-text); margin: 10px 0 8px;">Choose domain</label>
+            <select id="networkingDomainSelect" style="width: 100%; padding: 14px 14px; border-radius: 12px; border: 1px solid var(--border); font-size: 16px; background: var(--color-surface); color: var(--color-text);"></select>
+            <p class="muted" id="networkingDomainStats" style="margin-top: 10px;"></p>
+
+            <label for="networkingBatchSelect" style="display:block; font-weight: 750; color: var(--color-text); margin: 12px 0 8px;">Choose 20-question batch</label>
+            <select id="networkingBatchSelect" style="width: 100%; padding: 14px 14px; border-radius: 12px; border: 1px solid var(--border); font-size: 16px; background: var(--color-surface); color: var(--color-text);"></select>
+            <p class="muted" id="networkingBatchHint" style="margin-top: 10px;"></p>
+          </div>
+
+          <div id="nonNetworkingConfig" class="hide">
+            <p class="muted" style="margin: 0;">Press Start to take this layer quiz.</p>
+          </div>
+        </div>
+      </div>
+
+      <button class="btn" id="startBtn" disabled style="width: 100%; max-width: 640px; margin: 16px auto 0; display: block;">Checking login…</button>
+      <p class="muted" style="text-align: center; margin-top: 10px;"><a href="/assessment.html" style="color: var(--color-primary); text-decoration: none; border-bottom: 1px solid rgba(74, 52, 46, 0.35);">← Back to Assessments</a></p>
+    </section>
+
+    <section class="panel hide" id="step2" aria-label="Quiz">
+      <h2 class="section-title" id="quizTitle">Quiz</h2>
+      <p class="muted" id="quizSubtitle">Answer the question to continue.</p>
+
+      <div class="progress" aria-label="Progress">
+        <div class="progress-bar" id="progressBar"></div>
+      </div>
+
+      <p id="progressText" style="text-align: center; font-weight: 750; color: var(--color-text); margin-bottom: 10px;"></p>
+      <h3 id="sectionTitle" style="text-align: center; color: var(--color-secondary); margin-bottom: 12px;"></h3>
+
+      <p class="q" id="questionText"></p>
+      <div class="answers" id="answers"></div>
+      <div id="feedback" class="feedback" aria-live="polite"></div>
+
+      <div class="row" style="justify-content: center;">
+        <button class="btn secondary" type="button" id="quitBtn">← Return to IT Learning Pyramid</button>
+      </div>
+    </section>
+
+    <section class="panel hide" id="step3" aria-label="Results">
+      <div class="result" style="text-align: center;">
+        <div id="resultIcon" style="font-size: 56px; margin-bottom: 10px;"></div>
+        <h2 id="resultTitle" class="section-title" style="margin-bottom: 10px;"></h2>
+        <div id="resultScore" class="score" style="font-size: 22px;"></div>
+        <p id="resultMsg" class="muted" style="margin-top: 10px;"></p>
+        <div id="categoryBreakdown" style="border: 1px solid var(--border); background: rgba(198, 169, 146, 0.10); padding: 14px; border-radius: 14px; margin: 18px 0; text-align: left;"></div>
+        <div class="row" style="justify-content: center; margin-top: 10px;">
+          <button class="btn" type="button" id="retryBtn">Retake quiz</button>
+          <button class="btn secondary" type="button" id="backBtn">← Return to IT Learning Pyramid</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const LAYERS = [
+      {
+        key: 'apps',
+        title: 'Applications / Services',
+        mixWeight: 2,
+        questions: [
+          {
+            q: 'Which statement best describes an API gateway in a typical web architecture?',
+            a: [
+              'A device that replaces DNS',
+              'A reverse-proxy layer that can route, authenticate, and apply rate limits to APIs',
+              'A database feature that caches queries automatically',
+              'A Linux kernel module for load balancing'
+            ],
+            correct: 1,
+            why: 'API gateways commonly handle routing, auth, and policies at the edge of services.'
+          },
+          {
+            q: 'You deploy a web app and it becomes slow only when the database is under load. Which is the most likely bottleneck category?',
+            a: [
+              'Application/service dependency bottleneck',
+              'Monitor refresh rate',
+              'Keyboard input latency',
+              'CPU instruction set mismatch'
+            ],
+            correct: 0,
+            why: 'The app is waiting on a dependent service (the database).' 
+          },
+          {
+            q: 'Why do many systems add a cache in front of a database?',
+            a: [
+              'To avoid needing TCP',
+              'To reduce latency and database load for repeated reads',
+              'To increase disk usage intentionally',
+              'To eliminate the need for authentication'
+            ],
+            correct: 1,
+            why: 'Caching helps serve repeated requests quickly and protects the DB.'
+          },
+        ]
+      },
+      {
+        key: 'security',
+        title: 'Security & Reliability',
+        mixWeight: 2,
+        questions: [
+          {
+            q: 'What is the principle of least privilege?',
+            a: [
+              'Users should share admin accounts for convenience',
+              'Systems should grant only the minimum permissions needed to do the job',
+              'Backups are optional if you have monitoring',
+              'TLS is only needed for payments'
+            ],
+            correct: 1,
+            why: 'Least privilege reduces blast radius when accounts or services are compromised.'
+          },
+          {
+            q: 'A service is healthy but occasionally fails requests due to overload. Which reliability control most directly limits overload impact?',
+            a: [
+              'Rate limiting',
+              'Changing the keyboard layout',
+              'Disabling DNS',
+              'Turning off logs'
+            ],
+            correct: 0,
+            why: 'Rate limiting controls request volume to keep systems within capacity.'
+          },
+          {
+            q: 'Why do teams define SLOs (Service Level Objectives)?',
+            a: [
+              'To decide acceptable reliability targets and guide tradeoffs',
+              'To encrypt all data at rest automatically',
+              'To replace unit tests',
+              'To remove the need for incident response'
+            ],
+            correct: 0,
+            why: 'SLOs formalize what “good enough” reliability means for users.'
+          },
+        ]
+      },
+      {
+        key: 'os',
+        title: 'Operating Systems',
+        mixWeight: 2,
+        questions: [
+          {
+            q: 'Which OS concept best explains why one program can be running while another is waiting on disk I/O?',
+            a: [
+              'Process scheduling / multitasking',
+              'Monitor color calibration',
+              'Keyboard interrupts only',
+              'Static HTML routing'
+            ],
+            correct: 0,
+            why: 'The scheduler can run a different process while one waits.'
+          },
+          {
+            q: 'On Unix-like systems, which command is commonly used to check which process is listening on a port?',
+            a: [
+              'netstat or ss (or lsof -i)',
+              'cd',
+              'mkdir',
+              'cat /etc/hosts'
+            ],
+            correct: 0,
+            why: 'These tools inspect sockets and listeners.'
+          },
+          {
+            q: 'A program is frequently crashing with “out of memory”. Which OS resource is most directly constrained?',
+            a: [
+              'RAM (and possibly swap)',
+              'DNS TTL',
+              'GPU temperature only',
+              'HTTPS certificate validity'
+            ],
+            correct: 0,
+            why: 'OOM errors relate to memory allocation limits.'
+          },
+        ]
+      },
+      {
+        key: 'networking',
+        title: 'Networking',
+        mixWeight: 2,
+        domains: [
+          {
+            key: 'd1',
+            title: 'Domain 1 — Networking Concepts',
+            targetShare: 0.23,
+            plannedTotal: 230,
+            plannedBatches: 12,
+            rationale: [
+              'Foundation for everything else',
+              'Definitions-heavy',
+              'Needs depth to support all other domains',
+            ],
+            questions: [
+              {
+                q: 'What is a computer network?',
+                a: [
+                  'A collection of computers running the same operating system',
+                  'A system that allows devices to share resources and communicate',
+                  'A group of servers connected to the internet',
+                  'A physical room containing networking equipment'
+                ],
+                correct: 1,
+                why: ''
+              },
+              {
+                q: 'Why do computer networks exist?',
+                a: [
+                  'To reduce hardware costs',
+                  'To allow centralized control of computers',
+                  'To enable communication and resource sharing between devices',
+                  'To eliminate the need for storage devices'
+                ],
+                correct: 2,
+                why: ''
+              },
+              {
+                q: 'Which of the following is NOT a common network resource?',
+                a: [
+                  'Files',
+                  'Printers',
+                  'Applications',
+                  'CPU registers'
+                ],
+                correct: 3,
+                why: ''
+              },
+              {
+                q: 'What does the term “node” refer to in networking?',
+                a: [
+                  'Only servers connected to a network',
+                  'Any device capable of sending or receiving data on a network',
+                  'Only networking devices like switches and routers',
+                  'A physical network cable'
+                ],
+                correct: 1,
+                why: ''
+              },
+              {
+                q: 'What is the primary purpose of network protocols?',
+                a: [
+                  'To define hardware specifications',
+                  'To control physical cable layouts',
+                  'To establish rules for data communication',
+                  'To prevent unauthorized access'
+                ],
+                correct: 2,
+                why: ''
+              },
+              {
+                q: 'Which of the following best describes a Local Area Network (LAN)?',
+                a: [
+                  'A network that spans multiple cities',
+                  'A network limited to a small geographic area',
+                  'A wireless-only network',
+                  'A network owned by an internet service provider'
+                ],
+                correct: 1,
+                why: ''
+              },
+              {
+                q: 'What distinguishes a Wide Area Network (WAN) from a LAN?',
+                a: [
+                  'WANs use only wireless connections',
+                  'WANs operate at higher speeds than LANs',
+                  'WANs cover larger geographic areas',
+                  'WANs do not use routers'
+                ],
+                correct: 2,
+                why: ''
+              },
+              {
+                q: 'What is the Internet best described as?',
+                a: [
+                  'A private corporate WAN',
+                  'A global collection of interconnected networks',
+                  'A cloud-based storage system',
+                  'A single large data center'
+                ],
+                correct: 1,
+                why: ''
+              },
+              {
+                q: 'What is the primary role of a network interface card (NIC)?',
+                a: [
+                  'To route traffic between networks',
+                  'To provide physical access to a network',
+                  'To assign IP addresses',
+                  'To filter network traffic'
+                ],
+                correct: 1,
+                why: ''
+              },
+              {
+                q: 'Which component converts data into signals suitable for transmission on a network medium?',
+                a: [
+                  'Router',
+                  'Switch',
+                  'Network interface card',
+                  'Firewall'
+                ],
+                correct: 2,
+                why: ''
+              },
+              {
+                q: 'What does “bandwidth” refer to in networking?',
+                a: [
+                  'The physical width of a network cable',
+                  'The maximum data transfer capacity of a network',
+                  'The current speed of data transmission',
+                  'The delay in data delivery'
+                ],
+                correct: 1,
+                why: ''
+              },
+              {
+                q: 'What is latency?',
+                a: [
+                  'The amount of data sent per second',
+                  'The time it takes for data to travel from source to destination',
+                  'The number of devices on a network',
+                  'The error rate of a transmission'
+                ],
+                correct: 1,
+                why: ''
+              },
+              {
+                q: 'Which factor directly affects both latency and bandwidth?',
+                a: [
+                  'File permissions',
+                  'Network topology',
+                  'User authentication',
+                  'Operating system version'
+                ],
+                correct: 1,
+                why: ''
+              },
+              {
+                q: 'What is throughput?',
+                a: [
+                  'The theoretical maximum network speed',
+                  'The actual rate of successful data delivery',
+                  'The size of a network frame',
+                  'The number of hops between devices'
+                ],
+                correct: 1,
+                why: ''
+              },
+              {
+                q: 'Which statement best describes packet switching?',
+                a: [
+                  'Data is sent as a continuous stream',
+                  'Data is broken into smaller units and sent independently',
+                  'A dedicated path is reserved for communication',
+                  'Data is encrypted before transmission'
+                ],
+                correct: 1,
+                why: ''
+              },
+              {
+                q: 'What is a packet?',
+                a: [
+                  'A physical network cable',
+                  'A fixed-size block of memory',
+                  'A formatted unit of data transmitted over a network',
+                  'A routing protocol'
+                ],
+                correct: 2,
+                why: ''
+              },
+              {
+                q: 'Why is data divided into packets before transmission?',
+                a: [
+                  'To increase hardware compatibility',
+                  'To reduce storage requirements',
+                  'To improve reliability and efficiency',
+                  'To eliminate latency'
+                ],
+                correct: 2,
+                why: ''
+              },
+              {
+                q: 'What happens if a packet is lost during transmission?',
+                a: [
+                  'The entire transmission fails permanently',
+                  'The packet is ignored',
+                  'The packet can be retransmitted',
+                  'The connection is automatically terminated'
+                ],
+                correct: 2,
+                why: ''
+              },
+              {
+                q: 'Which term describes the path data takes from source to destination?',
+                a: [
+                  'Frame',
+                  'Route',
+                  'Segment',
+                  'Payload'
+                ],
+                correct: 1,
+                why: ''
+              },
+              {
+                q: 'Which of the following is NOT a primary goal of networking?',
+                a: [
+                  'Resource sharing',
+                  'Communication',
+                  'Fault tolerance',
+                  'Single-device operation'
+                ],
+                correct: 3,
+                why: ''
+              },
+              {
+                q: 'Which OSI layer is responsible for transmitting raw bits over a physical medium?',
+                a: [
+                  'Data Link',
+                  'Network',
+                  'Physical',
+                  'Transport'
+                ],
+                correct: 2,
+                why: ''
+              },
+              {
+                q: 'What is the primary purpose of the OSI model?',
+                a: [
+                  'To define hardware standards',
+                  'To describe how data is physically transmitted',
+                  'To standardize network communication functions',
+                  'To replace TCP/IP'
+                ],
+                correct: 2,
+                why: ''
+              },
+              {
+                q: 'How many layers are in the OSI model?',
+                a: [
+                  '4',
+                  '5',
+                  '6',
+                  '7'
+                ],
+                correct: 3,
+                why: ''
+              },
+              {
+                q: 'Which OSI layer is responsible for logical addressing?',
+                a: [
+                  'Data Link',
+                  'Network',
+                  'Transport',
+                  'Session'
+                ],
+                correct: 1,
+                why: ''
+              },
+              {
+                q: 'At which OSI layer does switching primarily operate?',
+                a: [
+                  'Physical',
+                  'Data Link',
+                  'Network',
+                  'Transport'
+                ],
+                correct: 1,
+                why: ''
+              },
+              {
+                q: 'Which OSI layer is responsible for end-to-end communication and reliability?',
+                a: [
+                  'Network',
+                  'Session',
+                  'Transport',
+                  'Application'
+                ],
+                correct: 2,
+                why: ''
+              },
+              {
+                q: 'What is the main function of the Transport layer?',
+                a: [
+                  'Routing packets between networks',
+                  'Formatting data for applications',
+                  'Providing reliable or unreliable delivery',
+                  'Controlling physical connections'
+                ],
+                correct: 2,
+                why: ''
+              },
+              {
+                q: 'Which OSI layer establishes, manages, and terminates sessions?',
+                a: [
+                  'Transport',
+                  'Session',
+                  'Presentation',
+                  'Application'
+                ],
+                correct: 1,
+                why: ''
+              },
+              {
+                q: 'What is the role of the Presentation layer?',
+                a: [
+                  'Encrypting, compressing, and formatting data',
+                  'Managing network connections',
+                  'Routing traffic',
+                  'Detecting transmission errors'
+                ],
+                correct: 0,
+                why: ''
+              },
+              {
+                q: 'Which OSI layer interacts directly with end-user applications?',
+                a: [
+                  'Presentation',
+                  'Session',
+                  'Application',
+                  'Transport'
+                ],
+                correct: 2,
+                why: ''
+              },
+              {
+                q: 'Which TCP/IP layer corresponds MOST closely to the OSI Network layer?',
+                a: [
+                  'Application',
+                  'Transport',
+                  'Internet',
+                  'Network Access'
+                ],
+                correct: 2,
+                why: ''
+              },
+              {
+                q: 'How many layers are in the TCP/IP model?',
+                a: [
+                  '3',
+                  '4',
+                  '5',
+                  '7'
+                ],
+                correct: 1,
+                why: ''
+              },
+              {
+                q: 'Which TCP/IP layer combines the OSI Physical and Data Link layers?',
+                a: [
+                  'Internet',
+                  'Transport',
+                  'Application',
+                  'Network Access'
+                ],
+                correct: 3,
+                why: ''
+              },
+              {
+                q: 'Which protocol operates at the TCP/IP Transport layer?',
+                a: [
+                  'IP',
+                  'ARP',
+                  'TCP',
+                  'ICMP'
+                ],
+                correct: 2,
+                why: ''
+              },
+              {
+                q: 'What is the primary purpose of encapsulation?',
+                a: [
+                  'To encrypt network traffic',
+                  'To break data into packets',
+                  'To wrap data with protocol-specific information',
+                  'To compress data'
+                ],
+                correct: 2,
+                why: ''
+              },
+              {
+                q: 'During encapsulation, which layer adds IP addressing information?',
+                a: [
+                  'Transport',
+                  'Network',
+                  'Data Link',
+                  'Physical'
+                ],
+                correct: 1,
+                why: ''
+              },
+              {
+                q: 'What is decapsulation?',
+                a: [
+                  'The process of routing packets',
+                  'The removal of protocol headers as data moves up the stack',
+                  'The encryption of network traffic',
+                  'The fragmentation of packets'
+                ],
+                correct: 1,
+                why: ''
+              },
+              {
+                q: 'Which OSI layer adds MAC address information?',
+                a: [
+                  'Physical',
+                  'Data Link',
+                  'Network',
+                  'Transport'
+                ],
+                correct: 1,
+                why: ''
+              },
+              {
+                q: 'Which term describes the movement of data DOWN the OSI layers before transmission?',
+                a: [
+                  'Segmentation',
+                  'Decapsulation',
+                  'Encapsulation',
+                  'Fragmentation'
+                ],
+                correct: 2,
+                why: ''
+              },
+              {
+                q: 'Which statement BEST describes the relationship between the OSI and TCP/IP models?',
+                a: [
+                  'OSI replaces TCP/IP',
+                  'TCP/IP is more theoretical than OSI',
+                  'OSI is a conceptual model, TCP/IP is implementation-focused',
+                  'They are identical in structure'
+                ],
+                correct: 2,
+                why: ''
+              },
+              {
+                q: 'What is the primary purpose of a port number?',
+                a: [
+                  'To identify a physical network interface',
+                  'To identify a specific application or service',
+                  'To define a routing path',
+                  'To encrypt network traffic'
+                ],
+                correct: 1,
+                why: ''
+              },
+              {
+                q: 'Which port range is classified as “well-known ports”?',
+                a: [
+                  '0–255',
+                  '0–1023',
+                  '1024–49151',
+                  '49152–65535'
+                ],
+                correct: 1,
+                why: ''
+              },
+              {
+                q: 'Which protocol uses port 80 by default?',
+                a: [
+                  'HTTPS',
+                  'FTP',
+                  'HTTP',
+                  'SMTP'
+                ],
+                correct: 2,
+                why: ''
+              },
+              {
+                q: 'Which protocol is primarily used for secure web traffic?',
+                a: [
+                  'HTTP',
+                  'FTP',
+                  'HTTPS',
+                  'Telnet'
+                ],
+                correct: 2,
+                why: ''
+              },
+              {
+                q: 'Which port number is associated with HTTPS?',
+                a: [
+                  '21',
+                  '22',
+                  '80',
+                  '443'
+                ],
+                correct: 3,
+                why: ''
+              },
+              {
+                q: 'Which protocol is used to send email from a client to a mail server?',
+                a: [
+                  'POP3',
+                  'IMAP',
+                  'SMTP',
+                  'SNMP'
+                ],
+                correct: 2,
+                why: ''
+              },
+              {
+                q: 'Which protocol is used to retrieve email while keeping messages on the server?',
+                a: [
+                  'SMTP',
+                  'POP3',
+                  'IMAP',
+                  'FTP'
+                ],
+                correct: 2,
+                why: ''
+              },
+              {
+                q: 'Which port is commonly used by SSH?',
+                a: [
+                  '20',
+                  '21',
+                  '22',
+                  '23'
+                ],
+                correct: 2,
+                why: ''
+              },
+              {
+                q: 'What is the primary difference between TCP and UDP?',
+                a: [
+                  'TCP is faster than UDP',
+                  'UDP provides reliable delivery, TCP does not',
+                  'TCP provides reliability, UDP does not',
+                  'UDP uses ports, TCP does not'
+                ],
+                correct: 2,
+                why: ''
+              },
+              {
+                q: 'Which protocol is connectionless and does NOT guarantee delivery?',
+                a: [
+                  'TCP',
+                  'UDP',
+                  'HTTP',
+                  'FTP'
+                ],
+                correct: 1,
+                why: ''
+              },
+              {
+                q: 'Which protocol is BEST suited for real-time voice or video transmission?',
+                a: [
+                  'TCP',
+                  'FTP',
+                  'UDP',
+                  'SMTP'
+                ],
+                correct: 2,
+                why: ''
+              },
+              {
+                q: 'What does “connection-oriented” mean?',
+                a: [
+                  'Data is sent without prior coordination',
+                  'A session is established before data transfer',
+                  'Data is always encrypted',
+                  'Packets are never reordered'
+                ],
+                correct: 1,
+                why: ''
+              },
+              {
+                q: 'Which protocol provides error checking, sequencing, and retransmission?',
+                a: [
+                  'UDP',
+                  'ICMP',
+                  'IP',
+                  'TCP'
+                ],
+                correct: 3,
+                why: ''
+              },
+              {
+                q: 'What type of traffic is sent to all devices on a network segment?',
+                a: [
+                  'Unicast',
+                  'Multicast',
+                  'Broadcast',
+                  'Anycast'
+                ],
+                correct: 2,
+                why: ''
+              },
+              {
+                q: 'What type of traffic is sent from one source to one destination?',
+                a: [
+                  'Broadcast',
+                  'Multicast',
+                  'Unicast',
+                  'Flood'
+                ],
+                correct: 2,
+                why: ''
+              },
+              {
+                q: 'What type of traffic is sent from one source to multiple selected destinations?',
+                a: [
+                  'Broadcast',
+                  'Unicast',
+                  'Multicast',
+                  'Anycast'
+                ],
+                correct: 2,
+                why: ''
+              },
+              {
+                q: 'Which protocol is used to report errors and diagnostic information?',
+                a: [
+                  'TCP',
+                  'UDP',
+                  'ICMP',
+                  'ARP'
+                ],
+                correct: 2,
+                why: ''
+              },
+              {
+                q: 'What is the primary purpose of ARP?',
+                a: [
+                  'To assign IP addresses',
+                  'To translate IP addresses to MAC addresses',
+                  'To route packets between networks',
+                  'To encrypt data'
+                ],
+                correct: 1,
+                why: ''
+              },
+              {
+                q: 'Which protocol is used to automatically assign IP addresses to hosts?',
+                a: [
+                  'DNS',
+                  'ARP',
+                  'DHCP',
+                  'SNMP'
+                ],
+                correct: 2,
+                why: ''
+              },
+              {
+                q: 'Which statement BEST describes DNS?',
+                a: [
+                  'It assigns MAC addresses',
+                  'It translates domain names into IP addresses',
+                  'It encrypts network traffic',
+                  'It monitors network performance'
+                ],
+                correct: 1,
+                why: ''
+              },
+              {
+                q: 'What is the primary purpose of an IP address?',
+                a: [
+                  'To identify a network cable',
+                  'To uniquely identify a device on a network',
+                  'To encrypt network traffic',
+                  'To identify an application'
+                ],
+                correct: 1,
+                why: ''
+              },
+              {
+                q: 'Which protocol provides logical addressing for network devices?',
+                a: [
+                  'TCP',
+                  'UDP',
+                  'IP',
+                  'ARP'
+                ],
+                correct: 2,
+                why: ''
+              },
+              {
+                q: 'How many bits are in an IPv4 address?',
+                a: [
+                  '16',
+                  '32',
+                  '64',
+                  '128'
+                ],
+                correct: 1,
+                why: ''
+              },
+              {
+                q: 'How many octets make up an IPv4 address?',
+                a: [
+                  '2',
+                  '3',
+                  '4',
+                  '8'
+                ],
+                correct: 2,
+                why: ''
+              },
+              {
+                q: 'Which notation is used to represent IPv4 addresses?',
+                a: [
+                  'Hexadecimal',
+                  'Binary',
+                  'Dotted decimal',
+                  'Base64'
+                ],
+                correct: 2,
+                why: ''
+              },
+              {
+                q: 'Which IPv4 address class provides the largest number of host addresses per network?',
+                a: [
+                  'Class A',
+                  'Class B',
+                  'Class C',
+                  'Class D'
+                ],
+                correct: 0,
+                why: ''
+              },
+              {
+                q: 'Which IPv4 address class is typically used for small networks?',
+                a: [
+                  'Class A',
+                  'Class B',
+                  'Class C',
+                  'Class E'
+                ],
+                correct: 2,
+                why: ''
+              },
+              {
+                q: 'What is the purpose of a subnet mask?',
+                a: [
+                  'To encrypt IP traffic',
+                  'To identify the network and host portions of an IP address',
+                  'To assign MAC addresses',
+                  'To determine port numbers'
+                ],
+                correct: 1,
+                why: ''
+              },
+              {
+                q: 'Which subnet mask represents a /24 network?',
+                a: [
+                  '255.0.0.0',
+                  '255.255.0.0',
+                  '255.255.255.0',
+                  '255.255.255.255'
+                ],
+                correct: 2,
+                why: ''
+              },
+              {
+                q: 'What does CIDR allow administrators to do?',
+                a: [
+                  'Eliminate IP addressing',
+                  'Use classless IP addressing',
+                  'Encrypt IP packets',
+                  'Replace subnet masks'
+                ],
+                correct: 1,
+                why: ''
+              },
+              {
+                q: 'What does the “/24” in CIDR notation represent?',
+                a: [
+                  'Number of hosts',
+                  'Number of subnets',
+                  'Number of network bits',
+                  'Number of octets'
+                ],
+                correct: 2,
+                why: ''
+              },
+              {
+                q: 'Which IPv4 address range is reserved for private use?',
+                a: [
+                  '8.8.8.0/24',
+                  '127.0.0.0/8',
+                  '192.168.0.0/16',
+                  '224.0.0.0/4'
+                ],
+                correct: 2,
+                why: ''
+              },
+              {
+                q: 'Which IPv4 address is used for loopback testing?',
+                a: [
+                  '0.0.0.0',
+                  '127.0.0.1',
+                  '169.254.0.1',
+                  '255.255.255.255'
+                ],
+                correct: 1,
+                why: ''
+              },
+              {
+                q: 'What is APIPA used for?',
+                a: [
+                  'Assigning public IP addresses',
+                  'Routing traffic between networks',
+                  'Automatically assigning IPs when DHCP fails',
+                  'Translating IP addresses to MAC addresses'
+                ],
+                correct: 2,
+                why: ''
+              },
+              {
+                q: 'Which IPv4 address range is used by APIPA?',
+                a: [
+                  '10.0.0.0 – 10.255.255.255',
+                  '172.16.0.0 – 172.31.255.255',
+                  '169.254.0.0 – 169.254.255.255',
+                  '192.168.0.0 – 192.168.255.255'
+                ],
+                correct: 2,
+                why: ''
+              },
+              {
+                q: 'What is the primary purpose of IPv6?',
+                a: [
+                  'To replace Ethernet',
+                  'To increase port availability',
+                  'To provide a larger address space',
+                  'To improve wireless performance'
+                ],
+                correct: 2,
+                why: ''
+              },
+              {
+                q: 'How many bits are in an IPv6 address?',
+                a: [
+                  '32',
+                  '64',
+                  '96',
+                  '128'
+                ],
+                correct: 3,
+                why: ''
+              },
+              {
+                q: 'Which notation format is used by IPv6 addresses?',
+                a: [
+                  'Dotted decimal',
+                  'Binary',
+                  'Hexadecimal',
+                  'Octal'
+                ],
+                correct: 2,
+                why: ''
+              },
+              {
+                q: 'Which feature allows IPv6 to simplify address representation by removing leading zeros?',
+                a: [
+                  'CIDR',
+                  'NAT',
+                  'Address compression',
+                  'Fragmentation'
+                ],
+                correct: 2,
+                why: ''
+              },
+              {
+                q: 'Which statement about IPv6 is TRUE?',
+                a: [
+                  'IPv6 uses broadcast traffic',
+                  'IPv6 eliminates the need for routing',
+                  'IPv6 supports multicast instead of broadcast',
+                  'IPv6 requires NAT to function'
+                ],
+                correct: 2,
+                why: ''
+              },
+              {
+                q: 'Which type of network connects devices within a single building or campus?',
+                a: [
+                  'WAN',
+                  'MAN',
+                  'LAN',
+                  'PAN'
+                ],
+                correct: 2,
+                why: ''
+              },
+              {
+                q: 'Which network type typically spans multiple geographic locations?',
+                a: [
+                  'LAN',
+                  'PAN',
+                  'CAN',
+                  'WAN'
+                ],
+                correct: 3,
+                why: ''
+              },
+              {
+                q: 'What type of network is commonly used for personal devices like smartphones and smartwatches?',
+                a: [
+                  'LAN',
+                  'PAN',
+                  'MAN',
+                  'WAN'
+                ],
+                correct: 1,
+                why: ''
+              },
+              {
+                q: 'Which network topology uses a central device to connect all nodes?',
+                a: [
+                  'Bus',
+                  'Ring',
+                  'Star',
+                  'Mesh'
+                ],
+                correct: 2,
+                why: ''
+              },
+              {
+                q: 'What is a key advantage of a star topology?',
+                a: [
+                  'Uses the least amount of cabling',
+                  'Failure of one cable affects the entire network',
+                  'Easy to troubleshoot and isolate faults',
+                  'Requires no central device'
+                ],
+                correct: 2,
+                why: ''
+              },
+              {
+                q: 'Which topology connects each node directly to every other node?',
+                a: [
+                  'Star',
+                  'Ring',
+                  'Bus',
+                  'Mesh'
+                ],
+                correct: 3,
+                why: ''
+              },
+              {
+                q: 'What is a major disadvantage of a mesh topology?',
+                a: [
+                  'Low reliability',
+                  'High cabling and cost requirements',
+                  'Single point of failure',
+                  'Poor performance'
+                ],
+                correct: 1,
+                why: ''
+              },
+              {
+                q: 'Which topology uses a single shared communication line?',
+                a: [
+                  'Star',
+                  'Mesh',
+                  'Bus',
+                  'Hybrid'
+                ],
+                correct: 2,
+                why: ''
+              },
+              {
+                q: 'What happens if the main cable fails in a bus topology?',
+                a: [
+                  'Only one device is affected',
+                  'Network performance improves',
+                  'The entire network goes down',
+                  'Traffic is rerouted automatically'
+                ],
+                correct: 2,
+                why: ''
+              },
+              {
+                q: 'Which topology passes data sequentially from one device to the next?',
+                a: [
+                  'Star',
+                  'Ring',
+                  'Mesh',
+                  'Hybrid'
+                ],
+                correct: 1,
+                why: ''
+              },
+              {
+                q: 'What is a hybrid topology?',
+                a: [
+                  'A wireless-only network',
+                  'A topology that combines two or more topologies',
+                  'A topology with no central device',
+                  'A temporary network design'
+                ],
+                correct: 1,
+                why: ''
+              },
+              {
+                q: 'Which network design concept focuses on separating traffic into smaller logical networks?',
+                a: [
+                  'Encapsulation',
+                  'Virtualization',
+                  'Segmentation',
+                  'Aggregation'
+                ],
+                correct: 2,
+                why: ''
+              },
+              {
+                q: 'What is the primary benefit of network segmentation?',
+                a: [
+                  'Increased cabling length',
+                  'Reduced broadcast traffic',
+                  'Elimination of routing',
+                  'Higher hardware costs'
+                ],
+                correct: 1,
+                why: ''
+              },
+              {
+                q: 'Which term describes a network that is owned and operated by a single organization?',
+                a: [
+                  'Public network',
+                  'Private network',
+                  'Extranet',
+                  'Internet'
+                ],
+                correct: 1,
+                why: ''
+              },
+              {
+                q: 'What is an intranet?',
+                a: [
+                  'A public network accessible to anyone',
+                  'A private internal network',
+                  'A network connecting multiple companies',
+                  'A wireless-only network'
+                ],
+                correct: 1,
+                why: ''
+              },
+              {
+                q: 'What is an extranet?',
+                a: [
+                  'A network open to the public',
+                  'A private network with no internet access',
+                  'A controlled network shared with external partners',
+                  'A peer-to-peer network'
+                ],
+                correct: 2,
+                why: ''
+              },
+              {
+                q: 'Which design goal focuses on ensuring a network remains operational during failures?',
+                a: [
+                  'Scalability',
+                  'Availability',
+                  'Performance',
+                  'Throughput'
+                ],
+                correct: 1,
+                why: ''
+              },
+              {
+                q: 'Which term describes the ability of a network to grow without major redesign?',
+                a: [
+                  'Redundancy',
+                  'Availability',
+                  'Scalability',
+                  'Latency'
+                ],
+                correct: 2,
+                why: ''
+              },
+              {
+                q: 'What does fault tolerance aim to achieve?',
+                a: [
+                  'Faster data transmission',
+                  'Elimination of network protocols',
+                  'Continued operation despite component failures',
+                  'Reduced network size'
+                ],
+                correct: 2,
+                why: ''
+              },
+              {
+                q: 'Which statement BEST summarizes good network design?',
+                a: [
+                  'Focuses only on performance',
+                  'Prioritizes low cost above all else',
+                  'Balances performance, reliability, and scalability',
+                  'Eliminates redundancy'
+                ],
+                correct: 2,
+                why: ''
+              },
+              {
+                q: 'What standard defines Ethernet networking?',
+                a: [
+                  'IEEE 802.3',
+                  'IEEE 802.11',
+                  'IEEE 802.1Q',
+                  'IEEE 802.5'
+                ],
+                correct: 0,
+                why: ''
+              },
+              {
+                q: 'Which Ethernet standard is associated with wireless networking?',
+                a: [
+                  'IEEE 802.1D',
+                  'IEEE 802.3',
+                  'IEEE 802.11',
+                  'IEEE 802.15'
+                ],
+                correct: 2,
+                why: ''
+              },
+              {
+                q: 'What is the maximum speed of Fast Ethernet?',
+                a: [
+                  '10 Mbps',
+                  '100 Mbps',
+                  '1 Gbps',
+                  '10 Gbps'
+                ],
+                correct: 1,
+                why: ''
+              },
+              {
+                q: 'Which Ethernet standard supports speeds of 1 Gbps?',
+                a: [
+                  '10BASE-T',
+                  '100BASE-TX',
+                  '1000BASE-T',
+                  '10GBASE-T'
+                ],
+                correct: 2,
+                why: ''
+              },
+              {
+                q: 'Which Ethernet speed is MOST commonly used in modern LANs?',
+                a: [
+                  '10 Mbps',
+                  '100 Mbps',
+                  '1 Gbps',
+                  '40 Gbps'
+                ],
+                correct: 2,
+                why: ''
+              },
+              {
+                q: 'What does “BASE” indicate in Ethernet naming conventions?',
+                a: [
+                  'Binary signaling',
+                  'Baseband transmission',
+                  'Backbone usage',
+                  'Bidirectional traffic'
+                ],
+                correct: 1,
+                why: ''
+              },
+              {
+                q: 'What does the “T” in 100BASE-T represent?',
+                a: [
+                  'Thicknet',
+                  'Token Ring',
+                  'Twisted pair',
+                  'Transmission'
+                ],
+                correct: 2,
+                why: ''
+              },
+              {
+                q: 'Which Ethernet cable type is typically used with 1000BASE-T?',
+                a: [
+                  'Coaxial',
+                  'Fiber optic',
+                  'Cat5e or higher twisted pair',
+                  'Serial cable'
+                ],
+                correct: 2,
+                why: ''
+              },
+              {
+                q: 'What is an Ethernet frame?',
+                a: [
+                  'A logical network address',
+                  'A unit of data at the Network layer',
+                  'A unit of data at the Data Link layer',
+                  'A routing protocol'
+                ],
+                correct: 2,
+                why: ''
+              },
+              {
+                q: 'Which field in an Ethernet frame identifies the sender?',
+                a: [
+                  'Destination MAC',
+                  'Source MAC',
+                  'EtherType',
+                  'Payload'
+                ],
+                correct: 1,
+                why: ''
+              },
+              {
+                q: 'Which field in an Ethernet frame identifies the receiver?',
+                a: [
+                  'Source MAC',
+                  'Frame Check Sequence',
+                  'EtherType',
+                  'Destination MAC'
+                ],
+                correct: 3,
+                why: ''
+              },
+              {
+                q: 'What is the purpose of the Frame Check Sequence (FCS)?',
+                a: [
+                  'Encrypt data',
+                  'Identify protocols',
+                  'Detect transmission errors',
+                  'Control traffic flow'
+                ],
+                correct: 2,
+                why: ''
+              },
+              {
+                q: 'What is the minimum size of an Ethernet frame?',
+                a: [
+                  '32 bytes',
+                  '46 bytes',
+                  '64 bytes',
+                  '1518 bytes'
+                ],
+                correct: 2,
+                why: ''
+              },
+              {
+                q: 'What is the maximum standard Ethernet frame size (without jumbo frames)?',
+                a: [
+                  '1024 bytes',
+                  '1518 bytes',
+                  '2048 bytes',
+                  '9000 bytes'
+                ],
+                correct: 1,
+                why: ''
+              },
+              {
+                q: 'What does “half-duplex” mean?',
+                a: [
+                  'Data flows in both directions simultaneously',
+                  'Data flows in one direction at a time',
+                  'Data is encrypted',
+                  'Data uses two cables'
+                ],
+                correct: 1,
+                why: ''
+              },
+              {
+                q: 'What does “full-duplex” mean?',
+                a: [
+                  'Data flows in one direction only',
+                  'Data flows in both directions simultaneously',
+                  'Data is compressed',
+                  'Data requires collision detection'
+                ],
+                correct: 1,
+                why: ''
+              },
+              {
+                q: 'Which device operates in full-duplex mode by default?',
+                a: [
+                  'Hub',
+                  'Repeater',
+                  'Switch',
+                  'Coaxial segment'
+                ],
+                correct: 2,
+                why: ''
+              },
+              {
+                q: 'What is a collision domain?',
+                a: [
+                  'A broadcast group',
+                  'An area where packet collisions can occur',
+                  'A routing boundary',
+                  'A VLAN'
+                ],
+                correct: 1,
+                why: ''
+              },
+              {
+                q: 'How do switches reduce collisions on a network?',
+                a: [
+                  'By using broadcast traffic',
+                  'By creating separate collision domains per port',
+                  'By disabling duplexing',
+                  'By increasing frame size'
+                ],
+                correct: 1,
+                why: ''
+              },
+              {
+                q: 'Why are collisions rare on modern Ethernet networks?',
+                a: [
+                  'Frames are encrypted',
+                  'Switches use half-duplex',
+                  'Full-duplex switching eliminates collisions',
+                  'Ethernet no longer uses frames'
+                ],
+                correct: 2,
+                why: ''
+              },
+              {
+                q: 'What type of address does a switch primarily use to forward traffic?',
+                a: [
+                  'IP address',
+                  'Port number',
+                  'MAC address',
+                  'Hostname'
+                ],
+                correct: 2,
+                why: ''
+              },
+              {
+                q: 'What type of address does a router primarily use to forward traffic?',
+                a: [
+                  'MAC address',
+                  'IP address',
+                  'Port number',
+                  'Frame Check Sequence'
+                ],
+                correct: 1,
+                why: ''
+              },
+              {
+                q: 'At which OSI layer does a switch primarily operate?',
+                a: [
+                  'Physical',
+                  'Data Link',
+                  'Network',
+                  'Transport'
+                ],
+                correct: 1,
+                why: ''
+              },
+              {
+                q: 'At which OSI layer does a router primarily operate?',
+                a: [
+                  'Data Link',
+                  'Network',
+                  'Transport',
+                  'Application'
+                ],
+                correct: 1,
+                why: ''
+              },
+              {
+                q: 'What is a broadcast domain?',
+                a: [
+                  'A group of devices that share the same collision space',
+                  'A group of devices that receive broadcast traffic',
+                  'A set of devices using the same MAC address',
+                  'A routing table entry'
+                ],
+                correct: 1,
+                why: ''
+              },
+              {
+                q: 'Which device separates broadcast domains by default?',
+                a: [
+                  'Hub',
+                  'Switch',
+                  'Router',
+                  'Repeater'
+                ],
+                correct: 2,
+                why: ''
+              },
+              {
+                q: 'How does a switch handle broadcast traffic by default?',
+                a: [
+                  'Drops it',
+                  'Sends it only to the destination MAC',
+                  'Forwards it out all ports except the source',
+                  'Routes it to another network'
+                ],
+                correct: 2,
+                why: ''
+              },
+              {
+                q: 'What happens when a router receives a broadcast packet?',
+                a: [
+                  'It forwards it to all interfaces',
+                  'It converts it to unicast',
+                  'It drops it by default',
+                  'It encrypts it'
+                ],
+                correct: 2,
+                why: ''
+              },
+              {
+                q: 'What is the primary purpose of a VLAN?',
+                a: [
+                  'To increase cable length',
+                  'To reduce latency',
+                  'To logically segment a network',
+                  'To replace routing'
+                ],
+                correct: 2,
+                why: ''
+              },
+              {
+                q: 'What type of traffic does a VLAN limit?',
+                a: [
+                  'Unicast',
+                  'Multicast',
+                  'Broadcast',
+                  'Internet'
+                ],
+                correct: 2,
+                why: ''
+              },
+              {
+                q: 'What standard is used to tag VLAN traffic on trunk links?',
+                a: [
+                  'IEEE 802.3',
+                  'IEEE 802.11',
+                  'IEEE 802.1Q',
+                  'IEEE 802.1D'
+                ],
+                correct: 2,
+                why: ''
+              },
+              {
+                q: 'What is a trunk port used for?',
+                a: [
+                  'Connecting end devices',
+                  'Carrying traffic for multiple VLANs',
+                  'Providing power to devices',
+                  'Filtering broadcast traffic'
+                ],
+                correct: 1,
+                why: ''
+              },
+              {
+                q: 'What is an access port?',
+                a: [
+                  'A port that carries multiple VLANs',
+                  'A port connected to another switch',
+                  'A port assigned to a single VLAN',
+                  'A port used only for routing'
+                ],
+                correct: 2,
+                why: ''
+              },
+              {
+                q: 'What is required for devices in different VLANs to communicate?',
+                a: [
+                  'A hub',
+                  'A bridge',
+                  'A router or Layer 3 device',
+                  'A repeater'
+                ],
+                correct: 2,
+                why: ''
+              },
+              {
+                q: 'What is inter-VLAN routing?',
+                a: [
+                  'Switching traffic between ports',
+                  'Routing traffic between VLANs',
+                  'Encrypting VLAN traffic',
+                  'Assigning VLAN IDs'
+                ],
+                correct: 1,
+                why: ''
+              },
+              {
+                q: 'Which address is used for local network delivery?',
+                a: [
+                  'IP address',
+                  'MAC address',
+                  'Port number',
+                  'Hostname'
+                ],
+                correct: 1,
+                why: ''
+              },
+              {
+                q: 'Which address is used for end-to-end network delivery?',
+                a: [
+                  'MAC address',
+                  'Frame sequence number',
+                  'IP address',
+                  'VLAN ID'
+                ],
+                correct: 2,
+                why: ''
+              },
+              {
+                q: 'Which table does a switch use to make forwarding decisions?',
+                a: [
+                  'Routing table',
+                  'ARP table',
+                  'MAC address table',
+                  'DNS cache'
+                ],
+                correct: 2,
+                why: ''
+              },
+              {
+                q: 'Which table does a router use to forward packets?',
+                a: [
+                  'MAC address table',
+                  'Routing table',
+                  'VLAN table',
+                  'CAM table'
+                ],
+                correct: 1,
+                why: ''
+              },
+              {
+                q: 'Which statement BEST summarizes switching vs routing?',
+                a: [
+                  'Switches use IP, routers use MAC',
+                  'Switches forward frames, routers forward packets',
+                  'Switches separate broadcast domains, routers do not',
+                  'Routers operate at Layer 2'
+                ],
+                correct: 1,
+                why: ''
+              },
+              {
+                q: 'What is the primary purpose of Network Address Translation (NAT)?',
+                a: [
+                  'To encrypt network traffic',
+                  'To convert MAC addresses to IP addresses',
+                  'To allow multiple devices to share a public IP address',
+                  'To route traffic within a LAN'
+                ],
+                correct: 2,
+                why: ''
+              },
+              {
+                q: 'Where is NAT most commonly implemented?',
+                a: [
+                  'On switches',
+                  'On end-user devices',
+                  'On routers or firewalls',
+                  'On wireless access points'
+                ],
+                correct: 2,
+                why: ''
+              },
+              {
+                q: 'Which type of IP address is NOT routable on the public internet?',
+                a: [
+                  'Public IP address',
+                  'Private IP address',
+                  'Static IP address',
+                  'Global unicast address'
+                ],
+                correct: 1,
+                why: ''
+              },
+              {
+                q: 'Which IPv4 address range is considered private?',
+                a: [
+                  '8.8.8.0 – 8.8.8.255',
+                  '11.0.0.0 – 11.255.255.255',
+                  '172.16.0.0 – 172.31.255.255',
+                  '224.0.0.0 – 239.255.255.255'
+                ],
+                correct: 2,
+                why: ''
+              },
+              {
+                q: 'What type of NAT maps multiple private IP addresses to a single public IP using different ports?',
+                a: [
+                  'Static NAT',
+                  'Dynamic NAT',
+                  'Port Address Translation (PAT)',
+                  'One-to-one NAT'
+                ],
+                correct: 2,
+                why: ''
+              },
+              {
+                q: 'What is a static NAT mapping?',
+                a: [
+                  'Multiple private IPs to one public IP',
+                  'One private IP permanently mapped to one public IP',
+                  'Automatic temporary address assignment',
+                  'Translation using random ports'
+                ],
+                correct: 1,
+                why: ''
+              },
+              {
+                q: 'What is a default gateway?',
+                a: [
+                  'The first usable IP address in a subnet',
+                  'The device that assigns IP addresses',
+                  'The device that forwards traffic to other networks',
+                  'The DNS server address'
+                ],
+                correct: 2,
+                why: ''
+              },
+              {
+                q: 'When does a host send traffic to its default gateway?',
+                a: [
+                  'When the destination is on the same subnet',
+                  'When the destination MAC address is unknown',
+                  'When the destination is outside the local subnet',
+                  'When DNS resolution fails'
+                ],
+                correct: 2,
+                why: ''
+              },
+              {
+                q: 'Which device typically acts as the default gateway in a LAN?',
+                a: [
+                  'Switch',
+                  'Hub',
+                  'Router',
+                  'Access point'
+                ],
+                correct: 2,
+                why: ''
+              },
+              {
+                q: 'What happens if a host has an incorrect default gateway configured?',
+                a: [
+                  'Local communication fails',
+                  'The host cannot communicate outside its subnet',
+                  'The host cannot obtain an IP address',
+                  'All network traffic is blocked'
+                ],
+                correct: 1,
+                why: ''
+              },
+              {
+                q: 'Which protocol is used to discover the MAC address of the default gateway?',
+                a: [
+                  'DNS',
+                  'ICMP',
+                  'ARP',
+                  'DHCP'
+                ],
+                correct: 2,
+                why: ''
+              },
+              {
+                q: 'What does a routing table contain?',
+                a: [
+                  'MAC addresses and port numbers',
+                  'VLAN IDs and trunk ports',
+                  'Destination networks and next-hop information',
+                  'User credentials'
+                ],
+                correct: 2,
+                why: ''
+              },
+              {
+                q: 'What is the “next hop” in routing?',
+                a: [
+                  'The final destination host',
+                  'The next router in the path to the destination',
+                  'The source device',
+                  'The default gateway'
+                ],
+                correct: 1,
+                why: ''
+              },
+              {
+                q: 'What does a router do if no specific route matches a destination?',
+                a: [
+                  'Drops the packet immediately',
+                  'Sends the packet to all interfaces',
+                  'Uses the default route, if configured',
+                  'Converts the packet to broadcast'
+                ],
+                correct: 2,
+                why: ''
+              },
+              {
+                q: 'Which entry represents a default route in IPv4?',
+                a: [
+                  '127.0.0.0/8',
+                  '169.254.0.0/16',
+                  '0.0.0.0/0',
+                  '255.255.255.255'
+                ],
+                correct: 2,
+                why: ''
+              },
+              {
+                q: 'What is the primary benefit of using private IP addresses with NAT?',
+                a: [
+                  'Increased encryption',
+                  'Reduced latency',
+                  'Conservation of public IP addresses',
+                  'Faster routing'
+                ],
+                correct: 2,
+                why: ''
+              },
+              {
+                q: 'Which type of address is assigned by an ISP?',
+                a: [
+                  'Private IP address',
+                  'Loopback address',
+                  'Public IP address',
+                  'APIPA address'
+                ],
+                correct: 2,
+                why: ''
+              },
+              {
+                q: 'What is “north-south” traffic?',
+                a: [
+                  'Traffic within the same VLAN',
+                  'Traffic between devices on the same subnet',
+                  'Traffic entering or leaving a network',
+                  'Traffic between switches'
+                ],
+                correct: 2,
+                why: ''
+              },
+              {
+                q: 'What is “east-west” traffic?',
+                a: [
+                  'Traffic between internal devices or services',
+                  'Traffic going to the internet',
+                  'Broadcast traffic',
+                  'Wireless-only traffic'
+                ],
+                correct: 0,
+                why: ''
+              },
+              {
+                q: 'Which statement BEST summarizes NAT and routing?',
+                a: [
+                  'NAT replaces routing',
+                  'Routing replaces NAT',
+                  'Routing determines paths, NAT translates addresses',
+                  'NAT operates at the Physical layer'
+                ],
+                correct: 2,
+                why: ''
+              },
+              {
+                q: 'What does Quality of Service (QoS) primarily manage?',
+                a: [
+                  'Physical cabling standards',
+                  'User authentication',
+                  'Network traffic prioritization',
+                  'IP address assignment'
+                ],
+                correct: 2,
+                why: ''
+              },
+              {
+                q: 'Why is QoS important for real-time applications?',
+                a: [
+                  'They require encryption',
+                  'They require guaranteed delivery',
+                  'They are sensitive to delay and variation',
+                  'They use large packet sizes'
+                ],
+                correct: 2,
+                why: ''
+              },
+              {
+                q: 'Which network characteristic measures the time it takes for data to travel from source to destination?',
+                a: [
+                  'Throughput',
+                  'Bandwidth',
+                  'Latency',
+                  'Jitter'
+                ],
+                correct: 2,
+                why: ''
+              },
+              {
+                q: 'What is jitter?',
+                a: [
+                  'Packet loss rate',
+                  'Variation in packet arrival time',
+                  'Maximum network speed',
+                  'Average throughput'
+                ],
+                correct: 1,
+                why: ''
+              },
+              {
+                q: 'Which application is MOST sensitive to jitter?',
+                a: [
+                  'Email',
+                  'File transfer',
+                  'Voice over IP (VoIP)',
+                  'Web browsing'
+                ],
+                correct: 2,
+                why: ''
+              },
+              {
+                q: 'What is packet loss?',
+                a: [
+                  'Delay in packet delivery',
+                  'Packets arriving out of order',
+                  'Packets that fail to reach their destination',
+                  'Duplicate packets'
+                ],
+                correct: 2,
+                why: ''
+              },
+              {
+                q: 'Which factor MOST directly affects packet loss?',
+                a: [
+                  'Screen resolution',
+                  'Network congestion',
+                  'DNS configuration',
+                  'Subnet mask'
+                ],
+                correct: 1,
+                why: ''
+              },
+              {
+                q: 'What does bandwidth represent?',
+                a: [
+                  'Actual data transfer rate',
+                  'Maximum theoretical data capacity',
+                  'Packet delivery time',
+                  'Error correction capability'
+                ],
+                correct: 1,
+                why: ''
+              },
+              {
+                q: 'How does throughput differ from bandwidth?',
+                a: [
+                  'Throughput is theoretical, bandwidth is actual',
+                  'Throughput measures delay',
+                  'Throughput is actual data successfully transmitted',
+                  'They are the same'
+                ],
+                correct: 2,
+                why: ''
+              },
+              {
+                q: 'Which metric reflects how efficiently bandwidth is being used?',
+                a: [
+                  'Latency',
+                  'Throughput',
+                  'Jitter',
+                  'Frame size'
+                ],
+                correct: 1,
+                why: ''
+              },
+              {
+                q: 'Which QoS technique prioritizes traffic by placing it into different queues?',
+                a: [
+                  'NAT',
+                  'Traffic shaping',
+                  'Queuing',
+                  'Fragmentation'
+                ],
+                correct: 2,
+                why: ''
+              },
+              {
+                q: 'Which QoS technique smooths traffic by delaying packets to prevent congestion?',
+                a: [
+                  'Policing',
+                  'Shaping',
+                  'Encryption',
+                  'Switching'
+                ],
+                correct: 1,
+                why: ''
+              },
+              {
+                q: 'What does traffic policing do?',
+                a: [
+                  'Delays excess traffic',
+                  'Drops traffic that exceeds defined limits',
+                  'Encrypts packets',
+                  'Reorders packets'
+                ],
+                correct: 1,
+                why: ''
+              },
+              {
+                q: 'Which QoS model reserves bandwidth in advance?',
+                a: [
+                  'Best-effort',
+                  'DiffServ',
+                  'IntServ',
+                  'FIFO'
+                ],
+                correct: 2,
+                why: ''
+              },
+              {
+                q: 'Which QoS model classifies and marks packets but does NOT reserve bandwidth?',
+                a: [
+                  'IntServ',
+                  'DiffServ',
+                  'FIFO',
+                  'NAT'
+                ],
+                correct: 1,
+                why: ''
+              },
+              {
+                q: 'Which type of traffic should receive the highest QoS priority?',
+                a: [
+                  'Email',
+                  'File transfers',
+                  'Voice and video',
+                  'Software updates'
+                ],
+                correct: 2,
+                why: ''
+              },
+              {
+                q: 'What happens to lower-priority traffic during congestion?',
+                a: [
+                  'It is encrypted',
+                  'It is always dropped',
+                  'It may be delayed or dropped',
+                  'It is rerouted automatically'
+                ],
+                correct: 2,
+                why: ''
+              },
+              {
+                q: 'Which network condition MOST impacts VoIP call quality?',
+                a: [
+                  'High bandwidth',
+                  'Low jitter',
+                  'High latency and jitter',
+                  'High throughput'
+                ],
+                correct: 2,
+                why: ''
+              },
+              {
+                q: 'What is “best-effort” traffic delivery?',
+                a: [
+                  'Traffic is guaranteed delivery',
+                  'Traffic is encrypted',
+                  'Traffic is delivered without prioritization',
+                  'Traffic is delayed intentionally'
+                ],
+                correct: 2,
+                why: ''
+              },
+              {
+                q: 'Which statement BEST summarizes network performance management?',
+                a: [
+                  'Increasing bandwidth solves all issues',
+                  'Latency, jitter, and loss are more critical than speed for real-time apps',
+                  'QoS eliminates congestion',
+                  'Throughput always equals bandwidth'
+                ],
+                correct: 1,
+                why: ''
+              },
+              {
+                q: 'What is cloud computing primarily based on?',
+                a: [
+                  'Dedicated physical servers',
+                  'On-demand network access to shared resources',
+                  'Peer-to-peer networking',
+                  'Local virtualization only'
+                ],
+                correct: 1,
+                why: 'Cloud computing is defined by on-demand access to shared, configurable resources delivered over a network.'
+              },
+              {
+                q: 'Which cloud service model provides virtual machines and networking resources?',
+                a: [
+                  'SaaS',
+                  'PaaS',
+                  'IaaS',
+                  'DaaS'
+                ],
+                correct: 2,
+                why: 'IaaS provides infrastructure building blocks such as compute (VMs), networking, and storage.'
+              },
+              {
+                q: 'Which cloud service model delivers applications over the network?',
+                a: [
+                  'IaaS',
+                  'PaaS',
+                  'SaaS',
+                  'NaaS'
+                ],
+                correct: 2,
+                why: 'SaaS is a complete application delivered to the user, typically via the internet.'
+              },
+              {
+                q: 'Which cloud deployment model is shared among multiple organizations with similar requirements?',
+                a: [
+                  'Public cloud',
+                  'Private cloud',
+                  'Community cloud',
+                  'Hybrid cloud'
+                ],
+                correct: 2,
+                why: 'A community cloud is shared by several organizations that have common needs (e.g., compliance or mission).' 
+              },
+              {
+                q: 'What is a hybrid cloud?',
+                a: [
+                  'A cloud using only virtual machines',
+                  'A combination of public and private cloud resources',
+                  'A cloud with no internet access',
+                  'A peer-to-peer cloud model'
+                ],
+                correct: 1,
+                why: 'Hybrid cloud combines private and public cloud environments with some level of integration between them.'
+              },
+              {
+                q: 'What role does virtualization play in cloud computing?',
+                a: [
+                  'It replaces networking',
+                  'It allows multiple virtual systems to run on shared hardware',
+                  'It encrypts cloud traffic',
+                  'It assigns IP addresses'
+                ],
+                correct: 1,
+                why: 'Virtualization abstracts physical hardware so multiple isolated VMs can share the same host resources.'
+              },
+              {
+                q: 'What is a hypervisor?',
+                a: [
+                  'A network routing protocol',
+                  'Software that manages virtual machines',
+                  'A cloud service provider',
+                  'A hardware firewall'
+                ],
+                correct: 1,
+                why: 'A hypervisor (VMM) is the layer that creates, runs, and manages virtual machines on a host.'
+              },
+              {
+                q: 'Which hypervisor type runs directly on hardware?',
+                a: [
+                  'Type 1',
+                  'Type 2',
+                  'Hosted',
+                  'Application-based'
+                ],
+                correct: 0,
+                why: 'Type 1 (bare-metal) hypervisors run directly on the physical hardware without a host OS underneath.'
+              },
+              {
+                q: 'Which hypervisor type runs on top of an operating system?',
+                a: [
+                  'Bare-metal',
+                  'Type 1',
+                  'Type 2',
+                  'Firmware'
+                ],
+                correct: 2,
+                why: 'Type 2 hypervisors run as applications on a host operating system.'
+              },
+              {
+                q: 'What is a virtual switch (vSwitch)?',
+                a: [
+                  'A physical Layer 3 device',
+                  'A cloud router',
+                  'A software-based switch for virtual machines',
+                  'A wireless access point'
+                ],
+                correct: 2,
+                why: 'A vSwitch is implemented in software to connect VMs to each other and to uplinks.'
+              },
+              {
+                q: 'What is east-west traffic in a virtualized environment?',
+                a: [
+                  'Traffic between virtual machines',
+                  'Traffic entering the cloud',
+                  'Traffic leaving the cloud',
+                  'Broadcast traffic'
+                ],
+                correct: 0,
+                why: 'East-west traffic refers to lateral traffic within the environment (e.g., VM-to-VM or service-to-service).' 
+              },
+              {
+                q: 'What is north-south traffic in cloud networking?',
+                a: [
+                  'VM-to-VM traffic',
+                  'Traffic between data centers',
+                  'Traffic entering or leaving the virtual environment',
+                  'Management traffic only'
+                ],
+                correct: 2,
+                why: 'North-south traffic crosses the boundary of the environment (client-to-service, service-to-internet, etc.).'
+              },
+              {
+                q: 'What networking component connects virtual networks to physical networks?',
+                a: [
+                  'Virtual NIC',
+                  'Virtual switch',
+                  'Virtual router or gateway',
+                  'Load balancer'
+                ],
+                correct: 2,
+                why: 'A virtual router/gateway provides routing and edge connectivity between virtual networks and the outside world.'
+              },
+              {
+                q: 'What is multitenancy in cloud computing?',
+                a: [
+                  'One customer per server',
+                  'Multiple customers sharing the same infrastructure',
+                  'Private cloud isolation',
+                  'Dedicated hardware usage'
+                ],
+                correct: 1,
+                why: 'Multitenancy means multiple customers (tenants) share underlying infrastructure while remaining logically isolated.'
+              },
+              {
+                q: 'What is a key networking challenge in cloud environments?',
+                a: [
+                  'Lack of bandwidth',
+                  'Physical cabling complexity',
+                  'Visibility and traffic monitoring',
+                  'IP addressing elimination'
+                ],
+                correct: 2,
+                why: 'Virtual overlays and distributed systems make end-to-end visibility, monitoring, and troubleshooting more challenging.'
+              },
+              {
+                q: 'Which technology allows networks to be configured through software?',
+                a: [
+                  'NAT',
+                  'SDN',
+                  'VLAN',
+                  'STP'
+                ],
+                correct: 1,
+                why: 'Software-Defined Networking (SDN) separates control from forwarding and enables programmability and automation.'
+              },
+              {
+                q: 'What is the primary benefit of Software-Defined Networking (SDN)?',
+                a: [
+                  'Increased cable length',
+                  'Centralized network control',
+                  'Elimination of routing',
+                  'Removal of switches'
+                ],
+                correct: 1,
+                why: 'SDN provides centralized control and policy enforcement, making networks easier to automate and manage.'
+              },
+              {
+                q: 'What does an SDN controller do?',
+                a: [
+                  'Forwards packets directly',
+                  'Manages routing tables on hosts',
+                  'Centrally controls network behavior',
+                  'Encrypts traffic'
+                ],
+                correct: 2,
+                why: 'The controller is the control plane brain that programs network devices and enforces policies.'
+              },
+              {
+                q: 'Which concept allows network functions to run as software instead of hardware appliances?',
+                a: [
+                  'VLAN',
+                  'NAT',
+                  'NFV',
+                  'QoS'
+                ],
+                correct: 2,
+                why: 'Network Functions Virtualization (NFV) runs functions like firewalls and load balancers as software workloads.'
+              },
+              {
+                q: 'Which statement BEST summarizes modern networking environments?',
+                a: [
+                  'Networks are purely hardware-based',
+                  'Networking and virtualization are tightly integrated',
+                  'Cloud networking removes the need for protocols',
+                  'Performance no longer matters'
+                ],
+                correct: 1,
+                why: 'Modern environments rely heavily on virtualization, overlays, automation, and software-defined control planes.'
+              },
+              {
+                q: 'What does Wi-Fi primarily provide?',
+                a: [
+                  'Wired network access',
+                  'Wireless local area networking',
+                  'Wide area connectivity',
+                  'Point-to-point routing'
+                ],
+                correct: 1,
+                why: 'Wi-Fi is a wireless LAN (WLAN) technology that connects devices locally without cables.'
+              },
+              {
+                q: 'Which IEEE standard defines Wi-Fi networking?',
+                a: [
+                  '802.3',
+                  '802.11',
+                  '802.1Q',
+                  '802.15'
+                ],
+                correct: 1,
+                why: 'The 802.11 family of standards defines Wi-Fi PHY/MAC behavior.'
+              },
+              {
+                q: 'Which frequency band is commonly used by Wi-Fi?',
+                a: [
+                  '900 MHz',
+                  '1.8 GHz',
+                  '2.4 GHz',
+                  '60 GHz'
+                ],
+                correct: 2,
+                why: '2.4 GHz is one of the most widely used Wi-Fi bands (along with 5 GHz and 6 GHz in newer deployments).'
+              },
+              {
+                q: 'Which Wi-Fi band provides higher speeds but shorter range?',
+                a: [
+                  '900 MHz',
+                  '2.4 GHz',
+                  '5 GHz',
+                  '700 MHz'
+                ],
+                correct: 2,
+                why: 'Higher frequencies like 5 GHz generally support higher throughput but attenuate more and cover less area.'
+              },
+              {
+                q: 'What is a key disadvantage of the 2.4 GHz band?',
+                a: [
+                  'Short range',
+                  'Higher attenuation',
+                  'Susceptibility to interference',
+                  'Incompatibility with older devices'
+                ],
+                correct: 2,
+                why: '2.4 GHz is crowded (Bluetooth, microwaves, many Wi-Fi networks), so interference is common.'
+              },
+              {
+                q: 'What does SSID represent?',
+                a: [
+                  'Security protocol',
+                  'Wireless channel',
+                  'Network name',
+                  'Encryption key'
+                ],
+                correct: 2,
+                why: 'An SSID is the human-readable name broadcast by a Wi-Fi network.'
+              },
+              {
+                q: 'What device allows wireless devices to connect to a wired network?',
+                a: [
+                  'Router',
+                  'Switch',
+                  'Wireless access point',
+                  'Firewall'
+                ],
+                correct: 2,
+                why: 'An access point bridges wireless clients onto the wired LAN.'
+              },
+              {
+                q: 'What is a wireless channel?',
+                a: [
+                  'A physical cable',
+                  'A specific frequency range',
+                  'A security protocol',
+                  'A routing path'
+                ],
+                correct: 1,
+                why: 'Channels divide the available RF spectrum into ranges used for communication.'
+              },
+              {
+                q: 'What problem does channel overlap cause?',
+                a: [
+                  'Increased throughput',
+                  'Reduced encryption',
+                  'Interference and performance degradation',
+                  'Improved roaming'
+                ],
+                correct: 2,
+                why: 'Overlapping channels compete for airtime and increase interference, reducing performance.'
+              },
+              {
+                q: 'How many non-overlapping channels exist in the 2.4 GHz band?',
+                a: [
+                  '3',
+                  '6',
+                  '11',
+                  '14'
+                ],
+                correct: 0,
+                why: 'In most regions with 20 MHz channels, there are 3 non-overlapping choices (commonly 1, 6, and 11).'
+              },
+              {
+                q: 'Which Wi-Fi standard introduced MIMO technology?',
+                a: [
+                  '802.11a',
+                  '802.11b',
+                  '802.11g',
+                  '802.11n'
+                ],
+                correct: 3,
+                why: '802.11n introduced MIMO as a major throughput and reliability improvement.'
+              },
+              {
+                q: 'What does MIMO improve?',
+                a: [
+                  'Encryption strength',
+                  'Signal latency',
+                  'Throughput and reliability',
+                  'IP addressing'
+                ],
+                correct: 2,
+                why: 'Multiple antennas can send/receive multiple spatial streams, improving throughput and resilience.'
+              },
+              {
+                q: 'What does RF stand for?',
+                a: [
+                  'Remote Function',
+                  'Radio Frequency',
+                  'Routing Factor',
+                  'Random Frame'
+                ],
+                correct: 1,
+                why: 'RF refers to electromagnetic radio frequencies used for wireless transmission.'
+              },
+              {
+                q: 'What is attenuation in wireless networking?',
+                a: [
+                  'Signal amplification',
+                  'Signal loss over distance',
+                  'Channel bonding',
+                  'Encryption'
+                ],
+                correct: 1,
+                why: 'Attenuation is the reduction in signal strength as it travels through air and materials.'
+              },
+              {
+                q: 'What causes multipath interference?',
+                a: [
+                  'Direct signal transmission',
+                  'Signal reflection from obstacles',
+                  'Strong encryption',
+                  'Channel bonding'
+                ],
+                correct: 1,
+                why: 'Reflections create multiple delayed copies of the signal that can add or cancel at the receiver.'
+              },
+              {
+                q: 'What is an omnidirectional antenna?',
+                a: [
+                  'Transmits in one direction',
+                  'Transmits equally in all directions',
+                  'Receives only weak signals',
+                  'Requires line-of-sight'
+                ],
+                correct: 1,
+                why: 'Omnidirectional antennas radiate broadly around the antenna to cover an area.'
+              },
+              {
+                q: 'Which antenna type focuses signal in a specific direction?',
+                a: [
+                  'Omnidirectional',
+                  'Dipole',
+                  'Directional',
+                  'Internal'
+                ],
+                correct: 2,
+                why: 'Directional antennas concentrate energy to extend range in a chosen direction.'
+              },
+              {
+                q: 'What does signal-to-noise ratio (SNR) measure?',
+                a: [
+                  'Packet size',
+                  'Encryption level',
+                  'Signal strength relative to background noise',
+                  'Channel width'
+                ],
+                correct: 2,
+                why: 'SNR compares desired signal level to noise; higher SNR usually enables better modulation rates.'
+              },
+              {
+                q: 'Which factor MOST improves wireless coverage in an office environment?',
+                a: [
+                  'Increasing transmit power only',
+                  'Proper access point placement',
+                  'Disabling encryption',
+                  'Using fewer channels'
+                ],
+                correct: 1,
+                why: 'Good AP placement and planning improves coverage and capacity more reliably than simply boosting power.'
+              },
+              {
+                q: 'Which statement BEST summarizes wireless networking fundamentals?',
+                a: [
+                  'Higher frequency always means better coverage',
+                  'Wireless performance depends on RF behavior and environment',
+                  'Channels eliminate interference',
+                  'Encryption improves signal strength'
+                ],
+                correct: 1,
+                why: 'Wireless behavior depends on RF physics, obstacles, interference, and design choices.'
+              },
+              {
+                q: 'Which wireless security protocol is considered the most secure?',
+                a: [
+                  'WEP',
+                  'WPA',
+                  'WPA2',
+                  'WPA3'
+                ],
+                correct: 3,
+                why: 'WPA3 provides stronger authentication and improved protections compared to older protocols.'
+              },
+              {
+                q: 'Why is WEP considered insecure?',
+                a: [
+                  'It uses MAC filtering',
+                  'It uses weak encryption that can be cracked',
+                  'It requires strong passwords',
+                  'It does not use SSIDs'
+                ],
+                correct: 1,
+                why: 'WEP has fundamental cryptographic weaknesses that allow it to be cracked quickly.'
+              },
+              {
+                q: 'What encryption algorithm is commonly used with WPA2?',
+                a: [
+                  'DES',
+                  'AES',
+                  'MD5',
+                  'SHA-1'
+                ],
+                correct: 1,
+                why: 'WPA2 commonly uses AES (CCMP) for strong encryption.'
+              },
+              {
+                q: 'What does PSK stand for in wireless security?',
+                a: [
+                  'Private Security Key',
+                  'Pre-Shared Key',
+                  'Public Session Key',
+                  'Protected System Key'
+                ],
+                correct: 1,
+                why: 'PSK means a shared passphrase/key used by clients to join a secured network.'
+              },
+              {
+                q: 'What is the primary difference between WPA2-Personal and WPA2-Enterprise?',
+                a: [
+                  'Enterprise uses MAC filtering',
+                  'Enterprise uses a centralized authentication server',
+                  'Personal uses AES',
+                  'Personal requires certificates'
+                ],
+                correct: 1,
+                why: 'WPA2-Enterprise typically uses 802.1X with a backend AAA server (often RADIUS) for per-user authentication.'
+              },
+              {
+                q: 'Which protocol is commonly used for centralized authentication in enterprise wireless networks?',
+                a: [
+                  'ARP',
+                  'ICMP',
+                  'RADIUS',
+                  'SNMP'
+                ],
+                correct: 2,
+                why: 'RADIUS is widely used to centralize authentication/authorization/accounting for 802.1X.'
+              },
+              {
+                q: 'What is 802.1X used for?',
+                a: [
+                  'VLAN tagging',
+                  'Port-based network access control',
+                  'Wireless channel bonding',
+                  'IP address assignment'
+                ],
+                correct: 1,
+                why: '802.1X provides port-based access control and is commonly used for enterprise Wi-Fi authentication.'
+              },
+              {
+                q: 'What is MAC filtering?',
+                a: [
+                  'Encrypting MAC addresses',
+                  'Allowing or denying devices based on MAC address',
+                  'Translating MAC to IP',
+                  'Segmenting broadcast domains'
+                ],
+                correct: 1,
+                why: 'MAC filtering allows/blocks devices using their MAC address (but can be bypassed via spoofing).' 
+              },
+              {
+                q: 'What is a captive portal?',
+                a: [
+                  'A firewall rule',
+                  'A login page before network access is granted',
+                  'An encryption method',
+                  'A VLAN configuration'
+                ],
+                correct: 1,
+                why: 'Captive portals require users to authenticate or accept terms before full network access.'
+              },
+              {
+                q: 'What enables seamless movement between access points without losing connectivity?',
+                a: [
+                  'NAT',
+                  'Roaming',
+                  'VLAN tagging',
+                  'Packet shaping'
+                ],
+                correct: 1,
+                why: 'Roaming allows a client to transition between APs while maintaining network connectivity.'
+              },
+              {
+                q: 'What is the purpose of a site survey in wireless networking?',
+                a: [
+                  'To assign IP addresses',
+                  'To measure and plan wireless coverage',
+                  'To configure VLANs',
+                  'To monitor routing tables'
+                ],
+                correct: 1,
+                why: 'A site survey measures RF conditions to design placement, channels, and coverage/capacity.'
+              },
+              {
+                q: 'What is a heat map used for in wireless design?',
+                a: [
+                  'Showing encryption strength',
+                  'Displaying signal coverage areas',
+                  'Mapping routing paths',
+                  'Identifying MAC addresses'
+                ],
+                correct: 1,
+                why: 'Heat maps visualize predicted or measured RF coverage, signal strength, and often SNR.'
+              },
+              {
+                q: 'What is channel bonding?',
+                a: [
+                  'Combining multiple channels to increase throughput',
+                  'Encrypting wireless channels',
+                  'Assigning channels dynamically',
+                  'Disabling overlapping channels'
+                ],
+                correct: 0,
+                why: 'Channel bonding increases channel width by combining channels to raise potential throughput.'
+              },
+              {
+                q: 'What is the main trade-off when increasing channel width?',
+                a: [
+                  'Reduced encryption',
+                  'Increased interference potential',
+                  'Lower latency',
+                  'Reduced coverage'
+                ],
+                correct: 1,
+                why: 'Wider channels consume more spectrum and are more likely to overlap, increasing interference risk.'
+              },
+              {
+                q: 'What type of wireless attack involves capturing and replaying authentication data?',
+                a: [
+                  'DoS',
+                  'Replay attack',
+                  'ARP poisoning',
+                  'VLAN hopping'
+                ],
+                correct: 1,
+                why: 'Replay attacks reuse previously captured authentication traffic to try to gain access.'
+              },
+              {
+                q: 'What is an evil twin attack?',
+                a: [
+                  'A duplicate wired switch',
+                  'A rogue access point mimicking a legitimate one',
+                  'A VLAN misconfiguration',
+                  'A routing loop'
+                ],
+                correct: 1,
+                why: 'An evil twin AP impersonates a legitimate SSID to lure clients into connecting.'
+              },
+              {
+                q: 'What is the purpose of disabling SSID broadcast?',
+                a: [
+                  'Encrypt traffic',
+                  'Improve throughput',
+                  'Reduce casual network discovery',
+                  'Eliminate interference'
+                ],
+                correct: 2,
+                why: 'Hiding SSID reduces casual visibility, but it is not a strong security control by itself.'
+              },
+              {
+                q: 'Which factor MOST impacts wireless security?',
+                a: [
+                  'Channel width',
+                  'Strong authentication and encryption',
+                  'Antenna type',
+                  'Frequency band'
+                ],
+                correct: 1,
+                why: 'Security is primarily driven by robust authentication and strong encryption, not RF settings.'
+              },
+              {
+                q: 'What is the main benefit of WPA3 over WPA2?',
+                a: [
+                  'Faster speeds',
+                  'Improved encryption and authentication protections',
+                  'Increased channel count',
+                  'Lower latency'
+                ],
+                correct: 1,
+                why: 'WPA3 improves protections (e.g., stronger handshakes and resistance to offline guessing in many modes).' 
+              },
+              {
+                q: 'Which statement BEST summarizes wireless networking security fundamentals?',
+                a: [
+                  'Encryption alone guarantees security',
+                  'Security requires layered controls including authentication and encryption',
+                  'SSID hiding prevents attacks',
+                  'MAC filtering replaces encryption'
+                ],
+                correct: 1,
+                why: 'Good Wi-Fi security uses defense-in-depth: strong auth, strong encryption, and appropriate policy/monitoring.'
+              },
+            ]
+          },
+          {
+            key: 'd2',
+            title: 'Domain 2 — Infrastructure',
+            targetShare: 0.18,
+            plannedTotal: 180,
+            plannedBatches: 9,
+            rationale: [
+              'Physical + logical components',
+              'Less abstract than Domain 1',
+              'Still very testable',
+            ],
+            questions: [
+              {
+                q: 'Which cable type is MOST commonly used in modern Ethernet LANs?',
+                a: [
+                  'Coaxial',
+                  'Fiber optic',
+                  'Twisted pair',
+                  'Serial'
+                ],
+                correct: 2,
+                why: 'Modern Ethernet LANs typically use copper twisted-pair cabling (e.g., Cat5e/Cat6) for endpoint connections.'
+              },
+              {
+                q: 'Which connector is used with twisted pair Ethernet cables?',
+                a: [
+                  'RJ-11',
+                  'RJ-45',
+                  'BNC',
+                  'SC'
+                ],
+                correct: 1,
+                why: 'RJ-45 is the common 8P8C connector used for twisted-pair Ethernet.'
+              },
+              {
+                q: 'Which cable category supports Gigabit Ethernet (1000BASE-T)?',
+                a: [
+                  'Cat3',
+                  'Cat5',
+                  'Cat5e',
+                  'Cat6a'
+                ],
+                correct: 2,
+                why: 'Cat5e supports 1000BASE-T at standard Ethernet distances (typically up to 100 meters).' 
+              },
+              {
+                q: 'Which cable type provides the BEST resistance to electromagnetic interference (EMI)?',
+                a: [
+                  'UTP',
+                  'STP',
+                  'Coaxial',
+                  'Fiber optic'
+                ],
+                correct: 3,
+                why: 'Fiber uses light rather than electrical signals, making it effectively immune to EMI.'
+              },
+              {
+                q: 'What does UTP stand for?',
+                a: [
+                  'Unshielded Twisted Pair',
+                  'Unified Transmission Protocol',
+                  'Universal Twisted Port',
+                  'Unidirectional Transfer Path'
+                ],
+                correct: 0,
+                why: 'UTP is Unshielded Twisted Pair, the most common copper cabling type for Ethernet.'
+              },
+              {
+                q: 'What is the primary purpose of twisting wires in Ethernet cables?',
+                a: [
+                  'Increase cable length',
+                  'Reduce interference and crosstalk',
+                  'Improve encryption',
+                  'Strengthen the cable'
+                ],
+                correct: 1,
+                why: 'Twisting pairs helps cancel electromagnetic noise and reduces crosstalk between pairs.'
+              },
+              {
+                q: 'Which type of fiber uses light signals that bounce inside the core at multiple angles?',
+                a: [
+                  'Single-mode fiber',
+                  'Multimode fiber',
+                  'Coaxial fiber',
+                  'Shielded fiber'
+                ],
+                correct: 1,
+                why: 'Multimode fiber supports multiple modes (paths) where light can reflect at different angles.'
+              },
+              {
+                q: 'Which type of fiber is best suited for long-distance transmission?',
+                a: [
+                  'Multimode fiber',
+                  'Single-mode fiber',
+                  'Twisted pair',
+                  'Coaxial'
+                ],
+                correct: 1,
+                why: 'Single-mode fiber has lower attenuation and supports much longer distances than multimode.'
+              },
+              {
+                q: 'Which connector type is commonly used with fiber optic cables?',
+                a: [
+                  'RJ-45',
+                  'BNC',
+                  'SC',
+                  'DB-9'
+                ],
+                correct: 2,
+                why: 'SC (Subscriber/Standard Connector) is a common fiber connector type.'
+              },
+              {
+                q: 'What is the primary advantage of fiber optic cabling over copper?',
+                a: [
+                  'Lower cost',
+                  'Easier installation',
+                  'Higher bandwidth and longer distance',
+                  'Uses electrical signals'
+                ],
+                correct: 2,
+                why: 'Fiber typically supports higher bandwidth and longer runs, and it is not affected by EMI.'
+              },
+              {
+                q: 'Which cable type was historically used in early Ethernet networks (10BASE2)?',
+                a: [
+                  'Twisted pair',
+                  'Fiber',
+                  'Coaxial',
+                  'Serial'
+                ],
+                correct: 2,
+                why: '10BASE2 (Thinnet) used coaxial cable with BNC connectors.'
+              },
+              {
+                q: 'What does plenum-rated cable indicate?',
+                a: [
+                  'Outdoor use only',
+                  'Fire-resistant and low smoke emission',
+                  'High-speed capability',
+                  'Shielded construction'
+                ],
+                correct: 1,
+                why: 'Plenum-rated cable is designed for plenum spaces and has safer fire/smoke characteristics.'
+              },
+              {
+                q: 'What tool is used to attach an RJ-45 connector to a cable?',
+                a: [
+                  'Punchdown tool',
+                  'Cable tester',
+                  'Crimping tool',
+                  'Tone generator'
+                ],
+                correct: 2,
+                why: 'A crimping tool terminates twisted-pair cable into an RJ-45 connector.'
+              },
+              {
+                q: 'What is a punchdown tool used for?',
+                a: [
+                  'Testing fiber cables',
+                  'Terminating wires into patch panels or keystones',
+                  'Crimping RJ-45 connectors',
+                  'Measuring voltage'
+                ],
+                correct: 1,
+                why: 'Punchdown tools seat individual conductors into IDC terminals on patch panels/keystone jacks.'
+              },
+              {
+                q: 'What does PoE stand for?',
+                a: [
+                  'Power over Ethernet',
+                  'Protocol over Ethernet',
+                  'Port of Entry',
+                  'Packet over Encryption'
+                ],
+                correct: 0,
+                why: 'PoE delivers electrical power along with data over Ethernet cabling.'
+              },
+              {
+                q: 'What is the primary benefit of PoE?',
+                a: [
+                  'Higher bandwidth',
+                  'Power and data over one cable',
+                  'Reduced interference',
+                  'Improved encryption'
+                ],
+                correct: 1,
+                why: 'PoE simplifies deployments by providing both power and network connectivity over a single cable.'
+              },
+              {
+                q: 'Which device commonly uses PoE?',
+                a: [
+                  'Desktop computer',
+                  'Wireless access point',
+                  'Printer',
+                  'Router console port'
+                ],
+                correct: 1,
+                why: 'Access points, VoIP phones, and cameras commonly use PoE so they don’t need local power.'
+              },
+              {
+                q: 'What is a patch panel used for?',
+                a: [
+                  'Routing internet traffic',
+                  'Centralizing cable terminations',
+                  'Encrypting connections',
+                  'Increasing signal strength'
+                ],
+                correct: 1,
+                why: 'Patch panels provide a central termination point for structured cabling in a rack.'
+              },
+              {
+                q: 'What is a transceiver?',
+                a: [
+                  'A routing protocol',
+                  'A device that transmits and receives signals',
+                  'A firewall appliance',
+                  'A VLAN configuration'
+                ],
+                correct: 1,
+                why: 'A transceiver (e.g., SFP/SFP+) both transmits and receives signals for a given media type.'
+              },
+              {
+                q: 'Which statement BEST summarizes physical infrastructure fundamentals?',
+                a: [
+                  'Copper is always superior to fiber',
+                  'Fiber eliminates the need for switches',
+                  'Media type affects distance, speed, and interference',
+                  'All Ethernet cables perform the same'
+                ],
+                correct: 2,
+                why: 'Choosing copper vs fiber affects bandwidth, maximum distance, cost, and susceptibility to interference.'
+              },
+              {
+                q: 'What does WAN stand for?',
+                a: [
+                  'Wireless Area Network',
+                  'Wide Area Network',
+                  'Web Access Network',
+                  'Wired Access Node'
+                ],
+                correct: 1,
+                why: 'A WAN (Wide Area Network) connects networks across large geographic areas.'
+              },
+              {
+                q: 'What is the primary purpose of a WAN?',
+                a: [
+                  'Connect devices within a single building',
+                  'Connect geographically separated networks',
+                  'Provide wireless connectivity only',
+                  'Replace LAN infrastructure'
+                ],
+                correct: 1,
+                why: 'WANs interconnect sites/branches or separate networks over distance.'
+              },
+              {
+                q: 'Which WAN technology uses labels to forward traffic efficiently?',
+                a: [
+                  'DSL',
+                  'MPLS',
+                  'Cable',
+                  'ISDN'
+                ],
+                correct: 1,
+                why: 'MPLS (Multiprotocol Label Switching) forwards traffic based on labels rather than only IP lookups.'
+              },
+              {
+                q: 'What is the main advantage of MPLS?',
+                a: [
+                  'Free internet access',
+                  'Built-in wireless support',
+                  'Traffic prioritization and reliability',
+                  'Eliminates routers'
+                ],
+                correct: 2,
+                why: 'MPLS can support QoS/traffic engineering for predictable performance and reliability.'
+              },
+              {
+                q: 'Which broadband technology operates over telephone lines?',
+                a: [
+                  'Cable',
+                  'Fiber',
+                  'DSL',
+                  'Satellite'
+                ],
+                correct: 2,
+                why: 'DSL uses existing copper telephone lines for broadband service.'
+              },
+              {
+                q: 'Which broadband technology uses coaxial cable infrastructure?',
+                a: [
+                  'DSL',
+                  'Cable',
+                  'Fiber',
+                  'T1'
+                ],
+                correct: 1,
+                why: 'Cable internet typically runs over coaxial cable (often in an HFC network).' 
+              },
+              {
+                q: 'Which technology provides the highest bandwidth among common broadband types?',
+                a: [
+                  'DSL',
+                  'Satellite',
+                  'Fiber',
+                  'ISDN'
+                ],
+                correct: 2,
+                why: 'Fiber generally provides the highest throughput and best scalability among common broadband options.'
+              },
+              {
+                q: 'What is a leased line?',
+                a: [
+                  'A shared public internet connection',
+                  'A dedicated private WAN connection',
+                  'A wireless broadband link',
+                  'A temporary VPN tunnel'
+                ],
+                correct: 1,
+                why: 'A leased line is a dedicated, always-on circuit provided by a carrier.'
+              },
+              {
+                q: 'What does a T1 line provide?',
+                a: [
+                  '56 Kbps',
+                  '1.544 Mbps',
+                  '10 Mbps',
+                  '100 Mbps'
+                ],
+                correct: 1,
+                why: 'A T1 (DS1) circuit provides 1.544 Mbps of bandwidth.'
+              },
+              {
+                q: 'What is the purpose of a VPN?',
+                a: [
+                  'Increase bandwidth',
+                  'Create a secure connection over a public network',
+                  'Assign IP addresses',
+                  'Replace firewalls'
+                ],
+                correct: 1,
+                why: 'VPNs encrypt traffic to securely connect users or sites across untrusted networks like the internet.'
+              },
+              {
+                q: 'What does IPsec primarily provide?',
+                a: [
+                  'Wireless connectivity',
+                  'Secure IP communications',
+                  'MAC filtering',
+                  'VLAN segmentation'
+                ],
+                correct: 1,
+                why: 'IPsec provides confidentiality, integrity, and authentication for IP traffic.'
+              },
+              {
+                q: 'Which VPN type connects two networks together securely?',
+                a: [
+                  'Remote-access VPN',
+                  'Site-to-site VPN',
+                  'SSL VPN',
+                  'Clientless VPN'
+                ],
+                correct: 1,
+                why: 'Site-to-site VPNs connect two networks (e.g., HQ and branch) over an encrypted tunnel.'
+              },
+              {
+                q: 'Which VPN type allows individual users to securely access a network remotely?',
+                a: [
+                  'MPLS VPN',
+                  'Leased-line VPN',
+                  'Remote-access VPN',
+                  'Community VPN'
+                ],
+                correct: 2,
+                why: 'Remote-access VPNs are designed for individual clients connecting into a private network.'
+              },
+              {
+                q: 'What is the primary disadvantage of satellite internet?',
+                a: [
+                  'Low bandwidth',
+                  'High latency',
+                  'No encryption',
+                  'Limited coverage'
+                ],
+                correct: 1,
+                why: 'Satellite links typically have high latency due to long signal travel distances.'
+              },
+              {
+                q: 'What is SD-WAN designed to improve?',
+                a: [
+                  'Physical cabling',
+                  'Centralized WAN management and performance',
+                  'Ethernet switching',
+                  'MAC address filtering'
+                ],
+                correct: 1,
+                why: 'SD-WAN centralizes policy/control and can optimize traffic across multiple WAN links.'
+              },
+              {
+                q: 'What is the purpose of a demarcation point (demarc)?',
+                a: [
+                  'Connect VLANs',
+                  'Define the boundary between ISP and customer responsibility',
+                  'Route WAN traffic',
+                  'Encrypt data'
+                ],
+                correct: 1,
+                why: 'The demarc is where provider responsibility ends and customer responsibility begins.'
+              },
+              {
+                q: 'What does PPP stand for?',
+                a: [
+                  'Public Packet Path',
+                  'Private Port Protocol',
+                  'Point-to-Point Protocol',
+                  'Protected Private Path'
+                ],
+                correct: 2,
+                why: 'PPP is Point-to-Point Protocol, used on direct links (historically common on serial/DSL connections).' 
+              },
+              {
+                q: 'What is the primary purpose of PPP?',
+                a: [
+                  'VLAN tagging',
+                  'Secure communication over point-to-point links',
+                  'DNS resolution',
+                  'Routing between subnets'
+                ],
+                correct: 1,
+                why: 'PPP provides encapsulation plus features like authentication (PAP/CHAP) and link negotiation on point-to-point links.'
+              },
+              {
+                q: 'Which WAN technology is commonly used in modern enterprise branch connectivity instead of traditional MPLS?',
+                a: [
+                  'ISDN',
+                  'Frame Relay',
+                  'SD-WAN',
+                  'Token Ring'
+                ],
+                correct: 2,
+                why: 'Many enterprises adopt SD-WAN to use multiple internet links with centralized policy and optimization.'
+              },
+              {
+                q: 'Which statement BEST summarizes WAN infrastructure?',
+                a: [
+                  'WANs eliminate the need for routers',
+                  'WAN technologies connect distant networks using various transmission methods',
+                  'DSL is faster than fiber',
+                  'VPNs replace MPLS entirely'
+                ],
+                correct: 1,
+                why: 'WANs connect distant networks using carrier circuits, broadband, VPNs, and other transmission technologies.'
+              },
+            ]
+          },
+          {
+            key: 'd3',
+            title: 'Domain 3 — Network Operations',
+            targetShare: 0.17,
+            plannedTotal: 170,
+            plannedBatches: 9,
+            plannedBatchesNote: '8–9',
+            rationale: [
+              'Process & policy driven',
+              'Important, but narrower in scope',
+            ],
+            questions: []
+          },
+          {
+            key: 'd4',
+            title: 'Domain 4 — Network Security',
+            targetShare: 0.20,
+            plannedTotal: 200,
+            plannedBatches: 10,
+            rationale: [
+              'High exam weight',
+              'Security shows up everywhere',
+              'Strong overlap with real-world jobs',
+            ],
+            questions: []
+          },
+          {
+            key: 'd5',
+            title: 'Domain 5 — Network Troubleshooting & Tools',
+            targetShare: 0.22,
+            plannedTotal: 220,
+            plannedBatches: 11,
+            rationale: [
+              'Very exam-heavy',
+              'Where CompTIA tests thinking',
+              'Tools + methodology + scenarios',
+            ],
+            questions: []
+          },
+        ]
+      },
+      {
+        key: 'hardware',
+        title: 'Hardware',
+        mixWeight: 1,
+        questions: [
+          {
+            q: 'Which upgrade most directly improves performance for a workload that is CPU-bound?',
+            a: [
+              'Faster CPU / more cores (if parallelizable)',
+              'Changing the router SSID',
+              'Lowering DNS TTL',
+              'Switching from HTTPS to HTTP'
+            ],
+            correct: 0,
+            why: 'CPU-bound means compute is the bottleneck.'
+          },
+          {
+            q: 'Which component is typically the fastest memory closest to the CPU for repeated access?',
+            a: [
+              'CPU cache',
+              'Hard disk drive',
+              'USB flash drive',
+              'Network attached storage'
+            ],
+            correct: 0,
+            why: 'CPU caches (L1/L2/L3) are designed for speed.'
+          },
+          {
+            q: 'A system feels slow when opening large files. Which hardware area is most likely involved?',
+            a: [
+              'Disk I/O throughput/latency (HDD vs SSD)',
+              'Screen resolution',
+              'Keyboard layout',
+              'Domain registrar'
+            ],
+            correct: 0,
+            why: 'Large file operations often depend on storage speed.'
+          },
+        ]
+      }
+    ];
+
+    const els = {
+      step1: document.getElementById('step1'),
+      step2: document.getElementById('step2'),
+      step3: document.getElementById('step3'),
+      startBtn: document.getElementById('startBtn'),
+      mixedBtn: document.getElementById('mixedBtn'),
+      layerPyramid: document.getElementById('layerPyramid'),
+      selectedLayerTitle: document.getElementById('selectedLayerTitle'),
+      networkingConfig: document.getElementById('networkingConfig'),
+      nonNetworkingConfig: document.getElementById('nonNetworkingConfig'),
+      networkingDomainSelect: document.getElementById('networkingDomainSelect'),
+      networkingBatchSelect: document.getElementById('networkingBatchSelect'),
+      networkingBatchHint: document.getElementById('networkingBatchHint'),
+      quizTitle: document.getElementById('quizTitle'),
+      quizSubtitle: document.getElementById('quizSubtitle'),
+      progressBar: document.getElementById('progressBar'),
+      progressText: document.getElementById('progressText'),
+      sectionTitle: document.getElementById('sectionTitle'),
+      questionText: document.getElementById('questionText'),
+      answers: document.getElementById('answers'),
+      quitBtn: document.getElementById('quitBtn'),
+      feedback: document.getElementById('feedback'),
+      resultScore: document.getElementById('resultScore'),
+      resultIcon: document.getElementById('resultIcon'),
+      resultTitle: document.getElementById('resultTitle'),
+      resultMsg: document.getElementById('resultMsg'),
+      categoryBreakdown: document.getElementById('categoryBreakdown'),
+      retryBtn: document.getElementById('retryBtn'),
+      backBtn: document.getElementById('backBtn'),
+      networkingDomainStats: document.getElementById('networkingDomainStats'),
+    };
+
+    const STORAGE_KEY = 'arxcafe_it_pyramid_scores_v1';
+    const PROGRESS_KEY = 'arxcafe_it_pyramid_progress_v1';
+
+    let isAuthed = false;
+
+    const state = {
+      mode: 'idle',
+      layerKey: null,
+      domainKey: null,
+      batchIndex: null,
+      questions: [],
+      idx: 0,
+      correctCount: 0,
+      lastWhy: '',
+      isAnswered: false,
+      session: null,
+      lastRun: null,
+    };
+
+    const NETWORKING_QUIZ_LEN = 20;
+
+    function loadProgress() {
+      try {
+        const raw = localStorage.getItem(PROGRESS_KEY);
+        return raw ? JSON.parse(raw) : {};
+      } catch {
+        return {};
+      }
+    }
+
+    function getProgressEntry(progressKey) {
+      const progress = loadProgress();
+      const entry = progress?.[progressKey];
+      return entry && typeof entry === 'object' ? entry : null;
+    }
+
+    function normalizeNetworkingProgress(progressKey, loadedCount) {
+      const entry = getProgressEntry(progressKey) || {};
+      const availableBatches = Math.max(0, Math.ceil((Number(loadedCount) || 0) / NETWORKING_QUIZ_LEN));
+
+      // New format: completedBatches: number[]
+      let completedBatches = Array.isArray(entry.completedBatches) ? entry.completedBatches : null;
+
+      // Legacy format: nextIndex number (cursor)
+      if (!completedBatches) {
+        const legacyNextIndex = Number(entry.nextIndex);
+        const legacyCompletedCount = Number.isFinite(legacyNextIndex) && legacyNextIndex > 0
+          ? Math.floor(legacyNextIndex / NETWORKING_QUIZ_LEN)
+          : 0;
+
+        completedBatches = [];
+        for (let i = 1; i <= legacyCompletedCount; i += 1) completedBatches.push(i);
+      }
+
+      // Sanitize
+      completedBatches = completedBatches
+        .map((x) => Math.floor(Number(x)))
+        .filter((x) => Number.isFinite(x) && x >= 1)
+        .filter((x) => availableBatches === 0 ? false : x <= availableBatches);
+
+      // Unique + sort
+      completedBatches = Array.from(new Set(completedBatches)).sort((a, b) => a - b);
+
+      return {
+        completedBatches,
+        availableBatches,
+      };
+    }
+
+    function saveCompletedBatch(progressKey, batchIndex, batchEndIndex) {
+      const progress = loadProgress();
+      const entry = (progress[progressKey] && typeof progress[progressKey] === 'object') ? progress[progressKey] : {};
+      const existing = Array.isArray(entry.completedBatches) ? entry.completedBatches : [];
+      const next = Array.from(new Set(existing.concat([Math.floor(Number(batchIndex))]))).filter(Boolean).sort((a, b) => a - b);
+
+      const legacyNextIndex = Math.max(
+        0,
+        Math.floor(Number(entry.nextIndex) || 0),
+        Math.floor(Number(batchEndIndex) || 0)
+      );
+
+      progress[progressKey] = {
+        ...entry,
+        completedBatches: next,
+        nextIndex: legacyNextIndex,
+        at: new Date().toISOString(),
+      };
+      localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress));
+    }
+
+    function clearProgress() {
+      localStorage.removeItem(PROGRESS_KEY);
+    }
+
+    function getNetworkingDomain(domainKey) {
+      const net = LAYERS.find(x => x.key === 'networking');
+      const d = net?.domains?.find(x => x.key === domainKey);
+      return d || null;
+    }
+
+    function calcCompletedQuestionsForDomain(domainKey) {
+      const d = getNetworkingDomain(domainKey);
+      const loaded = Array.isArray(d?.questions) ? d.questions.length : 0;
+      if (!loaded) return { loaded: 0, completed: 0, remaining: 0, completedBatches: [], availableBatches: 0 };
+
+      const progressKey = `networking-${domainKey}`;
+      const norm = normalizeNetworkingProgress(progressKey, loaded);
+
+      let completed = 0;
+      for (const batchIndex of norm.completedBatches) {
+        const start = (batchIndex - 1) * NETWORKING_QUIZ_LEN;
+        const end = Math.min(loaded, start + NETWORKING_QUIZ_LEN);
+        if (start < loaded) completed += Math.max(0, end - start);
+      }
+
+      completed = Math.max(0, Math.min(completed, loaded));
+      const remaining = Math.max(0, loaded - completed);
+      return { loaded, completed, remaining, completedBatches: norm.completedBatches, availableBatches: norm.availableBatches };
+    }
+
+    function renderNetworkingDomainStats(domainKey) {
+      if (!els.networkingDomainStats) return;
+      const d = getNetworkingDomain(domainKey);
+      if (!d) {
+        els.networkingDomainStats.textContent = '';
+        return;
+      }
+
+      const target = typeof d.plannedTotal === 'number' ? d.plannedTotal : null;
+      const batches = typeof d.plannedBatches === 'number' ? d.plannedBatches : null;
+      const { loaded, completed, remaining } = calcCompletedQuestionsForDomain(domainKey);
+
+      const tail = [
+        target != null ? `${loaded}/${target} questions` : `${loaded} questions`,
+        loaded ? `${completed}/${loaded} completed • ${remaining} remaining` : null,
+        batches != null ? `~${batches} batches` : null,
+      ].filter(Boolean).join(' • ');
+
+      els.networkingDomainStats.innerHTML = `<strong>${escapeHtml(d.title)}</strong>: ${escapeHtml(tail)}`;
+    }
+
+    function pickNetworkingQuestions(domainKey, batchIndex) {
+      const d = getNetworkingDomain(domainKey);
+      const pool = (d?.questions || []).map((q, i) => ({ ...q, _layer: 'networking', _domain: domainKey, _seqIndex: i }));
+
+      const loaded = pool.length;
+      const idx = Math.max(1, Math.floor(Number(batchIndex) || 1));
+      const start = (idx - 1) * NETWORKING_QUIZ_LEN;
+      const end = Math.min(loaded, start + NETWORKING_QUIZ_LEN);
+      const questions = start < loaded ? pool.slice(start, end) : [];
+
+      const session = {
+        progressKey: `networking-${domainKey}`,
+        batchIndex: idx,
+        batchStart: start,
+        batchEnd: end,
+        poolSize: loaded,
+      };
+
+      return { questions, session };
+    }
+
+    function loadScores() {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        return raw ? JSON.parse(raw) : {};
+      } catch {
+        return {};
+      }
+    }
+
+    function saveScore(layerKey, percent) {
+      const scores = loadScores();
+      scores[layerKey] = { percent, at: new Date().toISOString() };
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(scores));
+    }
+
+    function clearScores() {
+      localStorage.removeItem(STORAGE_KEY);
+    }
+
+    function fmtScores(scores) {
+      const entries = Object.entries(scores);
+      if (!entries.length) return 'No saved scores yet.';
+
+      const order = ['hardware','networking-d1','networking-d2','networking-d3','networking-d4','networking-d5','networking-mixed','os','security','apps','mixed'];
+      entries.sort((a, b) => order.indexOf(a[0]) - order.indexOf(b[0]));
+
+      const parts = entries.map(([k, v]) => {
+        let name = k === 'mixed' ? 'Mixed' : (LAYERS.find(x => x.key === k)?.title || k);
+        if (k.startsWith('networking-')) {
+          const suffix = k.slice('networking-'.length);
+          const net = LAYERS.find(x => x.key === 'networking');
+          if (suffix === 'mixed') name = 'Networking — Mixed';
+          else {
+            const d = net?.domains?.find(x => x.key === suffix);
+            if (d?.title) name = d.title;
+          }
+        }
+        const pct = typeof v?.percent === 'number' ? v.percent : 0;
+        return `${name}: ${pct}%`;
+      });
+      return 'Saved: ' + parts.join(' • ');
+    }
+
+    function renderSavedScores() {
+      // Saved score rendering intentionally omitted in this 3-step flow.
+    }
+
+    function showStep(n) {
+      els.step1.classList.toggle('hide', n !== 1);
+      els.step2.classList.toggle('hide', n !== 2);
+      els.step3.classList.toggle('hide', n !== 3);
+    }
+
+    function updateProgress() {
+      const total = state.questions.length || 1;
+      const pct = Math.round(((state.idx + 1) / total) * 100);
+      els.progressBar.style.width = `${pct}%`;
+    }
+
+    function setIdle() {
+      state.mode = 'idle';
+      state.questions = [];
+      state.idx = 0;
+      state.correctCount = 0;
+      state.lastWhy = '';
+      state.isAnswered = false;
+      state.session = null;
+      state.lastRun = null;
+
+      els.quizTitle.textContent = 'Quiz';
+      els.quizSubtitle.textContent = 'Answer the question to continue.';
+      els.progressBar.style.width = '0%';
+      els.questionText.textContent = '';
+      els.answers.innerHTML = '';
+      els.feedback.textContent = '';
+      els.progressText.textContent = '';
+      els.sectionTitle.textContent = '';
+
+      // Keep selection (layer/domain/batch) intact; just ensure Step 1 reflects it.
+      setSelectedLayer(state.layerKey || 'networking');
+      showStep(1);
+    }
+
+    function setSelectedLayer(layerKey) {
+      const key = String(layerKey || '').trim();
+      const valid = ['hardware', 'networking', 'os', 'security', 'apps', 'mixed'];
+      const next = valid.includes(key) ? key : 'networking';
+
+      if (next === 'mixed') {
+        state.layerKey = 'mixed';
+        state.domainKey = null;
+        state.batchIndex = null;
+      } else {
+        state.layerKey = next;
+        if (next !== 'networking') {
+          state.domainKey = null;
+          state.batchIndex = null;
+        }
+      }
+
+      const titleMap = {
+        mixed: 'All layers (mixed)',
+        hardware: 'Hardware',
+        networking: 'Networking',
+        os: 'Operating Systems',
+        security: 'Security & Reliability',
+        apps: 'Applications / Services',
+      };
+      if (els.selectedLayerTitle) els.selectedLayerTitle.textContent = `Selected layer: ${titleMap[state.layerKey] || 'Networking'}`;
+
+      const isNetworking = state.layerKey === 'networking';
+      els.networkingConfig?.classList.toggle('hide', !isNetworking);
+      els.nonNetworkingConfig?.classList.toggle('hide', isNetworking);
+
+      // Update pyramid button labels (Selected)
+      if (els.layerPyramid) {
+        const btns = Array.from(els.layerPyramid.querySelectorAll('[data-layer-btn]'));
+        btns.forEach((b) => {
+          const k = b.getAttribute('data-layer-btn');
+          b.textContent = (k === state.layerKey) ? 'Selected' : 'Select';
+        });
+      }
+
+      if (isNetworking) {
+        if (!state.domainKey) state.domainKey = 'd1';
+        fillNetworkingBatchSelect();
+        renderNetworkingDomainStats(state.domainKey);
+      }
+    }
+
+    function fillNetworkingDomainSelect() {
+      if (!els.networkingDomainSelect) return;
+      const net = LAYERS.find(x => x.key === 'networking');
+      const domains = Array.isArray(net?.domains) ? net.domains : [];
+
+      els.networkingDomainSelect.innerHTML = '';
+      for (const d of domains) {
+        const o = document.createElement('option');
+        o.value = d.key;
+        o.textContent = d.title;
+        els.networkingDomainSelect.appendChild(o);
+      }
+
+      els.networkingDomainSelect.value = state.domainKey || 'd1';
+    }
+
+    function getRecommendedBatchIndex(domainKey) {
+      const d = getNetworkingDomain(domainKey);
+      const loaded = Array.isArray(d?.questions) ? d.questions.length : 0;
+      const progressKey = `networking-${domainKey}`;
+      const norm = normalizeNetworkingProgress(progressKey, loaded);
+
+      for (let i = 1; i <= norm.availableBatches; i += 1) {
+        if (!norm.completedBatches.includes(i)) return i;
+      }
+      return norm.availableBatches > 0 ? 1 : 1;
+    }
+
+    function fillNetworkingBatchSelect() {
+      if (!els.networkingBatchSelect) return;
+      const domainKey = state.domainKey || 'd1';
+      const d = getNetworkingDomain(domainKey);
+      const loaded = Array.isArray(d?.questions) ? d.questions.length : 0;
+
+      const progressKey = `networking-${domainKey}`;
+      const norm = normalizeNetworkingProgress(progressKey, loaded);
+
+      els.networkingBatchSelect.innerHTML = '';
+
+      if (!loaded || norm.availableBatches === 0) {
+        const o = document.createElement('option');
+        o.value = '1';
+        o.textContent = 'No questions loaded yet';
+        els.networkingBatchSelect.appendChild(o);
+        els.networkingBatchSelect.disabled = true;
+        if (els.networkingBatchHint) els.networkingBatchHint.textContent = '';
+        return;
+      }
+
+      els.networkingBatchSelect.disabled = false;
+
+      const recommended = getRecommendedBatchIndex(domainKey);
+      for (let i = 1; i <= norm.availableBatches; i += 1) {
+        const start = (i - 1) * NETWORKING_QUIZ_LEN;
+        const end = Math.min(loaded, start + NETWORKING_QUIZ_LEN);
+        const isDone = norm.completedBatches.includes(i);
+
+        const o = document.createElement('option');
+        o.value = String(i);
+        o.textContent = `Batch ${i} — Questions ${start + 1}–${end}${isDone ? ' ✓ completed' : ''}`;
+        els.networkingBatchSelect.appendChild(o);
+      }
+
+      const preferred = Number.isFinite(state.batchIndex) ? state.batchIndex : recommended;
+      els.networkingBatchSelect.value = String(preferred);
+      state.batchIndex = Math.floor(Number(els.networkingBatchSelect.value) || recommended);
+
+      if (els.networkingBatchHint) {
+        const done = norm.completedBatches.includes(state.batchIndex);
+        els.networkingBatchHint.textContent = done
+          ? 'This batch is already marked completed, but you can retake it.'
+          : 'Recommended: take the next incomplete batch.';
+      }
+    }
+
+    function pickQuestionsForLayer(layerKey, domainKey = null) {
+      if (layerKey === 'mixed') {
+        const pool = [];
+        for (const layer of LAYERS) {
+          if (Array.isArray(layer.questions)) {
+            for (const q of layer.questions) pool.push({ ...q, _layer: layer.key });
+            continue;
+          }
+
+          if (layer.key === 'networking' && Array.isArray(layer.domains)) {
+            for (const d of layer.domains) {
+              for (const q of (d.questions || [])) pool.push({ ...q, _layer: 'networking', _domain: d.key });
+            }
+          }
+        }
+        // Shuffle then take up to 10
+        for (let i = pool.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [pool[i], pool[j]] = [pool[j], pool[i]];
+        }
+        // Full mixed quiz: return the whole pool
+        return pool;
+      }
+
+      const layer = LAYERS.find(l => l.key === layerKey);
+      if (!layer) return [];
+
+      if (layerKey === 'networking' && Array.isArray(layer.domains)) {
+        if (!domainKey) return [];
+
+        if (domainKey === 'mixed') {
+          const pool = [];
+          for (const d of layer.domains) {
+            for (const q of (d.questions || [])) pool.push({ ...q, _layer: 'networking', _domain: d.key });
+          }
+          for (let i = pool.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [pool[i], pool[j]] = [pool[j], pool[i]];
+          }
+          return pool.slice(0, Math.min(NETWORKING_QUIZ_LEN, pool.length));
+        }
+
+        const d = layer.domains.find(x => x.key === domainKey);
+        const pool = (d?.questions || []).map(q => ({ ...q, _layer: 'networking', _domain: domainKey }));
+        for (let i = pool.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [pool[i], pool[j]] = [pool[j], pool[i]];
+        }
+        return pool.slice(0, Math.min(NETWORKING_QUIZ_LEN, pool.length));
+      }
+
+      return Array.isArray(layer.questions) ? layer.questions.slice() : [];
+    }
+
+    function start(layerKey, options = {}) {
+      const domainKey = options?.domainKey || null;
+      const batchIndex = options?.batchIndex || null;
+
+      let qs = [];
+      let session = null;
+      if (layerKey === 'networking') {
+        const res = pickNetworkingQuestions(domainKey, batchIndex);
+        qs = res.questions;
+        session = res.session;
+      } else {
+        qs = pickQuestionsForLayer(layerKey, domainKey);
+      }
+      if (!qs.length) {
+        if (layerKey === 'networking') {
+          alert('No questions found for this domain/batch yet.');
+          renderNetworkingDomainStats(state.domainKey || domainKey || 'd1');
+        } else {
+          alert('No questions found for this layer yet.');
+        }
+        return;
+      }
+
+      state.mode = 'quiz';
+      state.layerKey = layerKey;
+      state.domainKey = domainKey;
+      state.batchIndex = layerKey === 'networking' ? Math.floor(Number(batchIndex) || 1) : null;
+      state.questions = qs;
+      state.idx = 0;
+      state.correctCount = 0;
+      state.lastWhy = '';
+      state.isAnswered = false;
+      state.session = session;
+      state.lastRun = null;
+
+      let title;
+      if (layerKey === 'mixed') title = 'Full mixed quiz';
+      else if (layerKey === 'networking') {
+        const net = LAYERS.find(x => x.key === 'networking');
+        const base = net?.domains?.find(x => x.key === domainKey)?.title || 'Networking';
+        title = `${base} — Batch ${state.batchIndex || 1}`;
+      } else title = (LAYERS.find(x => x.key === layerKey)?.title || 'Quiz');
+
+      els.quizTitle.textContent = title;
+      els.quizSubtitle.textContent = 'Answer the question to continue.';
+
+      showStep(2);
+      renderQuestion();
+    }
+
+    function renderQuestion() {
+      const total = state.questions.length;
+      const item = state.questions[state.idx];
+
+      state.isAnswered = false;
+
+      const progress = state.idx + 1;
+      els.progressText.textContent = `Question ${progress} of ${total}`;
+
+      // Match assessment quiz: show a compact "topic" line
+      let topic = '';
+      if (state.layerKey === 'networking') {
+        const net = LAYERS.find(x => x.key === 'networking');
+        topic = 'Topic: ' + (net?.domains?.find(x => x.key === state.domainKey)?.title || 'Networking') + ` (Batch ${state.batchIndex || 1})`;
+      } else if (state.layerKey === 'mixed') {
+        topic = 'Topic: Mixed';
+      } else {
+        topic = 'Topic: ' + (LAYERS.find(x => x.key === state.layerKey)?.title || 'Quiz');
+      }
+      els.sectionTitle.textContent = topic;
+      els.feedback.textContent = '';
+
+      els.questionText.textContent = item.q;
+      els.answers.innerHTML = '';
+
+      item.a.forEach((text, idx) => {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.textContent = text;
+        btn.addEventListener('click', () => choose(idx, btn));
+        els.answers.appendChild(btn);
+      });
+
+      updateProgress();
+    }
+
+    function choose(idx, clickedBtn) {
+      const item = state.questions[state.idx];
+      if (state.isAnswered) return;
+      state.isAnswered = true;
+
+      const correctIdx = item.correct;
+      const isCorrect = idx === correctIdx;
+      const answeredIndex = state.idx;
+
+      // Disable all buttons
+      Array.from(els.answers.querySelectorAll('button')).forEach(b => (b.disabled = true));
+
+      // Apply classes like assessment quiz
+      if (isCorrect) {
+        clickedBtn?.classList.add('correct');
+        els.feedback.textContent = '✓ Correct!';
+        els.feedback.className = 'feedback correct';
+        state.correctCount += 1;
+      } else {
+        clickedBtn?.classList.add('wrong');
+        const buttons = Array.from(els.answers.querySelectorAll('button'));
+        if (buttons[correctIdx]) buttons[correctIdx].classList.add('correct');
+        els.feedback.textContent = '✗ Incorrect.';
+        els.feedback.className = 'feedback wrong';
+      }
+
+      const advance = () => {
+        if (state.idx >= state.questions.length - 1) {
+          finish();
+          return;
+        }
+        state.idx += 1;
+        renderQuestion();
+      };
+
+      const quizId = state.layerKey === 'networking'
+        ? `it-learning-pyramid|networking-${state.domainKey || 'd1'}`
+        : `it-learning-pyramid|${state.layerKey || 'mixed'}`;
+
+      if (window.CzechLessonAiQuizAssist && window.CzechLessonAiQuizAssist.afterAnswer) {
+        window.CzechLessonAiQuizAssist.afterAnswer({
+          quizId,
+          questionText: item.q,
+          userAnswer: item.a[idx] || '',
+          correctAnswer: item.a[correctIdx] || '',
+          isCorrect,
+          feedbackEl: els.feedback.parentElement,
+          autoAdvanceDelayMs: 5000,
+          aiFetchTimeoutMs: 12000,
+          aiEnabled: true,
+          onAdvance: advance,
+          isStillCurrent: () => state.mode === 'quiz' && state.idx === answeredIndex
+        });
+      } else {
+        setTimeout(advance, 5000);
+      }
+    }
+
+    function finish() {
+      const total = state.questions.length;
+      const pct = Math.round((state.correctCount / total) * 100);
+      const scoreKey = state.layerKey === 'networking'
+        ? `networking-${state.domainKey || 'd1'}`
+        : state.layerKey;
+      saveScore(scoreKey, pct);
+
+      if (state.layerKey === 'networking' && state.session?.progressKey) {
+        // Mark this batch as completed (repeatable).
+        saveCompletedBatch(state.session.progressKey, state.session.batchIndex, state.session.batchEnd);
+        state.lastRun = { ...state.session };
+      }
+      showStep(3);
+
+      els.progressBar.style.width = '100%';
+      els.resultScore.textContent = `${state.correctCount}/${total} (${pct}%)`;
+
+      const title = els.quizTitle.textContent || 'Quiz';
+      els.resultTitle.textContent = title;
+      if (els.resultIcon) {
+        els.resultIcon.textContent = pct >= 90 ? '🏆' : (pct >= 70 ? '✅' : '📘');
+      }
+
+      if (pct >= 90) {
+        els.resultMsg.textContent = 'Strong score. Next: explain one real incident using this layer (what failed, why, and how you would prevent it).';
+      } else if (pct >= 70) {
+        els.resultMsg.textContent = 'Good. Next: revisit the missed concepts and connect them to the layer below.';
+      } else {
+        els.resultMsg.textContent = 'Start from the bottom layer and build upward. Most confusion is missing prerequisites.';
+      }
+
+      const breakdown = [];
+      breakdown.push(`<div><strong>Selected quiz</strong>: ${escapeHtml(title)}</div>`);
+      breakdown.push(`<div><strong>Score</strong>: ${state.correctCount}/${total} (${pct}%)</div>`);
+
+      if (state.layerKey === 'networking') {
+        const net = LAYERS.find(x => x.key === 'networking');
+        const domainTitle = (net?.domains?.find(x => x.key === state.domainKey)?.title || 'Networking');
+
+        breakdown.push(`<div style="margin-top: 10px;"><strong>Domain</strong>: ${escapeHtml(domainTitle)}</div>`);
+
+        if (state.domainKey) {
+          const stats = calcCompletedQuestionsForDomain(state.domainKey);
+          breakdown.push(`<div><strong>Completion</strong>: ${stats.completed}/${stats.loaded} completed • ${stats.remaining} remaining</div>`);
+          const nextBatch = getRecommendedBatchIndex(state.domainKey);
+          breakdown.push(`<div><strong>Next run</strong>: Recommended Batch ${nextBatch}</div>`);
+        }
+      }
+
+      els.categoryBreakdown.innerHTML = breakdown.join('<br>');
+      if (state.layerKey === 'networking' && state.domainKey) renderNetworkingDomainStats(state.domainKey);
+    }
+
+    function escapeHtml(s) {
+      return String(s || '')
+        .replaceAll('&', '&amp;')
+        .replaceAll('<', '&lt;')
+        .replaceAll('>', '&gt;')
+        .replaceAll('"', '&quot;')
+        .replaceAll("'", '&#39;');
+    }
+
+    function initLayerPyramid() {
+      if (els.layerPyramid) {
+        els.layerPyramid.addEventListener('click', (e) => {
+          const btn = e.target?.closest?.('[data-layer-btn]');
+          if (!btn) return;
+          const key = btn.getAttribute('data-layer-btn');
+          setSelectedLayer(key);
+        });
+      }
+
+      if (els.mixedBtn) {
+        els.mixedBtn.addEventListener('click', () => setSelectedLayer('mixed'));
+      }
+
+      if (els.networkingDomainSelect) {
+        els.networkingDomainSelect.addEventListener('change', () => {
+          state.domainKey = String(els.networkingDomainSelect.value || 'd1');
+          state.batchIndex = null;
+          fillNetworkingBatchSelect();
+          renderNetworkingDomainStats(state.domainKey);
+        });
+      }
+
+      if (els.networkingBatchSelect) {
+        els.networkingBatchSelect.addEventListener('change', () => {
+          state.batchIndex = Math.max(1, Math.floor(Number(els.networkingBatchSelect.value) || 1));
+          fillNetworkingBatchSelect();
+        });
+      }
+    }
+
+    async function checkLoginAndEnableStart() {
+      if (!els.startBtn) return;
+      els.startBtn.disabled = true;
+      els.startBtn.textContent = 'Checking login…';
+
+      try {
+        const res = await fetch('/api/account/status', { credentials: 'include' });
+        const ct = (res.headers.get('content-type') || '').toLowerCase();
+
+        if (!res.ok || !ct.includes('application/json')) {
+          throw new Error('not-json');
+        }
+
+        const data = await res.json();
+        if (!data?.ok) throw new Error('not-ok');
+
+        isAuthed = true;
+
+        els.startBtn.disabled = false;
+        els.startBtn.textContent = 'Start quiz';
+        return;
+      } catch {
+        // If this page is ever served without auth, route the user to login.
+        const redirect = '/it-learning-pyramid';
+        isAuthed = false;
+        els.startBtn.disabled = false;
+        els.startBtn.textContent = 'Log in to start';
+        els.startBtn.onclick = () => {
+          window.location.href = '/login?redirect=' + encodeURIComponent(redirect);
+        };
+      }
+    }
+
+    function next() {
+      // no-op (kept for compatibility)
+    }
+
+    function quit() {
+      setIdle();
+    }
+
+    // Wire up UI
+    els.startBtn.addEventListener('click', () => {
+      if (!isAuthed) {
+        const redirect = '/it-learning-pyramid';
+        window.location.href = '/login?redirect=' + encodeURIComponent(redirect);
+        return;
+      }
+
+      const selected = state.layerKey || 'networking';
+      if (selected === 'networking') {
+        const domainKey = state.domainKey || 'd1';
+        const batchIndex = Number.isFinite(state.batchIndex) ? state.batchIndex : getRecommendedBatchIndex(domainKey);
+        start('networking', { domainKey, batchIndex });
+        return;
+      }
+      start(selected);
+    });
+
+    els.quitBtn.addEventListener('click', quit);
+
+    els.retryBtn.addEventListener('click', () => {
+      if (state.layerKey === 'networking') {
+        start('networking', { domainKey: state.domainKey || 'd1', batchIndex: state.batchIndex || state.lastRun?.batchIndex || 1 });
+      }
+      else start(state.layerKey || 'mixed');
+    });
+    els.backBtn.addEventListener('click', setIdle);
+
+    // init
+    initLayerPyramid();
+    // Default selection: Networking → Domain 1 → next incomplete batch.
+    state.domainKey = 'd1';
+    fillNetworkingDomainSelect();
+    setSelectedLayer('networking');
+    void checkLoginAndEnableStart();
+    setIdle();
+  </script>
+  <script src="/js/ai-quiz-assist.js"></script>
+</body>
+</html>

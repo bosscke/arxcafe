@@ -4,9 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>ArxCafe</title>
-        <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231f2a44'/%3E%3Ctext x='50%25' y='58%25' text-anchor='middle' font-size='34'%3E🍰%3C/text%3E%3C/svg%3E">
-        <link rel="preload" as="image" href="/hero-night.jpg">
-        <link rel="preload" as="image" href="/hero-day.jpg">
+        <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%234A342E'/%3E%3Ctext x='50%25' y='58%25' text-anchor='middle' font-size='34'%3E🍰%3C/text%3E%3C/svg%3E">
         <link rel="stylesheet" href="/css/global.css">
         <link rel="stylesheet" href="/css/index.css">
 </head>
@@ -14,14 +12,16 @@
     <button class="theme-toggle" id="themeToggle" title="Toggle day/night">🌙</button>
     
     <div style="margin: 0 auto 40px; max-width: 1200px; padding: 40px 20px; width: 100%; box-sizing: border-box;">
-        <div style="padding: 30px; background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 12px; text-align: center; backdrop-filter: blur(8px); box-shadow: 0 10px 30px rgba(0,0,0,0.15);">
-            <p id="quote-text" style="font-size: 1.2em; font-weight: 400; color: rgba(255,255,255,0.92); margin: 0; font-style: italic; line-height: 1.8; letter-spacing: 0.3px; text-shadow: 0 1px 4px rgba(0,0,0,0.2);">
+        <div style="padding: 30px; background: var(--color-surface); border: 1px solid var(--border); border-radius: 12px; text-align: center; box-shadow: var(--shadow);">
+            <p id="quote-text" style="font-size: 1.2em; font-weight: 400; color: var(--color-text); margin: 0; font-style: italic; line-height: 1.8; letter-spacing: 0.3px;">
                 <!-- Quote loads via JavaScript -->
             </p>
-            <p id="quote-author" style="font-size: 0.9em; color: rgba(255,255,255,0.80); margin: 14px 0 0 0; font-weight: 300; letter-spacing: 0.2px; text-shadow: 0 1px 4px rgba(0,0,0,0.2);">
+            <p id="quote-author" style="font-size: 0.9em; color: var(--color-secondary); margin: 14px 0 0 0; font-weight: 500; letter-spacing: 0.2px;">
                 <!-- Author loads via JavaScript -->
             </p>
         </div>
+
+        
     </div>
     
     <script>
@@ -259,8 +259,8 @@
     </script>
 
     <div style="margin: 0 auto 30px; max-width: 1200px; padding: 0 20px; width: 100%; box-sizing: border-box;">
-        <div style="padding: 24px; background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.18); border-radius: 12px; backdrop-filter: blur(8px); box-shadow: 0 8px 24px rgba(0,0,0,0.18); color: rgba(255,255,255,0.9);">
-            <h2 style="margin: 0 0 8px; font-size: 1.1em; letter-spacing: 0.04em; text-transform: uppercase; opacity: 0.9;">Firmitas · Utilitas · Venustas</h2>
+        <div style="padding: 24px; background: var(--color-surface); border: 1px solid var(--border); border-radius: 12px; box-shadow: var(--shadow-sm); color: var(--color-text);">
+            <h2 style="margin: 0 0 8px; font-size: 1.1em; letter-spacing: 0.04em; text-transform: uppercase; color: var(--color-primary);">Firmitas · Utilitas · Venustas</h2>
             <div style="display: flex; flex-wrap: wrap; gap: 16px; font-size: 0.95em; line-height: 1.6;">
                 <p style="margin: 0; min-width: 180px;">
                     <strong>Firmitas: Strength</strong><br>
@@ -285,8 +285,8 @@
     </div>
 
     <div style="margin: 0 auto 30px; max-width: 1200px; padding: 0 20px; width: 100%; box-sizing: border-box;">
-        <div style="padding: 24px; background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.18); border-radius: 12px; backdrop-filter: blur(8px); box-shadow: 0 8px 24px rgba(0,0,0,0.18); color: rgba(255,255,255,0.9);">
-            <h2 style="margin: 0 0 8px; font-size: 1.05em; letter-spacing: 0.04em; text-transform: uppercase; opacity: 0.9;">Skill: Craft + Technique</h2>
+        <div style="padding: 24px; background: var(--color-surface); border: 1px solid var(--border); border-radius: 12px; box-shadow: var(--shadow-sm); color: var(--color-text);">
+            <h2 style="margin: 0 0 8px; font-size: 1.05em; letter-spacing: 0.04em; text-transform: uppercase; color: var(--color-primary);">Skill: Craft + Technique</h2>
             <p style="margin: 0; font-size: 0.95em; line-height: 1.7;">
                 Learning by doing, where practice, repetition, and reflection turn raw talent into reliable technique. As Vitruvius reminds us:
                 <br><em>&ldquo;For neither talent without instruction nor instruction without talent can produce the perfect craftsman.&rdquo;</em>
@@ -295,7 +295,7 @@
     </div>
 
     <div style="margin: 0 auto 30px; max-width: 1200px; padding: 0 20px; width: 100%; box-sizing: border-box;">
-        <div style="padding: 24px; background: rgba(255, 255, 255, 0.06); border: 1px solid rgba(255, 255, 255, 0.18); border-radius: 12px; backdrop-filter: blur(8px); box-shadow: 0 6px 20px rgba(0,0,0,0.16); color: rgba(255,255,255,0.9);">
+        <div style="padding: 24px; background: var(--color-surface); border: 1px solid var(--border); border-radius: 12px; box-shadow: var(--shadow-sm); color: var(--color-text);">
             <p style="margin: 0; font-size: 0.96em; line-height: 1.7;">
                 Before you design systems, you must understand the world they live in.
                 Architects often feel like generalists among specialists.
@@ -953,7 +953,7 @@
         </div>
         <div class="panel web-network-panel" aria-live="polite">
             <div class="web-network-header">
-                <div class="toplist-title">Web &amp; Networking Concepts</div>
+                <div class="toplist-title">Why Learn with Us?</div>
             </div>
 
             <div class="wn-grid">
@@ -1036,6 +1036,135 @@
                         <li>Regions and Availability Zones</li>
                     </ol>
                 </div>
+            </div>
+        </div>
+
+        <div class="panel ml-layered-panel" aria-label="Google Professional Machine Learning Engineer layered concepts">
+            <div class="ml-layered-header">
+                <div class="toplist-title">📘 Google Professional Machine Learning Engineer</div>
+                <div class="ml-layered-subtitle">Layered Concepts</div>
+            </div>
+
+            <div class="ml-layered-block">
+                <div class="ml-layered-label">Purpose</div>
+                <p class="ml-layered-text">
+                    A concept-first, layered learning framework that explains Machine Learning systems from first principles to production-scale deployment,
+                    aligned with Google Cloud Professional Machine Learning Engineer exam objectives.
+                </p>
+            </div>
+
+            <div class="ml-layered-block">
+                <div class="ml-layered-label">Design Goals</div>
+                <ul class="ml-layered-goals">
+                    <li>Explain concepts from fundamentals to advanced systems</li>
+                    <li>Assume zero prior Machine Learning knowledge</li>
+                    <li>Follow a strict layer-by-layer dependency model</li>
+                    <li>Make failure modes explicit</li>
+                    <li>Serve as long-term reference material (not just exam prep)</li>
+                    <li>Align with Google Cloud ML engineering expectations</li>
+                </ul>
+            </div>
+
+            <div class="ml-layered-block">
+                <div class="ml-layered-label">Layered Structure</div>
+                <div class="ml-layered-hint">Click a layer to expand.</div>
+
+                <details class="ml-layer" open>
+                    <summary class="ml-layer-title">Layer 0 — Mathematical &amp; Statistical Foundations (Bedrock)</summary>
+                    <div class="ml-layer-body">
+                        <div><span class="ml-layer-k">What it is:</span> Math and probability behind learning from data</div>
+                        <div><span class="ml-layer-k">Why it exists:</span> Models are optimized mathematical functions</div>
+                        <div><span class="ml-layer-k">If skipped:</span> ML becomes a black box with no intuition</div>
+                        <div class="ml-layer-links" aria-label="Layer 0 reading links">
+                            <a class="ml-layer-link" href="/ml-engineering/layer-0">Open Layer 0 (Book 0)</a>
+                            <a class="ml-layer-link" href="/ml-engineering/layer-0/part-1-learning/expected-loss-minimization">Start Chapter 0.1</a>
+                            <a class="ml-layer-link" href="/ml-engineering/layer-0/part-1-learning/distribution-gap">Chapter 0.2</a>
+                            <a class="ml-layer-link" href="/ml-engineering/layer-0/part-1-learning/training-is-optimization">Chapter 0.3</a>
+                            <a class="ml-layer-link" href="/ml-engineering/layer-0/part-2-linear-algebra/scalars-vectors-feature-spaces">Chapter 0.4</a>
+                        </div>
+                    </div>
+                </details>
+
+                <details class="ml-layer">
+                    <summary class="ml-layer-title">Layer 1 — Data &amp; Programming Foundations</summary>
+                    <div class="ml-layer-body">
+                        <div><span class="ml-layer-k">What it is:</span> Data handling, cleaning, and exploration</div>
+                        <div><span class="ml-layer-k">Why it exists:</span> Models depend entirely on data quality</div>
+                        <div><span class="ml-layer-k">If skipped:</span> Garbage-in, garbage-out failures</div>
+                    </div>
+                </details>
+
+                <details class="ml-layer">
+                    <summary class="ml-layer-title">Layer 2 — Machine Learning Fundamentals</summary>
+                    <div class="ml-layer-body">
+                        <div><span class="ml-layer-k">What it is:</span> Core ML algorithms and evaluation</div>
+                        <div><span class="ml-layer-k">Why it exists:</span> Different problems require different learning assumptions</div>
+                        <div><span class="ml-layer-k">If skipped:</span> Wrong model choices and poor metrics</div>
+                    </div>
+                </details>
+
+                <details class="ml-layer">
+                    <summary class="ml-layer-title">Layer 3 — Feature Engineering &amp; Representation</summary>
+                    <div class="ml-layer-body">
+                        <div><span class="ml-layer-k">What it is:</span> Transforming raw data into learnable signals</div>
+                        <div><span class="ml-layer-k">Why it exists:</span> Models only learn from exposed features</div>
+                        <div><span class="ml-layer-k">If skipped:</span> Underperforming models regardless of algorithm</div>
+                    </div>
+                </details>
+
+                <details class="ml-layer">
+                    <summary class="ml-layer-title">Layer 4 — Deep Learning &amp; Representation Learning</summary>
+                    <div class="ml-layer-body">
+                        <div><span class="ml-layer-k">What it is:</span> Neural networks and automatic feature learning</div>
+                        <div><span class="ml-layer-k">Why it exists:</span> Manual features don’t scale for complex data</div>
+                        <div><span class="ml-layer-k">If skipped:</span> Misuse or avoidance of deep learning</div>
+                    </div>
+                </details>
+
+                <details class="ml-layer">
+                    <summary class="ml-layer-title">Layer 5 — Data Pipelines &amp; Training Systems</summary>
+                    <div class="ml-layer-body">
+                        <div><span class="ml-layer-k">What it is:</span> Scalable, reproducible data and training workflows</div>
+                        <div><span class="ml-layer-k">Why it exists:</span> ML systems depend on reliable data flow</div>
+                        <div><span class="ml-layer-k">If skipped:</span> Non-reproducible and fragile systems</div>
+                    </div>
+                </details>
+
+                <details class="ml-layer">
+                    <summary class="ml-layer-title">Layer 6 — ML on Google Cloud (Infrastructure)</summary>
+                    <div class="ml-layer-body">
+                        <div><span class="ml-layer-k">What it is:</span> Cloud-native ML training, serving, and scaling</div>
+                        <div><span class="ml-layer-k">Why it exists:</span> Real ML must operate at production scale</div>
+                        <div><span class="ml-layer-k">If skipped:</span> Models cannot be reliably deployed</div>
+                    </div>
+                </details>
+
+                <details class="ml-layer">
+                    <summary class="ml-layer-title">Layer 7 — MLOps &amp; Model Lifecycle</summary>
+                    <div class="ml-layer-body">
+                        <div><span class="ml-layer-k">What it is:</span> Monitoring, versioning, and retraining models</div>
+                        <div><span class="ml-layer-k">Why it exists:</span> Models degrade over time</div>
+                        <div><span class="ml-layer-k">If skipped:</span> Silent performance decay</div>
+                    </div>
+                </details>
+
+                <details class="ml-layer">
+                    <summary class="ml-layer-title">Layer 8 — Responsible AI, Security &amp; Governance</summary>
+                    <div class="ml-layer-body">
+                        <div><span class="ml-layer-k">What it is:</span> Fairness, explainability, privacy, compliance</div>
+                        <div><span class="ml-layer-k">Why it exists:</span> ML systems affect real users</div>
+                        <div><span class="ml-layer-k">If skipped:</span> Ethical, legal, and reputational risk</div>
+                    </div>
+                </details>
+
+                <details class="ml-layer">
+                    <summary class="ml-layer-title">Layer 9 — End-to-End System Design (Integration)</summary>
+                    <div class="ml-layer-body">
+                        <div><span class="ml-layer-k">What it is:</span> Full ML system design under constraints</div>
+                        <div><span class="ml-layer-k">Why it exists:</span> This is how ML works in the real world</div>
+                        <div><span class="ml-layer-k">If skipped:</span> Inability to design or justify ML systems</div>
+                    </div>
+                </details>
             </div>
         </div>
     </main>
@@ -1329,6 +1458,8 @@
             <span class="footer-copy">© 2025 ArxCafe</span>
             <span class="footer-sep">•</span>
             <a class="footer-link" href="/assesment.html">Assessment</a>
+            <span class="footer-sep">•</span>
+            <a class="footer-link" href="/it-learning-pyramid">IT Learning Pyramid</a>
         </div>
     </section>
 </div>
