@@ -4577,7 +4577,668 @@
               'Process & policy driven',
               'Important, but narrower in scope',
             ],
-            questions: []
+            questions: [
+              {
+                q: 'What is the primary purpose of network monitoring?',
+                a: [
+                  'Encrypt traffic',
+                  'Increase bandwidth',
+                  'Detect performance issues and outages',
+                  'Assign VLANs'
+                ],
+                correct: 2,
+                why: 'Monitoring helps detect degradation, outages, and abnormal behavior so teams can respond quickly.'
+              },
+              {
+                q: 'What is a network baseline?',
+                a: [
+                  'A VLAN configuration',
+                  'A documented snapshot of normal network performance',
+                  'A routing protocol',
+                  'A backup server'
+                ],
+                correct: 1,
+                why: 'A baseline captures what “normal” looks like for metrics such as latency, loss, and utilization.'
+              },
+              {
+                q: 'Why is establishing a performance baseline important?',
+                a: [
+                  'To increase encryption',
+                  'To identify abnormal network behavior',
+                  'To eliminate routing',
+                  'To prevent VLAN hopping'
+                ],
+                correct: 1,
+                why: 'With a baseline, you can spot anomalies and regressions by comparing current metrics to normal levels.'
+              },
+              {
+                q: 'Which protocol is commonly used for network device monitoring?',
+                a: [
+                  'FTP',
+                  'SSH',
+                  'SNMP',
+                  'ARP'
+                ],
+                correct: 2,
+                why: 'SNMP is widely used for polling device counters/health and receiving traps/alerts.'
+              },
+              {
+                q: 'What does SNMP primarily collect from devices?',
+                a: [
+                  'VLAN IDs',
+                  'Management and performance data',
+                  'Encryption keys',
+                  'IP address assignments'
+                ],
+                correct: 1,
+                why: 'SNMP gathers management information (status, counters, performance metrics) from managed devices.'
+              },
+              {
+                q: 'What is a log file used for in network operations?',
+                a: [
+                  'Assigning IP addresses',
+                  'Recording system and event activity',
+                  'Encrypting traffic',
+                  'Increasing throughput'
+                ],
+                correct: 1,
+                why: 'Logs record events and actions, supporting troubleshooting, incident response, and audits.'
+              },
+              {
+                q: 'What is centralized logging?',
+                a: [
+                  'Storing logs on each device separately',
+                  'Collecting logs from multiple devices into one system',
+                  'Encrypting log data',
+                  'Deleting logs automatically'
+                ],
+                correct: 1,
+                why: 'Centralization improves searchability, correlation, retention, and alerting across many systems.'
+              },
+              {
+                q: 'What is the purpose of a syslog server?',
+                a: [
+                  'Route traffic',
+                  'Assign DNS records',
+                  'Collect and store log messages from devices',
+                  'Provide DHCP services'
+                ],
+                correct: 2,
+                why: 'A syslog server aggregates log messages sent from network devices and servers.'
+              },
+              {
+                q: 'What is change management?',
+                a: [
+                  'Automatically updating firmware',
+                  'Formal process for controlling network changes',
+                  'VLAN configuration',
+                  'Backup power management'
+                ],
+                correct: 1,
+                why: 'Change management reduces risk by using approvals, planning, testing, and documentation.'
+              },
+              {
+                q: 'Why is change documentation important?',
+                a: [
+                  'Increases bandwidth',
+                  'Tracks modifications for troubleshooting and auditing',
+                  'Encrypts configuration files',
+                  'Assigns routing metrics'
+                ],
+                correct: 1,
+                why: 'Documentation provides traceability to diagnose issues and meet compliance/audit requirements.'
+              },
+              {
+                q: 'What is a maintenance window?',
+                a: [
+                  'A VLAN configuration',
+                  'Scheduled time for performing network changes',
+                  'A security protocol',
+                  'A WAN link'
+                ],
+                correct: 1,
+                why: 'Maintenance windows schedule changes when impact is minimized and support teams are available.'
+              },
+              {
+                q: 'What is configuration management primarily concerned with?',
+                a: [
+                  'Physical cabling',
+                  'Managing and tracking device settings',
+                  'Wireless signal strength',
+                  'Routing algorithms'
+                ],
+                correct: 1,
+                why: 'Configuration management tracks device settings/versions so environments are consistent and recoverable.'
+              },
+              {
+                q: 'What is a rollback plan?',
+                a: [
+                  'VLAN removal procedure',
+                  'Plan to restore previous configuration after failed change',
+                  'Load balancing method',
+                  'Firewall rule'
+                ],
+                correct: 1,
+                why: 'Rollback plans define how to safely revert if a change causes outages or unexpected behavior.'
+              },
+              {
+                q: 'What is asset management?',
+                a: [
+                  'Assigning IP addresses',
+                  'Tracking hardware and software inventory',
+                  'Routing traffic',
+                  'Encrypting devices'
+                ],
+                correct: 1,
+                why: 'Asset management tracks what you own/run (devices, licenses, versions) for support and security.'
+              },
+              {
+                q: 'What is a service-level agreement (SLA)?',
+                a: [
+                  'Routing configuration',
+                  'A contract defining expected service performance',
+                  'VLAN policy',
+                  'Encryption standard'
+                ],
+                correct: 1,
+                why: 'An SLA defines service targets such as uptime, response times, and support commitments.'
+              },
+              {
+                q: 'What does uptime measure?',
+                a: [
+                  'Bandwidth usage',
+                  'Time a system remains operational',
+                  'Packet size',
+                  'Signal strength'
+                ],
+                correct: 1,
+                why: 'Uptime measures availability—how long a system/service stays operational without interruption.'
+              },
+              {
+                q: 'What is capacity planning?',
+                a: [
+                  'Installing new VLANs',
+                  'Forecasting future resource requirements',
+                  'Encrypting WAN links',
+                  'Assigning static IPs'
+                ],
+                correct: 1,
+                why: 'Capacity planning predicts future needs (bandwidth, CPU, storage) to avoid bottlenecks and outages.'
+              },
+              {
+                q: 'What is patch management?',
+                a: [
+                  'Managing network cables',
+                  'Updating software to fix vulnerabilities and bugs',
+                  'Assigning VLAN IDs',
+                  'Routing configuration'
+                ],
+                correct: 1,
+                why: 'Patch management keeps systems secure and stable by applying updates in a controlled way.'
+              },
+              {
+                q: 'What is the purpose of network documentation?',
+                a: [
+                  'Increase latency',
+                  'Provide reference for design, troubleshooting, and audits',
+                  'Encrypt system files',
+                  'Assign IP addresses'
+                ],
+                correct: 1,
+                why: 'Documentation helps teams operate consistently and troubleshoot faster while supporting audits/compliance.'
+              },
+              {
+                q: 'Which statement BEST summarizes network operations?',
+                a: [
+                  'Monitoring eliminates failures',
+                  'Proper documentation, monitoring, and controlled changes maintain network stability',
+                  'Bandwidth is the only concern',
+                  'Change management slows productivity unnecessarily'
+                ],
+                correct: 1,
+                why: 'Network ops focuses on stable, observable systems with controlled change processes and good documentation.'
+              },
+              {
+                q: 'What is the purpose of setting monitoring thresholds?',
+                a: [
+                  'Assign VLANs',
+                  'Trigger alerts when performance exceeds defined limits',
+                  'Increase bandwidth',
+                  'Encrypt traffic'
+                ],
+                correct: 1,
+                why: 'Thresholds define acceptable ranges so systems can alert when metrics indicate degradation or failure.'
+              },
+              {
+                q: 'What is an alert in network monitoring?',
+                a: [
+                  'A routing update',
+                  'A notification of abnormal system behavior',
+                  'A VLAN broadcast',
+                  'A firmware upgrade'
+                ],
+                correct: 1,
+                why: 'Alerts notify operators that a metric or event indicates abnormal behavior or a potential outage.'
+              },
+              {
+                q: 'Which metric is commonly monitored for network performance?',
+                a: [
+                  'Screen resolution',
+                  'CPU utilization',
+                  'Keyboard input',
+                  'Printer toner levels'
+                ],
+                correct: 1,
+                why: 'CPU utilization is a common device health/performance metric (along with memory, interface errors, and throughput).' 
+              },
+              {
+                q: 'What is interface utilization?',
+                a: [
+                  'Amount of available IP addresses',
+                  'Percentage of bandwidth being used on a network interface',
+                  'Number of VLANs configured',
+                  'Amount of memory in a router'
+                ],
+                correct: 1,
+                why: 'Interface utilization measures how much of the interface capacity is being used over time.'
+              },
+              {
+                q: 'What does packet error rate indicate?',
+                a: [
+                  'Number of users online',
+                  'Percentage of packets transmitted successfully',
+                  'Frequency of corrupted or lost packets',
+                  'Speed of routing convergence'
+                ],
+                correct: 2,
+                why: 'Higher error rates indicate corruption/drops and can signal cabling faults, duplex mismatches, or congestion.'
+              },
+              {
+                q: 'What is a trend analysis used for?',
+                a: [
+                  'Immediate troubleshooting only',
+                  'Predicting future network growth and issues',
+                  'VLAN assignment',
+                  'Firewall configuration'
+                ],
+                correct: 1,
+                why: 'Trend analysis uses historical data to forecast growth and identify emerging issues before they cause outages.'
+              },
+              {
+                q: 'What is a dashboard in network monitoring?',
+                a: [
+                  'A physical router panel',
+                  'A visual summary of network metrics and status',
+                  'A VLAN trunk',
+                  'A routing protocol'
+                ],
+                correct: 1,
+                why: 'Dashboards summarize health and key metrics so operators can quickly assess system status.'
+              },
+              {
+                q: 'What is NetFlow primarily used for?',
+                a: [
+                  'Encrypting traffic',
+                  'Monitoring traffic patterns and flows',
+                  'Assigning IP addresses',
+                  'Reducing latency'
+                ],
+                correct: 1,
+                why: 'NetFlow exports flow metadata to analyze who is talking to whom, how much, and when.'
+              },
+              {
+                q: 'What does flow data typically reveal?',
+                a: [
+                  'Physical cable length',
+                  'Traffic source, destination, and volume',
+                  'VLAN IDs',
+                  'BIOS configuration'
+                ],
+                correct: 1,
+                why: 'Flow records summarize communications (source/destination/ports/protocol and byte/packet counts).' 
+              },
+              {
+                q: 'What is a key benefit of centralized monitoring systems?',
+                a: [
+                  'Increased latency',
+                  'Reduced visibility',
+                  'Unified oversight across multiple devices',
+                  'Elimination of logs'
+                ],
+                correct: 2,
+                why: 'Central monitoring consolidates health and alerts for many devices/services in one place.'
+              },
+              {
+                q: 'What is mean time to detect (MTTD)?',
+                a: [
+                  'Average uptime',
+                  'Average time to discover an issue',
+                  'Average repair duration',
+                  'Average latency'
+                ],
+                correct: 1,
+                why: 'MTTD measures how quickly operations discovers an incident after it starts.'
+              },
+              {
+                q: 'What is capacity utilization reporting used for?',
+                a: [
+                  'Encryption auditing',
+                  'Predicting when upgrades may be required',
+                  'Assigning VLANs',
+                  'DHCP management'
+                ],
+                correct: 1,
+                why: 'Utilization reports help forecast when links/devices will reach capacity so upgrades can be planned.'
+              },
+              {
+                q: 'What is synthetic monitoring?',
+                a: [
+                  'Monitoring based on user complaints',
+                  'Simulated transactions to test system performance',
+                  'Manual log review',
+                  'VLAN scanning'
+                ],
+                correct: 1,
+                why: 'Synthetic monitoring runs scripted checks (pings, HTTP requests, logins) to validate availability and performance.'
+              },
+              {
+                q: 'What is real-user monitoring (RUM)?',
+                a: [
+                  'Simulated traffic testing',
+                  'Monitoring actual user interactions and performance',
+                  'Packet encryption analysis',
+                  'Firewall rule auditing'
+                ],
+                correct: 1,
+                why: 'RUM measures actual user experience (load times/errors) from real sessions rather than synthetic scripts.'
+              },
+              {
+                q: 'What is a threshold breach?',
+                a: [
+                  'Exceeding a predefined performance limit',
+                  'VLAN misconfiguration',
+                  'Encryption failure',
+                  'Routing loop'
+                ],
+                correct: 0,
+                why: 'A breach occurs when a metric crosses its defined threshold, typically triggering an alert.'
+              },
+              {
+                q: 'Why are historical logs important?',
+                a: [
+                  'Increase bandwidth',
+                  'Assist with forensic analysis and trend tracking',
+                  'Replace monitoring systems',
+                  'Assign static IPs'
+                ],
+                correct: 1,
+                why: 'Historical logs support investigations, correlate events, and enable trend analysis over time.'
+              },
+              {
+                q: 'What is a performance bottleneck?',
+                a: [
+                  'A firewall rule',
+                  'A network segment limiting overall performance',
+                  'A VLAN ID',
+                  'A DNS record'
+                ],
+                correct: 1,
+                why: 'A bottleneck is a limiting component/path that constrains throughput or increases latency.'
+              },
+              {
+                q: 'Which tool type helps visualize bandwidth usage over time?',
+                a: [
+                  'Packet sniffer',
+                  'Performance graphing tool',
+                  'BIOS utility',
+                  'ARP scanner'
+                ],
+                correct: 1,
+                why: 'Graphing tools (often fed by SNMP/telemetry) show utilization trends and spikes across time ranges.'
+              },
+              {
+                q: 'Why is proactive monitoring preferred over reactive troubleshooting?',
+                a: [
+                  'It increases costs',
+                  'It eliminates documentation',
+                  'It identifies issues before users are impacted',
+                  'It reduces visibility'
+                ],
+                correct: 2,
+                why: 'Proactive monitoring catches issues early so teams can fix them before they cause user-visible outages.'
+              },
+              {
+                q: 'Which statement BEST summarizes performance monitoring?',
+                a: [
+                  'Monitoring replaces troubleshooting',
+                  'Continuous measurement and alerting maintain operational stability',
+                  'Logs are unnecessary',
+                  'Thresholds eliminate outages entirely'
+                ],
+                correct: 1,
+                why: 'Monitoring provides continuous visibility and alerting; it reduces impact but does not eliminate all incidents.'
+              },
+              {
+                q: 'What is the primary goal of disaster recovery (DR)?',
+                a: [
+                  'Increase bandwidth',
+                  'Restore operations after a disruptive event',
+                  'Assign VLANs',
+                  'Encrypt traffic'
+                ],
+                correct: 1,
+                why: 'Disaster recovery focuses on restoring systems and services after a major disruption.'
+              },
+              {
+                q: 'What is business continuity (BC) focused on?',
+                a: [
+                  'Replacing routers',
+                  'Maintaining essential functions during disruptions',
+                  'Increasing network speed',
+                  'Assigning IP addresses'
+                ],
+                correct: 1,
+                why: 'Business continuity aims to keep critical business functions running even during incidents.'
+              },
+              {
+                q: 'What does RTO stand for?',
+                a: [
+                  'Recovery Time Objective',
+                  'Routing Transfer Operation',
+                  'Real-Time Operation',
+                  'Recovery Traffic Optimization'
+                ],
+                correct: 0,
+                why: 'RTO stands for Recovery Time Objective.'
+              },
+              {
+                q: 'What does RTO define?',
+                a: [
+                  'Maximum acceptable data loss',
+                  'Maximum acceptable downtime',
+                  'Encryption level',
+                  'VLAN priority'
+                ],
+                correct: 1,
+                why: 'RTO is the maximum acceptable time to restore service after an outage.'
+              },
+              {
+                q: 'What does RPO stand for?',
+                a: [
+                  'Recovery Point Objective',
+                  'Routing Process Operation',
+                  'Real Packet Output',
+                  'Remote Performance Optimization'
+                ],
+                correct: 0,
+                why: 'RPO stands for Recovery Point Objective.'
+              },
+              {
+                q: 'What does RPO define?',
+                a: [
+                  'Maximum tolerable downtime',
+                  'Maximum acceptable data loss measured in time',
+                  'Required bandwidth',
+                  'Firewall configuration'
+                ],
+                correct: 1,
+                why: 'RPO defines how much data loss (in time) is acceptable (e.g., 15 minutes of data).' 
+              },
+              {
+                q: 'What is a full backup?',
+                a: [
+                  'Copying only changed data',
+                  'Copying all selected data',
+                  'Copying system logs only',
+                  'Copying VLAN configurations'
+                ],
+                correct: 1,
+                why: 'A full backup copies all selected data at the time the backup is taken.'
+              },
+              {
+                q: 'What is an incremental backup?',
+                a: [
+                  'Backs up all data each time',
+                  'Backs up data changed since last full backup only',
+                  'Backs up data changed since last backup of any type',
+                  'Backs up network settings only'
+                ],
+                correct: 2,
+                why: 'Incremental backups capture changes since the most recent backup (full or incremental).' 
+              },
+              {
+                q: 'What is a differential backup?',
+                a: [
+                  'Backs up only new hardware',
+                  'Backs up data changed since the last full backup',
+                  'Backs up VLAN information',
+                  'Replaces full backups'
+                ],
+                correct: 1,
+                why: 'Differential backups capture changes since the last full backup.'
+              },
+              {
+                q: 'What is offsite backup primarily used for?',
+                a: [
+                  'Increasing throughput',
+                  'Protecting data against site-level disasters',
+                  'Encrypting traffic',
+                  'VLAN redundancy'
+                ],
+                correct: 1,
+                why: 'Offsite backups protect against local disasters like fire, flood, theft, or ransomware affecting the primary site.'
+              },
+              {
+                q: 'What is a backup retention policy?',
+                a: [
+                  'VLAN configuration plan',
+                  'Defined schedule for how long backups are stored',
+                  'Firewall rule',
+                  'Routing table'
+                ],
+                correct: 1,
+                why: 'Retention policies define how long backups are kept (and often how they are rotated and archived).' 
+              },
+              {
+                q: 'What is a hot site?',
+                a: [
+                  'A site with no equipment',
+                  'A fully operational backup location',
+                  'A wireless backup network',
+                  'A temporary VLAN'
+                ],
+                correct: 1,
+                why: 'A hot site is ready to run quickly with systems and data available, minimizing downtime.'
+              },
+              {
+                q: 'What is a cold site?',
+                a: [
+                  'A facility with minimal or no infrastructure ready',
+                  'A load-balanced data center',
+                  'A VLAN trunk',
+                  'A dedicated WAN link'
+                ],
+                correct: 0,
+                why: 'Cold sites have space but minimal equipment, so recovery takes longer to provision.'
+              },
+              {
+                q: 'What is a warm site?',
+                a: [
+                  'A site partially prepared with some infrastructure',
+                  'A wireless-only backup',
+                  'A cloud-only facility',
+                  'A VLAN isolation zone'
+                ],
+                correct: 0,
+                why: 'Warm sites are partially equipped (some systems/networking) but not fully ready like a hot site.'
+              },
+              {
+                q: 'What is redundancy in disaster recovery planning?',
+                a: [
+                  'Removing duplicate systems',
+                  'Maintaining backup systems to reduce downtime',
+                  'Encrypting duplicate data',
+                  'Reducing bandwidth'
+                ],
+                correct: 1,
+                why: 'Redundancy provides alternate components/systems so services can continue if the primary fails.'
+              },
+              {
+                q: 'What is a failover cluster?',
+                a: [
+                  'A VLAN trunk group',
+                  'A group of systems configured to provide backup support automatically',
+                  'A firewall rule set',
+                  'A routing protocol'
+                ],
+                correct: 1,
+                why: 'Failover clustering provides high availability by automatically shifting workloads to another node on failure.'
+              },
+              {
+                q: 'What is a tabletop exercise?',
+                a: [
+                  'Physical cabling test',
+                  'Simulated disaster scenario discussion',
+                  'VLAN testing process',
+                  'Firmware upgrade'
+                ],
+                correct: 1,
+                why: 'Tabletop exercises walk through response steps in a discussion-based scenario to validate plans and roles.'
+              },
+              {
+                q: 'Why should disaster recovery plans be tested regularly?',
+                a: [
+                  'To increase bandwidth',
+                  'To verify effectiveness and identify weaknesses',
+                  'To assign IP addresses',
+                  'To reduce monitoring'
+                ],
+                correct: 1,
+                why: 'Testing ensures procedures work in practice and reveals gaps in tooling, documentation, and coordination.'
+              },
+              {
+                q: 'What is data replication used for?',
+                a: [
+                  'Encrypting traffic',
+                  'Synchronizing data between systems',
+                  'Assigning VLANs',
+                  'Routing packets'
+                ],
+                correct: 1,
+                why: 'Replication keeps data copies in sync to support failover, DR, and reduced RPO.'
+              },
+              {
+                q: 'Which statement BEST summarizes disaster recovery planning?',
+                a: [
+                  'Backups eliminate the need for planning',
+                  'DR requires defined objectives, redundancy, and regular testing',
+                  'Encryption replaces backups',
+                  'RTO and RPO are optional'
+                ],
+                correct: 1,
+                why: 'Effective DR defines objectives (RTO/RPO), uses redundancy and backups/replication, and is tested regularly.'
+              },
+            ]
           },
           {
             key: 'd4',
