@@ -3684,6 +3684,886 @@
                 correct: 1,
                 why: 'WANs connect distant networks using carrier circuits, broadband, VPNs, and other transmission technologies.'
               },
+              {
+                q: 'What is an SFP module used for?',
+                a: [
+                  'VLAN tagging',
+                  'Routing configuration',
+                  'Providing modular network interface connectivity',
+                  'Encrypting WAN traffic'
+                ],
+                correct: 2,
+                why: 'SFPs are pluggable transceivers that provide modular fiber/copper connectivity for network ports.'
+              },
+              {
+                q: 'What does SFP stand for?',
+                a: [
+                  'Secure Forwarding Port',
+                  'Small Form-factor Pluggable',
+                  'Switching Frame Protocol',
+                  'Serial Fiber Port'
+                ],
+                correct: 1,
+                why: 'SFP stands for Small Form-factor Pluggable.'
+              },
+              {
+                q: 'What is the purpose of a console port on a network device?',
+                a: [
+                  'Carry production traffic',
+                  'Provide out-of-band management access',
+                  'Assign IP addresses',
+                  'Power the device'
+                ],
+                correct: 1,
+                why: 'Console ports provide direct, out-of-band access for initial setup and recovery.'
+              },
+              {
+                q: 'Which cable type is commonly used for console connections?',
+                a: [
+                  'Fiber optic',
+                  'Coaxial',
+                  'Rollover cable',
+                  'Straight-through Ethernet'
+                ],
+                correct: 2,
+                why: 'Many devices use a rollover (console) cable for serial console access (or USB console on newer gear).' 
+              },
+              {
+                q: 'What is out-of-band management?',
+                a: [
+                  'Managing devices over the production network',
+                  'Managing devices through a separate dedicated channel',
+                  'Encrypting management traffic',
+                  'VLAN-based management'
+                ],
+                correct: 1,
+                why: 'Out-of-band management uses a separate path so you can manage devices even if the production network is down.'
+              },
+              {
+                q: 'What is in-band management?',
+                a: [
+                  'Using a console port',
+                  'Managing devices via the normal network connection',
+                  'Powering devices remotely',
+                  'Encrypting traffic'
+                ],
+                correct: 1,
+                why: 'In-band management uses the same production network interfaces and paths as normal traffic.'
+              },
+              {
+                q: 'Which protocol is commonly used for secure remote management of network devices?',
+                a: [
+                  'Telnet',
+                  'FTP',
+                  'SSH',
+                  'TFTP'
+                ],
+                correct: 2,
+                why: 'SSH provides encrypted remote command-line management.'
+              },
+              {
+                q: 'Why is SSH preferred over Telnet?',
+                a: [
+                  'It is faster',
+                  'It uses less bandwidth',
+                  'It encrypts management traffic',
+                  'It assigns IP addresses'
+                ],
+                correct: 2,
+                why: 'Telnet sends credentials and commands in cleartext; SSH encrypts the session.'
+              },
+              {
+                q: 'What is SNMP primarily used for?',
+                a: [
+                  'Encrypting traffic',
+                  'Monitoring and managing network devices',
+                  'Assigning VLANs',
+                  'Routing packets'
+                ],
+                correct: 1,
+                why: 'SNMP is used to monitor device status/metrics and sometimes perform managed configuration actions.'
+              },
+              {
+                q: 'What does a network interface LED typically indicate?',
+                a: [
+                  'VLAN ID',
+                  'IP address',
+                  'Link status and activity',
+                  'Encryption status'
+                ],
+                correct: 2,
+                why: 'Port LEDs typically show link state (up/down), speed, and activity (blinking on traffic).' 
+              },
+              {
+                q: 'What is a management VLAN?',
+                a: [
+                  'A VLAN used for user traffic',
+                  'A VLAN dedicated to device management traffic',
+                  'A VLAN used only for VoIP',
+                  'A VLAN that blocks broadcasts'
+                ],
+                correct: 1,
+                why: 'A management VLAN isolates administrative access (e.g., SSH/SNMP) from user traffic.'
+              },
+              {
+                q: 'What is a loopback interface commonly used for?',
+                a: [
+                  'Physical cable testing',
+                  'Device identification and testing',
+                  'VLAN tagging',
+                  'WAN connectivity'
+                ],
+                correct: 1,
+                why: 'Loopbacks are logical interfaces often used for stable management addresses and for testing/diagnostics.'
+              },
+              {
+                q: 'What is firmware?',
+                a: [
+                  'A routing protocol',
+                  'Software embedded in hardware devices',
+                  'A type of VLAN',
+                  'A WAN connection'
+                ],
+                correct: 1,
+                why: 'Firmware is low-level software stored on devices that controls their hardware behavior.'
+              },
+              {
+                q: 'Why are firmware updates important?',
+                a: [
+                  'Increase bandwidth',
+                  'Improve encryption only',
+                  'Fix bugs and patch vulnerabilities',
+                  'Replace routing tables'
+                ],
+                correct: 2,
+                why: 'Updates commonly address defects and security issues and may also improve stability/features.'
+              },
+              {
+                q: 'What is a power distribution unit (PDU) used for in network racks?',
+                a: [
+                  'Encrypt traffic',
+                  'Distribute electrical power to devices',
+                  'Route network packets',
+                  'Manage VLANs'
+                ],
+                correct: 1,
+                why: 'PDUs distribute power to rack equipment, often with surge protection and optional monitoring.'
+              },
+              {
+                q: 'What is rack unit (U) used to measure?',
+                a: [
+                  'Cable length',
+                  'Power consumption',
+                  'Physical height of rack-mounted equipment',
+                  'Network speed'
+                ],
+                correct: 2,
+                why: 'Rack units measure equipment height (1U = 1.75 inches / 44.45 mm).' 
+              },
+              {
+                q: 'What is the purpose of cable management in a rack?',
+                a: [
+                  'Improve encryption',
+                  'Reduce electromagnetic interference only',
+                  'Improve airflow and organization',
+                  'Increase bandwidth'
+                ],
+                correct: 2,
+                why: 'Good cable management improves organization, reduces strain, and helps airflow/cooling.'
+              },
+              {
+                q: 'What is a KVM switch used for?',
+                a: [
+                  'Connecting WAN links',
+                  'Managing multiple computers from one keyboard, video, and mouse',
+                  'Assigning IP addresses',
+                  'Encrypting console traffic'
+                ],
+                correct: 1,
+                why: 'KVM switches let one console control multiple servers/devices.'
+              },
+              {
+                q: 'What is the purpose of a UPS in network infrastructure?',
+                a: [
+                  'Increase bandwidth',
+                  'Provide temporary backup power',
+                  'Encrypt traffic',
+                  'Assign VLANs'
+                ],
+                correct: 1,
+                why: 'UPS units provide short-term battery backup to ride through outages and allow graceful shutdown.'
+              },
+              {
+                q: 'Which statement BEST summarizes infrastructure device management?',
+                a: [
+                  'Devices should only be managed in-band',
+                  'Secure remote access and proper physical management are critical',
+                  'Console access replaces SSH',
+                  'Firmware updates are optional'
+                ],
+                correct: 1,
+                why: 'Good operations depend on secure management access (e.g., SSH/OOB), documentation, and physical/power hygiene.'
+              },
+              {
+                q: 'What is the primary purpose of a data center?',
+                a: [
+                  'Provide wireless connectivity only',
+                  'Centralize computing and network resources',
+                  'Replace WAN technologies',
+                  'Eliminate routing'
+                ],
+                correct: 1,
+                why: 'Data centers centralize servers, storage, and networking to provide reliable, scalable computing services.'
+              },
+              {
+                q: 'What is a Top-of-Rack (ToR) switch?',
+                a: [
+                  'A core router',
+                  'A switch located at the top of a server rack',
+                  'A firewall appliance',
+                  'A wireless controller'
+                ],
+                correct: 1,
+                why: 'ToR switches sit in or near a rack and connect the servers in that rack to the upstream network.'
+              },
+              {
+                q: 'What is a spine-leaf architecture designed to improve?',
+                a: [
+                  'Wireless coverage',
+                  'Data center scalability and performance',
+                  'IP address assignment',
+                  'Cable encryption'
+                ],
+                correct: 1,
+                why: 'Spine-leaf designs provide predictable, scalable east-west bandwidth and reduce bottlenecks in data centers.'
+              },
+              {
+                q: 'What is a key benefit of spine-leaf architecture?',
+                a: [
+                  'Single path routing',
+                  'Reduced latency through predictable paths',
+                  'Elimination of switches',
+                  'Lower encryption overhead'
+                ],
+                correct: 1,
+                why: 'Any leaf can reach any other leaf via a consistent number of hops, improving predictability and latency.'
+              },
+              {
+                q: 'What is the purpose of hot aisle/cold aisle design?',
+                a: [
+                  'Increase encryption',
+                  'Improve cable management',
+                  'Optimize airflow and cooling efficiency',
+                  'Reduce VLANs'
+                ],
+                correct: 2,
+                why: 'Separating hot and cold air streams improves cooling efficiency and reduces equipment overheating risk.'
+              },
+              {
+                q: 'Why is temperature control important in a data center?',
+                a: [
+                  'Improve bandwidth',
+                  'Prevent hardware failure',
+                  'Increase encryption strength',
+                  'Reduce routing complexity'
+                ],
+                correct: 1,
+                why: 'Excess heat reduces reliability and can cause throttling, errors, and hardware failure.'
+              },
+              {
+                q: 'What does HVAC stand for?',
+                a: [
+                  'High Voltage Access Control',
+                  'Heating, Ventilation, and Air Conditioning',
+                  'Hardware Validation and Control',
+                  'Host Virtual Access Console'
+                ],
+                correct: 1,
+                why: 'HVAC is Heating, Ventilation, and Air Conditioning.'
+              },
+              {
+                q: 'What is the purpose of raised flooring in some data centers?',
+                a: [
+                  'Improve encryption',
+                  'Hide cables only',
+                  'Improve airflow and cable routing',
+                  'Increase wireless signal strength'
+                ],
+                correct: 2,
+                why: 'Raised floors can provide underfloor air distribution and space for power/network cabling.'
+              },
+              {
+                q: 'What is a blade server?',
+                a: [
+                  'A server with integrated routing',
+                  'A modular server that fits into a shared chassis',
+                  'A wireless server',
+                  'A firewall appliance'
+                ],
+                correct: 1,
+                why: 'Blade servers are modular compute units that slide into a chassis sharing power/cooling and networking.'
+              },
+              {
+                q: 'What is a chassis in blade server architecture?',
+                a: [
+                  'A routing protocol',
+                  'A shared enclosure providing power and networking',
+                  'A cooling fan',
+                  'A VLAN controller'
+                ],
+                correct: 1,
+                why: 'The chassis houses blade servers and provides shared power supplies, cooling, and interconnects.'
+              },
+              {
+                q: 'What is server virtualization?',
+                a: [
+                  'Encrypting servers',
+                  'Running multiple virtual machines on a single physical server',
+                  'Replacing physical hardware',
+                  'Assigning static IP addresses'
+                ],
+                correct: 1,
+                why: 'Virtualization uses a hypervisor to run multiple isolated VMs on one physical host.'
+              },
+              {
+                q: 'What is a virtual NIC (vNIC)?',
+                a: [
+                  'A physical Ethernet card',
+                  'A software-based network interface for a VM',
+                  'A router interface',
+                  'A fiber connector'
+                ],
+                correct: 1,
+                why: 'A vNIC is a virtualized network adapter presented to a virtual machine by the hypervisor.'
+              },
+              {
+                q: 'What is VM sprawl?',
+                a: [
+                  'Excessive VLAN creation',
+                  'Too many unmanaged virtual machines',
+                  'Physical server overload',
+                  'Network congestion'
+                ],
+                correct: 1,
+                why: 'VM sprawl is uncontrolled growth of VMs, often leading to wasted resources and management challenges.'
+              },
+              {
+                q: 'What is the primary purpose of a storage area network (SAN)?',
+                a: [
+                  'Provide wireless connectivity',
+                  'Centralize high-speed storage access',
+                  'Replace routers',
+                  'Assign MAC addresses'
+                ],
+                correct: 1,
+                why: 'SANs provide high-speed, centralized storage access (typically block storage) to servers.'
+              },
+              {
+                q: 'Which protocol is commonly used in SAN environments?',
+                a: [
+                  'HTTP',
+                  'FTP',
+                  'Fibre Channel',
+                  'SMTP'
+                ],
+                correct: 2,
+                why: 'Fibre Channel is a common dedicated storage networking protocol used for SANs.'
+              },
+              {
+                q: 'What is network-attached storage (NAS)?',
+                a: [
+                  'Direct-attached storage',
+                  'Storage accessed over a network',
+                  'Cloud-only storage',
+                  'Encrypted storage only'
+                ],
+                correct: 1,
+                why: 'NAS provides file-level storage services accessible over a network (often via SMB/NFS).' 
+              },
+              {
+                q: 'What is the primary difference between SAN and NAS?',
+                a: [
+                  'SAN is slower',
+                  'NAS uses block storage',
+                  'SAN uses block-level access, NAS uses file-level access',
+                  'NAS requires fiber'
+                ],
+                correct: 2,
+                why: 'SAN typically provides block devices over a storage network; NAS provides shared filesystems over the network.'
+              },
+              {
+                q: 'What is redundancy in a data center power system?',
+                a: [
+                  'One power supply per rack',
+                  'Multiple independent power sources',
+                  'Wireless backup power',
+                  'Increased cooling capacity'
+                ],
+                correct: 1,
+                why: 'Redundant power uses multiple independent sources/paths so equipment stays up if one fails.'
+              },
+              {
+                q: 'What is a generator used for in data centers?',
+                a: [
+                  'Load balancing',
+                  'Long-term backup power',
+                  'Cooling airflow',
+                  'VLAN segmentation'
+                ],
+                correct: 1,
+                why: 'Generators provide longer-duration backup power once a UPS bridges the short gap during outages.'
+              },
+              {
+                q: 'Which statement BEST summarizes data center infrastructure?',
+                a: [
+                  'Cooling and power are optional considerations',
+                  'Infrastructure must address performance, cooling, power, and scalability',
+                  'Virtualization eliminates hardware concerns',
+                  'SAN replaces Ethernet'
+                ],
+                correct: 1,
+                why: 'Data centers must be designed for compute/network performance while also ensuring cooling, power, and growth.'
+              },
+              {
+                q: 'What is the primary purpose of a cloud gateway?',
+                a: [
+                  'Assign VLAN IDs',
+                  'Connect on-premises networks to cloud environments',
+                  'Replace routers',
+                  'Encrypt local LAN traffic'
+                ],
+                correct: 1,
+                why: 'Cloud gateways connect on-prem environments to cloud networks/services, often via VPN or dedicated links.'
+              },
+              {
+                q: 'What is a direct connect service used for?',
+                a: [
+                  'Wireless roaming',
+                  'Dedicated private connection to a cloud provider',
+                  'Public internet access',
+                  'DNS resolution'
+                ],
+                correct: 1,
+                why: 'Direct Connect/ExpressRoute-style services provide private, dedicated connectivity to a cloud provider.'
+              },
+              {
+                q: 'What is edge computing designed to reduce?',
+                a: [
+                  'Encryption overhead',
+                  'Cable length',
+                  'Latency by processing data closer to users',
+                  'VLAN complexity'
+                ],
+                correct: 2,
+                why: 'Edge computing processes data closer to users/devices to reduce round-trip latency and bandwidth usage.'
+              },
+              {
+                q: 'What is a content delivery network (CDN)?',
+                a: [
+                  'A routing protocol',
+                  'A distributed network of servers that deliver content efficiently',
+                  'A firewall service',
+                  'A VLAN management system'
+                ],
+                correct: 1,
+                why: 'CDNs cache and serve content from geographically distributed edge locations.'
+              },
+              {
+                q: 'What is the primary benefit of a CDN?',
+                a: [
+                  'Increased encryption',
+                  'Lower latency for end users',
+                  'Elimination of WAN links',
+                  'IP address assignment'
+                ],
+                correct: 1,
+                why: 'Serving content from nearby edge locations reduces latency and often improves performance.'
+              },
+              {
+                q: 'What is a virtual private cloud (VPC)?',
+                a: [
+                  'A public wireless network',
+                  'An isolated network environment within a public cloud',
+                  'A VPN appliance',
+                  'A physical data center'
+                ],
+                correct: 1,
+                why: 'A VPC is a logically isolated virtual network in a cloud provider for subnets, routing, and security controls.'
+              },
+              {
+                q: 'What is network segmentation in cloud environments used for?',
+                a: [
+                  'Increasing cable distance',
+                  'Improving wireless coverage',
+                  'Enhancing security and traffic control',
+                  'Eliminating routing'
+                ],
+                correct: 2,
+                why: 'Segmentation limits blast radius and enables policy-based control over east-west and north-south traffic.'
+              },
+              {
+                q: 'What is microsegmentation?',
+                a: [
+                  'VLAN trunking',
+                  'Highly granular network segmentation within virtual environments',
+                  'Reducing subnet sizes',
+                  'Limiting broadcast domains only'
+                ],
+                correct: 1,
+                why: 'Microsegmentation applies fine-grained policies between workloads/VMs/containers to reduce lateral movement.'
+              },
+              {
+                q: 'What is the purpose of a cloud load balancer?',
+                a: [
+                  'Encrypt traffic only',
+                  'Route WAN traffic',
+                  'Distribute application traffic across multiple resources',
+                  'Assign IP addresses'
+                ],
+                correct: 2,
+                why: 'Load balancers distribute traffic across instances/services to improve availability and scale.'
+              },
+              {
+                q: 'What is autoscaling in cloud infrastructure?',
+                a: [
+                  'Automatic VLAN creation',
+                  'Automatic adjustment of resources based on demand',
+                  'Manual server upgrades',
+                  'Increasing cable bandwidth'
+                ],
+                correct: 1,
+                why: 'Autoscaling adds/removes instances or adjusts capacity in response to load and policy.'
+              },
+              {
+                q: 'What is a private cloud?',
+                a: [
+                  'A public shared cloud',
+                  'A cloud dedicated to one organization',
+                  'A peer-to-peer network',
+                  'A wireless-only infrastructure'
+                ],
+                correct: 1,
+                why: 'Private clouds are dedicated to a single organization, either on-prem or hosted, with exclusive tenancy.'
+              },
+              {
+                q: 'What is a public cloud?',
+                a: [
+                  'A cloud environment available to multiple customers',
+                  'A private LAN',
+                  'A secure internal network only',
+                  'A WAN appliance'
+                ],
+                correct: 0,
+                why: 'Public clouds are multi-tenant cloud environments offered to many customers over the internet.'
+              },
+              {
+                q: 'What is a hybrid infrastructure?',
+                a: [
+                  'A wireless network',
+                  'A combination of on-premises and cloud resources',
+                  'A VLAN-based network',
+                  'A single ISP connection'
+                ],
+                correct: 1,
+                why: 'Hybrid infrastructure combines on-prem systems with public cloud resources and connectivity between them.'
+              },
+              {
+                q: 'What is the role of a reverse proxy in infrastructure?',
+                a: [
+                  'Encrypt local traffic',
+                  'Forward client requests to backend servers',
+                  'Replace firewalls',
+                  'Provide DHCP services'
+                ],
+                correct: 1,
+                why: 'Reverse proxies sit in front of backend services to route requests and often provide TLS termination and caching.'
+              },
+              {
+                q: 'What is zero-touch provisioning (ZTP)?',
+                a: [
+                  'Manual configuration of devices',
+                  'Automatic device configuration when connected to the network',
+                  'Wireless authentication',
+                  'VLAN isolation'
+                ],
+                correct: 1,
+                why: 'ZTP automates initial device provisioning so devices self-configure when first connected.'
+              },
+              {
+                q: 'What is infrastructure as code (IaC)?',
+                a: [
+                  'Manual router configuration',
+                  'Managing infrastructure using code and automation tools',
+                  'Encrypting network diagrams',
+                  'Configuring VLANs manually'
+                ],
+                correct: 1,
+                why: 'IaC defines infrastructure in declarative/programmable form for repeatable automation (e.g., Terraform, CloudFormation).' 
+              },
+              {
+                q: 'What is a container primarily used for?',
+                a: [
+                  'Replacing virtual machines entirely',
+                  'Running isolated applications with shared OS resources',
+                  'Assigning IP addresses',
+                  'Encrypting WAN traffic'
+                ],
+                correct: 1,
+                why: 'Containers package an app and dependencies to run in isolation while sharing the host OS kernel.'
+              },
+              {
+                q: 'What is orchestration in infrastructure management?',
+                a: [
+                  'VLAN tagging',
+                  'Coordinating automated deployment and management of systems',
+                  'Cable routing',
+                  'DNS resolution'
+                ],
+                correct: 1,
+                why: 'Orchestration coordinates provisioning, deployment, scaling, and healing across systems (e.g., Kubernetes).' 
+              },
+              {
+                q: 'What is the purpose of a bastion host?',
+                a: [
+                  'Provide wireless coverage',
+                  'Serve as a secure entry point to a private network',
+                  'Route internal traffic',
+                  'Assign VLANs'
+                ],
+                correct: 1,
+                why: 'Bastion hosts provide controlled administrative access into private networks to reduce exposure.'
+              },
+              {
+                q: 'Which statement BEST summarizes modern enterprise infrastructure?',
+                a: [
+                  'Infrastructure is purely physical',
+                  'Infrastructure integrates on-prem, cloud, automation, and security controls',
+                  'Cloud eliminates network design',
+                  'WAN links are no longer required'
+                ],
+                correct: 1,
+                why: 'Modern infrastructure spans on-prem and cloud, uses automation, and requires consistent security controls.'
+              },
+              {
+                q: 'What is the primary purpose of physical security controls in a network environment?',
+                a: [
+                  'Increase bandwidth',
+                  'Prevent unauthorized physical access',
+                  'Improve routing performance',
+                  'Encrypt network traffic'
+                ],
+                correct: 1,
+                why: 'Physical security prevents unauthorized people from accessing equipment and sensitive areas.'
+              },
+              {
+                q: 'Which device restricts physical access using electronic authentication?',
+                a: [
+                  'Patch panel',
+                  'Badge reader',
+                  'Load balancer',
+                  'UPS'
+                ],
+                correct: 1,
+                why: 'Badge readers control entry by requiring electronic credentials (badges/cards/fobs).' 
+              },
+              {
+                q: 'What is the purpose of a mantrap?',
+                a: [
+                  'Prevent cable theft',
+                  'Monitor VLAN traffic',
+                  'Control and verify single-person entry into secure areas',
+                  'Improve airflow'
+                ],
+                correct: 2,
+                why: 'Mantraps are access control vestibules that help prevent tailgating/piggybacking.'
+              },
+              {
+                q: 'Why are surveillance cameras used in data centers?',
+                a: [
+                  'Improve wireless coverage',
+                  'Monitor physical access and activity',
+                  'Reduce latency',
+                  'Assign IP addresses'
+                ],
+                correct: 1,
+                why: 'Cameras provide monitoring, deterrence, and audit evidence for physical security.'
+              },
+              {
+                q: 'What is the purpose of cable labeling?',
+                a: [
+                  'Increase throughput',
+                  'Improve encryption',
+                  'Simplify management and troubleshooting',
+                  'Reduce interference'
+                ],
+                correct: 2,
+                why: 'Labeling makes it faster to trace, maintain, and troubleshoot cabling and ports.'
+              },
+              {
+                q: 'What is the main safety concern when working with fiber optic cables?',
+                a: [
+                  'Electric shock',
+                  'Laser light exposure to eyes',
+                  'Radio interference',
+                  'Magnetic fields'
+                ],
+                correct: 1,
+                why: 'Active fiber can carry invisible laser light; looking into a connector can damage eyesight.'
+              },
+              {
+                q: 'What is grounding used for in network infrastructure?',
+                a: [
+                  'Increase bandwidth',
+                  'Prevent electrical shock and equipment damage',
+                  'Assign VLANs',
+                  'Encrypt traffic'
+                ],
+                correct: 1,
+                why: 'Grounding provides a safe path for fault current and helps protect equipment from electrical issues.'
+              },
+              {
+                q: 'What does EMI stand for?',
+                a: [
+                  'Electronic Management Interface',
+                  'Ethernet Media Integration',
+                  'Electromagnetic Interference',
+                  'External Modular Interface'
+                ],
+                correct: 2,
+                why: 'EMI is Electromagnetic Interference.'
+              },
+              {
+                q: 'Which practice helps reduce EMI in cabling installations?',
+                a: [
+                  'Using longer cables',
+                  'Separating power and data cables',
+                  'Increasing signal strength',
+                  'Removing cable shielding'
+                ],
+                correct: 1,
+                why: 'Keeping data cabling separated from power lines reduces induced noise and interference.'
+              },
+              {
+                q: 'What is a demarc extension?',
+                a: [
+                  'A second ISP connection',
+                  'Extending the demarcation point within a building',
+                  'A VLAN trunk',
+                  'A fiber repeater'
+                ],
+                correct: 1,
+                why: 'A demarc extension moves/extends the provider handoff deeper into the customer site.'
+              },
+              {
+                q: 'Why is proper airflow important in network racks?',
+                a: [
+                  'Improve encryption',
+                  'Prevent overheating',
+                  'Increase VLAN performance',
+                  'Reduce broadcast traffic'
+                ],
+                correct: 1,
+                why: 'Good airflow keeps equipment within safe operating temperatures and improves reliability.'
+              },
+              {
+                q: 'What is the purpose of ESD protection?',
+                a: [
+                  'Increase cable speed',
+                  'Prevent damage from static electricity',
+                  'Reduce interference',
+                  'Improve signal strength'
+                ],
+                correct: 1,
+                why: 'ESD controls reduce the risk of static discharge damaging sensitive electronics.'
+              },
+              {
+                q: 'What is a lockout/tagout procedure used for?',
+                a: [
+                  'Wireless authentication',
+                  'Preventing accidental power-on during maintenance',
+                  'VLAN segmentation',
+                  'Load balancing'
+                ],
+                correct: 1,
+                why: 'Lockout/tagout ensures equipment stays de-energized while being serviced to protect workers.'
+              },
+              {
+                q: 'What is a cross-connect in structured cabling?',
+                a: [
+                  'A wireless bridge',
+                  'A centralized point for interconnecting cables',
+                  'A router interface',
+                  'A fiber amplifier'
+                ],
+                correct: 1,
+                why: 'Cross-connects provide a central point (often via patch panels) to interconnect and manage cabling.'
+              },
+              {
+                q: 'What is a structured cabling system designed to provide?',
+                a: [
+                  'Wireless-only infrastructure',
+                  'Organized, standardized cabling framework',
+                  'Encrypted transmission',
+                  'WAN routing'
+                ],
+                correct: 1,
+                why: 'Structured cabling provides a standardized, maintainable cabling architecture for buildings/campuses.'
+              },
+              {
+                q: 'Which fire suppression system is commonly used in data centers to avoid water damage?',
+                a: [
+                  'Sprinkler system only',
+                  'CO₂ or clean agent system',
+                  'Water mist only',
+                  'Sand-based system'
+                ],
+                correct: 1,
+                why: 'Clean agent (or CO₂ in some contexts) suppression reduces equipment damage compared to water-based systems.'
+              },
+              {
+                q: 'What is the purpose of biometric access control?',
+                a: [
+                  'Encrypt traffic',
+                  'Authenticate individuals using physical characteristics',
+                  'Improve bandwidth',
+                  'Assign IP addresses'
+                ],
+                correct: 1,
+                why: 'Biometrics authenticate using traits like fingerprints, facial features, or iris patterns.'
+              },
+              {
+                q: 'What is the benefit of redundant power supplies in network devices?',
+                a: [
+                  'Reduce EMI',
+                  'Provide continued operation if one supply fails',
+                  'Increase routing efficiency',
+                  'Eliminate VLANs'
+                ],
+                correct: 1,
+                why: 'Redundant PSUs allow a device to keep running if one power supply fails (often with separate circuits).' 
+              },
+              {
+                q: 'What is a best practice when installing network cables?',
+                a: [
+                  'Run data and power cables together tightly',
+                  'Avoid sharp bends and excessive tension',
+                  'Stretch cables to maximum length',
+                  'Remove shielding'
+                ],
+                correct: 1,
+                why: 'Avoiding tight bends and tension prevents physical damage and preserves cable performance.'
+              },
+              {
+                q: 'Which statement BEST summarizes infrastructure best practices?',
+                a: [
+                  'Physical security is optional',
+                  'Proper installation, safety, redundancy, and organization are critical',
+                  'Encryption replaces physical controls',
+                  'Cooling is unnecessary in virtualized environments'
+                ],
+                correct: 1,
+                why: 'Strong infrastructure practices include physical security, safety procedures, redundancy, and good organization.'
+              },
             ]
           },
           {
@@ -3803,6 +4683,9 @@
 
     const STORAGE_KEY = 'arxcafe_it_pyramid_scores_v1';
     const PROGRESS_KEY = 'arxcafe_it_pyramid_progress_v1';
+    const SERVER_PROGRESS_QUIZ_ID = 'it-learning-pyramid';
+
+    let progressHydrateInFlight = null;
 
     let isAuthed = false;
 
@@ -3828,6 +4711,94 @@
         return raw ? JSON.parse(raw) : {};
       } catch {
         return {};
+      }
+    }
+
+    function normalizeProgressEntry(entry) {
+      if (!entry || typeof entry !== 'object') return { completedBatches: [], nextIndex: 0, at: null };
+
+      let completedBatches = Array.isArray(entry.completedBatches) ? entry.completedBatches : [];
+      completedBatches = completedBatches
+        .map((x) => Math.floor(Number(x)))
+        .filter((x) => Number.isFinite(x) && x >= 1);
+
+      completedBatches = Array.from(new Set(completedBatches)).sort((a, b) => a - b);
+
+      const nextIndex = Math.max(0, Math.floor(Number(entry.nextIndex) || 0));
+      const at = entry.at ? String(entry.at) : null;
+
+      return { completedBatches, nextIndex, at };
+    }
+
+    function mergeProgressEntries(a, b) {
+      const na = normalizeProgressEntry(a);
+      const nb = normalizeProgressEntry(b);
+      const completedBatches = Array.from(new Set(na.completedBatches.concat(nb.completedBatches))).sort((x, y) => x - y);
+      const nextIndex = Math.max(na.nextIndex, nb.nextIndex);
+
+      const da = na.at ? Date.parse(na.at) : NaN;
+      const db = nb.at ? Date.parse(nb.at) : NaN;
+      let at = na.at || nb.at || null;
+      if (!isNaN(da) && !isNaN(db)) at = da >= db ? na.at : nb.at;
+
+      return { completedBatches, nextIndex, at };
+    }
+
+    function mergeProgressObjects(localProgress, serverProgress) {
+      const out = (localProgress && typeof localProgress === 'object') ? { ...localProgress } : {};
+      const src = (serverProgress && typeof serverProgress === 'object') ? serverProgress : {};
+      for (const [k, v] of Object.entries(src)) {
+        out[k] = mergeProgressEntries(out[k], v);
+      }
+      return out;
+    }
+
+    async function hydrateProgressFromServer() {
+      if (progressHydrateInFlight) return progressHydrateInFlight;
+
+      progressHydrateInFlight = (async () => {
+        if (!isAuthed) return;
+
+        try {
+          const res = await fetch(`/api/quiz/progress/state?quiz_id=${encodeURIComponent(SERVER_PROGRESS_QUIZ_ID)}`, { credentials: 'same-origin' });
+          const ct = (res.headers.get('content-type') || '').toLowerCase();
+          if (!res.ok || !ct.includes('application/json')) return;
+
+          const data = await res.json().catch(() => null);
+          if (!data?.ok) return;
+
+          const serverProgress = data?.progress;
+          const localProgress = loadProgress();
+          const merged = mergeProgressObjects(localProgress, serverProgress);
+          localStorage.setItem(PROGRESS_KEY, JSON.stringify(merged));
+
+          // Re-render selection + stats because recommended batch may change.
+          fillNetworkingBatchSelect();
+          if (state.domainKey) renderNetworkingDomainStats(state.domainKey);
+        } catch {
+          // best-effort; never break quiz UX
+        }
+      })();
+
+      return progressHydrateInFlight;
+    }
+
+    async function markCompletedBatchOnServer(progressKey, batchIndex, batchEndIndex) {
+      if (!isAuthed) return;
+      try {
+        await fetch('/api/quiz/progress/mark-batch', {
+          method: 'POST',
+          credentials: 'same-origin',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            quiz_id: SERVER_PROGRESS_QUIZ_ID,
+            progressKey,
+            batchIndex,
+            batchEndIndex,
+          })
+        });
+      } catch {
+        // best-effort; never break quiz UX
       }
     }
 
@@ -3889,6 +4860,9 @@
         at: new Date().toISOString(),
       };
       localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress));
+
+      // Best-effort server sync so progress survives clearing browser data.
+      void markCompletedBatchOnServer(progressKey, batchIndex, batchEndIndex);
     }
 
     function clearProgress() {
@@ -4477,6 +5451,9 @@
         if (!data?.ok) throw new Error('not-ok');
 
         isAuthed = true;
+
+        // Pull progress state from server (best-effort) and merge with local.
+        void hydrateProgressFromServer();
 
         els.startBtn.disabled = false;
         els.startBtn.textContent = 'Start quiz';
